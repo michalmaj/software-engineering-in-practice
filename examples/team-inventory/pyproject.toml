@@ -1,0 +1,14 @@
+[project]
+name = "team-inventory"
+version = "0.1.0"
+description = "Labs 16-19: a shared kitchen inventory script for practicing branches, conflicts, PRs, and CI"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<9",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
