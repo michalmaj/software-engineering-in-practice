@@ -1,0 +1,14 @@
+[project]
+name = "discount-codes-version-b"
+version = "0.1.0"
+description = "Discount codes, version B: a separate discount_codes module"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<9",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
