@@ -1,0 +1,16 @@
+[project]
+name = "lab05-works-on-my-machine"
+version = "0.1.0"
+description = "Lab 05 starter: reproducible environments with uv"
+requires-python = ">=3.13"
+dependencies = [
+    "cowsay>=6,<7",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<9",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
