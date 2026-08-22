@@ -1,0 +1,101 @@
+# Lab 19 — The repository should check itself
+
+## Story
+
+A change merged last week broke `uv run pytest` on `main` — the author
+forgot to run the tests before merging, and the reviewer trusted the PR
+description instead of actually running anything. Nobody noticed until
+someone ran the script by hand and it crashed.
+
+## Learning objectives
+
+After this lab you should be able to:
+
+- Write a minimal GitHub Actions workflow that runs on every push and
+  pull request.
+- Explain what each step of a CI workflow does, without treating YAML
+  as magic.
+- Use a red/green CI check as evidence, instead of trusting a
+  description.
+
+## Before you start
+
+- Lab 18 complete: `main` has `reorder_report`, merged through a real
+  pull request.
+- Current directory: the repository root (the workflow file lives
+  outside `examples/team-inventory/`, at `.github/workflows/`).
+
+## Your task
+
+1. Create branch `feature/ci-pipeline` from `main`.
+2. Create `.github/workflows/team-inventory-ci.yml` (create
+   `.github/workflows/` if it doesn't exist) that:
+   - triggers `on: [push, pull_request]`
+   - checks out the repository
+   - sets up Python 3.13
+   - installs `uv`
+   - runs `uv sync`, then `uv run pytest`, both with a working
+     directory of `examples/team-inventory`
+3. Commit and push the branch, then open a pull request (as in
+   Lab 18).
+4. Open the PR's "Checks" tab and watch the workflow run. Confirm it
+   goes green.
+5. Deliberately break a test locally (change an assertion to something
+   false), commit, and push. Watch the check go **red** on the PR.
+   Then revert your deliberate breakage, push again, and watch it go
+   green.
+6. Merge the PR once it's green.
+
+## Acceptance criteria
+
+- `.github/workflows/team-inventory-ci.yml` exists, targets
+  `examples/team-inventory`, and triggers on both push and pull
+  request.
+- You've personally observed the check both fail (red, for a real
+  broken test) and pass (green) on an actual pull request.
+- The final merged state on `main` is green.
+
+## Verification
+
+There's no local command that replaces "watch it run on GitHub" — that
+observation *is* the point of this lab. Locally, you can only replicate
+what the workflow will do:
+
+```bash
+cd examples/team-inventory
+uv sync
+uv run pytest
+cd -
+```
+
+If this passes locally and your workflow YAML runs the same two
+commands in the same directory, the PR check will match.
+
+## Think about it
+
+- In Lab 18, a reviewer could have skipped actually running your tests
+  and just trusted the PR description. What changed once the workflow
+  existed — who, or what, is now actually responsible for catching an
+  untested change?
+- The workflow runs the exact same commands you've been running by
+  hand for several labs. What did automating them actually buy you,
+  if the commands themselves didn't change?
+
+## If you get stuck
+
+- **Hint 1:** A minimal workflow needs `on:`, a `jobs:` section with at
+  least one job, and a `steps:` list — checkout, Python setup, `uv`
+  install, `uv sync`, `uv run pytest`.
+- **Hint 2:** Use `working-directory: examples/team-inventory` on the
+  steps that run `uv sync`/`uv run pytest`, since the workflow's
+  default working directory is the repository root.
+- **Hint 3:** Check `.devcontainer/devcontainer.json` at the repository
+  root for the Python version this repo targets, and match it in
+  `setup-python`.
+
+## What's next
+
+You have tests, review, and CI. Given all of that, when exactly is a
+change actually "done"?
+
+Continue to [Lab 20 — What does "done" mean?](../20-definition-of-done/README.md).
