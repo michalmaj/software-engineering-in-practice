@@ -26,7 +26,8 @@ Po tym laboratorium powinieneś/aś umieć:
 - Jeśli jesteś w klasie: instruktor przydzielił Cię do zespołu 3-4
   osób. Jeśli pracujesz solo: Ty *jesteś* zespołem — wykonaj każdy krok
   poniżej, włącznie z tymi o przydziale ról, decydując sam/a za siebie.
-- Jeszcze bez kodu — ten lab to tylko planowanie.
+- Prawie bez kodu: jedyny kod, którego dotkniesz, to starter kopiowany
+  w kroku 2 poniżej. Reszta tego labu to samo planowanie.
 
 ## Twoje zadanie
 
@@ -58,8 +59,10 @@ Po tym laboratorium powinieneś/aś umieć:
 2. Skopiujcie odpowiedni starter językowy z
    `examples/capstone-starters/<python|go|java>/` (w tym repozytorium
    kursu) do korzenia Waszego nowego repozytorium, gdy już podejmiecie
-   decyzję językową w kroku 4 poniżej — zacommitujcie to jako Wasz
-   pierwszy prawdziwy commit.
+   decyzję językową w kroku 4 poniżej. Własny `STARTER.md` startera nie
+   nadpisze `README.md`, który napisaliście w kroku 1 — przeczytajcie go
+   raz, żeby poznać dokładne polecenia setupu, a potem zacommitujcie
+   starter jako Wasz pierwszy prawdziwy commit.
 3. Jako zespół napiszcie `PROJECT_PLAN.md` (w Waszym nowym
    repozytorium) obejmujący:
    - **Zakres**: co jest w MVP, co jest jawnie poza nim.
@@ -102,7 +105,7 @@ Po tym laboratorium powinieneś/aś umieć:
 ## Kryteria akceptacji
 
 - `PROJECT_PLAN.md` istnieje i odpowiada na wszystkie sześć punktów z
-  kroku 1 konkretnie, bez placeholderów.
+  kroku 3 konkretnie, bez placeholderów.
 - `docs/adr/adr-001-language-choice.md` istnieje i podaje prawdziwą
   decyzję z prawdziwym uzasadnieniem, nie "wybraliśmy Pythona, bo jest
   popularny".
