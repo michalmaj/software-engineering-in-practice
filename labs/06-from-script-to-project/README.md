@@ -107,6 +107,11 @@ removed`.
   or compare a single line at a time — floating-point formatting (`.2f`)
   is a common source of tiny mismatches.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 Your refactor preserved behavior — but "preserved" isn't the same as

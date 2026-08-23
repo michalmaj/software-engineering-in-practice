@@ -85,6 +85,12 @@ sprawdzeniami `SilentNotifier`.
   ale *zapomniał* napisać na niej `implements Notifier`, czy Java
   pozwoliłaby Ci przekazać ją wszędzie tam, gdzie oczekiwany jest
   `Notifier`? Czy Python albo Go zatrzymałyby Cię w ten sam sposób?
+- Sam `Protocol` w Pythonie daje Ci *dokumentację* kontraktu, nie jego
+  *egzekwowanie* — nic nie powstrzymuje Cię przed przekazaniem obiektu
+  bez metody `send` i odkryciem tego dopiero w runtime, gdy zostanie
+  wywołana. Zarówno kompilator Go, jak i kompilator Javy wyłapują
+  brakującą metodę, zanim program w ogóle się uruchomi. Co domknęłoby
+  tę lukę dla Pythona, i ile by to kosztowało?
 
 ## Jeśli utkniesz
 
@@ -100,6 +106,11 @@ sprawdzeniami `SilentNotifier`.
   run pytest` dla Pythona, `go test ./...` dla Go oraz `javac *.java -d
   out && java -cp out NotifierCheck` dla Javy to jedyne trzy potrzebne
   polecenia.
+
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
 
 ## Co dalej
 

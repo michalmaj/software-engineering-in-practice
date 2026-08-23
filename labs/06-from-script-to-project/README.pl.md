@@ -105,6 +105,11 @@ removed`.
   poleceniem `cat -A` albo porównaj linia po linii — formatowanie
   zmiennoprzecinkowe (`.2f`) to częste źródło drobnych niezgodności.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Twój refaktor zachował zachowanie — ale "zachowane" to nie to samo co

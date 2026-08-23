@@ -80,6 +80,11 @@ Expected: all tests `PASSED`; the printed dict shows `'tax': 4.32,
 - **Hint 3:** The fix is one changed argument on one line inside
   `calculate_bill` — resist the urge to restructure anything else.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 You have a green suite and a real fix behind it. Next, a different kind

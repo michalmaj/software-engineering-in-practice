@@ -74,7 +74,8 @@ cd examples/discount-codes/version-b && uv run pytest -v && cd - > /dev/null
 ```
 
 Expected: notes exist, and the test suite passes with one more test
-than before (8 total, given Version B's earlier 7).
+than before (9 total, given Version B's earlier 8 — 7 shipped plus the
+`SAVE20` test you added in Lab 12).
 
 ## Think about it
 
@@ -101,6 +102,19 @@ than before (8 total, given Version B's earlier 7).
   `"SAVE5"` in `DISCOUNT_CODES` — a lambda that ignores its argument
   and returns a flat amount.
 
+## Before you move on to Act IV
+
+Act IV (starting at Lab 16) assumes your `main` branch is clean and
+everything from Labs 06-15 is committed and pushed. Right now:
+
+```bash
+git status
+```
+
+If this shows anything uncommitted, commit and push it now
+(`git add -A && git commit -m "..."; git push`). If it shows clean,
+you're ready.
+
 ## What's next
 
 You've built a small feature, given it a name a real engineering team
@@ -108,4 +122,4 @@ would recognize, and reused it under new requirements without dread.
 Act III is done. Next, you stop working alone — and "my code works on
 my machine" turns into "my code works when someone else touches it."
 
-Act IV (Lab 16) continues in the next milestone.
+Continue to [Lab 16 — Branches exist because work happens in parallel](../16-parallel-branches/README.md).

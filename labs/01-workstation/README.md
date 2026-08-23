@@ -33,16 +33,24 @@ Working only in the terminal:
 2. List the contents of your home directory, including hidden files.
 3. Create a directory called `lab01-notes` inside your home directory.
 4. Inside it, create a file called `findings.txt`.
-5. Using `cat`, write into `findings.txt` the output of these four
-   commands, one per line, labeled: `whoami`, `uname -a`, `echo "$HOME"`,
-   `echo "$PATH"`.
-6. Use `which` to find out where the `python3` and `git` executables
+5. Run `echo "$SHELL"` and read what it prints — that's your current
+   shell.
+6. Write into `findings.txt` the output of these five commands, one per
+   line, labeled: `whoami`, `uname -a`, `echo "$HOME"`, `echo "$PATH"`,
+   `echo "$SHELL"`. You haven't learned a text editor yet, so use this
+   one small trick: `>>` appends a line of command output to a file
+   without opening anything —
+   `echo "whoami: $(whoami)" >> ~/lab01-notes/findings.txt` adds one
+   labeled line. Repeat for each of the five commands. (You'll learn
+   `>>` properly, alongside `>` and `|`, in Lab 02 — this is the one
+   piece you need early to finish this lab.)
+7. Use `which` to find out where the `python3` and `git` executables
    actually live on disk.
-7. Open `findings.txt` with `less` and confirm its contents.
+8. Open `findings.txt` with `less` and confirm its contents.
 
 ## Acceptance criteria
 
-- `~/lab01-notes/findings.txt` exists and contains four labeled lines with
+- `~/lab01-notes/findings.txt` exists and contains five labeled lines with
   real output from your machine (not made up).
 - You can state, without looking it up again, what your home directory path
   is and what your current shell is.
@@ -52,7 +60,7 @@ Working only in the terminal:
 
 ```bash
 test -f ~/lab01-notes/findings.txt && echo "file exists"
-wc -l < ~/lab01-notes/findings.txt   # expect at least 4
+wc -l < ~/lab01-notes/findings.txt   # expect at least 5
 which python3
 which git
 ```
@@ -74,9 +82,9 @@ reachable from your shell.
   for listing hidden files and `-a` for `uname`.
 - **Hint 2:** The commands you need are: `pwd`, `cd`, `ls -la`, `mkdir`,
   `touch`, `cat`, `whoami`, `uname -a`, `echo`, `which`, `less`.
-- **Hint 3:** To write labeled output into a file without an editor, you
-  can append line by line, e.g.
-  `echo "whoami: $(whoami)" >> ~/lab01-notes/findings.txt`.
+- **Hint 3:** If you're unsure the `>>` trick worked, run `cat
+  ~/lab01-notes/findings.txt` afterward and confirm all five lines are
+  there — each append should add exactly one new line.
 
 ## What's next
 

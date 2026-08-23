@@ -90,6 +90,11 @@ discount_code` line remains in `calculator.py`).
   old inline branch did — the discrepancy is usually in exactly one of
   the three codes.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 Discount codes and (from the last two labs) a family of things that all

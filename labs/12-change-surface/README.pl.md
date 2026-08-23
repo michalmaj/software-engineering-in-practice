@@ -89,6 +89,11 @@ notatki porównawcze istnieją.
   lojalnościowy $6, napiwek 15%): kwota po rabacie lojalnościowym to
   $54; `SAVE20` od tego to $10.80; łączny rabat to $16.80.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Poczułeś/aś różnicę między projektem, który czyni nowe wymaganie

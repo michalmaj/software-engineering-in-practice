@@ -26,14 +26,14 @@ After this lab you should be able to:
 
 ## Your task
 
-**Part 1 — persistence:**
+**Part 1 — persistence (behavior-preserving):**
 
 1. Create `db.py` with `init_db()` (creates an `orders` table if it
    doesn't exist: `order_id INTEGER PRIMARY KEY AUTOINCREMENT, items
    TEXT NOT NULL, status TEXT NOT NULL`), `create_order(items: list) ->
    dict`, and `get_order(order_id: str) -> dict | None` — using
    `sqlite3` from the standard library, storing `items` as a JSON
-   string.
+   string. Neither function knows about `notes` yet — that's Part 2.
 2. Rewrite `api.py` to call `db.create_order`/`db.get_order` instead of
    using the `ORDERS` dict. Call `db.init_db()` once, at server
    startup, in `run()`.
@@ -45,30 +45,49 @@ After this lab you should be able to:
 4. Run the full suite. All 4 existing tests must still pass — this
    part is behavior-preserving, exactly like Lab 06's refactor.
 
+**Now prove the "old data" problem is real, before you solve it:**
+
+5. Start the server for real: `uv run python api.py`. In a second
+   terminal, create one order:
+   ```bash
+   curl -s -X POST http://localhost:8000/orders \
+     -H "Content-Type: application/json" -d '{"items": ["Burger"]}'
+   ```
+   Note the `order_id` it returns. This row now exists in `orders.db`,
+   in the schema from Part 1 — with no `notes` column at all. Stop the
+   server (`Ctrl+C`), but **do not delete `orders.db`**.
+5a. Before going further, add `*.db` to the repository's `.gitignore`
+    (create the file at the repo root if it doesn't exist, or add the
+    line if it does). `orders.db` is runtime state your server
+    generates — it isn't source code, and it shouldn't be committed.
+    Confirm with `git status` that `orders.db` no longer shows up as an
+    untracked file to add.
+
 **Part 2 — schema evolution:**
 
-5. Add `migrate_add_notes_column()` to `db.py`: check
+6. Add `migrate_add_notes_column()` to `db.py`: check
    `PRAGMA table_info(orders)` for a column named `notes`, and if it's
    missing, run `ALTER TABLE orders ADD COLUMN notes TEXT`.
-6. Update `create_order` to accept an optional `notes: str = ""`
+7. In `run()`, call `db.migrate_add_notes_column()` right after
+   `db.init_db()`, so every server start ensures the column exists.
+8. Update `create_order` to accept an optional `notes: str = ""`
    parameter, storing and returning it. Update `get_order` to include
    `notes` in its result, defaulting to `""` if the stored value is
-   `NULL` (which it will be for any row created before the migration
-   ran).
-7. Update `do_POST` in `api.py` to read an optional `notes` field from
+   `NULL` (which it will be for the row you created in step 5).
+9. Update `do_POST` in `api.py` to read an optional `notes` field from
    the request body (defaulting to `""`) and pass it through.
-8. Prove the migration is safe for existing data, in this exact order:
-   - Comment out the `db.migrate_add_notes_column()` call in `run()`
-     for a moment. Start the server and `POST` an order — this row is
-     created in the old schema, with no `notes` column at all.
-     Stop the server.
-   - Uncomment the `db.migrate_add_notes_column()` call. Restart the
-     server (same database file — don't delete `orders.db`). `GET` the
-     order you created a moment ago, by its id.
-   - It must still return successfully, with `notes` present and equal
-     to `""` — not missing, not a crash.
-9. Add a test for creating and fetching an order with a real `notes`
-   value.
+10. Restart the server (`uv run python api.py` — same `orders.db` file
+    from step 5). `GET` the order you created in step 5, by its id:
+    ```bash
+    curl -s http://localhost:8000/orders/<the-id-from-step-5>
+    ```
+    It must still return successfully, with `notes` present and equal
+    to `""` — not missing, not a crash. Stop the server.
+11. Add a test for creating and fetching a *new* order with a real
+    `notes` value.
+12. Update `CONTRACT.md` from Lab 21: the `POST /orders` request body
+    now accepts an optional `notes` field, and every response
+    (success and error) that returns an order now includes `notes`.
 
 ## Acceptance criteria
 

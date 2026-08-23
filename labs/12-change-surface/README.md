@@ -88,6 +88,11 @@ the comparison notes exist.
   15% tip): after-loyalty amount is $54; `SAVE20` off that is $10.80;
   total discount is $16.80.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 You've felt the difference between a design that makes a new

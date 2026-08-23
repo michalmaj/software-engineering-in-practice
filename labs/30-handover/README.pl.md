@@ -89,9 +89,10 @@ repozytorium.
   nigdy nie trafił do README, `ARCHITECTURE.md` ani ADR-a? Dlaczego
   wydawał się wtedy niepotrzebny do zapisania?
 - Zespół oryginalny jest oceniany częściowo po tym, jak dobrze inny
-  zespół mógł pracować z ich projektem (własne ujęcie tego laba ze
-  specyfikacji). Czy to uczciwy sposób mierzenia jakości inżynierskiej?
-  Co uchwytuje, czego nie uchwytuje "czy testy przechodziły"?
+  zespół mógł pracować z ich projektem, a nie po tym, jak pewny siebie
+  czuł się zespół oryginalny. Czy to uczciwy sposób mierzenia jakości
+  inżynierskiej? Co uchwytuje, czego nie uchwytuje "czy testy
+  przechodziły"?
 
 ## Jeśli utkniesz
 

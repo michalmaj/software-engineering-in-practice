@@ -86,6 +86,11 @@ Twojej strony.
 - **Podpowiedź 3:** `chmod +x scripts/*.sh` uczyni wszystkie cztery
   wykonywalnymi naraz.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Wziąłeś/aś jeden skrypt i zamieniłeś/aś go w mały, dobrze przetestowany,
@@ -93,4 +98,4 @@ spójnie sprawdzany projekt. Akt II jest zakończony. Dalej sam projekt
 będzie musiał przetrwać rzeczywistą zmianę wymagań — a to jest miejsce,
 w którym zaczyna liczyć się projektowanie (design).
 
-Akt III (Lab 11) będzie kontynuowany w kolejnym etapie kursu.
+Przejdź do [Lab 11 — Klient zmienił zdanie](../11-changed-requirements/README.pl.md).

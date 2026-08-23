@@ -4,8 +4,11 @@
 
 Your last code review took ten minutes to converge on: tabs versus
 spaces, an unused import, and whether a string should use single or
-double quotes. None of that was about whether the code was *correct* —
-your tests already answer that question. It's still wasting review time.
+double quotes. None of that was about whether the code does the right
+thing — that's what tests are for, even if (as Lab 08 just showed you)
+tests only catch what someone thought to write a test for. Style
+arguments are still wasting review time on a question a machine can
+answer instead.
 
 ## Learning objectives
 
@@ -79,6 +82,11 @@ passes — none of this changed behavior.
 - **Hint 3:** If `ruff check .` reports nothing at all on your own code,
   that's a valid outcome, not a sign you did something wrong — it means
   your Lab 06-08 code was already clean.
+
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
 
 ## What's next
 

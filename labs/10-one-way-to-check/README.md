@@ -80,6 +80,11 @@ three complete successfully with no manual `cd` on your part.
   `set -euo pipefail`.
 - **Hint 3:** `chmod +x scripts/*.sh` makes all four executable at once.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 You've taken one script and turned it into a small, well-tested,
@@ -87,4 +92,4 @@ consistently-checked project. Act II is done. Next, the project itself
 will have to survive an actual change in requirements — which is where
 design starts to matter.
 
-Act III (Lab 11) continues in the next milestone.
+Continue to [Lab 11 — The client changed their mind](../11-changed-requirements/README.md).

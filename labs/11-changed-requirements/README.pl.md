@@ -87,6 +87,11 @@ potwierdzając, że każdy przykład rozstrzyga się jednoznacznie.
   stosuje się przed czy po rabacie lojalnościowym, przeczytaj ponownie
   ustaloną specyfikację — mówi to wprost.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Wiesz już dokładnie, co trzeba zbudować. Teraz: gdzie w kodzie ta

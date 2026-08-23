@@ -84,6 +84,11 @@ confirming each example resolves unambiguously.
 - **Hint 3:** If you're unsure whether `SAVE10` applies before or after
   the loyalty discount, re-read the resolved spec — it says explicitly.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 You know exactly what needs to be built. Now: where in the code should

@@ -31,31 +31,64 @@ Po tym laboratorium powinieneś/aś umieć:
 > Odtwórz to, napraw, i upewnij się, że nie może się to powtórzyć — ani
 > po cichu, ani jawnie.
 
-1. Odtwórz incydent na własnym systemie: utwórz dwie rezerwacje na ten
-   sam dzień i przedział czasowy, na tyle małe, że logika przydziału
-   stolików z Waszego MVP dałaby obu ten sam stolik (to zależy od
-   Waszego własnego projektu z Lab 26-28 — jeśli Wasz zespół już się
-   przed tym zabezpieczył, powiedzcie to jawnie i wyjaśnijcie dlaczego,
-   zamiast wymuszać błąd, który nie istnieje).
-2. Napisz failing test, który uchwyci dokładny defekt: dwie rezerwacje
-   na ten sam dzień/przedział czasowy nigdy nie mogą dostać nakładającego
+Podążaj **Ścieżką A**, jeśli da się to odtworzyć w Waszym systemie
+dzisiaj. Podążaj **Ścieżką B**, jeśli Wasz zespół już zapobiega
+dokładnie takiej samej podwójnej rezerwacji dzień/przedział czasowy —
+nie wymuszajcie fałszywego błędu w żadną stronę.
+
+**Ścieżka A — błąd jest prawdziwy:**
+
+1. Odtwórz go: utwórz dwie rezerwacje na ten sam dzień i dokładnie ten
+   sam przedział czasowy, na tyle małe, że Wasza logika przydziału
+   daje obu ten sam stolik.
+2. Napisz failing test uchwytujący dokładny defekt: dwie rezerwacje na
+   ten sam dzień/przedział czasowy nigdy nie mogą dostać nakładającego
    się zestawu stolików.
 3. Napraw defekt najmniejszą zmianą, która sprawia, że nowy test
    przechodzi, nie psując żadnego istniejącego testu.
-4. Napisz `POSTMORTEM.md`, bezstronny (bez nazwisk, bez obwiniania),
+4. Przejdź do kroku 5 poniżej.
+
+**Ścieżka B — już temu zapobiegacie:**
+
+1. Napisz test *dowodzący*, że ochrona istnieje (dwie rezerwacje, ten
+   sam dokładny dzień/przedział czasowy, muszą dostać nienakładające
+   się stoliki) — powinien już przechodzić, demonstrując pokrycie, a
+   nie je tworząc.
+2. Teraz zejdź o poziom głębiej: dwie rezerwacje na *tym samym
+   stoliku*, tego samego dnia, w porach będących różnymi stringami,
+   ale które realistycznie nakładałyby się w prawdziwej sali — na
+   przykład `19:00` i `19:15`, jeśli stolik jest zajęty przez około 90
+   minut. Odtwórz to na własnym systemie.
+3. Napisz failing test uchwytujący to: rezerwacje, których przedziały
+   czasowe mieszczą się w zakładanym oknie zajętości Waszego systemu,
+   nie mogą dzielić stolika, nawet jeśli stringi przedziałów czasowych
+   nie są identyczne.
+4. Napraw to — to prawdopodobnie będzie wymagało potraktowania
+   `time_slot` jako porównywalnej wartości czasu z czasem trwania, a
+   nie tylko stringa do porównania na dokładną równość. Przejdź do
+   kroku 5 poniżej.
+
+**Obie ścieżki:**
+
+5. Napisz `POSTMORTEM.md`, bezstronny — bez nazwisk, bez obwiniania —
    obejmujący: co się stało, wpływ na klienta, główną przyczynę (lukę
-   projektową z MVP, nie narrację "ktoś popełnił błąd"), jak to
-   wykryto (skarga klienta, nie alert monitoringu — zanotujcie to
-   jawnie), poprawkę, dodany test regresyjny, i jedną konkretną zmianę
-   systemową albo procesową, która zmniejszyłaby szansę powtórzenia się
-   tej klasy awarii.
+   projektową, nie narrację "ktoś popełnił błąd"), jak to wykryto
+   (skarga klienta, nie alert monitoringu — zanotujcie to jawnie),
+   poprawkę, dodany test regresyjny, i jedną konkretną zmianę systemową
+   albo procesową, która zmniejszyłaby szansę powtórzenia się tej klasy
+   awarii. Jeśli podążaliście Ścieżką B, zanotujcie też w postmortemie,
+   że oryginalny projekt Waszego zespołu już pokrywał prostszy
+   przypadek, i opiszcie zamiast tego znalezioną głębszą lukę.
 
 ## Kryteria akceptacji
 
-- Istnieje test regresyjny, nazwany konkretnie wokół zapobiegania
-  nakładającemu się przydziałowi stolików, który nie przechodzi przed
-  poprawką i przechodzi po niej.
-- Poprawka nie psuje żadnego testu napisanego w Lab 26-28.
+- **Ścieżka A:** istnieje test regresyjny, nie przechodzi przed
+  poprawką i przechodzi po niej, nie psując żadnego wcześniejszego
+  testu.
+- **Ścieżka B:** test dowodzi istniejącej ochrony tego samego
+  przedziału, *a* drugi test dla przypadku nakładających-się-ale-innych
+  przedziałów nie przechodzi przed swoją poprawką i przechodzi po niej,
+  nie psując żadnego wcześniejszego testu.
 - `POSTMORTEM.md` istnieje, jest bezstronny i kończy się konkretną
   rekomendacją systemową — nie tylko "być bardziej ostrożnym".
 
@@ -82,12 +115,13 @@ podwójnej rezerwacji.
 
 ## Jeśli utkniesz
 
-- **Podpowiedź 1:** Jeśli Wasz zespół już zapobiegł temu w Lab 26-28
-  (projektem albo przypadkiem), nie wymuszajcie fałszywego błędu —
-  zamiast tego napiszcie test dowodzący, że ochrona istnieje, i użyjcie
-  postmortemu, żeby opisać *powiązane* niebezpieczne pominięcie,
-  którego Wasz projekt wciąż nie pokrywa (na przykład: co się dzieje z
-  połączonymi stolikami, gdy tylko jeden z pary jest już zajęty?).
+- **Podpowiedź 1:** Jeśli jesteście na Ścieżce B, niebezpieczne
+  pominięcie nakładających się przedziałów jest konkretne: wybierzcie
+  stały czas zajętości (powiedzmy, 90 minut) dla każdej rezerwacji,
+  przeliczcie stringi `time_slot` na minuty-od-północy do porównania, i
+  traktujcie dwie rezerwacje na tym samym stoliku jako konfliktujące,
+  jeśli ich okna zajętości w ogóle się nakładają — nie tylko jeśli ich
+  surowe stringi się zgadzają.
 - **Podpowiedź 2:** Bezstronny postmortem opisuje, co *system*
   dopuścił, nie co *osoba* zrobiła źle — "logika przydziału nie
   sprawdzała istniejących rezerwacji", a nie "ktoś zapomniał dodać

@@ -33,16 +33,24 @@ Pracując wyłącznie w terminalu:
 2. Wylistuj zawartość katalogu domowego, wliczając pliki ukryte.
 3. Utwórz katalog `lab01-notes` wewnątrz katalogu domowego.
 4. W jego wnętrzu utwórz plik `findings.txt`.
-5. Za pomocą `cat` zapisz do `findings.txt` wynik tych czterech poleceń, po
-   jednym w linii, opisanych etykietą: `whoami`, `uname -a`,
-   `echo "$HOME"`, `echo "$PATH"`.
-6. Użyj `which`, żeby sprawdzić, gdzie na dysku faktycznie znajdują się
+5. Uruchom `echo "$SHELL"` i przeczytaj, co wypisuje — to Twoja bieżąca
+   powłoka.
+6. Zapisz do `findings.txt` wynik tych pięciu poleceń, po jednym w linii,
+   opisanych etykietą: `whoami`, `uname -a`, `echo "$HOME"`,
+   `echo "$PATH"`, `echo "$SHELL"`. Nie poznałeś/aś jeszcze edytora
+   tekstu, więc użyj tej jednej małej sztuczki: `>>` dopisuje linię
+   wyniku polecenia do pliku bez otwierania czegokolwiek —
+   `echo "whoami: $(whoami)" >> ~/lab01-notes/findings.txt` dodaje
+   jedną opisaną linię. Powtórz dla każdego z pięciu poleceń. (Poznasz
+   `>>` porządnie, razem z `>` i `|`, w Lab 02 — to jeden element,
+   którego potrzebujesz wcześniej, żeby skończyć ten lab.)
+7. Użyj `which`, żeby sprawdzić, gdzie na dysku faktycznie znajdują się
    programy `python3` i `git`.
-7. Otwórz `findings.txt` poleceniem `less` i potwierdź jego zawartość.
+8. Otwórz `findings.txt` poleceniem `less` i potwierdź jego zawartość.
 
 ## Kryteria akceptacji
 
-- `~/lab01-notes/findings.txt` istnieje i zawiera cztery opisane linie z
+- `~/lab01-notes/findings.txt` istnieje i zawiera pięć opisanych linii z
   prawdziwym wynikiem z Twojej maszyny (nie wymyślonym).
 - Potrafisz, bez ponownego sprawdzania, podać ścieżkę swojego katalogu
   domowego i nazwę swojej bieżącej powłoki.
@@ -52,7 +60,7 @@ Pracując wyłącznie w terminalu:
 
 ```bash
 test -f ~/lab01-notes/findings.txt && echo "file exists"
-wc -l < ~/lab01-notes/findings.txt   # oczekiwane co najmniej 4
+wc -l < ~/lab01-notes/findings.txt   # oczekiwane co najmniej 5
 which python3
 which git
 ```
@@ -74,9 +82,10 @@ osiągalne z poziomu powłoki.
   ukrytych plików i `-a` dla `uname`.
 - **Podpowiedź 2:** Potrzebne polecenia to: `pwd`, `cd`, `ls -la`, `mkdir`,
   `touch`, `cat`, `whoami`, `uname -a`, `echo`, `which`, `less`.
-- **Podpowiedź 3:** Żeby zapisać opisany wynik do pliku bez edytora, możesz
-  dopisywać linia po linii, np.
-  `echo "whoami: $(whoami)" >> ~/lab01-notes/findings.txt`.
+- **Podpowiedź 3:** Jeśli nie jesteś pewien/pewna, czy sztuczka z `>>`
+  zadziałała, uruchom potem `cat ~/lab01-notes/findings.txt` i potwierdź,
+  że wszystkie pięć linii tam jest — każde dopisanie powinno dodać
+  dokładnie jedną nową linię.
 
 ## Co dalej
 

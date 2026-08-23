@@ -23,8 +23,10 @@ After this lab you should be able to:
 
 - Lab 26 complete: `PROJECT_PLAN.md` and `docs/adr/adr-001-language-choice.md`
   exist in your team's own repository.
-- Your team's repository has, at minimum, whatever project skeleton
-  your chosen language needs to run a "hello world" and a test suite.
+- Your team's repository has the matching capstone starter copied in
+  from Lab 26 (`examples/capstone-starters/<language>/` in the course
+  repository) — a working "hello world" and one passing test, in
+  whichever language you chose.
 
 ## Your task
 

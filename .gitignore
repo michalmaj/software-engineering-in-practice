@@ -3,3 +3,5 @@ decisions/
 .venv/
 __pycache__/
 out/
+.pytest_cache/
+.ruff_cache/

@@ -86,6 +86,11 @@ pominięty.
   jest wystarczająco niezawodne w tym projekcie; nie potrzebujesz tu
   `pytest.approx`.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Twoje testy są zielone. Potem klient zgłasza reklamację dotyczącą swojego

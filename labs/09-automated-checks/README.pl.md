@@ -5,8 +5,11 @@
 Twój ostatni code review zajął dziesięć minut, żeby dojść do zgody w
 sprawie: tabulacji kontra spacji, nieużywanego importu i tego, czy
 string powinien używać pojedynczych czy podwójnych cudzysłowów. Nic z
-tego nie dotyczyło tego, czy kod jest *poprawny* — na to pytanie
-odpowiadają już Twoje testy. A mimo to zmarnowało czas przeglądu.
+tego nie dotyczyło tego, czy kod robi właściwą rzecz — od tego są testy,
+nawet jeśli (jak właśnie pokazał Lab 08) testy wyłapują tylko to, o
+czym ktoś pomyślał, żeby napisać test. Spory o styl mimo to marnują
+czas przeglądu na pytanie, na które maszyna może odpowiedzieć zamiast
+ludzi.
 
 ## Cele nauki
 
@@ -84,6 +87,11 @@ Oczekiwane: oba polecenia Ruff nie zgłaszają niczego do poprawy, a
 - **Podpowiedź 3:** Jeśli `ruff check .` nie zgłasza zupełnie niczego w
   Twoim własnym kodzie, to prawidłowy wynik, a nie znak, że coś
   zrobiłeś/aś źle — oznacza, że Twój kod z Labów 06-08 był już czysty.
+
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
 
 ## Co dalej
 

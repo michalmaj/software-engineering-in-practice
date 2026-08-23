@@ -34,9 +34,16 @@ After this lab you should be able to:
    = 5) -> str` that reuses `low_stock_items` and returns a formatted
    string like `"Reorder needed: Tomatoes, Milk"` (or `"Nothing to
    reorder."` if the list is empty). Add a test. Commit.
-3. Push the branch and open a pull request — `gh pr create --fill` or
-   the GitHub web UI both work. Write a description covering: what
-   changed, why, and how you verified it (which commands you ran).
+3. Push the branch and open a pull request. **If you're working from a
+   fork**, `gh pr create` defaults to opening the PR against the
+   *original* repository's default branch, not your own fork's `main`
+   — for this exercise (and every PR in this course from now on), you
+   want the PR to target your own fork. Either use the GitHub web UI
+   (which shows you the base repository before you confirm), or run
+   `gh repo set-default <your-fork>` once so `gh pr create` defaults to
+   your fork, and double-check the base repository shown before
+   submitting either way. Write a description covering: what changed,
+   why, and how you verified it (which commands you ran).
 4. Review it, using the checklist below:
    - **Paired:** ask your instructor-assigned partner to swap PRs —
      review theirs, they review yours.
@@ -51,9 +58,12 @@ After this lab you should be able to:
      be reused instead of rewritten?
    - Would you understand this diff without asking the author a
      question?
-5. Leave at least two concrete review comments — on GitHub if paired;
+5. Leave at least one substantive review comment — on GitHub if paired;
    in `labs/18-pull-requests-and-review/my-review-notes.md` if solo.
-   One comment must be about behavior, one about clarity.
+   "Substantive" means it identifies something a reader would actually
+   want changed or clarified — not a rephrasing of the diff. If the
+   diff genuinely raises more than one such point, leave more than one;
+   don't manufacture a second comment just to hit a number.
 6. Address each comment (fix the code, or write a one-line reply
    explaining why not), then merge the PR using GitHub's merge button —
    not a local `git merge`.
@@ -63,9 +73,9 @@ After this lab you should be able to:
 
 - A pull request existed with a description covering what/why/how
   verified.
-- At least two review comments exist (on GitHub, or in
-  `my-review-notes.md` if solo), one about behavior and one about
-  clarity.
+- At least one substantive review comment exists (on GitHub, or in
+  `my-review-notes.md` if solo) — specific enough that the author would
+  know exactly what to do with it.
 - After pulling, local `main` contains `reorder_report` and its test,
   and `uv run pytest` passes.
 

@@ -29,16 +29,24 @@ Po tym laboratorium powinieneś/aś umieć:
    wszystko, co robi API na koniec Lab 24: dwa endpointy, trwałość w
    SQLite, migrację `notes`, wrapper retry i strukturalne logowanie.
 2. Zacommituj `CHANGELOG.md`, potem otaguj bieżący commit:
-   `git tag -a v1.0.0 -m "order-api v1.0.0"`.
+   `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`.
 3. Teraz wprowadź jedną prawdziwą, addytywną zmianę: dodaj opcjonalne
    pole `priority` do `POST /orders`, domyślnie `"normal"`, gdy
-   wywołujący je pominie. Istniejące żądania, które nie wysyłają
-   `priority`, muszą nadal działać dokładnie jak wcześniej — uruchom
-   pełny zestaw testów, żeby potwierdzić, że żaden z Twoich
-   istniejących testów nie musiał się zmienić, żeby to było prawdą.
-4. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole,
-   zacommituj i otaguj: `git tag -a v1.1.0 -m "order-api v1.1.0"`.
-5. W nowej sekcji na dole `CHANGELOG.md`, `## Compatibility notes`,
+   wywołujący je pominie. Dodaj dwa nowe testy: jeden sprawdzający, że
+   żądanie, które *wysyła* `priority`, dostaje z powrotem dokładnie tę
+   wartość, jeden sprawdzający, że żądanie, które je *pomija*, dostaje
+   `"normal"`. Uruchom też pełny istniejący zestaw testów, żeby
+   potwierdzić, że żaden z nich nie musiał się zmienić, żeby to było
+   prawdą.
+4. Zaktualizuj `CONTRACT.md` z Lab 21: udokumentuj nowe opcjonalne pole
+   `priority` w ciele żądania `POST /orders` i jego obecność w
+   odpowiedzi.
+5. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole,
+   zacommituj i otaguj: `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`.
+6. Wypchnij oba tagi — wydanie, które istnieje tylko na Twojej maszynie,
+   nie jest wydaniem: `git push origin order-api-v1.0.0 order-api-v1.1.0`
+   (albo `git push --tags`, żeby wypchnąć wszystkie tagi naraz).
+7. W nowej sekcji na dole `CHANGELOG.md`, `## Compatibility notes`,
    opisz (bez implementowania tego), jak wyglądałaby *łamiąca* wersja
    tego samego pomysłu zamiast tego — na przykład zmiana nazwy `items`
    na `line_items` w żądaniu/odpowiedzi — i podaj, którą pozycję SemVer
@@ -49,9 +57,11 @@ Po tym laboratorium powinieneś/aś umieć:
 
 - `CHANGELOG.md` ma zarówno wpis `[1.0.0]`, jak i `[1.1.0]`, plus
   sekcję `## Compatibility notes` rozważającą major kontra minor.
-- Zarówno `v1.0.0`, jak i `v1.1.0` istnieją jako opisane (annotated)
-  tagi Gita.
-- Pole `priority` jest zaimplementowane, poprawnie domyślne, a każdy
+- `CONTRACT.md` dokumentuje nowe pole `priority`.
+- Zarówno `order-api-v1.0.0`, jak i `order-api-v1.1.0` istnieją jako
+  opisane (annotated) tagi Gita, wypchnięte na Twój remote.
+- Pole `priority` jest zaimplementowane, poprawnie domyślne, ma własne
+  przechodzące testy (jawna wartość i pominięcie z domyślną), a każdy
   test napisany przed tym labem nadal przechodzi bez modyfikacji.
 
 ## Weryfikacja
@@ -61,12 +71,14 @@ cd examples/order-api
 uv run pytest -v
 cat CHANGELOG.md
 git tag
+git ls-remote --tags origin
 cd -
 ```
 
 Oczekiwane: wszystkie testy przechodzą, `CHANGELOG.md` pokazuje oba
-wpisy plus uwagi o kompatybilności, a `git tag` wymienia zarówno
-`v1.0.0`, jak i `v1.1.0`.
+wpisy plus uwagi o kompatybilności, `git tag` wymienia zarówno
+`order-api-v1.0.0`, jak i `order-api-v1.1.0`, a `git ls-remote --tags
+origin` pokazuje, że dotarły też na remote.
 
 ## Zastanów się
 
@@ -100,4 +112,4 @@ wydaje wersjonowane release'y z prawdziwą historią kompatybilności.
 Dalej dołączasz do zespołu (albo go prowadzisz), budując coś od zera —
 tu cały kurs się spina.
 
-Akt VI (Lab 26) będzie kontynuowany w kolejnym etapie kursu.
+Przejdź do [Lab 26 — Kickoff projektu](../26-project-kickoff/README.pl.md).

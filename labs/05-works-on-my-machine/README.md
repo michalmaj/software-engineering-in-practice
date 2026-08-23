@@ -49,6 +49,9 @@ After this lab you should be able to:
 - `uv run pytest` passes inside `labs/05-works-on-my-machine/`.
 - `.venv/` and `uv.lock` exist in that directory (uv created them; do not
   hand-write either).
+- `uv.lock`, created by `uv sync` (not shipped with the starter), is
+  committed to the repository — a lock file is only useful to a
+  teammate if it's actually checked in.
 - `notes/my-observations.txt` answers all three points from step 6, plus
   the devcontainer question from step 7.
 
@@ -92,4 +95,4 @@ You now have one small, reproducible project. Real projects, though, don't
 stay in a single file for long. Next, you'll deal with a script that has
 grown past the point where "just one file" still works.
 
-Continue to Act II (Lab 06), coming in the next milestone.
+Continue to [Lab 06 — From script to project](../06-from-script-to-project/README.md).

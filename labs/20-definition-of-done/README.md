@@ -82,4 +82,4 @@ conflict, review, and let CI catch what review misses. Next, the
 software has to survive contact with the outside world: other systems,
 stored data, and failures that are nobody's fault.
 
-Act V (Lab 21) continues in the next milestone.
+Continue to [Lab 21 — An API is a contract](../21-api-is-a-contract/README.md).

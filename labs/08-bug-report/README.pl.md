@@ -85,6 +85,11 @@ Oczekiwane: wszystkie testy `PASSED`; wypisany słownik pokazuje
   wewnątrz `calculate_bill` — oprzyj się pokusie przebudowywania
   czegokolwiek innego.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Masz zielony zestaw testów i prawdziwą poprawkę za nim. Dalej: inny

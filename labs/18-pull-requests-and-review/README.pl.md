@@ -36,10 +36,17 @@ Po tym laboratorium powinieneś/aś umieć:
    sformatowany string w stylu `"Reorder needed: Tomatoes, Milk"` (albo
    `"Nothing to reorder."`, jeśli lista jest pusta). Dodaj test.
    Zacommituj.
-3. Wypchnij gałąź i otwórz pull request — działa zarówno `gh pr create
-   --fill`, jak i interfejs webowy GitHuba. Napisz opis obejmujący: co
-   się zmieniło, dlaczego i jak to zweryfikowałeś/aś (jakie polecenia
-   uruchomiłeś/aś).
+3. Wypchnij gałąź i otwórz pull request. **Jeśli pracujesz z forka**,
+   `gh pr create` domyślnie otwiera PR przeciwko domyślnej gałęzi
+   *oryginalnego* repozytorium, nie `main` Twojego forka — dla tego
+   ćwiczenia (i każdego kolejnego PR-a w tym kursie) chcesz, żeby PR
+   celował w Twój własny fork. Użyj albo interfejsu webowego GitHuba
+   (który pokazuje repozytorium bazowe, zanim potwierdzisz), albo
+   uruchom raz `gh repo set-default <Twój-fork>`, żeby `gh pr create`
+   domyślnie celował w Twój fork, i tak czy inaczej sprawdź dwa razy
+   pokazane repozytorium bazowe przed wysłaniem. Napisz opis
+   obejmujący: co się zmieniło, dlaczego i jak to zweryfikowałeś/aś
+   (jakie polecenia uruchomiłeś/aś).
 4. Zrecenzuj go, używając poniższej checklisty:
    - **W parze:** poproś przydzielonego przez instruktora partnera o
      wymianę PR-ów — zrecenzuj jego, on/ona zrecenzuje Twój.
@@ -54,10 +61,14 @@ Po tym laboratorium powinieneś/aś umieć:
      być ponownie użyta zamiast przepisana?
    - Czy zrozumiałbyś/zrozumiałabyś ten diff bez zadawania autorowi
      pytania?
-5. Zostaw co najmniej dwa konkretne komentarze recenzji — na GitHubie,
-   jeśli w parze; w
+5. Zostaw co najmniej jeden merytoryczny komentarz recenzji — na
+   GitHubie, jeśli w parze; w
    `labs/18-pull-requests-and-review/my-review-notes.md`, jeśli solo.
-   Jeden komentarz musi dotyczyć zachowania, jeden czytelności.
+   "Merytoryczny" znaczy, że wskazuje coś, co czytelnik faktycznie
+   chciałby zmienić albo doprecyzować — nie parafrazę diffa. Jeśli diff
+   naprawdę daje powód do więcej niż jednego takiego punktu, zostaw
+   więcej; nie wymuszaj drugiego komentarza tylko po to, żeby osiągnąć
+   liczbę.
 6. Zajmij się każdym komentarzem (napraw kod albo napisz jednolinijkową
    odpowiedź wyjaśniającą dlaczego nie), potem zmerguj PR przyciskiem
    merge'a na GitHubie — nie lokalnym `git merge`.
@@ -67,9 +78,9 @@ Po tym laboratorium powinieneś/aś umieć:
 
 - Istniał pull request z opisem obejmującym co/dlaczego/jak
   zweryfikowano.
-- Istnieją co najmniej dwa komentarze recenzji (na GitHubie albo w
-  `my-review-notes.md`, jeśli solo), jeden o zachowaniu i jeden o
-  czytelności.
+- Istnieje co najmniej jeden merytoryczny komentarz recenzji (na
+  GitHubie albo w `my-review-notes.md`, jeśli solo) — na tyle
+  konkretny, żeby autor wiedział dokładnie, co z nim zrobić.
 - Po pobraniu lokalny `main` zawiera `reorder_report` i jego test, a
   `uv run pytest` przechodzi.
 

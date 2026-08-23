@@ -24,6 +24,10 @@ After this lab you should be able to:
   pull request.
 - Current directory: the repository root (the workflow file lives
   outside `examples/team-inventory/`, at `.github/workflows/`).
+- If your repository is a fork, GitHub disables Actions workflows on it
+  by default. Open your fork's **Actions** tab and click **"I understand
+  my workflows, go ahead and enable them"** before this lab's workflow
+  will run at all.
 
 ## Your task
 

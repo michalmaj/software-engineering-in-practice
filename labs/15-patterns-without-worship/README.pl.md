@@ -79,8 +79,8 @@ cd examples/discount-codes/version-b && uv run pytest -v && cd - > /dev/null
 ```
 
 Oczekiwane: notatki istnieją, a zestaw testów przechodzi z jednym
-testem więcej niż wcześniej (8 razem, licząc od wcześniejszych 7 w
-Wersji B).
+testem więcej niż wcześniej (9 razem, licząc od wcześniejszych 8 w
+Wersji B — 7 ship'owanych plus test `SAVE20`, który dodałeś/aś w Lab 12).
 
 ## Zastanów się
 
@@ -106,6 +106,19 @@ Wersji B).
   samym kształtem co `"SAVE5"` w `DISCOUNT_CODES` — lambda, która
   ignoruje swój argument i zwraca płaską kwotę.
 
+## Zanim przejdziesz do Aktu IV
+
+Akt IV (od Lab 16) zakłada, że Twoja gałąź `main` jest czysta, a
+wszystko z Labów 06-15 jest zacommitowane i wypchnięte. Teraz:
+
+```bash
+git status
+```
+
+Jeśli to pokazuje cokolwiek niezacommitowanego, zacommituj i wypchnij to
+teraz (`git add -A && git commit -m "..."; git push`). Jeśli pokazuje
+czysto, jesteś gotów/gotowa.
+
 ## Co dalej
 
 Zbudowałeś/aś małą funkcję, nadałeś/aś jej nazwę, którą rozpoznałby
@@ -114,4 +127,4 @@ wymaganiach bez obaw. Akt III jest zakończony. Dalej przestajesz
 pracować sam/sama — a "u mnie na komputerze działa" zamienia się w
 "działa, gdy ktoś inny dotknie mojego kodu".
 
-Akt IV (Lab 16) będzie kontynuowany w kolejnym etapie kursu.
+Przejdź do [Lab 16 — Gałęzie istnieją, bo praca dzieje się równolegle](../16-parallel-branches/README.pl.md).

@@ -26,14 +26,14 @@ Po tym laboratorium powinieneś/aś umieć:
 
 ## Twoje zadanie
 
-**Część 1 — trwałość danych:**
+**Część 1 — trwałość danych (zachowująca zachowanie):**
 
 1. Utwórz `db.py` z `init_db()` (tworzy tabelę `orders`, jeśli nie
    istnieje: `order_id INTEGER PRIMARY KEY AUTOINCREMENT, items TEXT
    NOT NULL, status TEXT NOT NULL`), `create_order(items: list) ->
    dict` oraz `get_order(order_id: str) -> dict | None` — używając
    `sqlite3` z biblioteki standardowej, przechowując `items` jako
-   string JSON.
+   string JSON. Żadna z funkcji nie wie jeszcze o `notes` — to Część 2.
 2. Przepisz `api.py`, żeby wywoływało `db.create_order`/`db.get_order`
    zamiast używać słownika `ORDERS`. Wywołaj `db.init_db()` raz, przy
    starcie serwera, w `run()`.
@@ -47,32 +47,52 @@ Po tym laboratorium powinieneś/aś umieć:
    przechodzić — ta część jest zachowująca zachowanie, dokładnie jak
    refaktor z Lab 06.
 
+**Teraz udowodnij, że problem "starych danych" jest prawdziwy, zanim go rozwiążesz:**
+
+5. Uruchom serwer naprawdę: `uv run python api.py`. W drugim terminalu
+   utwórz jedno zamówienie:
+   ```bash
+   curl -s -X POST http://localhost:8000/orders \
+     -H "Content-Type: application/json" -d '{"items": ["Burger"]}'
+   ```
+   Zanotuj `order_id`, który zwróci. Ten wiersz istnieje teraz w
+   `orders.db`, w schemacie z Części 1 — bez żadnej kolumny `notes`.
+   Zatrzymaj serwer (`Ctrl+C`), ale **nie usuwaj `orders.db`**.
+5a. Zanim pójdziesz dalej, dodaj `*.db` do `.gitignore` repozytorium
+    (utwórz plik w katalogu głównym, jeśli nie istnieje, albo dodaj
+    linię, jeśli istnieje). `orders.db` to stan uruchomieniowy, który
+    generuje Twój serwer — to nie jest kod źródłowy i nie powinien być
+    commitowany. Potwierdź przez `git status`, że `orders.db` nie
+    pojawia się już jako nieśledzony plik do dodania.
+
 **Część 2 — ewolucja schematu:**
 
-5. Dodaj `migrate_add_notes_column()` do `db.py`: sprawdź `PRAGMA
+6. Dodaj `migrate_add_notes_column()` do `db.py`: sprawdź `PRAGMA
    table_info(orders)` pod kątem kolumny o nazwie `notes`, i jeśli jej
    brakuje, uruchom `ALTER TABLE orders ADD COLUMN notes TEXT`.
-6. Zaktualizuj `create_order`, żeby przyjmowało opcjonalny parametr
+7. W `run()` wywołaj `db.migrate_add_notes_column()` zaraz po
+   `db.init_db()`, żeby każdy start serwera zapewniał istnienie
+   kolumny.
+8. Zaktualizuj `create_order`, żeby przyjmowało opcjonalny parametr
    `notes: str = ""`, przechowując go i zwracając. Zaktualizuj
    `get_order`, żeby uwzględniało `notes` w wyniku, domyślnie `""`,
    jeśli przechowana wartość to `NULL` (co będzie miało miejsce dla
-   każdego wiersza utworzonego przed uruchomieniem migracji).
-7. Zaktualizuj `do_POST` w `api.py`, żeby odczytywało opcjonalne pole
+   wiersza utworzonego w kroku 5).
+9. Zaktualizuj `do_POST` w `api.py`, żeby odczytywało opcjonalne pole
    `notes` z ciała żądania (domyślnie `""`) i przekazywało je dalej.
-8. Udowodnij, że migracja jest bezpieczna dla istniejących danych, w
-   dokładnie tej kolejności:
-   - Zakomentuj na chwilę wywołanie `db.migrate_add_notes_column()` w
-     `run()`. Uruchom serwer i wykonaj `POST` zamówienia — ten wiersz
-     powstaje w starym schemacie, bez żadnej kolumny `notes`. Zatrzymaj
-     serwer.
-   - Odkomentuj wywołanie `db.migrate_add_notes_column()`. Zrestartuj
-     serwer (ten sam plik bazy danych — nie usuwaj `orders.db`).
-     Wykonaj `GET` tego zamówienia, które utworzyłeś/aś przed chwilą,
-     po jego id.
-   - Musi nadal zwrócić się poprawnie, z `notes` obecnym i równym
-     `""` — nie brakującym, nie awarią.
-9. Dodaj test tworzenia i pobierania zamówienia z prawdziwą wartością
-   `notes`.
+10. Zrestartuj serwer (`uv run python api.py` — ten sam plik
+    `orders.db` z kroku 5). Wykonaj `GET` zamówienia utworzonego w
+    kroku 5, po jego id:
+    ```bash
+    curl -s http://localhost:8000/orders/<id-z-kroku-5>
+    ```
+    Musi nadal zwrócić się poprawnie, z `notes` obecnym i równym
+    `""` — nie brakującym, nie awarią. Zatrzymaj serwer.
+11. Dodaj test tworzenia i pobierania *nowego* zamówienia z prawdziwą
+    wartością `notes`.
+12. Zaktualizuj `CONTRACT.md` z Lab 21: ciało żądania `POST /orders`
+    teraz akceptuje opcjonalne pole `notes`, a każda odpowiedź (sukces
+    i błąd) zwracająca zamówienie teraz zawiera `notes`.
 
 ## Kryteria akceptacji
 
