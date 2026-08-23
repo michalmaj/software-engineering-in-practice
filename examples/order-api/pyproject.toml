@@ -1,0 +1,14 @@
+[project]
+name = "order-api"
+version = "0.1.0"
+description = "Labs 21-25: a minimal HTTP/JSON order API"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<9",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
