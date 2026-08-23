@@ -34,36 +34,68 @@ After this lab you should be able to:
    `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`.
 3. Now make one real, additive change: add an optional `priority` field
    to `POST /orders`, defaulting to `"normal"` when the caller omits
-   it. Add two new tests: one asserting a request that *does* send
-   `priority` gets that exact value back, one asserting a request that
-   *omits* it gets `"normal"`. Run the full existing test suite too, to
-   confirm none of those tests needed to change for this to be true.
+   it. This has to be a real, persisted field, not just a value echoed
+   back in the POST response:
+   - In `db.py`, add `migrate_add_priority_column()` (same shape as
+     Lab 22's `migrate_add_notes_column()`: check `PRAGMA
+     table_info(orders)`, `ALTER TABLE orders ADD COLUMN priority TEXT`
+     if it's missing) and call it in `run()`, right after
+     `migrate_add_notes_column()`. Update your test fixture the same
+     way you did in Lab 22.
+   - Update `create_order` to accept and store an optional
+     `priority: str = "normal"` parameter. Update `get_order` to
+     include `priority` in its result, defaulting to `"normal"` if the
+     stored value is `NULL`.
+   - Update `do_POST` in `api.py` to read an optional `priority` field
+     from the request body (defaulting to `"normal"`) and pass it into
+     `db.create_order` — don't just attach it to the response dict
+     after the fact.
+   - Add three tests: one asserting a `POST` that *does* send
+     `priority` gets that exact value back; one asserting a `POST` that
+     *omits* it gets `"normal"`; and one that `POST`s an order with an
+     explicit `priority`, then `GET`s that same order by id and asserts
+     the fetched order's `priority` matches — proving it's actually
+     persisted, not just echoed in the creation response.
+   - Run the full existing test suite too, to confirm none of those
+     tests needed to change for this to be true.
 4. Update `CONTRACT.md` from Lab 21: document the new optional
    `priority` field on `POST /orders`'s request body and its presence
-   in the response.
+   in every response that returns an order, including `GET`.
 5. Add a `## [1.1.0]` entry to `CHANGELOG.md` describing the new field,
-   commit, and tag: `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`.
-6. Push both tags — a release that only exists on your machine isn't a
-   release: `git push origin order-api-v1.0.0 order-api-v1.1.0` (or
-   `git push --tags` to push every tag at once).
-7. In a new section at the bottom of `CHANGELOG.md`, `## Compatibility
-   notes`, describe (without implementing it) what a *breaking* version
-   of this same idea would have looked like instead — for example,
-   renaming `items` to `line_items` in the request/response — and state
+   and a `## Compatibility notes` section at the bottom of the file
+   describing (without implementing it) what a *breaking* version of
+   this same idea would have looked like instead — for example,
+   renaming `items` to `line_items` in the request/response — stating
    which SemVer position (major/minor/patch) each of the two changes
    (the real additive one, and the hypothetical breaking one) would
-   bump, and why.
+   bump, and why. Write both of these before you commit and tag, so the
+   tagged commit's changelog is complete, not finished after the fact.
+6. Commit, then tag: `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`.
+7. Push both tags — a release that only exists on your machine isn't a
+   release: `git push origin order-api-v1.0.0 order-api-v1.1.0` (or
+   `git push --tags` to push every tag at once).
+8. Do this lab's work on a branch (for example
+   `feature/release-and-compatibility`), push it, and open a pull
+   request. Merge only once CI is green — same loop as the rest of
+   Act V.
 
 ## Acceptance criteria
 
 - `CHANGELOG.md` has both a `[1.0.0]` and a `[1.1.0]` entry, plus a
-  `## Compatibility notes` section reasoning about major vs. minor.
-- `CONTRACT.md` documents the new `priority` field.
+  `## Compatibility notes` section reasoning about major vs. minor —
+  and both were part of the same commit that got tagged
+  `order-api-v1.1.0`.
+- `CONTRACT.md` documents the new `priority` field, including on `GET`
+  responses.
 - Both `order-api-v1.0.0` and `order-api-v1.1.0` exist as annotated Git
   tags, pushed to your remote.
-- The `priority` field is implemented, defaults correctly, has its own
-  passing tests (explicit value and default omission), and every test
-  written before this lab still passes unmodified.
+- The `priority` field is implemented and genuinely persisted in
+  SQLite (a `GET` after a `POST` returns it, not just the `POST`
+  response itself), defaults correctly, has its own passing tests
+  (explicit value, default omission, and the POST-then-GET round trip),
+  and every test written before this lab still passes unmodified.
+- This lab's changes were merged through a pull request with a green
+  CI check, not committed directly to `main`.
 
 ## Verification
 
@@ -93,10 +125,12 @@ to the remote too.
 
 ## If you get stuck
 
-- **Hint 1:** `data.get("priority", "normal")` is the whole
-  backward-compatibility trick — a caller who never heard of
-  `priority` sends a request that looks exactly like before, and gets
-  the same default behavior as before.
+- **Hint 1:** `data.get("priority", "normal")` is the read side of
+  backward compatibility — a caller who never heard of `priority`
+  sends a request that looks exactly like before. The write side is
+  passing that value into `db.create_order` so it becomes a real
+  column: a caller who fetches the order later with `GET` needs to see
+  `priority` too, not just the caller who made the original `POST`.
 - **Hint 2:** An annotated tag (`git tag -a <name> -m "<message>"`)
   carries a message and author info, unlike a lightweight tag (`git tag
   <name>`) — prefer annotated tags for releases.

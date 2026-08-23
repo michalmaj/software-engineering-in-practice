@@ -73,26 +73,38 @@ Po tym laboratorium powinieneś/aś umieć:
 7. W `run()` wywołaj `db.migrate_add_notes_column()` zaraz po
    `db.init_db()`, żeby każdy start serwera zapewniał istnienie
    kolumny.
-8. Zaktualizuj `create_order`, żeby przyjmowało opcjonalny parametr
+8. Zaktualizuj swój fixture testowy w `tests/test_api.py`, żeby też
+   wywoływał `db.migrate_add_notes_column()` zaraz po `db.init_db()`,
+   dokładnie tak jak przed chwilą zrobiłeś/aś w `run()`. Testy startują
+   serwer bezpośrednio — nigdy nie przechodzą przez `run()` — więc jeśli
+   to pominiesz, test `notes` dodawany w kroku 12 poniżej działa na
+   bazie, która nigdy nie została zmigrowana, i tylko przypadkiem
+   przejdzie (albo zawiedzie z mylącym błędem "no such column").
+9. Zaktualizuj `create_order`, żeby przyjmowało opcjonalny parametr
    `notes: str = ""`, przechowując go i zwracając. Zaktualizuj
    `get_order`, żeby uwzględniało `notes` w wyniku, domyślnie `""`,
    jeśli przechowana wartość to `NULL` (co będzie miało miejsce dla
    wiersza utworzonego w kroku 5).
-9. Zaktualizuj `do_POST` w `api.py`, żeby odczytywało opcjonalne pole
-   `notes` z ciała żądania (domyślnie `""`) i przekazywało je dalej.
-10. Zrestartuj serwer (`uv run python api.py` — ten sam plik
+10. Zaktualizuj `do_POST` w `api.py`, żeby odczytywało opcjonalne pole
+    `notes` z ciała żądania (domyślnie `""`) i przekazywało je dalej.
+11. Zrestartuj serwer (`uv run python api.py` — ten sam plik
     `orders.db` z kroku 5). Wykonaj `GET` zamówienia utworzonego w
     kroku 5, po jego id:
     ```bash
-    curl -s http://localhost:8000/orders/<id-z-kroku-5>
+    curl -s http://localhost:8000/orders/<the-id-from-step-5>
     ```
     Musi nadal zwrócić się poprawnie, z `notes` obecnym i równym
     `""` — nie brakującym, nie awarią. Zatrzymaj serwer.
-11. Dodaj test tworzenia i pobierania *nowego* zamówienia z prawdziwą
+12. Dodaj test tworzenia i pobierania *nowego* zamówienia z prawdziwą
     wartością `notes`.
-12. Zaktualizuj `CONTRACT.md` z Lab 21: ciało żądania `POST /orders`
+13. Zaktualizuj `CONTRACT.md` z Lab 21: ciało żądania `POST /orders`
     teraz akceptuje opcjonalne pole `notes`, a każda odpowiedź (sukces
     i błąd) zwracająca zamówienie teraz zawiera `notes`.
+14. Zrób pracę z tego labu na gałęzi (na przykład
+    `feature/data-outlives-code`), wypchnij ją i otwórz pull request.
+    Zmerguj dopiero, gdy check CI z Lab 21 jest zielony — pętla branch
+    → PR → zielone CI → merge nadal obowiązuje dla `order-api` przez
+    resztę Aktu V.
 
 ## Kryteria akceptacji
 
@@ -103,6 +115,8 @@ Po tym laboratorium powinieneś/aś umieć:
 - Zamówienie utworzone przed uruchomieniem
   `migrate_add_notes_column()` jest nadal pobieralne po niej, z
   `notes == ""`.
+- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
+  checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 

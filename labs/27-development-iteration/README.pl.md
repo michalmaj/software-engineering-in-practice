@@ -28,6 +28,13 @@ Po tym laboratorium powinieneś/aś umieć:
   (`examples/capstone-starters/<język>/` w repozytorium kursu) —
   działające "hello world" i jeden przechodzący test, w wybranym przez
   Was języku.
+- Jeśli pracujesz solo: ten lab obejmuje cały build Twojego MVP, nie
+  jedną 90-minutową sesję. Nie ściskaj pętli, żeby zmieściła się w
+  zegarku — albo rozłóż ten lab na tyle prawdziwych sesji, ile Twoje
+  MVP faktycznie potrzebuje, albo zawęź zakres MVP w
+  `PROJECT_PLAN.md` do czegoś, co jedna 90-minutowa sesja da radę
+  uczciwie skończyć od początku do końca. Zespół rozkłada tę samą pracę
+  między swoich członków.
 
 ## Twoje zadanie
 
@@ -38,7 +45,17 @@ sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
    wzorzec z Lab 19: workflow, który instaluje zależności i uruchamia
    Wasz zestaw testów przy każdym push i pull requeście. Zrób to
    *przed* budowaniem funkcji, nie po — chcesz, żeby wyłapywało błędy
-   już od Waszego pierwszego prawdziwego PR-a.
+   już od Waszego pierwszego prawdziwego PR-a. Krótki przepis dla
+   języka, który wybraliście w Lab 26:
+   - **Python:** `actions/setup-python@v5` (dopasowany do wersji z
+     `.devcontainer/devcontainer.json`), potem zainstaluj `uv` i
+     uruchom `uv sync --locked` oraz `uv run pytest` — te same dwa
+     polecenia co w Lab 19, zastosowane do Waszego repozytorium.
+   - **Go:** `actions/setup-go@v5` z `go-version: '1.25'`, potem
+     `go test ./...`. Bez osobnego kroku instalacji zależności.
+   - **Java:** `actions/setup-java@v4` z `distribution: 'temurin'` i
+     `java-version: '21'`, potem `./gradlew test`. Committed wrapper
+     załatwia resztę — bez osobnego kroku instalacji Gradle w CI.
 2. Dla każdej możliwości MVP z Waszego planu (utworzenie rezerwacji,
    wylistowanie rezerwacji na dzień, anulowanie rezerwacji i cokolwiek
    jeszcze Wasz zespół zakresił), powtórz pełną pętlę: otwórz issue
@@ -66,8 +83,8 @@ sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
 ## Weryfikacja
 
 ```bash
-# uruchom z Waszego własnego repozytorium zespołu, dowolnym poleceniem uruchamiającym testy
-<Wasze polecenie testowe>
+# run from your team's own repository, with whatever command runs your tests
+<your test command>
 ```
 
 Oczekiwane: Wasz pełny zestaw testów przechodzi, a Wasz dostawca CI

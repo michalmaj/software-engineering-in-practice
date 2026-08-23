@@ -70,24 +70,36 @@ After this lab you should be able to:
    missing, run `ALTER TABLE orders ADD COLUMN notes TEXT`.
 7. In `run()`, call `db.migrate_add_notes_column()` right after
    `db.init_db()`, so every server start ensures the column exists.
-8. Update `create_order` to accept an optional `notes: str = ""`
+8. Update your test fixture in `tests/test_api.py` to also call
+   `db.migrate_add_notes_column()` right after `db.init_db()`, mirroring
+   what you just did to `run()`. Tests start the server directly — they
+   never go through `run()` — so if you skip this, the notes test you
+   add in step 12 below runs against a database that was never
+   migrated, and only appears to pass by accident (or fails with a
+   confusing "no such column" error).
+9. Update `create_order` to accept an optional `notes: str = ""`
    parameter, storing and returning it. Update `get_order` to include
    `notes` in its result, defaulting to `""` if the stored value is
    `NULL` (which it will be for the row you created in step 5).
-9. Update `do_POST` in `api.py` to read an optional `notes` field from
-   the request body (defaulting to `""`) and pass it through.
-10. Restart the server (`uv run python api.py` — same `orders.db` file
+10. Update `do_POST` in `api.py` to read an optional `notes` field from
+    the request body (defaulting to `""`) and pass it through.
+11. Restart the server (`uv run python api.py` — same `orders.db` file
     from step 5). `GET` the order you created in step 5, by its id:
     ```bash
     curl -s http://localhost:8000/orders/<the-id-from-step-5>
     ```
     It must still return successfully, with `notes` present and equal
     to `""` — not missing, not a crash. Stop the server.
-11. Add a test for creating and fetching a *new* order with a real
+12. Add a test for creating and fetching a *new* order with a real
     `notes` value.
-12. Update `CONTRACT.md` from Lab 21: the `POST /orders` request body
+13. Update `CONTRACT.md` from Lab 21: the `POST /orders` request body
     now accepts an optional `notes` field, and every response
     (success and error) that returns an order now includes `notes`.
+14. Do this lab's work on a branch (for example
+    `feature/data-outlives-code`), push it, and open a pull request.
+    Merge only once the CI check from Lab 21 is green — the branch → PR
+    → green CI → merge loop keeps applying to `order-api` for the rest
+    of Act V.
 
 ## Acceptance criteria
 
@@ -97,6 +109,8 @@ After this lab you should be able to:
   `notes` test (5 total).
 - An order created before `migrate_add_notes_column()` ran is still
   fetchable afterward, with `notes == ""`.
+- This lab's changes were merged through a pull request with a green
+  CI check, not committed directly to `main`.
 
 ## Verification
 

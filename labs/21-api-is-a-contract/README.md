@@ -46,6 +46,18 @@ After this lab you should be able to:
    non-empty string"}` instead of creating the order.
 5. Add a test for the new validation rule in `tests/test_api.py`.
 6. Update `CONTRACT.md` to describe this new error case too.
+7. Set up CI for `order-api`: create
+   `.github/workflows/order-api-ci.yml` (same pattern as Lab 19's
+   `team-inventory-ci.yml`) triggering on `[push, pull_request]`, that
+   checks out the repo, sets up Python 3.13, installs `uv`, then runs
+   `uv sync` and `uv run pytest` with `working-directory:
+   examples/order-api`.
+8. Do this lab's work on a branch (for example `feature/api-contract`),
+   push it, and open a pull request. Confirm the new CI check goes
+   green, then merge. Act IV's branch → PR → green CI → merge loop
+   doesn't stop just because Act V changed which project you're working
+   in — from here through the rest of Act V, every lab's changes go
+   through it, now covering `order-api`.
 
 ## Acceptance criteria
 
@@ -54,6 +66,10 @@ After this lab you should be able to:
 - The new item-validation rule is implemented and has a passing test.
 - `uv run pytest` passes with the original three tests plus your new
   one (4 total).
+- `.github/workflows/order-api-ci.yml` exists, triggers on push and
+  pull request, and runs `uv run pytest` in `examples/order-api`.
+- This lab's changes were merged through a pull request with a green
+  CI check, not committed directly to `main`.
 
 ## Verification
 
@@ -62,9 +78,11 @@ cd examples/order-api
 uv run pytest -v
 test -f CONTRACT.md && echo "contract documented"
 cd -
+test -f .github/workflows/order-api-ci.yml && echo "CI workflow exists"
 ```
 
-Expected: `4 passed`, and `contract documented`.
+Expected: `4 passed`, `contract documented`, and `CI workflow exists` —
+plus a green check on the pull request that merged this lab's work.
 
 ## Think about it
 

@@ -54,8 +54,8 @@ Po tym laboratorium powinieneś/aś umieć:
 ```bash
 test -f ~/lab02-notes/findings.bak.txt && echo "backup exists"
 test -f ~/lab02-notes/whoami-line.txt && echo "grep output exists"
-wc -l < ~/lab02-notes/whoami-line.txt   # oczekiwane dokładnie 1
-find ~ -name findings.txt               # oczekiwana dokładnie jedna ścieżka
+wc -l < ~/lab02-notes/whoami-line.txt   # expect exactly 1
+find ~ -name findings.txt               # expect exactly one path
 ```
 
 ## Zastanów się

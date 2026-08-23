@@ -54,8 +54,8 @@ Po tym laboratorium powinieneś/aś umieć:
 ## Weryfikacja
 
 ```bash
-git log --oneline -1                      # Twój commit powinien być na HEAD
-git status                                 # powinno być czysto (nic do commitowania)
+git log --oneline -1                      # your commit should be at HEAD
+git status                                 # should be clean (nothing to commit)
 test -f labs/03-inherited-repository/notes/my-observations.txt && echo "notes exist"
 wc -l < labs/03-inherited-repository/notes/my-observations.txt  # oczekiwane >= 3
 ```

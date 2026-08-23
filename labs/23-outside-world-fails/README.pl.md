@@ -51,6 +51,10 @@ Po tym laboratorium powinieneś/aś umieć:
    `call_with_retries(lambda: notify_kitchen(order["order_id"]))`,
    łapiąc `NotifierError`, żeby nieudane powiadomienie nie psuło całego
    żądania — zamówienie i tak jest tworzone.
+6. Zrób pracę z tego labu na gałęzi (na przykład
+   `feature/outside-world-fails`), wypchnij ją i otwórz pull request.
+   Zmerguj dopiero, gdy CI jest zielone — ta sama pętla co w Lab 21 i
+   22.
 
 ## Kryteria akceptacji
 
@@ -59,6 +63,8 @@ Po tym laboratorium powinieneś/aś umieć:
   sprawdza dokładną liczbę wywołań, nie tylko końcowy wynik.
 - `do_POST` nadal zwraca `201` dla poprawnego zamówienia, mimo że
   `notify_kitchen` jest tylko namiastką.
+- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
+  checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 

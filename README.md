@@ -70,8 +70,14 @@ you where to go.
 
 ## Getting an environment: local Unix-like machine (supported fallback)
 
-Works on Linux and macOS. Requires only Git — no admin rights, no Docker
-Desktop, no WSL.
+Works on Linux and macOS. Getting the repository itself needs only
+Git — no Docker Desktop, no WSL. Individual labs will later have you
+install a language toolchain (Python, `uv`, Go, a JDK) as you actually
+need it; the install methods in the table below (`curl`-based scripts,
+your OS's package manager) don't need admin rights on most systems, but
+that depends on how your machine is already set up — if your package
+manager is configured to require `sudo`, that's a property of your
+machine, not something this course adds on top of it.
 
 1. Fork this repository on GitHub (same reason as above: you need write
    access for later labs).
@@ -110,7 +116,7 @@ Not every lab needs every tool. Here's when each one actually matters:
 |------|-----------------|---------------------|
 | Git | Lab 01 | Already on Codespaces; on macOS/Linux, usually pre-installed or via your package manager |
 | Python 3.13 | Lab 01 | Codespaces has it; locally, use your OS's Python or [pyenv](https://github.com/pyenv/pyenv) if you need a specific version |
-| `uv` | Lab 05 | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| `uv` 0.11.21 | Lab 05 | `curl -LsSf https://astral.sh/uv/0.11.21/install.sh \| sh` |
 | Go 1.25 | Lab 14 | Codespaces has it; locally, see [go.dev/doc/install](https://go.dev/doc/install) |
 | JDK 21 | Lab 14 | Codespaces has it; locally, see your OS's package manager (e.g. `brew install openjdk@21`) |
 

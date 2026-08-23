@@ -95,8 +95,8 @@ nie wymuszajcie fałszywego błędu w żadną stronę.
 ## Weryfikacja
 
 ```bash
-# z Waszego własnego repozytorium zespołu
-<Wasze polecenie testowe>
+# from your team's own repository
+<your test command>
 ```
 
 Oczekiwane: pełny zestaw zielony, włącznie z nowym testem regresyjnym

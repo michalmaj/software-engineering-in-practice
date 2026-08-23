@@ -24,7 +24,8 @@ After this lab you should be able to:
 - If you're in a classroom: your instructor has assigned you to a team
   of 3-4. If you're working solo: you *are* the team — do every step
   below, including the role-assignment ones, deciding for yourself.
-- No code yet — this lab is planning only.
+- Almost no code yet: the only code you touch is the starter you copy
+  in step 2 below. Everything else in this lab is planning.
 
 ## Your task
 
@@ -56,8 +57,10 @@ After this lab you should be able to:
 2. Copy the matching language starter from
    `examples/capstone-starters/<python|go|java>/` (in this course
    repository) into your new repository's root, once you've made the
-   language decision in step 4 below — commit it as your first real
-   commit.
+   language decision in step 4 below. The starter's own `STARTER.md`
+   won't overwrite the `README.md` you wrote in step 1 — read it once
+   for the exact setup commands, then commit the starter as your first
+   real commit.
 3. As a team, write `PROJECT_PLAN.md` (in your new repository) covering:
    - **Scope**: what's in the MVP, what's explicitly out.
    - **Assumptions**: anything the brief didn't specify that you
@@ -96,7 +99,7 @@ After this lab you should be able to:
 
 ## Acceptance criteria
 
-- `PROJECT_PLAN.md` exists and answers all six points in step 1 with
+- `PROJECT_PLAN.md` exists and answers all six points in step 3 with
   specifics, not placeholders.
 - `docs/adr/adr-001-language-choice.md` exists and states a real
   decision with real reasoning, not "we chose Python because it's

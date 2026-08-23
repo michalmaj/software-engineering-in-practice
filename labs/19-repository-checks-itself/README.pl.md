@@ -38,8 +38,11 @@ Po tym laboratorium powinieneś/aś umieć:
    - wypina repozytorium
    - ustawia Pythona 3.13
    - instaluje `uv`
-   - uruchamia `uv sync`, potem `uv run pytest`, oba z katalogiem
-     roboczym `examples/team-inventory`
+   - uruchamia `uv sync --locked`, potem `uv run pytest`, oba z
+     katalogiem roboczym `examples/team-inventory` (`--locked`
+     wywala build zamiast po cichu aktualizować `uv.lock`, jeśli
+     kiedykolwiek rozjedzie się z `pyproject.toml` — dokładnie ten
+     rodzaj rozjazdu, który CI ma wyłapywać)
 3. Zacommituj i wypchnij gałąź, potem otwórz pull request (jak w
    Lab 18).
 4. Otwórz zakładkę "Checks" PR-a i obserwuj uruchomienie workflow.
@@ -68,7 +71,7 @@ tylko odtworzyć to, co zrobi workflow:
 
 ```bash
 cd examples/team-inventory
-uv sync
+uv sync --locked
 uv run pytest
 cd -
 ```
@@ -91,10 +94,34 @@ zgadzać.
 
 - **Podpowiedź 1:** Minimalny workflow potrzebuje `on:`, sekcji
   `jobs:` z co najmniej jednym jobem i listy `steps:` — checkout,
-  ustawienie Pythona, instalacja `uv`, `uv sync`, `uv run pytest`.
+  ustawienie Pythona, instalacja `uv`, `uv sync --locked`, `uv run
+  pytest`. Jeśli utknąłeś/aś na samym YAML-u, a nie na tym, co workflow
+  ma *robić*, oto szkielet — wypełnij luki, nie kopiuj go po prostu:
+  ```yaml
+  name: team-inventory CI
+
+  on: [push, pull_request]
+
+  jobs:
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-python@v5
+          with:
+            python-version: "___"   # match .devcontainer/devcontainer.json
+        - name: Install uv
+          run: curl -LsSf https://astral.sh/uv/install.sh | sh
+        - name: ___
+          working-directory: examples/team-inventory
+          run: ___                   # the dependency-install command
+        - name: ___
+          working-directory: examples/team-inventory
+          run: ___                   # the test command
+  ```
 - **Podpowiedź 2:** Użyj `working-directory: examples/team-inventory`
-  na krokach uruchamiających `uv sync`/`uv run pytest`, ponieważ
-  domyślnym katalogiem roboczym workflow jest katalog główny
+  na krokach uruchamiających `uv sync --locked`/`uv run pytest`,
+  ponieważ domyślnym katalogiem roboczym workflow jest katalog główny
   repozytorium.
 - **Podpowiedź 3:** Sprawdź `.devcontainer/devcontainer.json` w
   katalogu głównym repozytorium, żeby zobaczyć, jaką wersję Pythona

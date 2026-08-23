@@ -65,26 +65,32 @@ sekcją "Co dalej", która mówi, dokąd pójść.
 9. Codespaces ma miesięczne limity użycia. Zatrzymuj codespace'y, z których
    aktualnie nie korzystasz; usuwaj te, których już nie potrzebujesz.
 10. Żeby później pobrać aktualizacje kursu, dodaj oryginalne
-    repozytorium jako drugi remote: `git remote add upstream <adres-oryginalnego-repo>`,
+    repozytorium jako drugi remote: `git remote add upstream <original-repo-url>`,
     potem `git fetch upstream` i `git merge upstream/main`, gdy będzie
     potrzeba.
 
 ## Zdobycie środowiska: lokalna maszyna uniksopodobna (wspierany fallback)
 
-Działa na Linuksie i macOS. Wymaga tylko Gita — bez uprawnień administratora,
-bez Docker Desktop, bez WSL.
+Działa na Linuksie i macOS. Samo zdobycie repozytorium wymaga tylko
+Gita — bez Docker Desktop, bez WSL. Poszczególne laby każą Ci później
+zainstalować toolchain językowy (Python, `uv`, Go, JDK), dokładnie
+wtedy, gdy będzie potrzebny; metody instalacji z tabeli niżej (skrypty
+przez `curl`, menedżer pakietów Twojego systemu) na większości systemów
+nie wymagają uprawnień administratora, ale to zależy od tego, jak Twoja
+maszyna jest już skonfigurowana — jeśli Twój menedżer pakietów wymaga
+`sudo`, to właściwość Twojej maszyny, a nie coś, co dokłada ten kurs.
 
 1. Zrób fork tego repozytorium na GitHubie (ten sam powód co wyżej:
    potrzebujesz uprawnień do zapisu do kolejnych labów).
 2. Sklonuj **swój fork**, nie oryginalne repozytorium:
    ```bash
-   git clone <adres-Twojego-forka>
+   git clone <your-fork-url>
    cd software-engineering-in-practice
    ```
 3. Dodaj oryginalne repozytorium jako drugi remote, żeby móc później
    pobierać aktualizacje kursu:
    ```bash
-   git remote add upstream <adres-oryginalnego-repozytorium>
+   git remote add upstream <original-repository-url>
    ```
 
 Poszczególne laboratoria powiedzą Ci, które dodatkowe narzędzie (np. `uv`)
@@ -114,7 +120,7 @@ znaczenie każde z nich:
 |-----------|--------------------------|----------------------------|
 | Git | Lab 01 | Już jest w Codespaces; na macOS/Linuksie zwykle preinstalowany albo przez menedżera pakietów |
 | Python 3.13 | Lab 01 | Codespaces go ma; lokalnie użyj Pythona z systemu albo [pyenv](https://github.com/pyenv/pyenv), jeśli potrzebujesz konkretnej wersji |
-| `uv` | Lab 05 | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| `uv` 0.11.21 | Lab 05 | `curl -LsSf https://astral.sh/uv/0.11.21/install.sh \| sh` |
 | Go 1.25 | Lab 14 | Codespaces go ma; lokalnie zobacz [go.dev/doc/install](https://go.dev/doc/install) |
 | JDK 21 | Lab 14 | Codespaces go ma; lokalnie zobacz menedżer pakietów swojego systemu (np. `brew install openjdk@21`) |
 

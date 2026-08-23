@@ -32,37 +32,69 @@ Po tym laboratorium powinieneś/aś umieć:
    `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`.
 3. Teraz wprowadź jedną prawdziwą, addytywną zmianę: dodaj opcjonalne
    pole `priority` do `POST /orders`, domyślnie `"normal"`, gdy
-   wywołujący je pominie. Dodaj dwa nowe testy: jeden sprawdzający, że
-   żądanie, które *wysyła* `priority`, dostaje z powrotem dokładnie tę
-   wartość, jeden sprawdzający, że żądanie, które je *pomija*, dostaje
-   `"normal"`. Uruchom też pełny istniejący zestaw testów, żeby
-   potwierdzić, że żaden z nich nie musiał się zmienić, żeby to było
-   prawdą.
+   wywołujący je pominie. To musi być prawdziwe, przechowywane pole, nie
+   tylko wartość doklejona do odpowiedzi POST:
+   - W `db.py` dodaj `migrate_add_priority_column()` (dokładnie taki
+     sam kształt jak `migrate_add_notes_column()` z Lab 22: sprawdź
+     `PRAGMA table_info(orders)`, `ALTER TABLE orders ADD COLUMN
+     priority TEXT`, jeśli jej brakuje) i wywołaj ją w `run()`, zaraz po
+     `migrate_add_notes_column()`. Zaktualizuj swój fixture testowy w
+     ten sam sposób, w jaki zrobiłeś/aś to w Lab 22.
+   - Zaktualizuj `create_order`, żeby przyjmowało i przechowywało
+     opcjonalny parametr `priority: str = "normal"`. Zaktualizuj
+     `get_order`, żeby uwzględniało `priority` w wyniku, domyślnie
+     `"normal"`, jeśli przechowana wartość to `NULL`.
+   - Zaktualizuj `do_POST` w `api.py`, żeby odczytywało opcjonalne pole
+     `priority` z ciała żądania (domyślnie `"normal"`) i przekazywało
+     je do `db.create_order` — nie doklejaj go do słownika odpowiedzi
+     po fakcie.
+   - Dodaj trzy testy: jeden sprawdzający, że `POST`, który *wysyła*
+     `priority`, dostaje z powrotem dokładnie tę wartość; jeden
+     sprawdzający, że `POST`, który je *pomija*, dostaje `"normal"`; i
+     jeden, który wysyła `POST` z jawnym `priority`, a potem wykonuje
+     `GET` tego samego zamówienia po id i sprawdza, że `priority`
+     pobranego zamówienia się zgadza — dowodząc, że jest naprawdę
+     przechowywane, nie tylko odbite w odpowiedzi tworzącej.
+   - Uruchom też pełny istniejący zestaw testów, żeby potwierdzić, że
+     żaden z nich nie musiał się zmienić, żeby to było prawdą.
 4. Zaktualizuj `CONTRACT.md` z Lab 21: udokumentuj nowe opcjonalne pole
-   `priority` w ciele żądania `POST /orders` i jego obecność w
-   odpowiedzi.
-5. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole,
-   zacommituj i otaguj: `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`.
-6. Wypchnij oba tagi — wydanie, które istnieje tylko na Twojej maszynie,
+   `priority` w ciele żądania `POST /orders` i jego obecność w każdej
+   odpowiedzi zwracającej zamówienie, włącznie z `GET`.
+5. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole, oraz
+   sekcję `## Compatibility notes` na dole pliku, opisującą (bez
+   implementowania tego), jak wyglądałaby *łamiąca* wersja tego samego
+   pomysłu zamiast tego — na przykład zmiana nazwy `items` na
+   `line_items` w żądaniu/odpowiedzi — podając, którą pozycję SemVer
+   (major/minor/patch) podniosłaby każda z dwóch zmian (ta prawdziwa
+   addytywna i ta hipotetyczna łamiąca), i dlaczego. Napisz obie te
+   rzeczy, zanim zacommitujesz i otagujesz, żeby changelog w otagowanym
+   commicie był kompletny, a nie dopisany później.
+6. Zacommituj, potem otaguj: `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`.
+7. Wypchnij oba tagi — wydanie, które istnieje tylko na Twojej maszynie,
    nie jest wydaniem: `git push origin order-api-v1.0.0 order-api-v1.1.0`
    (albo `git push --tags`, żeby wypchnąć wszystkie tagi naraz).
-7. W nowej sekcji na dole `CHANGELOG.md`, `## Compatibility notes`,
-   opisz (bez implementowania tego), jak wyglądałaby *łamiąca* wersja
-   tego samego pomysłu zamiast tego — na przykład zmiana nazwy `items`
-   na `line_items` w żądaniu/odpowiedzi — i podaj, którą pozycję SemVer
-   (major/minor/patch) podniosłaby każda z dwóch zmian (ta prawdziwa
-   addytywna i ta hipotetyczna łamiąca), i dlaczego.
+8. Zrób pracę z tego labu na gałęzi (na przykład
+   `feature/release-and-compatibility`), wypchnij ją i otwórz pull
+   request. Zmerguj dopiero, gdy CI jest zielone — ta sama pętla co w
+   reszcie Aktu V.
 
 ## Kryteria akceptacji
 
 - `CHANGELOG.md` ma zarówno wpis `[1.0.0]`, jak i `[1.1.0]`, plus
-  sekcję `## Compatibility notes` rozważającą major kontra minor.
-- `CONTRACT.md` dokumentuje nowe pole `priority`.
+  sekcję `## Compatibility notes` rozważającą major kontra minor — i
+  oba były częścią tego samego commita, który został otagowany jako
+  `order-api-v1.1.0`.
+- `CONTRACT.md` dokumentuje nowe pole `priority`, także w odpowiedziach
+  `GET`.
 - Zarówno `order-api-v1.0.0`, jak i `order-api-v1.1.0` istnieją jako
   opisane (annotated) tagi Gita, wypchnięte na Twój remote.
-- Pole `priority` jest zaimplementowane, poprawnie domyślne, ma własne
-  przechodzące testy (jawna wartość i pominięcie z domyślną), a każdy
-  test napisany przed tym labem nadal przechodzi bez modyfikacji.
+- Pole `priority` jest zaimplementowane i naprawdę przechowywane w
+  SQLite (`GET` po `POST` je zwraca, nie tylko sama odpowiedź `POST`),
+  poprawnie domyślne, ma własne przechodzące testy (jawna wartość,
+  pominięcie z domyślną, i round-trip POST-potem-GET), a każdy test
+  napisany przed tym labem nadal przechodzi bez modyfikacji.
+- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
+  checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 
@@ -92,10 +124,13 @@ origin` pokazuje, że dotarły też na remote.
 
 ## Jeśli utkniesz
 
-- **Podpowiedź 1:** `data.get("priority", "normal")` to cała sztuczka
-  wstecznej kompatybilności — wywołujący, który nigdy nie słyszał o
-  `priority`, wysyła żądanie wyglądające dokładnie jak wcześniej i
-  dostaje to samo domyślne zachowanie co wcześniej.
+- **Podpowiedź 1:** `data.get("priority", "normal")` to strona
+  odczytu wstecznej kompatybilności — wywołujący, który nigdy nie
+  słyszał o `priority`, wysyła żądanie wyglądające dokładnie jak
+  wcześniej. Stroną zapisu jest przekazanie tej wartości do
+  `db.create_order`, żeby stała się prawdziwą kolumną: wywołujący, który
+  później pobierze zamówienie przez `GET`, też musi zobaczyć
+  `priority`, nie tylko ten, kto zrobił oryginalny `POST`.
 - **Podpowiedź 2:** Opisany tag (`git tag -a <nazwa> -m "<wiadomość>"`)
   niesie wiadomość i informacje o autorze, w przeciwieństwie do
   lekkiego tagu (`git tag <nazwa>`) — preferuj opisane tagi dla wydań.
