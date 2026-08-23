@@ -52,8 +52,9 @@ Po tym laboratorium powinieneś/aś umieć:
    `.github/workflows/order-api-ci.yml` (ten sam wzorzec co
    `team-inventory-ci.yml` z Lab 19), wyzwalany przez `[push,
    pull_request]`, który checkoutuje repo, ustawia Pythona 3.13,
-   instaluje `uv`, a potem uruchamia `uv sync` i `uv run pytest` z
-   `working-directory: examples/order-api`.
+   instaluje `uv` przypięte do `0.11.21` przez akcję
+   `astral-sh/setup-uv`, a potem uruchamia `uv sync --locked` i
+   `uv run pytest` z `working-directory: examples/order-api`.
 8. Zrób pracę z tego labu na gałęzi (na przykład
    `feature/api-contract`), wypchnij ją i otwórz pull request.
    Potwierdź, że nowy check CI staje się zielony, potem zmerguj. Pętla

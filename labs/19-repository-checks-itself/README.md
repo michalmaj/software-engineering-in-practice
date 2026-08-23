@@ -37,7 +37,9 @@ After this lab you should be able to:
    - triggers `on: [push, pull_request]`
    - checks out the repository
    - sets up Python 3.13
-   - installs `uv`
+   - installs `uv`, pinned to `0.11.21` (matching the devcontainer and
+     your local setup) via the `astral-sh/setup-uv` action, rather than
+     whatever the unpinned install script would resolve to that day
    - runs `uv sync --locked`, then `uv run pytest`, both with a working
      directory of `examples/team-inventory` (`--locked` fails the build
      instead of silently updating `uv.lock` if it's ever out of sync
@@ -109,7 +111,9 @@ commands in the same directory, the PR check will match.
           with:
             python-version: "___"   # match .devcontainer/devcontainer.json
         - name: Install uv
-          run: curl -LsSf https://astral.sh/uv/install.sh | sh
+          uses: astral-sh/setup-uv@v10.0.1
+          with:
+            version: "0.11.21"
         - name: ___
           working-directory: examples/team-inventory
           run: ___                   # the dependency-install command
