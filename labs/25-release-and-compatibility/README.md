@@ -31,15 +31,22 @@ After this lab you should be able to:
    persistence, the `notes` migration, the retry wrapper, and
    structured logging.
 2. Commit `CHANGELOG.md`, then tag the current commit:
-   `git tag -a v1.0.0 -m "order-api v1.0.0"`.
+   `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`.
 3. Now make one real, additive change: add an optional `priority` field
    to `POST /orders`, defaulting to `"normal"` when the caller omits
-   it. Existing requests that don't send `priority` must keep working
-   exactly as before — run the full test suite to confirm none of your
-   existing tests needed to change for this to be true.
-4. Add a `## [1.1.0]` entry to `CHANGELOG.md` describing the new field,
-   commit, and tag: `git tag -a v1.1.0 -m "order-api v1.1.0"`.
-5. In a new section at the bottom of `CHANGELOG.md`, `## Compatibility
+   it. Add two new tests: one asserting a request that *does* send
+   `priority` gets that exact value back, one asserting a request that
+   *omits* it gets `"normal"`. Run the full existing test suite too, to
+   confirm none of those tests needed to change for this to be true.
+4. Update `CONTRACT.md` from Lab 21: document the new optional
+   `priority` field on `POST /orders`'s request body and its presence
+   in the response.
+5. Add a `## [1.1.0]` entry to `CHANGELOG.md` describing the new field,
+   commit, and tag: `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`.
+6. Push both tags — a release that only exists on your machine isn't a
+   release: `git push origin order-api-v1.0.0 order-api-v1.1.0` (or
+   `git push --tags` to push every tag at once).
+7. In a new section at the bottom of `CHANGELOG.md`, `## Compatibility
    notes`, describe (without implementing it) what a *breaking* version
    of this same idea would have looked like instead — for example,
    renaming `items` to `line_items` in the request/response — and state
@@ -51,9 +58,12 @@ After this lab you should be able to:
 
 - `CHANGELOG.md` has both a `[1.0.0]` and a `[1.1.0]` entry, plus a
   `## Compatibility notes` section reasoning about major vs. minor.
-- Both `v1.0.0` and `v1.1.0` exist as annotated Git tags.
-- The `priority` field is implemented, defaults correctly, and every
-  test written before this lab still passes unmodified.
+- `CONTRACT.md` documents the new `priority` field.
+- Both `order-api-v1.0.0` and `order-api-v1.1.0` exist as annotated Git
+  tags, pushed to your remote.
+- The `priority` field is implemented, defaults correctly, has its own
+  passing tests (explicit value and default omission), and every test
+  written before this lab still passes unmodified.
 
 ## Verification
 
@@ -62,11 +72,14 @@ cd examples/order-api
 uv run pytest -v
 cat CHANGELOG.md
 git tag
+git ls-remote --tags origin
 cd -
 ```
 
 Expected: all tests pass, `CHANGELOG.md` shows both entries plus the
-compatibility notes, and `git tag` lists both `v1.0.0` and `v1.1.0`.
+compatibility notes, `git tag` lists both `order-api-v1.0.0` and
+`order-api-v1.1.0`, and `git ls-remote --tags origin` shows they made it
+to the remote too.
 
 ## Think about it
 
