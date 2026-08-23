@@ -5,8 +5,11 @@
 Twój ostatni code review zajął dziesięć minut, żeby dojść do zgody w
 sprawie: tabulacji kontra spacji, nieużywanego importu i tego, czy
 string powinien używać pojedynczych czy podwójnych cudzysłowów. Nic z
-tego nie dotyczyło tego, czy kod jest *poprawny* — na to pytanie
-odpowiadają już Twoje testy. A mimo to zmarnowało czas przeglądu.
+tego nie dotyczyło tego, czy kod robi właściwą rzecz — od tego są testy,
+nawet jeśli (jak właśnie pokazał Lab 08) testy wyłapują tylko to, o
+czym ktoś pomyślał, żeby napisać test. Spory o styl mimo to marnują
+czas przeglądu na pytanie, na które maszyna może odpowiedzieć zamiast
+ludzi.
 
 ## Cele nauki
 

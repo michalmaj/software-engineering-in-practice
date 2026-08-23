@@ -4,8 +4,11 @@
 
 Your last code review took ten minutes to converge on: tabs versus
 spaces, an unused import, and whether a string should use single or
-double quotes. None of that was about whether the code was *correct* —
-your tests already answer that question. It's still wasting review time.
+double quotes. None of that was about whether the code does the right
+thing — that's what tests are for, even if (as Lab 08 just showed you)
+tests only catch what someone thought to write a test for. Style
+arguments are still wasting review time on a question a machine can
+answer instead.
 
 ## Learning objectives
 

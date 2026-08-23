@@ -58,9 +58,12 @@ After this lab you should be able to:
      be reused instead of rewritten?
    - Would you understand this diff without asking the author a
      question?
-5. Leave at least two concrete review comments — on GitHub if paired;
+5. Leave at least one substantive review comment — on GitHub if paired;
    in `labs/18-pull-requests-and-review/my-review-notes.md` if solo.
-   One comment must be about behavior, one about clarity.
+   "Substantive" means it identifies something a reader would actually
+   want changed or clarified — not a rephrasing of the diff. If the
+   diff genuinely raises more than one such point, leave more than one;
+   don't manufacture a second comment just to hit a number.
 6. Address each comment (fix the code, or write a one-line reply
    explaining why not), then merge the PR using GitHub's merge button —
    not a local `git merge`.
@@ -70,9 +73,9 @@ After this lab you should be able to:
 
 - A pull request existed with a description covering what/why/how
   verified.
-- At least two review comments exist (on GitHub, or in
-  `my-review-notes.md` if solo), one about behavior and one about
-  clarity.
+- At least one substantive review comment exists (on GitHub, or in
+  `my-review-notes.md` if solo) — specific enough that the author would
+  know exactly what to do with it.
 - After pulling, local `main` contains `reorder_report` and its test,
   and `uv run pytest` passes.
 

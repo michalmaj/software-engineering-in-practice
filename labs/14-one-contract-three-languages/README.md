@@ -81,6 +81,12 @@ Expected: all three succeed, including your new `SilentNotifier` checks.
   method but *forgot* to write `implements Notifier` on it, would Java
   let you pass it anywhere a `Notifier` is expected? Would Python or Go
   stop you the same way?
+- Python's `Protocol` alone gives you *documentation* of a contract, not
+  *enforcement* — nothing stops you from passing an object missing
+  `send` and only finding out at runtime, when it's called. Go's
+  compiler and Java's compiler both catch a missing method before the
+  program ever runs. What would close that gap for Python, and what
+  would it cost to add?
 
 ## If you get stuck
 
