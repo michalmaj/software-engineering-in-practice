@@ -87,8 +87,8 @@ repository.
   never made it into the README, `ARCHITECTURE.md`, or an ADR? Why did
   it feel unnecessary to write down at the time?
 - The original team is evaluated partly by how well another team could
-  work with their project (spec's own framing for this lab). Is that a
-  fair way to measure engineering quality? What does it capture that
+  work with their project, not by how confident the original team felt.
+  Is that a fair way to measure engineering quality? What does it capture that
   "did the tests pass" doesn't?
 
 ## If you get stuck
