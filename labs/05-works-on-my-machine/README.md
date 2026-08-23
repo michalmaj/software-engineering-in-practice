@@ -89,6 +89,11 @@ cd -
 - **Hint 3:** `uv run <command>` runs `<command>` inside the project's own
   managed environment, without you needing to manually activate anything.
 
+Before moving on: commit and push everything from this lab, `uv.lock`
+included (`git add -A && git commit -m "..."; git push`). Nothing later
+assumes a clean tree yet, but Act IV (starting at Lab 16) does — get in
+the habit now.
+
 ## What's next
 
 You now have one small, reproducible project. Real projects, though, don't

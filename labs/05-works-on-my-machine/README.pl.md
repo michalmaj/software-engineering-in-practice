@@ -92,9 +92,14 @@ cd -
   zainstalowany globalnie na Twojej maszynie — to dokładnie ta pułapka,
   o której jest to laboratorium. Spróbuj w zupełnie świeżym Codespace,
   żeby zobaczyć prawdziwą porażkę.
-- **Podpowiedź 3:** `uv run <polecenie>` uruchamia `<polecenie>` wewnątrz
+- **Podpowiedź 3:** `uv run <command>` uruchamia `<command>` wewnątrz
   środowiska zarządzanego przez sam projekt, bez potrzeby ręcznej
   aktywacji czegokolwiek.
+
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba,
+włącznie z `uv.lock` (`git add -A && git commit -m "..."; git push`).
+Nic później jeszcze nie zakłada czystego drzewa, ale Akt IV (od Lab 16)
+już tak — wyrób sobie ten nawyk już teraz.
 
 ## Co dalej
 
