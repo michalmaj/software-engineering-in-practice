@@ -99,4 +99,4 @@ versioned releases with a real compatibility story. Next, you join
 (or lead) a team building something from scratch — this is where the
 whole course comes together.
 
-Act VI (Lab 26) continues in the next milestone.
+Continue to [Lab 26 — Project kickoff](../26-project-kickoff/README.md).

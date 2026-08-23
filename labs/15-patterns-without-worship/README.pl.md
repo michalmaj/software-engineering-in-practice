@@ -127,4 +127,4 @@ wymaganiach bez obaw. Akt III jest zakończony. Dalej przestajesz
 pracować sam/sama — a "u mnie na komputerze działa" zamienia się w
 "działa, gdy ktoś inny dotknie mojego kodu".
 
-Akt IV (Lab 16) będzie kontynuowany w kolejnym etapie kursu.
+Przejdź do [Lab 16 — Gałęzie istnieją, bo praca dzieje się równolegle](../16-parallel-branches/README.pl.md).

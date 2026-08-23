@@ -100,4 +100,4 @@ wydaje wersjonowane release'y z prawdziwą historią kompatybilności.
 Dalej dołączasz do zespołu (albo go prowadzisz), budując coś od zera —
 tu cały kurs się spina.
 
-Akt VI (Lab 26) będzie kontynuowany w kolejnym etapie kursu.
+Przejdź do [Lab 26 — Kickoff projektu](../26-project-kickoff/README.pl.md).

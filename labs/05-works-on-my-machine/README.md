@@ -92,4 +92,4 @@ You now have one small, reproducible project. Real projects, though, don't
 stay in a single file for long. Next, you'll deal with a script that has
 grown past the point where "just one file" still works.
 
-Continue to Act II (Lab 06), coming in the next milestone.
+Continue to [Lab 06 — From script to project](../06-from-script-to-project/README.md).

@@ -99,4 +99,4 @@ Masz już jeden mały, odtwarzalny projekt. Prawdziwe projekty jednak nie
 zostają w jednym pliku na długo. Dalej zajmiesz się skryptem, który
 urósł ponad punkt, w którym "po prostu jeden plik" wciąż działa.
 
-Przejdź do Aktu II (Lab 06), w kolejnym etapie kursu.
+Przejdź do [Lab 06 — Od skryptu do projektu](../06-from-script-to-project/README.pl.md).

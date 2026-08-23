@@ -122,4 +122,4 @@ would recognize, and reused it under new requirements without dread.
 Act III is done. Next, you stop working alone — and "my code works on
 my machine" turns into "my code works when someone else touches it."
 
-Act IV (Lab 16) continues in the next milestone.
+Continue to [Lab 16 — Branches exist because work happens in parallel](../16-parallel-branches/README.md).

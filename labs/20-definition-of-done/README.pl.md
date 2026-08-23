@@ -89,4 +89,4 @@ to, co przeoczy review. Dalej oprogramowanie musi przetrwać kontakt ze
 światem zewnętrznym: innymi systemami, przechowywanymi danymi i
 awariami, które nie są niczyją winą.
 
-Akt V (Lab 21) będzie kontynuowany w kolejnym etapie kursu.
+Przejdź do [Lab 21 — API to kontrakt](../21-api-is-a-contract/README.pl.md).

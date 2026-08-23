@@ -92,4 +92,4 @@ consistently-checked project. Act II is done. Next, the project itself
 will have to survive an actual change in requirements — which is where
 design starts to matter.
 
-Act III (Lab 11) continues in the next milestone.
+Continue to [Lab 11 — The client changed their mind](../11-changed-requirements/README.md).
