@@ -64,8 +64,8 @@ Po tym laboratorium powinieneś/aś umieć:
 ## Weryfikacja
 
 ```bash
-# z Waszego własnego repozytorium zespołu
-<Wasze polecenie testowe>
+# from your team's own repository
+<your test command>
 ```
 
 Oczekiwane: pełny zestaw zielony, włącznie z nowymi testami dla

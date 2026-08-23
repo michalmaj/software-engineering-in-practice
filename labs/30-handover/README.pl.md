@@ -75,9 +75,9 @@ Po tym laboratorium powinieneś/aś umieć:
 ## Weryfikacja
 
 ```bash
-# ze strony odbierającej, w zupełnie świeżym klonie
-<polecenia konfiguracyjne z README zespołu oryginalnego>
-<polecenie testowe z README zespołu oryginalnego>
+# from the receiving side, in a completely fresh clone
+<the setup commands from the originating team's README>
+<the test command from the originating team's README>
 ```
 
 Oczekiwane: oba się udają, używając wyłącznie tego, co spisane w

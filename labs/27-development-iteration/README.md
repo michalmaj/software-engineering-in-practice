@@ -27,6 +27,12 @@ After this lab you should be able to:
   from Lab 26 (`examples/capstone-starters/<language>/` in the course
   repository) — a working "hello world" and one passing test, in
   whichever language you chose.
+- If you're working solo: this lab covers your entire MVP build, not
+  one 90-minute session's worth of it. Don't compress the loop to fit
+  the clock — either spread this lab across as many real sessions as
+  your MVP actually needs, or scope your `PROJECT_PLAN.md`'s MVP down
+  to something a single 90-minute session can honestly finish end to
+  end. A team splits this same work across its members instead.
 
 ## Your task
 
@@ -37,6 +43,16 @@ Working from your own `PROJECT_PLAN.md`'s MVP scope:
    a workflow that installs dependencies and runs your test suite on
    every push and pull request. Do this *before* building features, not
    after — you want it catching mistakes from your very first real PR.
+   A short recipe for whichever language you chose in Lab 26:
+   - **Python:** `actions/setup-python@v5` (match `.devcontainer/devcontainer.json`'s
+     version), then install `uv` and run `uv sync --locked` and
+     `uv run pytest` — the same two commands as Lab 19, applied to your
+     own repository.
+   - **Go:** `actions/setup-go@v5` with `go-version: '1.25'`, then
+     `go test ./...`. No separate dependency-install step.
+   - **Java:** `actions/setup-java@v4` with `distribution: 'temurin'`
+     and `java-version: '21'`, then `./gradlew test`. The committed
+     wrapper handles the rest — no Gradle install step in CI either.
 2. For each MVP capability in your plan (create a reservation, list
    reservations for a day, cancel a reservation, and whatever else your
    team scoped in), repeat the full loop: open an issue or task
