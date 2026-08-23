@@ -96,6 +96,11 @@ Oczekiwane: wszystkie testy przechodzą, a wypisuje się `decoupled`
   robiła stara gałąź wbudowana — rozbieżność zwykle dotyczy dokładnie
   jednego z trzech kodów.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Kody rabatowe i (z ostatnich dwóch labów) rodzina rzeczy, które

@@ -80,6 +80,11 @@ passes — none of this changed behavior.
   that's a valid outcome, not a sign you did something wrong — it means
   your Lab 06-08 code was already clean.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 You now have three different kinds of automated feedback: tests,

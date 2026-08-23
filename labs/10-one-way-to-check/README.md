@@ -80,6 +80,11 @@ three complete successfully with no manual `cd` on your part.
   `set -euo pipefail`.
 - **Hint 3:** `chmod +x scripts/*.sh` makes all four executable at once.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 You've taken one script and turned it into a small, well-tested,

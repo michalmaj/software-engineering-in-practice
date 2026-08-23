@@ -96,6 +96,11 @@ Expected: all three succeed, including your new `SilentNotifier` checks.
   Python, `go test ./...` for Go, and `javac *.java -d out && java -cp
   out NotifierCheck` for Java are the only three commands you need.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 Discount codes (Labs 12-13) and notifiers (this lab) turn out to share

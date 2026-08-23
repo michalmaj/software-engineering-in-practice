@@ -81,6 +81,11 @@ Expected: every test shown as `PASSED`, none `FAILED`, none skipped.
   rounding to 2 decimal places (as `calculate_bill` already does) is
   reliable enough for this project; you don't need `pytest.approx` here.
 
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
+
 ## What's next
 
 Your tests are green. Then a customer complains about their bill. Time

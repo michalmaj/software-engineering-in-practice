@@ -101,6 +101,11 @@ sprawdzeniami `SilentNotifier`.
   out && java -cp out NotifierCheck` dla Javy to jedyne trzy potrzebne
   polecenia.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Kody rabatowe (Laby 12-13) i notifiery (ten lab) okazują się mieć

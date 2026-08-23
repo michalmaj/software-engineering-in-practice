@@ -74,7 +74,8 @@ cd examples/discount-codes/version-b && uv run pytest -v && cd - > /dev/null
 ```
 
 Expected: notes exist, and the test suite passes with one more test
-than before (8 total, given Version B's earlier 7).
+than before (9 total, given Version B's earlier 8 — 7 shipped plus the
+`SAVE20` test you added in Lab 12).
 
 ## Think about it
 
@@ -100,6 +101,19 @@ than before (8 total, given Version B's earlier 7).
 - **Hint 3:** For the new discount code, follow the exact same shape as
   `"SAVE5"` in `DISCOUNT_CODES` — a lambda that ignores its argument
   and returns a flat amount.
+
+## Before you move on to Act IV
+
+Act IV (starting at Lab 16) assumes your `main` branch is clean and
+everything from Labs 06-15 is committed and pushed. Right now:
+
+```bash
+git status
+```
+
+If this shows anything uncommitted, commit and push it now
+(`git add -A && git commit -m "..."; git push`). If it shows clean,
+you're ready.
 
 ## What's next
 

@@ -85,6 +85,11 @@ Oczekiwane: oba polecenia Ruff nie zgłaszają niczego do poprawy, a
   Twoim własnym kodzie, to prawidłowy wynik, a nie znak, że coś
   zrobiłeś/aś źle — oznacza, że Twój kod z Labów 06-08 był już czysty.
 
+Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
+(`git add -A && git commit -m "..."; git push`). Nic później jeszcze
+nie zakłada czystego drzewa, ale Akt IV (od Lab 16) już tak — wyrób
+sobie ten nawyk już teraz.
+
 ## Co dalej
 
 Masz teraz trzy różne rodzaje automatycznej informacji zwrotnej: testy,
