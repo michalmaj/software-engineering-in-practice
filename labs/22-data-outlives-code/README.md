@@ -95,6 +95,11 @@ After this lab you should be able to:
 13. Update `CONTRACT.md` from Lab 21: the `POST /orders` request body
     now accepts an optional `notes` field, and every response
     (success and error) that returns an order now includes `notes`.
+14. Do this lab's work on a branch (for example
+    `feature/data-outlives-code`), push it, and open a pull request.
+    Merge only once the CI check from Lab 21 is green — the branch → PR
+    → green CI → merge loop keeps applying to `order-api` for the rest
+    of Act V.
 
 ## Acceptance criteria
 
@@ -104,6 +109,8 @@ After this lab you should be able to:
   `notes` test (5 total).
 - An order created before `migrate_add_notes_column()` ran is still
   fetchable afterward, with `notes == ""`.
+- This lab's changes were merged through a pull request with a green
+  CI check, not committed directly to `main`.
 
 ## Verification
 

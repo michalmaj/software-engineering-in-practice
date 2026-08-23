@@ -100,6 +100,11 @@ Po tym laboratorium powinieneś/aś umieć:
 13. Zaktualizuj `CONTRACT.md` z Lab 21: ciało żądania `POST /orders`
     teraz akceptuje opcjonalne pole `notes`, a każda odpowiedź (sukces
     i błąd) zwracająca zamówienie teraz zawiera `notes`.
+14. Zrób pracę z tego labu na gałęzi (na przykład
+    `feature/data-outlives-code`), wypchnij ją i otwórz pull request.
+    Zmerguj dopiero, gdy check CI z Lab 21 jest zielony — pętla branch
+    → PR → zielone CI → merge nadal obowiązuje dla `order-api` przez
+    resztę Aktu V.
 
 ## Kryteria akceptacji
 
@@ -110,6 +115,8 @@ Po tym laboratorium powinieneś/aś umieć:
 - Zamówienie utworzone przed uruchomieniem
   `migrate_add_notes_column()` jest nadal pobieralne po niej, z
   `notes == ""`.
+- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
+  checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 

@@ -48,6 +48,19 @@ Po tym laboratorium powinieneś/aś umieć:
    item must be a non-empty string"}` zamiast tworzyć zamówienie.
 5. Dodaj test dla nowej reguły walidacji w `tests/test_api.py`.
 6. Zaktualizuj `CONTRACT.md`, żeby opisać też ten nowy przypadek błędu.
+7. Skonfiguruj CI dla `order-api`: utwórz
+   `.github/workflows/order-api-ci.yml` (ten sam wzorzec co
+   `team-inventory-ci.yml` z Lab 19), wyzwalany przez `[push,
+   pull_request]`, który checkoutuje repo, ustawia Pythona 3.13,
+   instaluje `uv`, a potem uruchamia `uv sync` i `uv run pytest` z
+   `working-directory: examples/order-api`.
+8. Zrób pracę z tego labu na gałęzi (na przykład
+   `feature/api-contract`), wypchnij ją i otwórz pull request.
+   Potwierdź, że nowy check CI staje się zielony, potem zmerguj. Pętla
+   branch → PR → zielone CI → merge z Aktu IV nie znika tylko dlatego,
+   że Akt V zmienił projekt, nad którym pracujesz — od teraz przez
+   resztę Aktu V każda zmiana w labie przechodzi przez nią, teraz
+   obejmując też `order-api`.
 
 ## Kryteria akceptacji
 
@@ -57,6 +70,10 @@ Po tym laboratorium powinieneś/aś umieć:
   test.
 - `uv run pytest` przechodzi z oryginalnymi trzema testami plus Twoim
   nowym (4 razem).
+- `.github/workflows/order-api-ci.yml` istnieje, wyzwala się na push i
+  pull request, i uruchamia `uv run pytest` w `examples/order-api`.
+- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
+  checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 
@@ -65,9 +82,11 @@ cd examples/order-api
 uv run pytest -v
 test -f CONTRACT.md && echo "contract documented"
 cd -
+test -f .github/workflows/order-api-ci.yml && echo "CI workflow exists"
 ```
 
-Oczekiwane: `4 passed` i `contract documented`.
+Oczekiwane: `4 passed`, `contract documented` i `CI workflow exists` —
+plus zielony check na pull requeście, który zmergował ten lab.
 
 ## Zastanów się
 
