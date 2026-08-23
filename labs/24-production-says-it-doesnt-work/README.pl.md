@@ -45,6 +45,10 @@ Po tym laboratorium powinieneś/aś umieć:
 7. Uruchom serwer ręcznie, wykonaj kilka żądań (w tym jedno o brakujące
    zamówienie), i przeczytaj wyjście logów w swoim terminalu. Potwierdź,
    że możesz stwierdzić, co się stało, nie otwierając `api.py`.
+8. Zrób pracę z tego labu na gałęzi (na przykład
+   `feature/production-logging`), wypchnij ją i otwórz pull request.
+   Zmerguj dopiero, gdy CI jest zielone — ta sama pętla co w reszcie
+   Aktu V.
 
 ## Kryteria akceptacji
 
@@ -56,6 +60,8 @@ Po tym laboratorium powinieneś/aś umieć:
   na `ERROR`.
 - Dwa testy oparte na `caplog` przechodzą, potwierdzając przypadki
   `INFO` i `WARNING`.
+- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
+  checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 

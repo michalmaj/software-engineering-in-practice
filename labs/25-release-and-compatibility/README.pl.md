@@ -73,6 +73,10 @@ Po tym laboratorium powinieneś/aś umieć:
 7. Wypchnij oba tagi — wydanie, które istnieje tylko na Twojej maszynie,
    nie jest wydaniem: `git push origin order-api-v1.0.0 order-api-v1.1.0`
    (albo `git push --tags`, żeby wypchnąć wszystkie tagi naraz).
+8. Zrób pracę z tego labu na gałęzi (na przykład
+   `feature/release-and-compatibility`), wypchnij ją i otwórz pull
+   request. Zmerguj dopiero, gdy CI jest zielone — ta sama pętla co w
+   reszcie Aktu V.
 
 ## Kryteria akceptacji
 
@@ -89,6 +93,8 @@ Po tym laboratorium powinieneś/aś umieć:
   poprawnie domyślne, ma własne przechodzące testy (jawna wartość,
   pominięcie z domyślną, i round-trip POST-potem-GET), a każdy test
   napisany przed tym labem nadal przechodzi bez modyfikacji.
+- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
+  checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 

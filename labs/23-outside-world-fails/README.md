@@ -49,6 +49,9 @@ After this lab you should be able to:
    `call_with_retries(lambda: notify_kitchen(order["order_id"]))`,
    catching `NotifierError` so a failed notification doesn't fail the
    whole request — the order is still created either way.
+6. Do this lab's work on a branch (for example
+   `feature/outside-world-fails`), push it, and open a pull request.
+   Merge only once CI is green — same loop as Lab 21 and 22.
 
 ## Acceptance criteria
 
@@ -57,6 +60,8 @@ After this lab you should be able to:
   count, not just the final outcome.
 - `do_POST` still returns `201` for a valid order even though
   `notify_kitchen` is only a stub.
+- This lab's changes were merged through a pull request with a green
+  CI check, not committed directly to `main`.
 
 ## Verification
 

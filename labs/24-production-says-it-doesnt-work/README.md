@@ -44,6 +44,9 @@ After this lab you should be able to:
 7. Run the server by hand, make a couple of requests (including one for
    a missing order), and read the log output in your terminal. Confirm
    you can tell what happened without opening `api.py`.
+8. Do this lab's work on a branch (for example
+   `feature/production-logging`), push it, and open a pull request.
+   Merge only once CI is green — same loop as the rest of Act V.
 
 ## Acceptance criteria
 
@@ -54,6 +57,8 @@ After this lab you should be able to:
   `WARNING`, and exhausting all retries logs at `ERROR`.
 - Two `caplog`-based tests pass, confirming the `INFO` and `WARNING`
   cases.
+- This lab's changes were merged through a pull request with a green
+  CI check, not committed directly to `main`.
 
 ## Verification
 

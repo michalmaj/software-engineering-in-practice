@@ -74,6 +74,10 @@ After this lab you should be able to:
 7. Push both tags — a release that only exists on your machine isn't a
    release: `git push origin order-api-v1.0.0 order-api-v1.1.0` (or
    `git push --tags` to push every tag at once).
+8. Do this lab's work on a branch (for example
+   `feature/release-and-compatibility`), push it, and open a pull
+   request. Merge only once CI is green — same loop as the rest of
+   Act V.
 
 ## Acceptance criteria
 
@@ -90,6 +94,8 @@ After this lab you should be able to:
   response itself), defaults correctly, has its own passing tests
   (explicit value, default omission, and the POST-then-GET round trip),
   and every test written before this lab still passes unmodified.
+- This lab's changes were merged through a pull request with a green
+  CI check, not committed directly to `main`.
 
 ## Verification
 
