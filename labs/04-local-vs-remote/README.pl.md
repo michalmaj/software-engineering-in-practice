@@ -25,6 +25,12 @@ Po tym laboratorium powinieneś/aś umieć:
 - Twoje repozytorium ma skonfigurowany remote (Codespaces i zwykłe `git
   clone` ustawiają to automatycznie).
 - Bieżący katalog: katalog główny repozytorium.
+- Jeśli `git remote -v` pokazuje adres URL, który *nie* jest Twoim
+  własnym forkiem (wskazuje na oryginalne repozytorium kursu), zatrzymaj
+  się tutaj — wróć do instrukcji forkowania w głównym
+  [`README.pl.md`](../../README.pl.md), zanim będziesz kontynuować.
+  Push do repozytorium, którego nie jesteś właścicielem, zawiedzie z
+  błędem uprawnień.
 
 ## Twoje zadanie
 

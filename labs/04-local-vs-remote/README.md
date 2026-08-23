@@ -24,6 +24,11 @@ After this lab you should be able to:
 - Your repository has a configured remote (Codespaces and a normal `git
   clone` both set this up automatically).
 - Current directory: the repository root.
+- If `git remote -v` shows a URL that is *not* your own fork (it points
+  to the original course repository instead), stop here — go back to
+  the root [`README.md`](../../README.md)'s fork instructions before
+  continuing. Pushing to a repository you don't own will fail with a
+  permissions error.
 
 ## Your task
 

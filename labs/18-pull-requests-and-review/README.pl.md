@@ -36,10 +36,17 @@ Po tym laboratorium powinieneś/aś umieć:
    sformatowany string w stylu `"Reorder needed: Tomatoes, Milk"` (albo
    `"Nothing to reorder."`, jeśli lista jest pusta). Dodaj test.
    Zacommituj.
-3. Wypchnij gałąź i otwórz pull request — działa zarówno `gh pr create
-   --fill`, jak i interfejs webowy GitHuba. Napisz opis obejmujący: co
-   się zmieniło, dlaczego i jak to zweryfikowałeś/aś (jakie polecenia
-   uruchomiłeś/aś).
+3. Wypchnij gałąź i otwórz pull request. **Jeśli pracujesz z forka**,
+   `gh pr create` domyślnie otwiera PR przeciwko domyślnej gałęzi
+   *oryginalnego* repozytorium, nie `main` Twojego forka — dla tego
+   ćwiczenia (i każdego kolejnego PR-a w tym kursie) chcesz, żeby PR
+   celował w Twój własny fork. Użyj albo interfejsu webowego GitHuba
+   (który pokazuje repozytorium bazowe, zanim potwierdzisz), albo
+   uruchom raz `gh repo set-default <Twój-fork>`, żeby `gh pr create`
+   domyślnie celował w Twój fork, i tak czy inaczej sprawdź dwa razy
+   pokazane repozytorium bazowe przed wysłaniem. Napisz opis
+   obejmujący: co się zmieniło, dlaczego i jak to zweryfikowałeś/aś
+   (jakie polecenia uruchomiłeś/aś).
 4. Zrecenzuj go, używając poniższej checklisty:
    - **W parze:** poproś przydzielonego przez instruktora partnera o
      wymianę PR-ów — zrecenzuj jego, on/ona zrecenzuje Twój.

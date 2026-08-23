@@ -24,6 +24,10 @@ Po tym laboratorium powinieneś/aś umieć:
   prawdziwy pull request.
 - Bieżący katalog: katalog główny repozytorium (plik workflow mieszka
   poza `examples/team-inventory/`, w `.github/workflows/`).
+- Jeśli Twoje repozytorium jest forkiem, GitHub domyślnie wyłącza w nim
+  workflow Actions. Otwórz zakładkę **Actions** swojego forka i kliknij
+  **"I understand my workflows, go ahead and enable them"**, zanim
+  workflow z tego laba w ogóle zacznie działać.
 
 ## Twoje zadanie
 
