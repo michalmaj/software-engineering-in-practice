@@ -109,15 +109,15 @@ zgadzać.
         - uses: actions/checkout@v4
         - uses: actions/setup-python@v5
           with:
-            python-version: "___"   # dopasuj do .devcontainer/devcontainer.json
+            python-version: "___"   # match .devcontainer/devcontainer.json
         - name: Install uv
           run: curl -LsSf https://astral.sh/uv/install.sh | sh
         - name: ___
           working-directory: examples/team-inventory
-          run: ___                   # polecenie instalujące zależności
+          run: ___                   # the dependency-install command
         - name: ___
           working-directory: examples/team-inventory
-          run: ___                   # polecenie testowe
+          run: ___                   # the test command
   ```
 - **Podpowiedź 2:** Użyj `working-directory: examples/team-inventory`
   na krokach uruchamiających `uv sync --locked`/`uv run pytest`,
