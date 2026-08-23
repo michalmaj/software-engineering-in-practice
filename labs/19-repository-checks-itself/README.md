@@ -111,7 +111,7 @@ commands in the same directory, the PR check will match.
           with:
             python-version: "___"   # match .devcontainer/devcontainer.json
         - name: Install uv
-          uses: astral-sh/setup-uv@v10.0.1
+          uses: astral-sh/setup-uv@v9.0.0
           with:
             version: "0.11.21"
         - name: ___
