@@ -57,7 +57,7 @@ Po tym laboratorium powinieneś/aś umieć:
 git log --oneline -1                      # your commit should be at HEAD
 git status                                 # should be clean (nothing to commit)
 test -f labs/03-inherited-repository/notes/my-observations.txt && echo "notes exist"
-wc -l < labs/03-inherited-repository/notes/my-observations.txt  # oczekiwane >= 3
+wc -l < labs/03-inherited-repository/notes/my-observations.txt  # expect >= 3
 ```
 
 ## Zastanów się
