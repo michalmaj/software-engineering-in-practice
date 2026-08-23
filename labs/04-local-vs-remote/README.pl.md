@@ -64,7 +64,7 @@ Po tym laboratorium powinieneś/aś umieć:
 ```bash
 git remote -v
 git log --oneline -3
-git status   # powinno pokazać "up to date" / "nothing to commit"
+git status   # should show "up to date" / "nothing to commit"
 ```
 
 Następnie otwórz repozytorium na GitHubie (albo swoim hoście Gita) i
