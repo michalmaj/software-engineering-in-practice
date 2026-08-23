@@ -37,7 +37,9 @@ Po tym laboratorium powinieneś/aś umieć:
    - uruchamia się `on: [push, pull_request]`
    - wypina repozytorium
    - ustawia Pythona 3.13
-   - instaluje `uv`
+   - instaluje `uv`, przypięte do `0.11.21` (zgodnie z devcontainerem i
+     Twoim lokalnym setupem) przez akcję `astral-sh/setup-uv`, zamiast
+     tego, co danego dnia rozwiązałby nieprzypięty skrypt instalacyjny
    - uruchamia `uv sync --locked`, potem `uv run pytest`, oba z
      katalogiem roboczym `examples/team-inventory` (`--locked`
      wywala build zamiast po cichu aktualizować `uv.lock`, jeśli
@@ -111,7 +113,9 @@ zgadzać.
           with:
             python-version: "___"   # match .devcontainer/devcontainer.json
         - name: Install uv
-          run: curl -LsSf https://astral.sh/uv/install.sh | sh
+          uses: astral-sh/setup-uv@v10.0.1
+          with:
+            version: "0.11.21"
         - name: ___
           working-directory: examples/team-inventory
           run: ___                   # the dependency-install command

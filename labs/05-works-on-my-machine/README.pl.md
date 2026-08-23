@@ -27,7 +27,9 @@ Po tym laboratorium powinieneś/aś umieć:
   repozytorium, jest już gotowe (patrz główny
   [`README.pl.md`](../../README.pl.md)). Jeśli jeszcze go nie masz,
   zainstaluj poleceniem:
-  `curl -LsSf https://astral.sh/uv/install.sh | sh`
+  `curl -LsSf https://astral.sh/uv/0.11.21/install.sh | sh` (przypięte
+  do tej samej wersji co devcontainer, żeby każdy w tym kursie miał
+  to samo `uv`)
 
 ## Twoje zadanie
 

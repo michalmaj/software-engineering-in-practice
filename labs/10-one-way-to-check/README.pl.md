@@ -55,13 +55,13 @@ potrzebna, żeby go zrozumieć.
 
 ```bash
 cd ~
-/sciezka/do/examples/restaurant-bill/scripts/test.sh
-/sciezka/do/examples/restaurant-bill/scripts/check.sh
-/sciezka/do/examples/restaurant-bill/scripts/run.sh
+/path/to/examples/restaurant-bill/scripts/test.sh
+/path/to/examples/restaurant-bill/scripts/check.sh
+/path/to/examples/restaurant-bill/scripts/run.sh
 cd -
 ```
 
-(Zamień `/sciezka/do/` na rzeczywistą ścieżkę Twojego repozytorium).
+(Zamień `/path/to/` na rzeczywistą ścieżkę Twojego repozytorium).
 Oczekiwane: wszystkie trzy kończą się powodzeniem, bez ręcznego `cd` z
 Twojej strony.
 

@@ -26,7 +26,9 @@ After this lab you should be able to:
 - `uv` installed. If you're in this repository's Codespace/devcontainer,
   it's already set up (see the root [`README.md`](../../README.md)). If
   you don't have it yet, install it with:
-  `curl -LsSf https://astral.sh/uv/install.sh | sh`
+  `curl -LsSf https://astral.sh/uv/0.11.21/install.sh | sh` (pinned to
+  the same version as the devcontainer, so everyone in this course is
+  running the same `uv`)
 
 ## Your task
 

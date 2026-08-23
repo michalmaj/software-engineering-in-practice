@@ -60,7 +60,7 @@ Pracując wyłącznie w terminalu:
 
 ```bash
 test -f ~/lab01-notes/findings.txt && echo "file exists"
-wc -l < ~/lab01-notes/findings.txt   # oczekiwane co najmniej 5
+wc -l < ~/lab01-notes/findings.txt   # expect at least 5
 which python3
 which git
 ```

@@ -27,7 +27,8 @@ Po tym laboratorium powinieneś/aś umieć:
   osób. Jeśli pracujesz solo: Ty *jesteś* zespołem — wykonaj każdy krok
   poniżej, włącznie z tymi o przydziale ról, decydując sam/a za siebie.
 - Prawie bez kodu: jedyny kod, którego dotkniesz, to starter kopiowany
-  w kroku 2 poniżej. Reszta tego labu to samo planowanie.
+  w kroku 4 poniżej, gdy Wasz zespół już zdecyduje o języku. Reszta
+  tego labu to samo planowanie.
 
 ## Twoje zadanie
 
@@ -56,14 +57,7 @@ Po tym laboratorium powinieneś/aś umieć:
    od tego repozytorium kursowego), z głównym `README.md` wyjaśniającym,
    czym jest TableTime i jak je uruchomić, gdy już powstanie. Wszystko
    od tej chwili powstaje w tym repozytorium, nie w tym.
-2. Skopiujcie odpowiedni starter językowy z
-   `examples/capstone-starters/<python|go|java>/` (w tym repozytorium
-   kursu) do korzenia Waszego nowego repozytorium, gdy już podejmiecie
-   decyzję językową w kroku 4 poniżej. Własny `STARTER.md` startera nie
-   nadpisze `README.md`, który napisaliście w kroku 1 — przeczytajcie go
-   raz, żeby poznać dokładne polecenia setupu, a potem zacommitujcie
-   starter jako Wasz pierwszy prawdziwy commit.
-3. Jako zespół napiszcie `PROJECT_PLAN.md` (w Waszym nowym
+2. Jako zespół napiszcie `PROJECT_PLAN.md` (w Waszym nowym
    repozytorium) obejmujący:
    - **Zakres**: co jest w MVP, co jest jawnie poza nim.
    - **Założenia**: cokolwiek, czego brief nie sprecyzował, a Wy
@@ -80,7 +74,7 @@ Po tym laboratorium powinieneś/aś umieć:
      (handover).
    - **Największe ryzyka**: 2-3 konkretne rzeczy, które mogłyby wykoleić
      ten projekt, i co byś z każdą zrobił/a.
-4. Napiszcie `docs/adr/adr-001-language-choice.md` (w Waszym nowym
+3. Napiszcie `docs/adr/adr-001-language-choice.md` (w Waszym nowym
    repozytorium) używając tego szablonu:
    ```markdown
    # ADR-001: Wybór języka implementacji
@@ -101,11 +95,17 @@ Po tym laboratorium powinieneś/aś umieć:
    [Co ten wybór ułatwia? Co utrudnia? Co sprawiłoby, że wrócilibyście
    do tej decyzji później?]
    ```
+4. Teraz, gdy krok 3 ustalił język, skopiujcie odpowiedni starter z
+   `examples/capstone-starters/<python|go|java>/` (w tym repozytorium
+   kursu) do korzenia Waszego nowego repozytorium. Własny `STARTER.md`
+   startera nie nadpisze `README.md`, który napisaliście w kroku 1 —
+   przeczytajcie go raz, żeby poznać dokładne polecenia setupu, a potem
+   zacommitujcie starter jako Wasz pierwszy prawdziwy commit.
 
 ## Kryteria akceptacji
 
 - `PROJECT_PLAN.md` istnieje i odpowiada na wszystkie sześć punktów z
-  kroku 3 konkretnie, bez placeholderów.
+  kroku 2 konkretnie, bez placeholderów.
 - `docs/adr/adr-001-language-choice.md` istnieje i podaje prawdziwą
   decyzję z prawdziwym uzasadnieniem, nie "wybraliśmy Pythona, bo jest
   popularny".

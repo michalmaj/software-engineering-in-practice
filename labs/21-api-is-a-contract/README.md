@@ -49,8 +49,9 @@ After this lab you should be able to:
 7. Set up CI for `order-api`: create
    `.github/workflows/order-api-ci.yml` (same pattern as Lab 19's
    `team-inventory-ci.yml`) triggering on `[push, pull_request]`, that
-   checks out the repo, sets up Python 3.13, installs `uv`, then runs
-   `uv sync` and `uv run pytest` with `working-directory:
+   checks out the repo, sets up Python 3.13, installs `uv` pinned to
+   `0.11.21` via the `astral-sh/setup-uv` action, then runs
+   `uv sync --locked` and `uv run pytest` with `working-directory:
    examples/order-api`.
 8. Do this lab's work on a branch (for example `feature/api-contract`),
    push it, and open a pull request. Confirm the new CI check goes

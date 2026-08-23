@@ -25,7 +25,8 @@ After this lab you should be able to:
   of 3-4. If you're working solo: you *are* the team — do every step
   below, including the role-assignment ones, deciding for yourself.
 - Almost no code yet: the only code you touch is the starter you copy
-  in step 2 below. Everything else in this lab is planning.
+  in step 4 below, after your team has decided on a language.
+  Everything else in this lab is planning.
 
 ## Your task
 
@@ -54,14 +55,7 @@ After this lab you should be able to:
    course repository), with a root `README.md` explaining what
    TableTime is and how to run it once it exists. Everything from here
    on lives in that repository, not this one.
-2. Copy the matching language starter from
-   `examples/capstone-starters/<python|go|java>/` (in this course
-   repository) into your new repository's root, once you've made the
-   language decision in step 4 below. The starter's own `STARTER.md`
-   won't overwrite the `README.md` you wrote in step 1 — read it once
-   for the exact setup commands, then commit the starter as your first
-   real commit.
-3. As a team, write `PROJECT_PLAN.md` (in your new repository) covering:
+2. As a team, write `PROJECT_PLAN.md` (in your new repository) covering:
    - **Scope**: what's in the MVP, what's explicitly out.
    - **Assumptions**: anything the brief didn't specify that you
      decided for yourselves (how many tables, their capacities, what a
@@ -75,7 +69,7 @@ After this lab you should be able to:
      (iteration), 28 (change request), 29 (incident), and 30 (handover).
    - **Top risks**: 2-3 specific things that could derail this project,
      and what you'd do about each.
-4. Write `docs/adr/adr-001-language-choice.md` (in your new repository)
+3. Write `docs/adr/adr-001-language-choice.md` (in your new repository)
    using this template:
    ```markdown
    # ADR-001: Choice of implementation language
@@ -96,10 +90,16 @@ After this lab you should be able to:
    [What does this choice make easier? What does it make harder? What
    would make you revisit this decision later?]
    ```
+4. Now that step 3 has settled on a language, copy the matching starter
+   from `examples/capstone-starters/<python|go|java>/` (in this course
+   repository) into your new repository's root. The starter's own
+   `STARTER.md` won't overwrite the `README.md` you wrote in step 1 —
+   read it once for the exact setup commands, then commit the starter
+   as your first real commit.
 
 ## Acceptance criteria
 
-- `PROJECT_PLAN.md` exists and answers all six points in step 3 with
+- `PROJECT_PLAN.md` exists and answers all six points in step 2 with
   specifics, not placeholders.
 - `docs/adr/adr-001-language-choice.md` exists and states a real
   decision with real reasoning, not "we chose Python because it's
