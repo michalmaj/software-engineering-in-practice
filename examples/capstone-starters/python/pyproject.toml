@@ -1,0 +1,14 @@
+[project]
+name = "capstone-starter"
+version = "0.1.0"
+description = "Capstone starter: hello world + one test, nothing else"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<9",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

@@ -24,9 +24,10 @@ Po tym laboratorium powinieneś/aś umieć:
 - Lab 26 ukończony: `PROJECT_PLAN.md` i
   `docs/adr/adr-001-language-choice.md` istnieją w Waszym własnym
   repozytorium zespołu.
-- Repozytorium Waszego zespołu ma, co najmniej, szkielet projektu,
-  jakiego potrzebuje wybrany przez Was język, żeby uruchomić "hello
-  world" i zestaw testów.
+- Repozytorium Waszego zespołu ma skopiowany starter kapstone z Lab 26
+  (`examples/capstone-starters/<język>/` w repozytorium kursu) —
+  działające "hello world" i jeden przechodzący test, w wybranym przez
+  Was języku.
 
 ## Twoje zadanie
 

@@ -51,7 +51,17 @@ Po tym laboratorium powinieneś/aś umieć:
 > dwie rezerwacje trafią na ten sam stolik w nakładających się porach.
 > Zdecydujcie sami, czy to ma znaczenie dla tego MVP.
 
-1. Jako zespół napisz `PROJECT_PLAN.md` obejmujący:
+1. Załóżcie teraz prawdziwe repozytorium Waszego zespołu (nowe, osobne
+   od tego repozytorium kursowego), z głównym `README.md` wyjaśniającym,
+   czym jest TableTime i jak je uruchomić, gdy już powstanie. Wszystko
+   od tej chwili powstaje w tym repozytorium, nie w tym.
+2. Skopiujcie odpowiedni starter językowy z
+   `examples/capstone-starters/<python|go|java>/` (w tym repozytorium
+   kursu) do korzenia Waszego nowego repozytorium, gdy już podejmiecie
+   decyzję językową w kroku 4 poniżej — zacommitujcie to jako Wasz
+   pierwszy prawdziwy commit.
+3. Jako zespół napiszcie `PROJECT_PLAN.md` (w Waszym nowym
+   repozytorium) obejmujący:
    - **Zakres**: co jest w MVP, co jest jawnie poza nim.
    - **Założenia**: cokolwiek, czego brief nie sprecyzował, a Wy
      zdecydowaliście sami (ile stolików, ich pojemności, czym jest
@@ -67,7 +77,8 @@ Po tym laboratorium powinieneś/aś umieć:
      (handover).
    - **Największe ryzyka**: 2-3 konkretne rzeczy, które mogłyby wykoleić
      ten projekt, i co byś z każdą zrobił/a.
-2. Napisz `docs/adr/adr-001-language-choice.md` używając tego szablonu:
+4. Napiszcie `docs/adr/adr-001-language-choice.md` (w Waszym nowym
+   repozytorium) używając tego szablonu:
    ```markdown
    # ADR-001: Wybór języka implementacji
 
@@ -87,9 +98,6 @@ Po tym laboratorium powinieneś/aś umieć:
    [Co ten wybór ułatwia? Co utrudnia? Co sprawiłoby, że wrócilibyście
    do tej decyzji później?]
    ```
-3. Załóżcie prawdziwe repozytorium Waszego zespołu (nowe, osobne od
-   tego repozytorium kursowego), z głównym `README.md` wyjaśniającym,
-   czym jest TableTime i jak je uruchomić, gdy już powstanie.
 
 ## Kryteria akceptacji
 

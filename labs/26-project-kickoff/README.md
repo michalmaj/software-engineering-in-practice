@@ -49,7 +49,16 @@ After this lab you should be able to:
 > end up assigned to the same table at overlapping times. Decide for
 > yourselves whether that matters for this MVP.
 
-1. As a team, write `PROJECT_PLAN.md` covering:
+1. Set up your team's actual repository now (new, separate from this
+   course repository), with a root `README.md` explaining what
+   TableTime is and how to run it once it exists. Everything from here
+   on lives in that repository, not this one.
+2. Copy the matching language starter from
+   `examples/capstone-starters/<python|go|java>/` (in this course
+   repository) into your new repository's root, once you've made the
+   language decision in step 4 below — commit it as your first real
+   commit.
+3. As a team, write `PROJECT_PLAN.md` (in your new repository) covering:
    - **Scope**: what's in the MVP, what's explicitly out.
    - **Assumptions**: anything the brief didn't specify that you
      decided for yourselves (how many tables, their capacities, what a
@@ -63,7 +72,8 @@ After this lab you should be able to:
      (iteration), 28 (change request), 29 (incident), and 30 (handover).
    - **Top risks**: 2-3 specific things that could derail this project,
      and what you'd do about each.
-2. Write `docs/adr/adr-001-language-choice.md` using this template:
+4. Write `docs/adr/adr-001-language-choice.md` (in your new repository)
+   using this template:
    ```markdown
    # ADR-001: Choice of implementation language
 
@@ -83,9 +93,6 @@ After this lab you should be able to:
    [What does this choice make easier? What does it make harder? What
    would make you revisit this decision later?]
    ```
-3. Set up your team's actual repository (new, separate from this course
-   repository), with a root `README.md` explaining what TableTime is
-   and how to run it once it exists.
 
 ## Acceptance criteria
 
