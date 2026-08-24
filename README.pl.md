@@ -2,6 +2,16 @@
 
 [Read this in English →](README.md)
 
+[![Course Health](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml/badge.svg)](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml)
+[![Python 3.13](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/)
+[![Go 1.25](https://img.shields.io/badge/Go-1.25-00ADD8)](https://go.dev/)
+[![Java 21](https://img.shields.io/badge/Java-21-ED8B00)](https://adoptium.net/)
+[![30 Labs](https://img.shields.io/badge/30%20Labs-orange)](#mapa-kursu)
+[![Bilingual EN | PL](https://img.shields.io/badge/EN%20%7C%20PL-9cf)](README.md)
+[![License: MIT](https://img.shields.io/badge/code-MIT-yellow)](LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-lightgrey)](LICENSE-CONTENT.md)
+[![Codespaces — ready](https://img.shields.io/badge/Codespaces%20%E2%80%94%20ready-success)](#github-codespaces)
+
 > Od terminala do zespołu — ucz się budować oprogramowanie, które przetrwa zmianę.
 
 ## Czym jest ten kurs
