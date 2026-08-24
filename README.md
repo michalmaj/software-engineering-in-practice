@@ -1,150 +1,173 @@
 # Software Engineering in Practice
 
-A hands-on laboratory course in software engineering, told as one continuous
-story instead of a list of unrelated topics.
+[Czytaj po polsku →](README.pl.md)
 
-## Who this is for
+> From terminal to team — learning to build software that survives change.
 
-University students taking a Software Engineering lab course. No prior
-professional development experience is assumed. You should be comfortable
-writing basic Python.
+## What this course is
 
-## The idea behind this course
+30 lab sessions, 90 minutes each: a hands-on Software Engineering lab
+course told as one continuous, progressive story, not a catalogue of
+technologies. It's built for university students taking a Software
+Engineering lab course — no prior professional development experience
+assumed, just basic Python.
 
-> Programming is about making a program work.
-> Software engineering is about making software safe to change, understand,
-> review, reproduce, operate, and hand over to other people.
+## Core idea
 
-Each lab exists because the previous state of the project created a problem
-worth solving. You will meet a problem before you meet its name.
+> Programming is about making a program work. Software engineering is
+> about making software safe to change, understand, review, reproduce,
+> operate, and hand over.
 
-## How the course is organized
+Every lab exists because the previous state of the project created a
+problem worth solving. You meet a problem before you meet its name.
 
-30 lab sessions, 90 minutes each, grouped into six acts:
-
-| Act | Labs  | Theme                                   |
-|-----|-------|------------------------------------------|
-| I   | 01-05 | I am a developer                         |
-| II  | 06-10 | Code is not yet a project                |
-| III | 11-15 | Software must survive change             |
-| IV  | 16-20 | You do not work alone                    |
-| V   | 21-25 | The system lives in a larger world        |
-| VI  | 26-30 | You are the engineering team              |
-
-Python is the shared language through most of the course. Go and Java appear
-from Lab 14 onward for explicit cross-language comparisons, and become
-implementation choices for your team project in Act VI.
-
-## Where to start
-
-Open [`labs/01-workstation/README.md`](labs/01-workstation/README.md) (or
-[`README.pl.md`](labs/01-workstation/README.pl.md) for Polish) and follow the
-labs in numeric order. Each lab ends with a "What's next" section that tells
-you where to go.
-
-## Getting an environment: GitHub Codespaces (recommended)
-
-1. You need a GitHub account.
-2. Open this repository on GitHub and click **Fork** (top right). This
-   creates your own copy — you need your own fork because later labs
-   have you commit and push, and you don't have write access to the
-   original course repository.
-3. On **your fork**, click **Code → Codespaces → Create codespace on
-   main**. (Creating a Codespace on the original course repository
-   instead of your fork is the most common setup mistake — double-check
-   the repository name in the URL before continuing.)
-4. Wait for the codespace to finish initializing (this can take a few
-   minutes the first time).
-5. Open the integrated terminal: **Terminal → New Terminal**.
-6. Verify your toolchain (see below).
-7. The repository is already checked out at `/workspaces/<repo-name>`
-   inside the codespace, with `origin` already pointing at your fork.
-8. When you are done for the day, stop the codespace from
-   **github.com/codespaces** (or let it auto-suspend) — this does not
-   delete your work.
-9. Codespaces has monthly usage limits. Stop codespaces you are not
-   actively using; delete ones you no longer need.
-10. To pull in course updates later, add the original repository as a
-    second remote: `git remote add upstream <original-repo-url>`, then
-    `git fetch upstream` and `git merge upstream/main` when needed.
-
-## Getting an environment: local Unix-like machine (supported fallback)
-
-Works on Linux and macOS. Getting the repository itself needs only
-Git — no Docker Desktop, no WSL. Individual labs will later have you
-install a language toolchain (Python, `uv`, Go, a JDK) as you actually
-need it; the install methods in the table below (`curl`-based scripts,
-your OS's package manager) don't need admin rights on most systems, but
-that depends on how your machine is already set up — if your package
-manager is configured to require `sudo`, that's a property of your
-machine, not something this course adds on top of it.
-
-1. Fork this repository on GitHub (same reason as above: you need write
-   access for later labs).
-2. Clone **your fork**, not the original repository:
-   ```bash
-   git clone <your-fork-url>
-   cd software-engineering-in-practice
-   ```
-3. Add the original repository as a second remote, so you can pull
-   course updates later:
-   ```bash
-   git remote add upstream <original-repository-url>
-   ```
-
-Individual labs will tell you which additional tool (like `uv`) to install
-and how, the first time you actually need it. See "Verifying your
-toolchain" below for what each lab actually needs and when.
-
-## Verifying your toolchain
-
-Once your environment is up (Codespaces or local), check what is available:
-
-```bash
-git --version
-python3 --version
-go version
-java -version
-```
-
-Lab 01 walks you through reading and interpreting this kind of output if any
-of it is unfamiliar.
-
-Not every lab needs every tool. Here's when each one actually matters:
-
-| Tool | First needed in | Install if missing |
-|------|-----------------|---------------------|
-| Git | Lab 01 | Already on Codespaces; on macOS/Linux, usually pre-installed or via your package manager |
-| Python 3.13 | Lab 01 | Codespaces has it; locally, use your OS's Python or [pyenv](https://github.com/pyenv/pyenv) if you need a specific version |
-| `uv` 0.11.21 | Lab 05 | `curl -LsSf https://astral.sh/uv/0.11.21/install.sh \| sh` |
-| Go 1.25 | Lab 14 | Codespaces has it; locally, see [go.dev/doc/install](https://go.dev/doc/install) |
-| JDK 21 | Lab 14 | Codespaces has it; locally, see your OS's package manager (e.g. `brew install openjdk@21`) |
-
-Run `scripts/check-environment.sh` at any point to see which of these
-your current environment actually has.
-
-## Language of this repository
-
-This repository is bilingual. Every lab has two versions:
+## Course journey
 
 ```text
-labs/0N-topic/README.md      # English
-labs/0N-topic/README.pl.md   # Polish
+workstation → terminal → Git → project → tests → design →
+collaboration → CI → APIs / data / failures → release →
+team project → handover
 ```
 
-Both versions are pedagogically equivalent — pick whichever you read more
-comfortably. Code, commands, filenames, and identifiers are always in
-English regardless of which README you follow.
+| Act | Labs  | Theme                              |
+|-----|-------|-------------------------------------|
+| I   | 01-05 | I am a developer                    |
+| II  | 06-10 | Code is not yet a project           |
+| III | 11-15 | Software must survive change        |
+| IV  | 16-20 | You do not work alone               |
+| V   | 21-25 | The system lives in a larger world  |
+| VI  | 26-30 | You are the engineering team        |
 
-## Working through the labs
+## Start here
 
-- Follow labs in order — each one assumes the previous one is done.
-- Do the task described in the lab, not just the reading.
-- Use each lab's "Verification" section to confirm you're actually finished
-  before moving on.
-- If you get stuck, use the lab's progressive hints before asking for the
-  answer outright.
+The preferred path is: **fork → Codespace → terminal → Lab 01.** This
+course doesn't assume GitHub Classroom — just a regular GitHub account.
 
-## What's next
+1. Fork this repository (**Fork** button, top right of the GitHub page).
+2. On **your fork**, open **Code → Codespaces → Create codespace on
+   main**.
+3. Open the integrated terminal (**Terminal → New Terminal**).
+4. Open [`labs/01-workstation/README.md`](labs/01-workstation/README.md)
+   and begin.
 
-Start with [`labs/01-workstation/README.md`](labs/01-workstation/README.md).
+## GitHub Codespaces
+
+Codespaces is the recommended way to run this course: everyone gets the
+same environment, with nothing to install on your own machine first.
+
+- **Why we use it:** no local setup, no "works on my machine" before
+  Lab 1 even starts, and it works from any machine that can run a
+  browser.
+- **The environment is Linux-based** (Ubuntu), regardless of what your
+  own laptop runs. Every command and path in this course assumes a
+  Unix-like shell.
+- **Create it from your own fork**, not the original course repository
+  — you need write access for later labs that have you commit and push.
+  Creating a Codespace on the original repository instead of your fork
+  is the single most common setup mistake; double-check the repository
+  name in the URL before continuing.
+- **Open the terminal** with **Terminal → New Terminal** once the
+  Codespace finishes initializing.
+- **Verify your toolchain** by running `./scripts/check-environment.sh`
+  — it checks the versions this course actually needs and tells you
+  exactly what's missing or mismatched.
+- **Stop Codespaces you're not using** from
+  [github.com/codespaces](https://github.com/codespaces) (or let them
+  auto-suspend). Codespaces has monthly usage limits; stopping one
+  doesn't delete your work.
+
+## Local Unix-like setup
+
+Linux and macOS are a supported fallback. Getting the repository itself
+needs only Git and a fork — no Docker Desktop, no WSL. The labs
+themselves, though, do need a real toolchain, and we won't pretend
+otherwise:
+
+```bash
+git clone <your-fork-url>
+cd software-engineering-in-practice
+./scripts/check-environment.sh
+```
+
+| Tool   | Required version |
+|--------|-------------------|
+| Python | 3.13.x             |
+| `uv`   | 0.11.21 exactly    |
+| Go     | 1.25.x             |
+| JDK    | 21                 |
+
+Gradle is **not** a global requirement: the Java capstone starter ships
+its own committed Gradle Wrapper (`./gradlew`), so all you need locally
+is a JDK.
+
+## Languages and tools
+
+| Ecosystem | Toolchain              | Tests                    |
+|-----------|-------------------------|---------------------------|
+| Python    | `uv`                    | `pytest`                  |
+| Go        | standard Go tooling      | `go test`                 |
+| Java      | JDK 21 + Gradle Wrapper  | JUnit, via `./gradlew test` |
+
+Python carries most of the course; Go and Java appear from Lab 14
+onward for explicit cross-language comparisons. In all three, the
+language is the medium — the subject is software engineering.
+
+## How the labs work
+
+Every lab follows the same shape: **Story → Learning objectives →
+Before you start → Your task → Acceptance criteria → Verification →
+Think about it → If you get stuck → What's next.** That consistency is
+deliberate — these materials are designed for self-study, whether
+you're working through them solo or as part of a classroom.
+
+## Course map
+
+| Lab | Title | Lab | Title |
+|-----|-------|-----|-------|
+| [01](labs/01-workstation/README.md) | Welcome to your workstation | [16](labs/16-parallel-branches/README.md) | Branches exist because work happens in parallel |
+| [02](labs/02-terminal/README.md) | The terminal is a development tool | [17](labs/17-merge-conflict/README.md) | The merge conflict |
+| [03](labs/03-inherited-repository/README.md) | You inherited a repository | [18](labs/18-pull-requests-and-review/README.md) | Pull requests and code review |
+| [04](labs/04-local-vs-remote/README.md) | Local is not remote | [19](labs/19-repository-checks-itself/README.md) | The repository should check itself |
+| [05](labs/05-works-on-my-machine/README.md) | "It works on my machine" | [20](labs/20-definition-of-done/README.md) | What does "done" mean? |
+| [06](labs/06-from-script-to-project/README.md) | From script to project | [21](labs/21-api-is-a-contract/README.md) | An API is a contract |
+| [07](labs/07-automated-tests/README.md) | How do we know it works? | [22](labs/22-data-outlives-code/README.md) | Code changed, old data remained |
+| [08](labs/08-bug-report/README.md) | A bug report arrives | [23](labs/23-outside-world-fails/README.md) | The outside world fails |
+| [09](labs/09-automated-checks/README.md) | Machines can check boring things | [24](labs/24-production-says-it-doesnt-work/README.md) | Production says "it does not work" |
+| [10](labs/10-one-way-to-check/README.md) | One obvious way to check the project | [25](labs/25-release-and-compatibility/README.md) | Release and compatibility |
+| [11](labs/11-changed-requirements/README.md) | The client changed their mind | [26](labs/26-project-kickoff/README.md) | Project kickoff |
+| [12](labs/12-change-surface/README.md) | Where should this change go? | [27](labs/27-development-iteration/README.md) | Development iteration |
+| [13](labs/13-refactoring-safety-net/README.md) | Refactoring with a safety net | [28](labs/28-change-request/README.md) | Change request |
+| [14](labs/14-one-contract-three-languages/README.md) | One contract, three languages | [29](labs/29-production-incident/README.md) | Production incident |
+| [15](labs/15-patterns-without-worship/README.md) | Patterns without pattern worship | [30](labs/30-handover/README.md) | Handover |
+
+## Repository health
+
+Run `./scripts/check-course.sh` to run the same checks this
+repository's own CI runs on every push and pull request: repository
+structure, EN/PL parity, and every example project's tests, syntax, and
+lockfiles. This repository holds itself to the same practices it
+teaches.
+
+## Contributing / reporting problems
+
+Found a bug, unclear instruction, or something that does not work in
+your environment? Please open an issue.
+
+## Licensing
+
+This repository is dual-licensed:
+
+- **Code** — source code, tests, scripts, configuration, CI/CD
+  workflows, starter projects, and code snippets embedded in lab
+  Markdown files — is licensed under the [MIT License](LICENSE).
+- **Instructional content** — lab READMEs, task descriptions,
+  narrative, questions, hints, and diagrams — is licensed under
+  [Creative Commons Attribution 4.0 International](LICENSE-CONTENT.md)
+  (CC BY 4.0).
+
+Third-party materials included in this repository, if any, keep their
+own original copyright and licensing terms.
+
+## Instructor / author
+
+Created and maintained by Michał Maj.
