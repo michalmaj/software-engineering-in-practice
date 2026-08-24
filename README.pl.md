@@ -1,27 +1,36 @@
 # Software Engineering in Practice
 
-Praktyczny kurs laboratoryjny z inżynierii oprogramowania, opowiedziany jako
-jedna ciągła historia, a nie lista niepowiązanych tematów.
+[Read this in English →](README.md)
 
-## Dla kogo jest ten kurs
+> Od terminala do zespołu — ucz się budować oprogramowanie, które przetrwa zmianę.
 
-Dla studentów kursu laboratoryjnego z Inżynierii Oprogramowania. Nie zakładamy
-wcześniejszego doświadczenia zawodowego w programowaniu. Powinieneś/powinnaś
-swobodnie pisać podstawowy kod w Pythonie.
+## Czym jest ten kurs
 
-## Idea stojąca za kursem
+30 spotkań laboratoryjnych po 90 minut: praktyczny kurs laboratoryjny z
+inżynierii oprogramowania, opowiedziany jako jedna ciągła, progresywna
+historia, a nie katalog technologii. Jest pomyślany dla studentów kursu
+laboratoryjnego z Inżynierii Oprogramowania — nie zakłada wcześniejszego
+doświadczenia zawodowego w programowaniu, tylko podstawową znajomość
+Pythona.
 
-> Programowanie polega na tym, żeby program działał.
-> Inżynieria oprogramowania polega na tym, żeby oprogramowanie dało się
-> bezpiecznie zmieniać, rozumieć, przeglądać, odtwarzać, obsługiwać i
-> przekazywać innym ludziom.
+## Główna idea
+
+> Programowanie polega na tym, żeby program działał. Inżynieria
+> oprogramowania polega na tym, żeby oprogramowanie dało się bezpiecznie
+> zmieniać, rozumieć, przeglądać, odtwarzać, obsługiwać i przekazywać
+> dalej.
 
 Każde laboratorium istnieje dlatego, że poprzedni stan projektu stworzył
-problem wart rozwiązania. Najpierw spotkasz problem, dopiero potem jego nazwę.
+problem wart rozwiązania. Najpierw spotkasz problem, dopiero potem jego
+nazwę.
 
-## Jak zorganizowany jest kurs
+## Podróż przez kurs
 
-30 spotkań laboratoryjnych po 90 minut, pogrupowanych w sześć aktów:
+```text
+stanowisko pracy → terminal → Git → projekt → testy → projektowanie →
+współpraca → CI → API / dane / awarie → wydanie →
+projekt zespołowy → przekazanie
+```
 
 | Akt | Laby  | Temat                                      |
 |-----|-------|---------------------------------------------|
@@ -32,124 +41,142 @@ problem wart rozwiązania. Najpierw spotkasz problem, dopiero potem jego nazwę.
 | V   | 21-25 | System żyje w większym świecie              |
 | VI  | 26-30 | Jesteście zespołem inżynierskim             |
 
-Python jest wspólnym językiem przez większość kursu. Go i Java pojawiają się
-od Laboratorium 14 przy okazji jawnych porównań między-językowych, a w Akcie
-VI stają się wyborem implementacyjnym dla Twojego zespołu.
+## Zacznij tutaj
 
-## Od czego zacząć
+Preferowana ścieżka to: **fork → Codespace → terminal → Lab 01.** Ten
+kurs nie zakłada GitHub Classroom — wystarczy zwykłe konto na GitHubie.
 
-Otwórz [`labs/01-workstation/README.pl.md`](labs/01-workstation/README.pl.md)
-(albo [`README.md`](labs/01-workstation/README.md) po angielsku) i przechodź
-przez laboratoria w kolejności numerycznej. Każde laboratorium kończy się
-sekcją "Co dalej", która mówi, dokąd pójść.
+1. Zrób fork tego repozytorium (przycisk **Fork** w prawym górnym rogu
+   strony GitHub).
+2. Na **swoim forku** otwórz **Code → Codespaces → Create codespace on
+   main**.
+3. Otwórz zintegrowany terminal (**Terminal → New Terminal**).
+4. Otwórz
+   [`labs/01-workstation/README.pl.md`](labs/01-workstation/README.pl.md)
+   i zaczynaj.
 
-## Zdobycie środowiska: GitHub Codespaces (zalecane)
+## GitHub Codespaces
 
-1. Potrzebujesz konta na GitHubie.
-2. Otwórz to repozytorium na GitHubie i kliknij **Fork** (prawy górny
-   róg). To tworzy Twoją własną kopię — potrzebujesz własnego forka,
-   bo kolejne laby każą Ci commitować i pushować, a nie masz uprawnień
-   do zapisu w oryginalnym repozytorium kursowym.
-3. Na **swoim forku** kliknij **Code → Codespaces → Create codespace on
-   main**. (Utworzenie Codespace'a na oryginalnym repozytorium kursu
-   zamiast na swoim forku to najczęstszy błąd na starcie — sprawdź
-   dwa razy nazwę repozytorium w adresie URL, zanim przejdziesz dalej.)
-4. Poczekaj, aż codespace się zainicjalizuje (za pierwszym razem może to
-   potrwać kilka minut).
-5. Otwórz zintegrowany terminal: **Terminal → New Terminal**.
-6. Zweryfikuj swój toolchain (patrz niżej).
-7. Repozytorium jest już wypięte w `/workspaces/<nazwa-repo>` wewnątrz
-   codespace'a, z `origin` już wskazującym na Twój fork.
-8. Kończąc pracę, zatrzymaj codespace z poziomu **github.com/codespaces**
-   (albo pozwól mu się automatycznie uśpić) — to nie usuwa Twojej pracy.
-9. Codespaces ma miesięczne limity użycia. Zatrzymuj codespace'y, z których
-   aktualnie nie korzystasz; usuwaj te, których już nie potrzebujesz.
-10. Żeby później pobrać aktualizacje kursu, dodaj oryginalne
-    repozytorium jako drugi remote: `git remote add upstream <original-repo-url>`,
-    potem `git fetch upstream` i `git merge upstream/main`, gdy będzie
-    potrzeba.
+Codespaces to zalecany sposób przechodzenia tego kursu: każdy dostaje to
+samo środowisko, bez niczego do instalowania na własnej maszynie na
+starcie.
 
-## Zdobycie środowiska: lokalna maszyna uniksopodobna (wspierany fallback)
+- **Dlaczego z tego korzystamy:** brak lokalnego setupu, brak "u mnie
+  działa" jeszcze przed Labem 1, i działa z dowolnej maszyny, która
+  potrafi uruchomić przeglądarkę.
+- **Środowisko jest oparte na Linuksie** (Ubuntu), niezależnie od tego,
+  co masz na własnym laptopie. Każde polecenie i ścieżka w tym kursie
+  zakłada powłokę uniksopodobną.
+- **Utwórz go na swoim forku**, nie na oryginalnym repozytorium kursu —
+  potrzebujesz uprawnień do zapisu do kolejnych labów, które każą Ci
+  commitować i pushować. Utworzenie Codespace'a na oryginalnym
+  repozytorium zamiast na swoim forku to najczęstszy błąd na starcie —
+  sprawdź dwa razy nazwę repozytorium w adresie URL, zanim przejdziesz
+  dalej.
+- **Otwórz terminal** przez **Terminal → New Terminal**, gdy Codespace
+  skończy się inicjalizować.
+- **Zweryfikuj swój toolchain**, uruchamiając
+  `./scripts/check-environment.sh` — sprawdza wersje, których ten kurs
+  faktycznie potrzebuje, i mówi dokładnie, czego brakuje albo co się nie
+  zgadza.
+- **Zatrzymuj Codespace'y, z których nie korzystasz** z poziomu
+  [github.com/codespaces](https://github.com/codespaces) (albo pozwól
+  im się automatycznie uśpić). Codespaces ma miesięczne limity użycia;
+  zatrzymanie nie usuwa Twojej pracy.
 
-Działa na Linuksie i macOS. Samo zdobycie repozytorium wymaga tylko
-Gita — bez Docker Desktop, bez WSL. Poszczególne laby każą Ci później
-zainstalować toolchain językowy (Python, `uv`, Go, JDK), dokładnie
-wtedy, gdy będzie potrzebny; metody instalacji z tabeli niżej (skrypty
-przez `curl`, menedżer pakietów Twojego systemu) na większości systemów
-nie wymagają uprawnień administratora, ale to zależy od tego, jak Twoja
-maszyna jest już skonfigurowana — jeśli Twój menedżer pakietów wymaga
-`sudo`, to właściwość Twojej maszyny, a nie coś, co dokłada ten kurs.
+## Lokalne środowisko uniksopodobne
 
-1. Zrób fork tego repozytorium na GitHubie (ten sam powód co wyżej:
-   potrzebujesz uprawnień do zapisu do kolejnych labów).
-2. Sklonuj **swój fork**, nie oryginalne repozytorium:
-   ```bash
-   git clone <your-fork-url>
-   cd software-engineering-in-practice
-   ```
-3. Dodaj oryginalne repozytorium jako drugi remote, żeby móc później
-   pobierać aktualizacje kursu:
-   ```bash
-   git remote add upstream <original-repository-url>
-   ```
-
-Poszczególne laboratoria powiedzą Ci, które dodatkowe narzędzie (np. `uv`)
-zainstalować i jak, dokładnie wtedy, gdy będzie potrzebne. Patrz
-"Weryfikacja toolchainu" niżej, co dokładnie i kiedy jest potrzebne
-każdemu labowi.
-
-## Weryfikacja toolchainu
-
-Gdy Twoje środowisko już działa (Codespaces albo lokalnie), sprawdź, co jest
-dostępne:
+Linux i macOS to wspierany fallback. Samo zdobycie repozytorium wymaga
+tylko Gita i forka — bez Docker Desktop, bez WSL. Same laby jednak
+potrzebują prawdziwego toolchainu, i nie będziemy udawać inaczej:
 
 ```bash
-git --version
-python3 --version
-go version
-java -version
+git clone <your-fork-url>
+cd software-engineering-in-practice
+./scripts/check-environment.sh
 ```
 
-Laboratorium 01 prowadzi Cię przez czytanie i interpretowanie takiego wyniku,
-jeśli coś z tego jest dla Ciebie nieznane.
+| Narzędzie | Wymagana wersja      |
+|-----------|------------------------|
+| Python    | 3.13.x                 |
+| `uv`      | dokładnie 0.11.21      |
+| Go        | 1.25.x                 |
+| JDK       | 21                     |
 
-Nie każdy lab potrzebuje każdego narzędzia. Oto, kiedy faktycznie ma
-znaczenie każde z nich:
+Gradle **nie** jest wymaganiem globalnym: starter Java na kapstone ma
+już własny, committed Gradle Wrapper (`./gradlew`), więc lokalnie
+potrzebujesz tylko JDK.
 
-| Narzędzie | Pierwszy raz potrzebne w | Instalacja, jeśli brakuje |
-|-----------|--------------------------|----------------------------|
-| Git | Lab 01 | Już jest w Codespaces; na macOS/Linuksie zwykle preinstalowany albo przez menedżera pakietów |
-| Python 3.13 | Lab 01 | Codespaces go ma; lokalnie użyj Pythona z systemu albo [pyenv](https://github.com/pyenv/pyenv), jeśli potrzebujesz konkretnej wersji |
-| `uv` 0.11.21 | Lab 05 | `curl -LsSf https://astral.sh/uv/0.11.21/install.sh \| sh` |
-| Go 1.25 | Lab 14 | Codespaces go ma; lokalnie zobacz [go.dev/doc/install](https://go.dev/doc/install) |
-| JDK 21 | Lab 14 | Codespaces go ma; lokalnie zobacz menedżer pakietów swojego systemu (np. `brew install openjdk@21`) |
+## Języki i narzędzia
 
-Uruchom `scripts/check-environment.sh` w dowolnym momencie, żeby
-zobaczyć, które z nich faktycznie ma Twoje bieżące środowisko.
+| Ekosystem | Toolchain                | Testy                       |
+|-----------|----------------------------|-------------------------------|
+| Python    | `uv`                       | `pytest`                      |
+| Go        | standardowe narzędzia Go    | `go test`                     |
+| Java      | JDK 21 + Gradle Wrapper     | JUnit, przez `./gradlew test` |
 
-## Język tego repozytorium
+Python niesie większość kursu; Go i Java pojawiają się od Lab 14 przy
+okazji jawnych porównań między-językowych. We wszystkich trzech język
+jest medium — przedmiotem jest inżynieria oprogramowania.
 
-To repozytorium jest dwujęzyczne. Każde laboratorium ma dwie wersje:
+## Jak działają laby
 
-```text
-labs/0N-temat/README.md      # angielski
-labs/0N-temat/README.pl.md   # polski
-```
+Każdy lab ma tę samą strukturę: **Sytuacja → Cele nauki → Zanim
+zaczniesz → Twoje zadanie → Kryteria akceptacji → Weryfikacja →
+Zastanów się → Jeśli utkniesz → Co dalej.** Ta spójność jest celowa —
+te materiały są zaprojektowane do samodzielnej pracy, czy to solo, czy
+jako część zajęć w klasie.
 
-Obie wersje są pedagogicznie równoważne — wybierz tę, która czyta Ci się
-wygodniej. Kod, polecenia, nazwy plików i identyfikatory zawsze są po
-angielsku, niezależnie od wybranego README.
+## Mapa kursu
 
-## Praca nad laboratoriami
+| Lab | Tytuł | Lab | Tytuł |
+|-----|-------|-----|-------|
+| [01](labs/01-workstation/README.pl.md) | Witaj na swoim stanowisku pracy | [16](labs/16-parallel-branches/README.pl.md) | Gałęzie istnieją, bo praca dzieje się równolegle |
+| [02](labs/02-terminal/README.pl.md) | Terminal jako narzędzie pracy | [17](labs/17-merge-conflict/README.pl.md) | Konflikt scalania |
+| [03](labs/03-inherited-repository/README.pl.md) | Odziedziczyłeś/aś repozytorium | [18](labs/18-pull-requests-and-review/README.pl.md) | Pull requesty i code review |
+| [04](labs/04-local-vs-remote/README.pl.md) | Lokalne to nie zdalne | [19](labs/19-repository-checks-itself/README.pl.md) | Repozytorium powinno sprawdzać się samo |
+| [05](labs/05-works-on-my-machine/README.pl.md) | "Działa na moim komputerze" | [20](labs/20-definition-of-done/README.pl.md) | Co oznacza "zrobione"? |
+| [06](labs/06-from-script-to-project/README.pl.md) | Od skryptu do projektu | [21](labs/21-api-is-a-contract/README.pl.md) | API to kontrakt |
+| [07](labs/07-automated-tests/README.pl.md) | Skąd wiemy, że to działa? | [22](labs/22-data-outlives-code/README.pl.md) | Kod się zmienił, stare dane zostały |
+| [08](labs/08-bug-report/README.pl.md) | Nadchodzi zgłoszenie błędu | [23](labs/23-outside-world-fails/README.pl.md) | Świat zewnętrzny zawodzi |
+| [09](labs/09-automated-checks/README.pl.md) | Maszyny mogą sprawdzać nudne rzeczy | [24](labs/24-production-says-it-doesnt-work/README.pl.md) | Produkcja mówi "to nie działa" |
+| [10](labs/10-one-way-to-check/README.pl.md) | Jeden oczywisty sposób sprawdzania projektu | [25](labs/25-release-and-compatibility/README.pl.md) | Wydanie i kompatybilność |
+| [11](labs/11-changed-requirements/README.pl.md) | Klient zmienił zdanie | [26](labs/26-project-kickoff/README.pl.md) | Kickoff projektu |
+| [12](labs/12-change-surface/README.pl.md) | Gdzie powinna trafić ta zmiana? | [27](labs/27-development-iteration/README.pl.md) | Iteracja rozwojowa |
+| [13](labs/13-refactoring-safety-net/README.pl.md) | Refaktoryzacja z siatką bezpieczeństwa | [28](labs/28-change-request/README.pl.md) | Zmiana wymagań |
+| [14](labs/14-one-contract-three-languages/README.pl.md) | Jeden kontrakt, trzy języki | [29](labs/29-production-incident/README.pl.md) | Incydent produkcyjny |
+| [15](labs/15-patterns-without-worship/README.pl.md) | Wzorce bez kultu wzorców | [30](labs/30-handover/README.pl.md) | Handover |
 
-- Przechodź laboratoria w kolejności — każde zakłada, że poprzednie jest
-  zrobione.
-- Wykonaj zadanie opisane w laboratorium, a nie tylko przeczytaj je.
-- Użyj sekcji "Weryfikacja" w laboratorium, żeby potwierdzić, że faktycznie
-  skończyłeś/aś, zanim pójdziesz dalej.
-- Jeśli utkniesz, skorzystaj ze stopniowanych podpowiedzi, zanim poprosisz
-  o gotowe rozwiązanie.
+## Zdrowie repozytorium
 
-## Co dalej
+Uruchom `./scripts/check-course.sh`, żeby uruchomić te same sprawdzenia,
+które własne CI tego repozytorium uruchamia przy każdym pushu i pull
+requeście: strukturę repozytorium, parytet EN/PL oraz testy, składnię i
+lockfile'y każdego przykładowego projektu. To repozytorium trzyma się
+tych samych praktyk, których
+uczy.
 
-Zacznij od [`labs/01-workstation/README.pl.md`](labs/01-workstation/README.pl.md).
+## Współpraca / zgłaszanie problemów
+
+Znalazłeś/aś błąd, niejasną instrukcję albo coś, co nie działa w Twoim
+środowisku? Otwórz issue.
+
+## Licencjonowanie
+
+To repozytorium ma podwójną licencję:
+
+- **Kod** — kod źródłowy, testy, skrypty, konfiguracja, workflowy
+  CI/CD, starter projekty i fragmenty kodu osadzone w Markdownach
+  labów — jest objęty [licencją MIT](LICENSE).
+- **Treść dydaktyczna** — README labów, opisy zadań, narracja, pytania,
+  podpowiedzi i diagramy — jest objęta licencją
+  [Creative Commons Attribution 4.0 International](LICENSE-CONTENT.md)
+  (CC BY 4.0).
+
+Materiały stron trzecich zawarte w tym repozytorium, jeśli takie
+istnieją, zachowują własne oryginalne prawa autorskie i warunki
+licencyjne.
+
+## Prowadzący / autor
+
+Stworzone i utrzymywane przez Michała Maja.
