@@ -1,0 +1,48 @@
+name: "🧭 I got lost"
+description: The instructions might be technically correct, but you don't know what to do next. This is not necessarily a bug — and it's exactly the kind of report that makes a self-guided course better.
+title: "[Clarity] "
+labels: ["clarity"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This course is meant to be self-guided. If a lab is technically
+        correct but you still got stuck, that's a real gap worth
+        reporting — not a sign you did something wrong.
+
+  - type: input
+    id: lab
+    attributes:
+      label: Which lab?
+      placeholder: "e.g. Lab 17"
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: At which section/step did you get lost?
+      placeholder: "e.g. step 4 of Your task, or the Verification section"
+    validations:
+      required: true
+
+  - type: textarea
+    id: understood
+    attributes:
+      label: What did you understand up to this point?
+    validations:
+      required: true
+
+  - type: textarea
+    id: thought
+    attributes:
+      label: What did you think the next action should be?
+    validations:
+      required: true
+
+  - type: textarea
+    id: help
+    attributes:
+      label: What information would have helped?
+    validations:
+      required: true

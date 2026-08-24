@@ -1,0 +1,76 @@
+name: "🐛 Something is broken"
+description: A real bug in the course material or code — not just confusion.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: input
+    id: lab
+    attributes:
+      label: Lab number / affected part
+      placeholder: "e.g. Lab 22, or examples/order-api"
+    validations:
+      required: true
+
+  - type: textarea
+    id: trying
+    attributes:
+      label: What were you trying to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Exact command run
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Full error output
+      render: shell
+    validations:
+      required: false
+
+  - type: dropdown
+    id: where
+    attributes:
+      label: Codespaces or local?
+      options:
+        - GitHub Codespaces
+        - Local machine
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment info
+      description: Output of `./scripts/check-environment.sh`
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Numbered steps, starting from a clean state if you can.
+    validations:
+      required: true

@@ -1,0 +1,42 @@
+name: "🌍 Translation mismatch"
+description: The English and Polish versions of a lab disagree — not just a typo, but a real difference in meaning or instructions.
+title: "[Translation] "
+labels: ["translation"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Lab/file
+      placeholder: "e.g. labs/22-data-outlives-code/README.md vs README.pl.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: english
+    attributes:
+      label: English fragment
+    validations:
+      required: true
+
+  - type: textarea
+    id: polish
+    attributes:
+      label: Polish fragment
+    validations:
+      required: true
+
+  - type: textarea
+    id: differs
+    attributes:
+      label: What differs semantically?
+      description: Not a typo — what does one version tell you to do (or understand) that the other doesn't?
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested wording
+      description: Optional.
+    validations:
+      required: false

@@ -1,0 +1,45 @@
+name: "💡 Lab/course idea"
+description: A suggestion to improve or extend the course.
+title: "[Idea] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The course intentionally avoids adding tools or topics just
+        because they're popular. Explain the engineering problem this
+        idea would help students experience — that's what makes it a
+        good fit here (or not).
+
+  - type: textarea
+    id: change
+    attributes:
+      label: What would you change/add?
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Which problem would it solve?
+    validations:
+      required: true
+
+  - type: input
+    id: fit
+    attributes:
+      label: Where in the course would it fit?
+      placeholder: "e.g. a new lab after Lab 20, or a change inside Lab 14"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Does it replace something or add scope?
+      options:
+        - Replaces something existing
+        - Adds new scope
+        - Not sure
+    validations:
+      required: true

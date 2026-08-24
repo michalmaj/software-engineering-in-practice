@@ -1,0 +1,43 @@
+name: "🧪 Verification disagrees with me"
+description: You think you finished the task, but the verification command or acceptance criteria say otherwise.
+title: "[Verification] "
+labels: ["verification"]
+body:
+  - type: input
+    id: lab
+    attributes:
+      label: Lab
+      placeholder: "e.g. Lab 12"
+    validations:
+      required: true
+
+  - type: textarea
+    id: criterion
+    attributes:
+      label: Acceptance criterion
+      description: Which specific criterion do you think you've met?
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Verification command
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: What makes you think the result should pass?
+    validations:
+      required: true
