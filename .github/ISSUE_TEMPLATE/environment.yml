@@ -1,0 +1,66 @@
+name: "🐧 Environment problem"
+description: Something works in Codespaces but not locally — or the other way around.
+title: "[Environment] "
+labels: ["environment"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This course supports GitHub Codespaces and Unix-like systems
+        (macOS/Linux) locally. Windows without WSL isn't a supported
+        local path — if that's your situation, Codespaces is by far
+        the easiest fix.
+
+  - type: dropdown
+    id: where
+    attributes:
+      label: Codespaces / macOS / Linux
+      options:
+        - GitHub Codespaces
+        - macOS
+        - Linux
+    validations:
+      required: true
+
+  - type: input
+    id: arch
+    attributes:
+      label: Architecture, if known
+      placeholder: "e.g. arm64, x86_64"
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Output of ./scripts/check-environment.sh
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command that fails
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Error
+      render: shell
+    validations:
+      required: true
+
+  - type: dropdown
+    id: works_in_codespaces
+    attributes:
+      label: Does the same operation work in Codespaces?
+      options:
+        - "Yes"
+        - "No"
+        - Haven't tried
+    validations:
+      required: true
