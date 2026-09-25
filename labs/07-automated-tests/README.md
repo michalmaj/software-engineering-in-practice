@@ -20,8 +20,7 @@ After this lab you should be able to:
 ## Before you start
 
 - Lab 06 complete: `billing/calculator.py` exists with the five
-  functions, `main.py` reproduces `bill.py`'s exact output, and
-  `tests/` exists as an empty directory.
+  functions, and `main.py` reproduces `bill.py`'s exact output.
 - Current directory: `examples/restaurant-bill/`.
 
 ## Your task

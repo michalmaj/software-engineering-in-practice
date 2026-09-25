@@ -16,7 +16,6 @@ Po tym laboratorium powinieneś/aś umieć:
   obsługującym I/O (w tym przypadku: wypisywanie na ekran).
 - Utworzyć minimalny `pyproject.toml` opisujący projekt jako metadane
   projektu, a nie tylko folder z plikami.
-- Wyjaśnić, co sygnalizuje pusty katalog `tests/` o intencjach projektu.
 
 ## Zanim zaczniesz
 
@@ -26,8 +25,8 @@ Po tym laboratorium powinieneś/aś umieć:
 
 ## Twoje zadanie
 
-1. Uruchom `python3 bill.py` i zapisz jego wynik — będzie Ci potrzebny,
-   żeby udowodnić, że refaktor nie zmienił zachowania.
+1. Uruchom `python3 bill.py`, zapisując jego wynik jako punkt odniesienia
+   do późniejszego porównania: `python3 bill.py | tee /tmp/bill-before.txt`.
 2. Zidentyfikuj odrębne odpowiedzialności wymieszane w `main()`:
    liczenie sumy częściowej, naliczanie rabatu, liczenie podatku, liczenie
    napiwku i wypisywanie rachunku.
@@ -36,8 +35,8 @@ Po tym laboratorium powinieneś/aś umieć:
    `[tool.pytest.ini_options]` z `pythonpath = ["."]` (ten sam wzorzec co
    w Lab 05).
 4. Utwórz pakiet `billing/` (`billing/__init__.py`, pusty) z modułem
-   `billing/calculator.py` zawierającym dokładnie te cztery czyste
-   funkcje, z dokładnie tymi nazwami i sygnaturami (kolejne dwa
+   `billing/calculator.py` zawierającym dokładnie te pięć czystych
+   funkcji, z dokładnie tymi nazwami i sygnaturami (kolejne dwa
    laboratoria zależą od tych dokładnych nazw):
    - `calculate_subtotal(items: list[tuple[str, float, int]]) -> float`
      — suma `price * quantity` dla każdego elementu.
@@ -53,15 +52,15 @@ Po tym laboratorium powinieneś/aś umieć:
      — ten refaktor ma odtworzyć istniejące zachowanie dokładnie, razem
      z błędami. Niczego jeszcze nie naprawiasz.
 5. Utwórz `billing/cli.py` z `main()`, które wywołuje `calculate_bill`
-   *raz* i wypisuje ten sam pięciolinijkowy rachunek co oryginalny
-   skrypt, używając wyłącznie wartości ze zwróconego słownika (nie licz
-   niczego osobno — jedno źródło prawdy).
+   *raz* i wypisuje rachunek, którego wynik jest bajt w bajt identyczny
+   z wynikiem oryginalnego skryptu, używając wyłącznie wartości ze
+   zwróconego słownika (nie licz niczego osobno — jedno źródło prawdy).
 6. Utwórz `main.py` w katalogu głównym projektu, które importuje `main` z
    `billing.cli` i wywołuje je pod `if __name__ == "__main__":`.
-7. Utwórz pusty katalog `tests/` (sam katalog — Lab 07 go wypełni).
-8. Uruchom swój nowy punkt wejścia i porównaj (`diff`) z wynikiem
-   zapisanym w kroku 1.
-9. Gdy diff jest czysty, usuń `bill.py` — jest już w pełni zastąpiony.
+7. Uruchom swój nowy punkt wejścia w ten sam sposób, też zapisując jego
+   wynik: `uv run python main.py | tee /tmp/bill-after.txt`. Porównaj
+   (`diff`) oba pliki: `diff /tmp/bill-before.txt /tmp/bill-after.txt`.
+8. Gdy diff jest czysty, usuń `bill.py` — jest już w pełni zastąpiony.
 
 ## Kryteria akceptacji
 
@@ -70,7 +69,6 @@ Po tym laboratorium powinieneś/aś umieć:
   oryginalnego skryptu.
 - `billing/calculator.py` definiuje wszystkie pięć funkcji z dokładnie
   takimi nazwami i sygnaturami jak wyżej.
-- `tests/` istnieje jako katalog (nawet jeśli na razie pusty).
 
 ## Weryfikacja
 
@@ -79,13 +77,11 @@ cd examples/restaurant-bill
 python3 -c "import billing.calculator as c; print(c.calculate_bill([('Burger',12.50,2),('Fries',4.00,2),('Soda',2.50,2)], 0.15))" 2>&1 || true
 uv run python main.py | tee /tmp/bill-after.txt
 diff /tmp/bill-before.txt /tmp/bill-after.txt && echo "IDENTICAL"
-test -d tests && echo "tests/ directory exists"
 test -f bill.py && echo "bill.py still exists — delete it" || echo "bill.py correctly removed"
 cd -
 ```
 
-Oczekiwane: `IDENTICAL`, `tests/ directory exists` i `bill.py correctly
-removed`.
+Oczekiwane: `IDENTICAL` i `bill.py correctly removed`.
 
 ## Zastanów się
 

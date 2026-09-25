@@ -22,8 +22,7 @@ Po tym laboratorium powinieneś/aś umieć:
 ## Zanim zaczniesz
 
 - Lab 06 ukończony: `billing/calculator.py` istnieje z pięcioma
-  funkcjami, `main.py` odtwarza dokładny wynik `bill.py`, a `tests/`
-  istnieje jako pusty katalog.
+  funkcjami, a `main.py` odtwarza dokładny wynik `bill.py`.
 - Bieżący katalog: `examples/restaurant-bill/`.
 
 ## Twoje zadanie
