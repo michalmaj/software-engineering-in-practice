@@ -47,12 +47,18 @@ Po tym laboratorium powinieneś/aś umieć:
    swoich notatkach: co straciłoby `send_receipt_ready`, gdyby zamiast
    otrzymywać notifier, konstruowało własny `ConsoleNotifier`
    wewnętrznie?
-4. Dwie kolejne nazwy, krótko: **Factory** to kod, którego całym
-   zadaniem jest wybór albo konstrukcja właściwej strategii (wyobraź
-   sobie funkcję `build_notifier(config)`, która zwraca
+4. Dwie kolejne nazwy, krótko: **Factory** to kod, którego zadaniem
+   jest centralizacja decyzji o tym, *który* obiekt utworzyć albo
+   dostarczyć, żeby wywołujący nie musieli sami podejmować tej decyzji
+   za każdym razem. Ogólnie Factory może konstruować albo dostarczać
+   dowolny rodzaj obiektu; w *tym konkretnym* ćwiczeniu ta decyzja
+   akurat sprowadza się do wyboru właściwej implementacji Strategy
+   (wyobraź sobie funkcję `build_notifier(config)`, która zwraca
    `ConsoleNotifier` albo `InMemoryNotifier` w zależności od ustawienia
    — nie zbudowałeś/aś takiej, ale teraz rozpoznasz, jak by wyglądała).
-   **Adapter** owija coś o niekompatybilnym interfejsie, żeby pasowało
+   "Wybór strategii" to po prostu to, do czego Factory służy w tym
+   ćwiczeniu, a nie czym Factory jest z natury. **Adapter** owija coś
+   o niekompatybilnym interfejsie, żeby pasowało
    do tego, którego oczekuje Twój kod (wyobraź sobie zewnętrzną
    bibliotekę SMS, której metoda nazywa się `sendMessage(text)` zamiast
    `send(message)` — mała klasa opakowująca, tłumacząca jedno wywołanie
