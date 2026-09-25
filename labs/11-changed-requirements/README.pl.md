@@ -58,8 +58,12 @@ Po tym laboratorium powinieneś/aś umieć:
 
 ```bash
 test -f labs/11-changed-requirements/my-clarifying-questions.md && echo "notes exist"
-grep -c '^[0-9]\.' labs/11-changed-requirements/my-clarifying-questions.md
+grep -cE '^[[:space:]]*([0-9]+\.|[-*])[[:space:]]+\S' labs/11-changed-requirements/my-clarifying-questions.md
 ```
+
+(To drugie polecenie liczy elementy listy w *dowolnym* stylu Markdown —
+numerowanej, `-` albo `*`. Ten lab dotyczy zadawania dobrych pytań, nie
+tego, jakiej składni listy użyjesz, żeby je zapisać.)
 
 Nie ma automatycznego sprawdzenia *treści* analizy wymagań — to
 laboratorium weryfikujesz, ponownie czytając własne notatki i

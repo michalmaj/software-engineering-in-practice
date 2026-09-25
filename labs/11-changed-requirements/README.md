@@ -57,8 +57,12 @@ After this lab you should be able to:
 
 ```bash
 test -f labs/11-changed-requirements/my-clarifying-questions.md && echo "notes exist"
-grep -c '^[0-9]\.' labs/11-changed-requirements/my-clarifying-questions.md
+grep -cE '^[[:space:]]*([0-9]+\.|[-*])[[:space:]]+\S' labs/11-changed-requirements/my-clarifying-questions.md
 ```
+
+(That second command counts list items in *any* Markdown list style —
+numbered, `-`, or `*`. This lab is about asking good questions, not
+about which list syntax you type them in.)
 
 There's no automated check for the *content* of a requirements
 analysis — this lab is verified by re-reading your own notes and
