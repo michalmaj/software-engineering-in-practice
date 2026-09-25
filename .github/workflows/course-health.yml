@@ -7,6 +7,17 @@ on:
 
 jobs:
   course-health:
+    # This repository is also the course material students fork. If this
+    # job ran on every fork too, a student would see a fully working CI
+    # badge before ever building their own in Lab 19 — quietly undermining
+    # that lab's point. Scoping to the canonical repo is a deliberate
+    # teaching choice, not an accidental hack.
+    #
+    # This does NOT skip pull requests from external contributors' forks
+    # into this repository: `github.repository` reflects the repo the
+    # workflow is defined on (this one), not the head repo of the pull
+    # request, so those still run normally.
+    if: github.repository == 'michalmaj/software-engineering-in-practice'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
