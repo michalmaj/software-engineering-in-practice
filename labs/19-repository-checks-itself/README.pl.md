@@ -108,12 +108,12 @@ zgadzać.
     test:
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-python@v5
+        - uses: actions/checkout@v7
+        - uses: actions/setup-python@v7
           with:
             python-version: "___"   # match .devcontainer/devcontainer.json
         - name: Install uv
-          uses: astral-sh/setup-uv@v9.0.0
+          uses: astral-sh/setup-uv@v10.2.0
           with:
             version: "0.11.21"
         - name: ___

@@ -44,13 +44,14 @@ Working from your own `PROJECT_PLAN.md`'s MVP scope:
    every push and pull request. Do this *before* building features, not
    after — you want it catching mistakes from your very first real PR.
    A short recipe for whichever language you chose in Lab 26:
-   - **Python:** `actions/setup-python@v5` (match `.devcontainer/devcontainer.json`'s
-     version), then install `uv` and run `uv sync --locked` and
+   - **Python:** `actions/setup-python@v7` with `python-version: '3.13'`
+     (your own repository has no `.devcontainer`, so pin the version
+     directly), then install `uv` and run `uv sync --locked` and
      `uv run pytest` — the same two commands as Lab 19, applied to your
      own repository.
-   - **Go:** `actions/setup-go@v5` with `go-version: '1.25'`, then
+   - **Go:** `actions/setup-go@v7` with `go-version: '1.25'`, then
      `go test ./...`. No separate dependency-install step.
-   - **Java:** `actions/setup-java@v4` with `distribution: 'temurin'`
+   - **Java:** `actions/setup-java@v6` with `distribution: 'temurin'`
      and `java-version: '21'`, then `./gradlew test`. The committed
      wrapper handles the rest — no Gradle install step in CI either.
 2. For each MVP capability in your plan (create a reservation, list

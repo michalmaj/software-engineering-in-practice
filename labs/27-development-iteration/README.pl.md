@@ -47,13 +47,14 @@ sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
    *przed* budowaniem funkcji, nie po — chcesz, żeby wyłapywało błędy
    już od Waszego pierwszego prawdziwego PR-a. Krótki przepis dla
    języka, który wybraliście w Lab 26:
-   - **Python:** `actions/setup-python@v5` (dopasowany do wersji z
-     `.devcontainer/devcontainer.json`), potem zainstaluj `uv` i
-     uruchom `uv sync --locked` oraz `uv run pytest` — te same dwa
-     polecenia co w Lab 19, zastosowane do Waszego repozytorium.
-   - **Go:** `actions/setup-go@v5` z `go-version: '1.25'`, potem
+   - **Python:** `actions/setup-python@v7` z `python-version: '3.13'`
+     (Wasze własne repozytorium nie ma `.devcontainer`, więc przypnijcie
+     wersję wprost), potem zainstaluj `uv` i uruchom `uv sync --locked`
+     oraz `uv run pytest` — te same dwa polecenia co w Lab 19,
+     zastosowane do Waszego repozytorium.
+   - **Go:** `actions/setup-go@v7` z `go-version: '1.25'`, potem
      `go test ./...`. Bez osobnego kroku instalacji zależności.
-   - **Java:** `actions/setup-java@v4` z `distribution: 'temurin'` i
+   - **Java:** `actions/setup-java@v6` z `distribution: 'temurin'` i
      `java-version: '21'`, potem `./gradlew test`. Committed wrapper
      załatwia resztę — bez osobnego kroku instalacji Gradle w CI.
 2. Dla każdej możliwości MVP z Waszego planu (utworzenie rezerwacji,

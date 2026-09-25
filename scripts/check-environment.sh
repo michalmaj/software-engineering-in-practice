@@ -48,14 +48,14 @@ check() {
 
   if ! command -v "$cmd" > /dev/null 2>&1; then
     echo "MISSING  $name — not on PATH (need $label)"
-    return
+    return 1
   fi
 
   local have
   have="$(eval "$extract" 2>&1 || true)"
   if [ -z "$have" ]; then
     echo "UNKNOWN  $name — installed, but couldn't parse its version (need $label)"
-    return
+    return 1
   fi
 
   local ok=1
@@ -67,34 +67,48 @@ check() {
 
   if [ "$ok" -eq 0 ]; then
     echo "OK       $name $have (need $label)"
+    return 0
   else
     echo "MISMATCH $name $have — need $label"
+    return 1
   fi
 }
 
 echo "Checking your environment against what this course's labs need:"
 echo
 
+ANY_FAILED=0
+
 check "Git (Lab 01)" git \
   'git --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | head -1' \
-  "ge:2.30"
+  "ge:2.30" || ANY_FAILED=1
 
 check "Python 3 (Lab 01)" python3 \
   'python3 --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+"' \
-  "series:3.13"
+  "series:3.13" || ANY_FAILED=1
 
 check "uv (Lab 05)" uv \
   'uv --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | head -1' \
-  "exact:0.11.21"
+  "exact:0.11.21" || ANY_FAILED=1
 
 check "Go (Lab 14)" go \
   'go version | grep -oE "go[0-9]+\.[0-9]+(\.[0-9]+)?" | head -1 | sed "s/^go//"' \
-  "series:1.25"
+  "series:1.25" || ANY_FAILED=1
 
-check "Java (Lab 14)" java \
+check "Java runtime (Lab 14)" java \
   'java -version 2>&1 | grep -oE "\"[0-9]+(\.[0-9]+)*" | head -1 | tr -d "\""' \
-  "series:21"
+  "series:21" || ANY_FAILED=1
+
+# A JRE isn't enough — this course compiles Java, it doesn't just run it.
+# Some systems (stock macOS included) have a `java`/`javac` stub on PATH
+# that prints an "install a JDK" message instead of a version; that
+# already surfaces as UNKNOWN below, not a false OK.
+check "javac / JDK (Lab 14)" javac \
+  'javac --version 2>&1 | grep -oE "[0-9]+(\.[0-9]+)*" | head -1' \
+  "series:21" || ANY_FAILED=1
 
 echo
 echo "Missing something, or does a version not match? See the root README's"
-echo "toolchain table for how to install or switch to the exact version."
+echo "toolchain table for how to install or switch to the required version."
+
+exit "$ANY_FAILED"
