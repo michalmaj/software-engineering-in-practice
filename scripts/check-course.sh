@@ -16,6 +16,27 @@ set -uo pipefail
 
 cd "$(dirname "$0")/.."
 
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  echo "This check must be run from a Git clone of the repository."
+  echo "GitHub source archives are not supported by the repository health check."
+  exit 1
+fi
+
+# Projects that deliberately ship a pyproject.toml without a committed
+# uv.lock — right now, only Lab 05 itself, whose whole point is having
+# the student generate and commit their own uv.lock. Any other project
+# with no lockfile is a real problem, not another exception, so it's
+# not auto-detected: it has to be added here on purpose.
+KNOWN_UNLOCKED_PROJECTS=("labs/05-works-on-my-machine")
+
+is_known_unlocked() {
+  local dir="$1" known
+  for known in "${KNOWN_UNLOCKED_PROJECTS[@]}"; do
+    [ "$dir" = "$known" ] && return 0
+  done
+  return 1
+}
+
 FAILED=0
 fail() {
   echo "FAIL  $1"
@@ -81,10 +102,36 @@ echo "== Python project test suites (uv run pytest) =="
 pytest_failed=0
 while IFS= read -r pyproject; do
   dir=$(dirname "$pyproject")
-  echo "  -- $dir --"
-  if ! (cd "$dir" && uv run pytest -q); then
-    fail "$dir: pytest failed"
+  has_lock=0
+  git ls-files --error-unmatch "$dir/uv.lock" > /dev/null 2>&1 && has_lock=1
+
+  if [ "$has_lock" -eq 0 ] && ! is_known_unlocked "$dir"; then
+    fail "$dir: no committed uv.lock and not in KNOWN_UNLOCKED_PROJECTS (top of this script) — commit a uv.lock, or add it there if it's deliberately unlocked like Lab 05"
     pytest_failed=1
+    continue
+  fi
+
+  echo "  -- $dir --"
+  if [ "$has_lock" -eq 0 ]; then
+    # Deliberately unlocked (Lab 05): run in a throwaway copy so the
+    # uv.lock that `uv run` generates never touches the real tree —
+    # the health check must stay side-effect free, and must not do
+    # part of the lab's own exercise (creating that lock file) for the
+    # student.
+    tmp_dir=$(mktemp -d)
+    trap 'rm -rf "$tmp_dir"' EXIT
+    cp -R "$dir/." "$tmp_dir/"
+    if ! (cd "$tmp_dir" && uv run pytest -q); then
+      fail "$dir: pytest failed (run in a temporary copy — deliberately unlocked)"
+      pytest_failed=1
+    fi
+    rm -rf "$tmp_dir"
+    trap - EXIT
+  else
+    if ! (cd "$dir" && uv run pytest -q); then
+      fail "$dir: pytest failed"
+      pytest_failed=1
+    fi
   fi
 done < <(git ls-files -- '*/pyproject.toml' 'pyproject.toml')
 [ "$pytest_failed" -eq 0 ] && ok "All Python project test suites pass"
