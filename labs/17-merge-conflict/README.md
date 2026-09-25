@@ -40,11 +40,14 @@ After this lab you should be able to:
 6. Resolve both blocks by keeping **both** changes — both new function
    definitions, and both lines appended inside `summarize` (in either
    order). Delete every conflict marker.
-7. Open `tests/test_inventory.py`. It conflicts too — on the `import`
-   line (each branch imported a different new name) and inside the new
-   test function (each branch named it differently and asserted a
-   different function). Resolve it by keeping **both** imports and
-   **both** test functions, each testing its own feature.
+7. Open `tests/test_inventory.py`. It conflicts too, in two blocks: the
+   `import` line (each branch imported a different new name), and the
+   new test function each branch added (each named it differently and
+   called a different function — the two conflict as one block because
+   they're adjacent lines, right down to the final `assert`, which is
+   identical on both sides and isn't part of the conflict). Resolve it
+   by keeping **both** imports and **both** test functions, each
+   testing its own feature.
 8. Run `uv run pytest -v`. All three tests — the original, the
    low-stock one, and the expiry one — must pass.
 9. Stage both resolved files and complete the merge:
@@ -67,15 +70,18 @@ After this lab you should be able to:
 
 ```bash
 cd examples/team-inventory
-grep -c '<<<<<<<\|=======\|>>>>>>>' inventory.py tests/test_inventory.py
+if grep -nE '^(<<<<<<<|=======|>>>>>>>)' inventory.py tests/test_inventory.py; then
+    echo "Conflict markers remain."
+else
+    echo "No conflict markers remain."
+fi
 uv run pytest -v
 git log --oneline -4
 cd -
 ```
 
-Expected: `0` for both files (no output for a file counts as an error
-here — that itself confirms no markers remain in it), 3 tests passed,
-and the merge commit visible in the log.
+Expected: `No conflict markers remain.`, 3 tests passed, and the merge
+commit visible in the log.
 
 ## Think about it
 
@@ -93,10 +99,9 @@ and the merge commit visible in the log.
   version; `=======` divides the two sides; `>>>>>>> feature/expiry-warning`
   marks the end of the *incoming* branch's version.
 - **Hint 2:** `inventory.py` has two separate conflict blocks; the test
-  file has more, smaller ones (import line, function name, assertion
-  line) because both branches edited the same few lines of the same
-  test function. Resolve every block you find — don't stop after the
-  first file.
+  file also has two — one on the import line, one spanning the new test
+  function's name and body. Resolve every block you find — don't stop
+  after the first file.
 - **Hint 3:** After editing, both files should contain zero
   `<<<<<<<`, `=======`, or `>>>>>>>` lines — if `grep` finds any in
   either file, you're not done.

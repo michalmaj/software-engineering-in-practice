@@ -42,11 +42,14 @@ Po tym laboratorium powinieneś/aś umieć:
 6. Rozwiąż oba bloki, zachowując **obie** zmiany — obie definicje
    nowych funkcji i obie linie dopisane wewnątrz `summarize` (w
    dowolnej kolejności). Usuń każdy znacznik konfliktu.
-7. Otwórz `tests/test_inventory.py`. Też konfliktuje — na linii
-   `import` (każda gałąź zaimportowała inną nową nazwę) i wewnątrz
-   nowej funkcji testowej (każda gałąź nazwała ją inaczej i sprawdzała
-   inną funkcję). Rozwiąż to, zachowując **oba** importy i **obie**
-   funkcje testowe, każdą testującą własną funkcję.
+7. Otwórz `tests/test_inventory.py`. Też konfliktuje, w dwóch blokach:
+   na linii `import` (każda gałąź zaimportowała inną nową nazwę) oraz w
+   nowej funkcji testowej, którą dodała każda gałąź (każda nazwała ją
+   inaczej i wywoływała inną funkcję — te dwie rzeczy konfliktują jako
+   jeden blok, bo to sąsiadujące linie, aż do końcowego `assert`, który
+   jest identyczny po obu stronach i nie wchodzi w konflikt). Rozwiąż
+   to, zachowując **oba** importy i **obie** funkcje testowe, każdą
+   testującą własną funkcję.
 8. Uruchom `uv run pytest -v`. Wszystkie trzy testy — oryginalny, ten
    od niskiego stanu i ten od terminu ważności — muszą przejść.
 9. Dodaj oba rozwiązane pliki do stagingu i dokończ merge:
@@ -69,15 +72,18 @@ Po tym laboratorium powinieneś/aś umieć:
 
 ```bash
 cd examples/team-inventory
-grep -c '<<<<<<<\|=======\|>>>>>>>' inventory.py tests/test_inventory.py
+if grep -nE '^(<<<<<<<|=======|>>>>>>>)' inventory.py tests/test_inventory.py; then
+    echo "Conflict markers remain."
+else
+    echo "No conflict markers remain."
+fi
 uv run pytest -v
 git log --oneline -4
 cd -
 ```
 
-Oczekiwane: `0` dla obu plików (brak wyniku dla pliku liczy się tu jako
-błąd — to samo potwierdza, że nie pozostały w nim żadne znaczniki),
-3 zaliczone testy i commit merge'a widoczny w logu.
+Oczekiwane: `No conflict markers remain.`, 3 zaliczone testy i commit
+merge'a widoczny w logu.
 
 ## Zastanów się
 
@@ -95,9 +101,8 @@ błąd — to samo potwierdza, że nie pozostały w nim żadne znaczniki),
   bieżącej gałęzi*; `=======` dzieli obie strony; `>>>>>>>
   feature/expiry-warning` oznacza koniec wersji *nadchodzącej* gałęzi.
 - **Podpowiedź 2:** `inventory.py` ma dwa osobne bloki konfliktu; plik
-  testowy ma ich więcej, mniejszych (linia importu, nazwa funkcji,
-  linia asercji), bo obie gałęzie edytowały te same kilka linii tej
-  samej funkcji testowej. Rozwiąż każdy znaleziony blok — nie
+  testowy też ma dwa — jeden na linii importu, jeden obejmujący nazwę i
+  ciało nowej funkcji testowej. Rozwiąż każdy znaleziony blok — nie
   zatrzymuj się po pierwszym pliku.
 - **Podpowiedź 3:** Po edycji oba pliki powinny zawierać zero linii
   `<<<<<<<`, `=======` ani `>>>>>>>` — jeśli `grep` cokolwiek znajdzie

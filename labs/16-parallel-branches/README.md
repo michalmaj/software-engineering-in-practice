@@ -26,50 +26,80 @@ After this lab you should be able to:
 
 You'll play both "teammates" yourself, one branch at a time.
 
+1. Confirm you're starting from a clean `main`: `git switch main` then
+   `git status --short`. If that prints anything, commit or stash it
+   first — both branches below need to start from the same clean
+   point.
+
 **Teammate A — low stock warning:**
 
-1. From `main`, create and switch to a new branch:
+2. From `main`, create and switch to a new branch:
    `git switch -c feature/low-stock-warning`.
-2. In `inventory.py`, add:
-   `low_stock_items(inventory: list[dict], threshold: int = 5) -> list[str]`
+3. In `inventory.py`, add
+   `low_stock_items(inventory: list[dict], threshold: int = 5) -> list[str]`,
    returning the names of items whose `quantity` is below `threshold`.
-3. In `summarize`, right after the `for` loop and before the `return`
+   Insert it **immediately above `summarize`**.
+4. In `summarize`, right after the `for` loop and before the `return`
    line, add:
    ```python
        low_stock = low_stock_items(inventory)
        if low_stock:
            lines.append(f"Low stock: {', '.join(low_stock)}")
    ```
-4. Add a test for `low_stock_items` in `tests/test_inventory.py`.
-5. Run the tests, then commit everything on this branch.
+5. In `tests/test_inventory.py`, change the import on the first line to
+   `from inventory import low_stock_items, summarize`, then add a test
+   directly after `test_summarize_lists_each_item_with_quantity`:
+   ```python
+   def test_low_stock_items_lists_items_below_threshold():
+       inventory = [{"name": "Milk", "quantity": 2, "expires_in_days": 1}]
+
+       result = low_stock_items(inventory)
+
+       assert result == ["Milk"]
+   ```
+6. Run the tests, then commit everything on this branch.
 
 **Teammate B — expiry warning:**
 
-6. Switch back to `main` — **do not merge `feature/low-stock-warning`
+7. Switch back to `main` — **do not merge `feature/low-stock-warning`
    yet.**
-7. From `main`, create and switch to a new branch:
+8. From `main`, create and switch to a new branch:
    `git switch -c feature/expiry-warning`.
-8. In `inventory.py`, add:
-   `expiring_items(inventory: list[dict], days: int = 3) -> list[str]`
+9. In `inventory.py`, add
+   `expiring_items(inventory: list[dict], days: int = 3) -> list[str]`,
    returning the names of items whose `expires_in_days` is `<=` `days`.
-9. In `summarize`, at the **same location** as step 3 (right after the
-   `for` loop, before `return`), add:
-   ```python
-       expiring = expiring_items(inventory)
-       if expiring:
-           lines.append(f"Expiring soon: {', '.join(expiring)}")
-   ```
-10. Add a test for `expiring_items`. Run the tests, then commit
-    everything on this branch.
+   Insert it **immediately above `summarize`** — the same location as
+   step 3, since you're starting from the same `main` teammate A did.
+10. In `summarize`, at the **same location** as step 4 (right after the
+    `for` loop, before `return`), add:
+    ```python
+        expiring = expiring_items(inventory)
+        if expiring:
+            lines.append(f"Expiring soon: {', '.join(expiring)}")
+    ```
+11. In `tests/test_inventory.py`, change the import on the first line to
+    `from inventory import expiring_items, summarize`, then add a test
+    directly after `test_summarize_lists_each_item_with_quantity` —
+    the same location as step 5:
+    ```python
+    def test_expiring_items_lists_items_within_days():
+        inventory = [{"name": "Milk", "quantity": 2, "expires_in_days": 1}]
 
-11. Run `git branch` and `git log --all --graph --oneline -5`. Confirm
+        result = expiring_items(inventory)
+
+        assert result == ["Milk"]
+    ```
+12. Run the tests, then commit everything on this branch.
+
+13. Run `git branch` and `git log --all --graph --oneline -5`. Confirm
     both branches exist, both start from the same commit, and neither
     contains the other's work yet.
 
 ## Acceptance criteria
 
 - Both `feature/low-stock-warning` and `feature/expiry-warning` exist
-  as branches, each with one commit on top of the same `main` commit.
+  as branches, each with exactly one feature commit on top of the same
+  `main` commit.
 - Checking out either branch individually and running `uv run pytest`
   passes on that branch alone.
 - Neither branch's `inventory.py` contains the other branch's function.
@@ -106,9 +136,10 @@ still has neither feature (that's Lab 17's job).
 - **Hint 2:** Make sure you're on `main` (`git branch` shows a `*` next
   to your current branch) before creating each new feature branch —
   if you branch B from A by mistake, B will already contain A's work.
-- **Hint 3:** The two inserted blocks in `summarize` must go in the
-  exact same place (right after the `for` loop) in both branches for
-  the next lab to work as described.
+- **Hint 3:** Both the new helper function (immediately above
+  `summarize`) and the two inserted blocks inside `summarize` (right
+  after the `for` loop) must go in the exact same place in both
+  branches for the next lab to work as described.
 
 ## What's next
 

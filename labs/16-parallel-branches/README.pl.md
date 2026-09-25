@@ -27,49 +27,78 @@ Po tym laboratorium powinieneś/aś umieć:
 
 Zagrasz oboje "kolegów z zespołu" sam/a, jedna gałąź na raz.
 
+1. Potwierdź, że zaczynasz od czystego `main`: `git switch main`, potem
+   `git status --short`. Jeśli coś wypisze, zacommituj to albo zrób
+   stash, zanim przejdziesz dalej — obie gałęzie poniżej muszą zaczynać
+   się z tego samego, czystego punktu.
+
 **Kolega A — ostrzeżenie o niskim stanie:**
 
-1. Z `main` utwórz i przełącz się na nową gałąź:
+2. Z `main` utwórz i przełącz się na nową gałąź:
    `git switch -c feature/low-stock-warning`.
-2. W `inventory.py` dodaj:
-   `low_stock_items(inventory: list[dict], threshold: int = 5) -> list[str]`
+3. W `inventory.py` dodaj
+   `low_stock_items(inventory: list[dict], threshold: int = 5) -> list[str]`,
    zwracającą nazwy pozycji, których `quantity` jest poniżej `threshold`.
-3. W `summarize`, zaraz po pętli `for` i przed linią `return`, dodaj:
+   Wstaw ją **bezpośrednio nad `summarize`**.
+4. W `summarize`, zaraz po pętli `for` i przed linią `return`, dodaj:
    ```python
        low_stock = low_stock_items(inventory)
        if low_stock:
            lines.append(f"Low stock: {', '.join(low_stock)}")
    ```
-4. Dodaj test dla `low_stock_items` w `tests/test_inventory.py`.
-5. Uruchom testy, potem zacommituj wszystko na tej gałęzi.
+5. W `tests/test_inventory.py` zmień import w pierwszej linii na
+   `from inventory import low_stock_items, summarize`, potem dodaj test
+   bezpośrednio po `test_summarize_lists_each_item_with_quantity`:
+   ```python
+   def test_low_stock_items_lists_items_below_threshold():
+       inventory = [{"name": "Milk", "quantity": 2, "expires_in_days": 1}]
+
+       result = low_stock_items(inventory)
+
+       assert result == ["Milk"]
+   ```
+6. Uruchom testy, potem zacommituj wszystko na tej gałęzi.
 
 **Kolega B — ostrzeżenie o terminie ważności:**
 
-6. Wróć do `main` — **jeszcze nie mergúj `feature/low-stock-warning`.**
-7. Z `main` utwórz i przełącz się na nową gałąź:
+7. Wróć do `main` — **jeszcze nie scalaj `feature/low-stock-warning`.**
+8. Z `main` utwórz i przełącz się na nową gałąź:
    `git switch -c feature/expiry-warning`.
-8. W `inventory.py` dodaj:
-   `expiring_items(inventory: list[dict], days: int = 3) -> list[str]`
+9. W `inventory.py` dodaj
+   `expiring_items(inventory: list[dict], days: int = 3) -> list[str]`,
    zwracającą nazwy pozycji, których `expires_in_days` jest `<=` `days`.
-9. W `summarize`, w **tym samym miejscu** co w kroku 3 (zaraz po pętli
-   `for`, przed `return`), dodaj:
-   ```python
-       expiring = expiring_items(inventory)
-       if expiring:
-           lines.append(f"Expiring soon: {', '.join(expiring)}")
-   ```
-10. Dodaj test dla `expiring_items`. Uruchom testy, potem zacommituj
-    wszystko na tej gałęzi.
+   Wstaw ją **bezpośrednio nad `summarize`** — to samo miejsce co w
+   kroku 3, bo zaczynasz z tego samego `main`, co kolega A.
+10. W `summarize`, w **tym samym miejscu** co w kroku 4 (zaraz po pętli
+    `for`, przed `return`), dodaj:
+    ```python
+        expiring = expiring_items(inventory)
+        if expiring:
+            lines.append(f"Expiring soon: {', '.join(expiring)}")
+    ```
+11. W `tests/test_inventory.py` zmień import w pierwszej linii na
+    `from inventory import expiring_items, summarize`, potem dodaj test
+    bezpośrednio po `test_summarize_lists_each_item_with_quantity` — to
+    samo miejsce co w kroku 5:
+    ```python
+    def test_expiring_items_lists_items_within_days():
+        inventory = [{"name": "Milk", "quantity": 2, "expires_in_days": 1}]
 
-11. Uruchom `git branch` i `git log --all --graph --oneline -5`.
+        result = expiring_items(inventory)
+
+        assert result == ["Milk"]
+    ```
+12. Uruchom testy, potem zacommituj wszystko na tej gałęzi.
+
+13. Uruchom `git branch` i `git log --all --graph --oneline -5`.
     Potwierdź, że obie gałęzie istnieją, obie zaczynają się od tego
     samego commita, i żadna nie zawiera jeszcze pracy tej drugiej.
 
 ## Kryteria akceptacji
 
 - Zarówno `feature/low-stock-warning`, jak i `feature/expiry-warning`
-  istnieją jako gałęzie, każda z jednym commitem na tym samym commicie
-  `main`.
+  istnieją jako gałęzie, każda z dokładnie jednym commitem feature na
+  tym samym commicie `main`.
 - Przełączenie się na każdą gałąź osobno i uruchomienie `uv run pytest`
   przechodzi na tej gałęzi samodzielnie.
 - Żadna gałąź nie zawiera funkcji tej drugiej w `inventory.py`.
@@ -106,9 +135,10 @@ a `main` nadal nie ma żadnej z funkcji (to zadanie Lab 17).
   pokazuje `*` przy Twojej bieżącej gałęzi), zanim utworzysz każdą
   nową gałąź funkcji — jeśli przez pomyłkę rozgałęzisz B z A, B będzie
   już zawierać pracę A.
-- **Podpowiedź 3:** Oba wstawione bloki w `summarize` muszą trafić w
-  dokładnie to samo miejsce (zaraz po pętli `for`) w obu gałęziach,
-  żeby kolejny lab zadziałał tak, jak opisano.
+- **Podpowiedź 3:** Zarówno nowa funkcja pomocnicza (bezpośrednio nad
+  `summarize`), jak i oba wstawione bloki wewnątrz `summarize` (zaraz
+  po pętli `for`) muszą trafić w dokładnie to samo miejsce w obu
+  gałęziach, żeby kolejny lab zadziałał tak, jak opisano.
 
 ## Co dalej
 
