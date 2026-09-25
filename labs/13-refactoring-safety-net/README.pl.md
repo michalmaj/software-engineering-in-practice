@@ -84,9 +84,10 @@ Oczekiwane: wszystkie testy przechodzą, a wypisuje się `decoupled`
 ## Jeśli utkniesz
 
 - **Podpowiedź 1:** Kroki 1-2 to czyste dodawanie — nic istniejącego
-  się nie zmienia, więc nic jeszcze nie może się zepsuć. To celowe:
-  umieść nowy kod na miejscu i udowodnij, że jest poprawny w izolacji,
-  zanim go podłączysz.
+  się nie zmienia, więc nic jeszcze nie może się zepsuć. To celowe: na
+  tym etapie istniejące zachowanie nadal chroni zestaw testów
+  regresyjnych; kolejny krok to przepuszczenie przez nową strukturę
+  prawdziwego zachowania.
 - **Podpowiedź 2:** Krok 3 to jednolinijkowe zastąpienie całego bloku
   `if discount_code == "SAVE10": ... elif ...: ... else: raise ...`
   przez `code_discount = apply_discount_code(after_loyalty,

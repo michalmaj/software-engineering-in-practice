@@ -16,8 +16,6 @@ After this lab you should be able to:
   entry point that handles I/O (printing, in this case).
 - Create a minimal `pyproject.toml` describing a project as project
   metadata, not just a folder of files.
-- Explain what an empty `tests/` directory signals about a project's
-  intentions.
 
 ## Before you start
 
@@ -27,8 +25,8 @@ After this lab you should be able to:
 
 ## Your task
 
-1. Run `python3 bill.py` and save its output — you'll need it to prove
-   your refactor didn't change behavior.
+1. Run `python3 bill.py`, saving its output as a baseline you'll compare
+   against later: `python3 bill.py | tee /tmp/bill-before.txt`.
 2. Identify the distinct responsibilities mixed together in `main()`:
    computing a subtotal, applying a discount, computing tax, computing a
    tip, and printing a receipt.
@@ -37,7 +35,7 @@ After this lab you should be able to:
    `[tool.pytest.ini_options]` with `pythonpath = ["."]` (same pattern as
    Lab 05).
 4. Create a `billing/` package (`billing/__init__.py`, empty) with a
-   module `billing/calculator.py` containing exactly these four pure
+   module `billing/calculator.py` containing exactly these five pure
    functions, with these exact names and signatures (the next two labs
    depend on these exact names):
    - `calculate_subtotal(items: list[tuple[str, float, int]]) -> float`
@@ -54,16 +52,15 @@ After this lab you should be able to:
      original script does** — this refactor must reproduce the existing
      behavior exactly, bugs included. You are not fixing anything yet.
 5. Create `billing/cli.py` with a `main()` that calls `calculate_bill`
-   *once* and prints the same five-line receipt format as the original
-   script, using only the values from the dict it got back (don't
-   recompute anything separately — one source of truth).
+   *once* and prints a receipt whose output is byte-for-byte identical
+   to the original script's, using only the values from the dict it got
+   back (don't recompute anything separately — one source of truth).
 6. Create `main.py` at the project root that imports `main` from
    `billing.cli` and calls it under `if __name__ == "__main__":`.
-7. Create an empty `tests/` directory (just the directory — Lab 07 fills
-   it in).
-8. Run your new entry point and diff it against the output you saved in
-   step 1.
-9. Once the diff is clean, delete `bill.py` — it's fully replaced.
+7. Run your new entry point the same way, saving its output too:
+   `uv run python main.py | tee /tmp/bill-after.txt`. Diff the two
+   files: `diff /tmp/bill-before.txt /tmp/bill-after.txt`.
+8. Once the diff is clean, delete `bill.py` — it's fully replaced.
 
 ## Acceptance criteria
 
@@ -72,7 +69,6 @@ After this lab you should be able to:
   script's output.
 - `billing/calculator.py` defines all five functions with the exact names
   and signatures listed above.
-- `tests/` exists as a directory (even though it's empty for now).
 
 ## Verification
 
@@ -81,13 +77,11 @@ cd examples/restaurant-bill
 python3 -c "import billing.calculator as c; print(c.calculate_bill([('Burger',12.50,2),('Fries',4.00,2),('Soda',2.50,2)], 0.15))" 2>&1 || true
 uv run python main.py | tee /tmp/bill-after.txt
 diff /tmp/bill-before.txt /tmp/bill-after.txt && echo "IDENTICAL"
-test -d tests && echo "tests/ directory exists"
 test -f bill.py && echo "bill.py still exists — delete it" || echo "bill.py correctly removed"
 cd -
 ```
 
-Expected: `IDENTICAL`, `tests/ directory exists`, and `bill.py correctly
-removed`.
+Expected: `IDENTICAL` and `bill.py correctly removed`.
 
 ## Think about it
 

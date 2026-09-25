@@ -43,11 +43,17 @@ After this lab you should be able to:
    **Dependency Injection**. Write one sentence in your notes: what
    would `send_receipt_ready` lose the ability to do if it constructed
    its own `ConsoleNotifier` internally instead of receiving one?
-4. Two more names, briefly: a **Factory** is code whose entire job is
-   choosing or constructing the right strategy (imagine a function
+4. Two more names, briefly: a **Factory** is code whose job is to
+   centralize the decision of *which* object to create or return, so
+   callers don't each have to make that decision themselves. In
+   general, a Factory can construct or supply any kind of object; in
+   *this* exercise specifically, that decision happens to be which
+   Strategy implementation to use (imagine a function
    `build_notifier(config)` that returns a `ConsoleNotifier` or an
    `InMemoryNotifier` depending on a setting — you haven't built one,
-   but you can now recognize what one would look like). An **Adapter**
+   but you can now recognize what one would look like). "Picking a
+   Strategy" is simply this exercise's use of a Factory, not what a
+   Factory inherently is. An **Adapter**
    wraps something with an incompatible interface so it matches the one
    your code expects (imagine a third-party SMS library whose method is
    called `sendMessage(text)` instead of `send(message)` — a tiny
