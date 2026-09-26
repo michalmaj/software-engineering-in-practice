@@ -5,18 +5,21 @@ import pytest
 from http.client import HTTPConnection
 from http.server import HTTPServer
 
+import api
 from api import ORDERS, OrderHandler
 
 
 @pytest.fixture()
 def server_port():
     ORDERS.clear()
+    api.NEXT_ID = 1
     httpd = HTTPServer(("localhost", 0), OrderHandler)
     port = httpd.server_port
     thread = threading.Thread(target=httpd.serve_forever, daemon=True)
     thread.start()
     yield port
     httpd.shutdown()
+    httpd.server_close()
     thread.join()
 
 
