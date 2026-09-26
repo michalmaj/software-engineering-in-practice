@@ -2,9 +2,9 @@
 
 ## Story
 
-Yesterday you learned to look around. Today you need to actually get work
-done without touching a mouse: copy files, search inside them, chain
-commands together, and run something that keeps running until you stop it.
+Yesterday you learned to look around. Today you need to get work done
+without touching a mouse: copy files, search inside them, chain commands
+together, and run something that keeps running until you stop it.
 
 ## Learning objectives
 

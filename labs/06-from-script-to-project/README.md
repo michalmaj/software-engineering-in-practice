@@ -108,7 +108,7 @@ habit now.
 
 ## What's next
 
-Your refactor preserved behavior — but "preserved" isn't the same as
+Your refactor preserved behavior. But "preserved" isn't the same as
 "correct," and right now the only way to check either one is to read the
 code by eye. Next, you'll teach the computer to check for you.
 

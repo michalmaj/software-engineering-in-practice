@@ -115,6 +115,6 @@ merge settings) for `feature/reorder-report`, and all tests passing.
 ## What's next
 
 Reviewed, merged code is still only as good as what nobody remembered
-to actually check. Next, the repository starts checking itself.
+to check. Next, the repository starts checking itself.
 
 Continue to [Lab 19 — The repository should check itself](../19-repository-checks-itself/README.md).

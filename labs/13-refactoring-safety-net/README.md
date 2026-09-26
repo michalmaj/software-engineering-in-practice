@@ -81,7 +81,7 @@ discount_code` line remains in `calculator.py`).
 - **Hint 1:** Steps 1-2 are pure addition — nothing existing changes,
   so nothing can break yet. That's deliberate: at this point, the
   existing behavior is still protected by the regression suite; the
-  next step is to route real behavior through the new structure.
+  next step is to route it through the new structure.
 - **Hint 2:** Step 3 is a one-line replacement of the whole `if
   discount_code == "SAVE10": ... elif ...: ... else: raise ...` block
   with `code_discount = apply_discount_code(after_loyalty,

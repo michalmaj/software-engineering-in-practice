@@ -33,8 +33,8 @@ After this lab you should be able to:
 ## Your task
 
 1. Without installing anything, try: `python3 main.py`. Read the error.
-2. Open `pyproject.toml` and identify which package the project actually
-   depends on.
+2. Open `pyproject.toml` and identify which package the project depends
+   on.
 3. Run `uv sync`. Look at what appeared in this directory afterward.
 4. Run `uv run python main.py`. Compare this result with step 1.
 5. Run `uv run pytest` and confirm the test suite passes.
@@ -52,8 +52,8 @@ After this lab you should be able to:
 - `.venv/` and `uv.lock` exist in that directory (uv created them; do not
   hand-write either).
 - `uv.lock`, created by `uv sync` (not shipped with the starter), is
-  committed to the repository — a lock file is only useful to a
-  teammate if it's actually checked in.
+  committed to the repository. A lock file is only useful to a teammate
+  if it's checked in.
 - `notes/my-observations.txt` answers all three points from step 6, plus
   the devcontainer question from step 7.
 
