@@ -37,28 +37,50 @@ Po tym laboratorium powinieneś/aś umieć:
 > "połącz dowolne dwa stoliki", to "te dwa stoliki akurat da się
 > zsunąć w sali".
 
-1. Zaimplementuj tę zmianę w swoim kodzie.
-2. Zanim napiszesz jakikolwiek kod, zapisz (w
-   `labs/28-change-request/impact-notes.md`) przewidywanie: które
-   pliki spodziewasz się dotknąć, i czy Wasz obecny model danych ma już
-   naturalne miejsce, żeby reprezentować "ta rezerwacja używa więcej
-   niż jednego stolika"?
+1. Utwórz gałąź dla tej zmiany (na przykład `feature/combined-tables`).
+2. Zanim napiszesz jakikolwiek kod, zapisz przewidywanie w
+   `docs/change-request-impact.md` (w repozytorium Waszego zespołu —
+   utwórz `docs/`, jeśli jeszcze nie istnieje): które pliki albo
+   komponenty spodziewasz się dotknąć, i czy Wasz obecny model danych
+   ma już naturalne miejsce, żeby reprezentować "ta rezerwacja używa
+   więcej niż jednego stolika"? Zacommituj to przewidywanie samo, jako
+   osobny commit, zanim istnieje jakikolwiek kod implementacji — na
+   przykład `docs: predict impact of combined-table change`. To jest
+   zapis "przed", z którym porównasz się później; napisanie go po
+   fakcie zrobiłoby z niego retrospektywę udającą przewidywanie.
 3. Zaimplementuj zmianę, aktualizując i dodając testy w miarę
    potrzeby. Jeśli istniejący test musiał się zmienić tylko z powodu
    zmiany nazwy kształtu danych (nie dlatego, że jego faktyczna asercja
    zachowania była błędna), zanotuj to konkretnie w
-   `impact-notes.md` — to jest dokładnie ten rodzaj kosztu zmiany
-   powierzchni, o który Lab 12 prosił Was uważać.
-4. Po zmergowaniu zaktualizuj `impact-notes.md` o to, co faktycznie się
-   stało: jak bliskie było Twoje przewidywanie? Które pliki faktycznie
-   się zmieniły?
+   `docs/change-request-impact.md` — to jest dokładnie ten rodzaj
+   kosztu zmiany powierzchni, o który Lab 12 prosił Was uważać.
+4. Zanim otworzysz PR do review — nie po zmergowaniu — zaktualizuj ten
+   sam `docs/change-request-impact.md` o to, co faktycznie się stało:
+   które pliki albo komponenty faktycznie się zmieniły, jak to się ma
+   do Twojego przewidywania, jakie nieoczekiwane powiązania się
+   pojawiły, i co okazało się łatwiejsze albo trudniejsze niż
+   oczekiwano. Powierzchnia zmiany jest sygnałem do analizy, nie
+   wynikiem do minimalizowania — kilka sensownie powiązanych plików
+   zmienionych z dobrego powodu może być lepszym wynikiem niż hack
+   dotykający tylko jednego. Ta aktualizacja musi trafić do tego samego
+   PR-a co implementacja, nie do osobnego commita po merge'u.
+5. Otwórz PR, zdobądź review i zmerguj dopiero, gdy CI jest zielone —
+   ta sama pętla co w Lab 27.
 
 ## Kryteria akceptacji
 
 - Zachowanie łączenia stolików jest zaimplementowane, przetestowane,
   zrecenzowane i zmergowane przez ten sam workflow PR co Lab 27.
-- `impact-notes.md` zawiera zarówno przewidywanie *przed*, jak i
-  rzeczywistość *po*, i jest uczciwe co do wszelkich rozbieżności.
+- `docs/change-request-impact.md` zawiera zarówno przewidywanie
+  *przed*, jak i rzeczywistość *po*, i jest uczciwe co do wszelkich
+  rozbieżności.
+- Przewidywanie istnieje jako osobny commit w historii Gita, przed
+  jakimkolwiek commitem implementującym zmianę — nie napisane po
+  fakcie.
+- Aktualizacja o rzeczywistym wpływie była częścią tego samego pull
+  requesta, który implementował zmianę: `git status --short` jest
+  czyste po merge'u, bez osobnego commita dokumentacyjnego dodanego
+  później.
 - Wasz pełny zestaw testów (MVP + ta zmiana) przechodzi z zielonym CI.
 
 ## Weryfikacja
