@@ -38,6 +38,11 @@ Po tym laboratorium powinieneś/aś umieć:
    `ERROR`, jeśli wszystkie próby się wyczerpią.
 5. W `run()` skonfiguruj logowanie raz, przez `logging.basicConfig`,
    uwzględniając znacznik czasu, poziom i nazwę loggera w formacie.
+   Potem zamień `print(...)`, który ogłasza, że serwer nasłuchuje, na
+   `logger.info(...)` — teraz, gdy logowanie jest skonfigurowane, ten
+   komunikat startowy jest dokładnie tym rodzajem szczegółu
+   operacyjnego, o który jest ten lab, a nie wynikiem dla użytkownika,
+   który ktoś ma czytać z narzędzia CLI.
 6. Napisz dwa testy używające fixture'a `caplog` z pytest: jeden
    potwierdzający, że utworzenie zamówienia produkuje rekord logu
    `INFO`; jeden potwierdzający, że zapytanie o brakujące zamówienie

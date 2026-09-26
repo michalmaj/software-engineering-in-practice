@@ -37,7 +37,12 @@ After this lab you should be able to:
    failed attempt (include the attempt number and the error), and an
    `ERROR` if every attempt is exhausted.
 5. In `run()`, configure logging once with `logging.basicConfig`,
-   including the timestamp, level, and logger name in the format.
+   including the timestamp, level, and logger name in the format. Then
+   replace the `print(...)` that announces the server is listening with
+   `logger.info(...)` — now that logging is configured, that startup
+   message is exactly the kind of operational detail this lab is
+   about, not user-facing output someone's meant to read from a CLI
+   tool.
 6. Write two tests using pytest's `caplog` fixture: one confirming that
    creating an order produces an `INFO` log record; one confirming that
    requesting a missing order produces a `WARNING` record.
