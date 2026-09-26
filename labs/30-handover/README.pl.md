@@ -9,7 +9,7 @@ potrzebują, musi już być w repozytorium.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Przygotować projekt tak, żeby obcy mógł go skonfigurować i uruchomić
   jego sprawdzenia, używając wyłącznie tego, co jest spisane.
@@ -24,7 +24,7 @@ Po tym laboratorium powinieneś/aś umieć:
   wszystkie zmergowane, przetestowane i udokumentowane.
 - Jeśli jesteś w klasie: instruktor paruje Wasz zespół z innym do
   wymiany. Jeśli solo: ocenisz własny projekt jako "zespół
-  odbierający", udając, że nigdy go nie widziałeś/aś.
+  odbierający", tak jakby widziano go po raz pierwszy.
 
 ## Twoje zadanie
 
@@ -45,13 +45,13 @@ Po tym laboratorium powinieneś/aś umieć:
 **Jeśli odbieracie (albo oceniacie własny projekt solo):**
 
 Nie masz uprawnień do zapisu w repozytorium zespołu oryginalnego i nie
-powinieneś/aś ich potrzebować — cała ta ścieżka działa przez fork i
+powinno się ich potrzebować — cała ta ścieżka działa przez fork i
 pull request, tak samo jak zewnętrzny kontrybutor pracowałby z
 dowolnym projektem, którego nie jest właścicielem.
 
 5. Zrób fork repozytorium zespołu oryginalnego na GitHubie, potem
-   sklonuj *swój własny fork* do świeżej lokalizacji, której wcześniej
-   nie dotykałeś/aś.
+   sklonuj *swój własny fork* do świeżej, wcześniej nietkniętej
+   lokalizacji.
 6. Podążajcie wyłącznie za spisanym `README.md`, żeby skonfigurować
    projekt i uruchomić jego sprawdzenia. Nie zadawajcie jeszcze
    oryginalnemu zespołowi pytania doprecyzowującego — zanotujcie
@@ -100,9 +100,9 @@ repozytorium.
 
 ## Zastanów się
 
-- Który fragment kontekstu nosiłeś/aś osobiście w głowie, a który
-  nigdy nie trafił do README, `ARCHITECTURE.md` ani ADR-a? Dlaczego
-  wydawał się wtedy niepotrzebny do zapisania?
+- Jaki fragment kontekstu istniał tylko w Twojej głowie, a nigdy nie
+  trafił do README, `ARCHITECTURE.md` ani ADR-a? Dlaczego wydawał się
+  wtedy niepotrzebny do zapisania?
 - Zespół oryginalny jest oceniany częściowo po tym, jak dobrze inny
   zespół mógł pracować z ich projektem, a nie po tym, jak pewny siebie
   czuł się zespół oryginalny. Czy to uczciwy sposób mierzenia jakości
@@ -130,8 +130,6 @@ repozytorium.
 
 ## Co dalej
 
-To ostatnie laboratorium. Przeszedłeś/aś od odnajdywania się w
-terminalu do przekazania przetestowanego, zrecenzowanego, odpornego na
-incydenty projektu, który ktoś inny może przejąć i kontynuować. To
-ostatnie zdanie to właściwa definicja inżynierii oprogramowania, o którą
-ten kurs się dopominał od Lab 01.
+To ostatnie laboratorium. Zaczęło się od odnajdywania się w terminalu,
+a kończy na przekazaniu przetestowanego, zrecenzowanego, odpornego na
+incydenty projektu, który ktoś inny może przejąć i kontynuować.

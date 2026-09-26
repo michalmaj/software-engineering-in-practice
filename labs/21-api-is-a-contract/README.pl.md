@@ -10,7 +10,7 @@ swojego kodu źródłowego.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Opisać kontrakt endpointu HTTP: kształt żądania, kształt odpowiedzi,
   kody statusu i format błędu.
@@ -91,7 +91,7 @@ plus zielony check na pull requeście, który zmergował ten lab.
 
 ## Zastanów się
 
-- Gdybyś zmienił/a odpowiedź udanego `POST`, zagnieżdżając `items`
+- Gdyby zmieniono odpowiedź udanego `POST`, zagnieżdżając `items`
   wewnątrz nowego klucza `"order"` zamiast na najwyższym poziomie, czy
   to złamałoby klienta napisanego względem Twojego obecnego
   `CONTRACT.md`? Czy dodanie nowego, opcjonalnego pola do odpowiedzi by
@@ -115,7 +115,6 @@ plus zielony check na pull requeście, który zmergował ten lab.
 ## Co dalej
 
 Twoje API działa — dopóki go nie zrestartujesz, a wtedy każde
-zamówienie, które utworzyłeś/aś, znika. Dalej dane będą musiały
-faktycznie przetrwać.
+utworzone zamówienie znika. Dalej dane będą musiały przetrwać.
 
 Przejdź do [Lab 22 — Kod się zmienił, stare dane zostały](../22-data-outlives-code/README.pl.md).

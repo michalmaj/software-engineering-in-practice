@@ -2,14 +2,14 @@
 
 ## Sytuacja
 
-Do tej pory każda zmiana lądowała na `main`, bo sam/a ją mergowałeś/aś,
-samotnie. Kolega z zespołu powinien zobaczyć zmianę, zanim wyląduje —
-nawet gdy tym kolegą jest dziś prawdziwy kolega z klasy, albo po prostu
-ostrożniejszy-Ty w inny dzień.
+Do tej pory każda zmiana lądowała na `main` przez samodzielny merge,
+bez recenzji. Kolega z zespołu powinien zobaczyć zmianę, zanim
+wyląduje — nawet gdy tym kolegą jest dziś prawdziwy kolega z klasy,
+albo po prostu ostrożniejsza wersja Ciebie z innego dnia.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Otworzyć pull request z opisem, który wyjaśnia, dlaczego zmiana
   istnieje, a nie tylko co się zmieniło.
@@ -45,8 +45,8 @@ Po tym laboratorium powinieneś/aś umieć:
    uruchom raz `gh repo set-default <Twój-fork>`, żeby `gh pr create`
    domyślnie celował w Twój fork, i tak czy inaczej sprawdź dwa razy
    pokazane repozytorium bazowe przed wysłaniem. Napisz opis
-   obejmujący: co się zmieniło, dlaczego i jak to zweryfikowałeś/aś
-   (jakie polecenia uruchomiłeś/aś).
+   obejmujący: co się zmieniło, dlaczego i jak to zweryfikowano (jakie
+   polecenia uruchomiono).
 4. Zrecenzuj go, używając poniższej checklisty:
    - **W parze:** poproś przydzielonego przez instruktora partnera o
      wymianę PR-ów — zrecenzuj jego, on/ona zrecenzuje Twój.
@@ -59,8 +59,7 @@ Po tym laboratorium powinieneś/aś umieć:
      wywołuje funkcję raz?
    - Czy jest tu logika powielona z `low_stock_items`, która powinna
      być ponownie użyta zamiast przepisana?
-   - Czy zrozumiałbyś/zrozumiałabyś ten diff bez zadawania autorowi
-     pytania?
+   - Czy ten diff byłby zrozumiały bez zadawania autorowi pytania?
 5. Zostaw co najmniej jeden merytoryczny komentarz recenzji — na
    GitHubie, jeśli w parze; w
    `labs/18-pull-requests-and-review/my-review-notes.md`, jeśli solo.
@@ -102,23 +101,22 @@ przechodzące.
 - Jaka jest różnica między recenzentem sprawdzającym "czy to działa" a
   recenzentem sprawdzającym "czy następna osoba, która to przeczyta,
   zrozumie to"? Ku któremu pchnęła Cię checklista?
-- Jeśli recenzowałeś/aś solo, co zauważyłeś/aś we własnym kodzie, co
-  mogłeś/mogłabyś pominąć, gdybyś tylko uruchomił/a testy i uznał/a
-  sprawę za zamkniętą?
+- Przy recenzji solo, co zauważono we własnym kodzie, co można by
+  przeoczyć, ograniczając się do samego uruchomienia testów i uznania
+  sprawy za zamkniętą?
 
 ## Jeśli utkniesz
 
 - **Podpowiedź 1:** `gh pr create --fill` używa komunikatów commitów z
   Twojej gałęzi, żeby wstępnie wypełnić tytuł i treść PR-a — szybsze
-  niż wpisywanie obu ręcznie, choć i tak powinieneś/aś potem poprawić
-  opis.
+  niż wpisywanie obu ręcznie, choć i tak warto potem poprawić opis.
 - **Podpowiedź 2:** "Ponowne użycie `low_stock_items`" oznacza
   wywołanie jej z `reorder_report`, a nie skopiowanie jej logiki
   filtrowania w drugie miejsce.
 - **Podpowiedź 3:** Jeśli pracujesz solo, pisz komentarze recenzji tak,
-  jakbyś za sześć miesięcy nie pamiętał/a żadnego kontekstu — to
-  ograniczenie sprawia, że mgliste komentarze stają się oczywiście
-  bezużyteczne.
+  jakby ktoś, kto je czyta, nie pamiętał za sześć miesięcy żadnego
+  kontekstu — to ograniczenie sprawia, że mgliste komentarze stają się
+  oczywiście bezużyteczne.
 
 ## Co dalej
 

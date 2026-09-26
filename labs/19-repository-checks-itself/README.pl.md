@@ -9,7 +9,7 @@ dopóki ktoś nie uruchomił skryptu ręcznie i się nie wywalił.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Napisać minimalny workflow GitHub Actions, który uruchamia się przy
   każdym push i pull request.
@@ -60,9 +60,9 @@ Po tym laboratorium powinieneś/aś umieć:
 - `.github/workflows/team-inventory-ci.yml` istnieje, celuje w
   `examples/team-inventory` i uruchamia się zarówno przy push, jak i
   pull request.
-- Osobiście zaobserwowałeś/aś sprawdzenie zarówno nieudane (czerwone,
-  dla faktycznie zepsutego testu), jak i udane (zielone) na
-  prawdziwym pull requeście.
+- To sprawdzenie zaobserwowano osobiście zarówno jako nieudane
+  (czerwone, dla faktycznie zepsutego testu), jak i udane (zielone),
+  na prawdziwym pull requeście.
 - Ostateczny zmergowany stan na `main` jest zielony.
 
 ## Weryfikacja
@@ -89,15 +89,15 @@ zgadzać.
   workflow — kto, albo co, jest teraz faktycznie odpowiedzialne za
   wyłapanie nieprzetestowanej zmiany?
 - Workflow uruchamia dokładnie te same polecenia, które ręcznie
-  uruchamiałeś/aś przez kilka labów. Co faktycznie dała Ci ich
-  automatyzacja, skoro same polecenia się nie zmieniły?
+  uruchamiano przez kilka labów. Co faktycznie dała ich automatyzacja,
+  skoro same polecenia się nie zmieniły?
 
 ## Jeśli utkniesz
 
 - **Podpowiedź 1:** Minimalny workflow potrzebuje `on:`, sekcji
   `jobs:` z co najmniej jednym jobem i listy `steps:` — checkout,
   ustawienie Pythona, instalacja `uv`, `uv sync --locked`, `uv run
-  pytest`. Jeśli utknąłeś/aś na samym YAML-u, a nie na tym, co workflow
+  pytest`. Jeśli problem jest w samym YAML-u, a nie w tym, co workflow
   ma *robić*, oto szkielet — wypełnij luki, nie kopiuj go po prostu:
   ```yaml
   name: team-inventory CI
@@ -133,7 +133,7 @@ zgadzać.
 
 ## Co dalej
 
-Masz testy, review i CI. Mając to wszystko, kiedy dokładnie zmiana
-jest właściwie "zrobiona"?
+Masz testy, review i CI. Mając to wszystko, kiedy zmiana jest
+"zrobiona"?
 
 Przejdź do [Lab 20 — Co oznacza "zrobione"?](../20-definition-of-done/README.pl.md).

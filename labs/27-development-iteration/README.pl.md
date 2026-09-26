@@ -9,12 +9,12 @@ pominięty, gdy ktoś się pierwszy raz spieszy.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Uruchomić pełną pętlę issue → branch → commity → testy → PR → review
   → CI → merge wielokrotnie, bez README laba mówiącego Ci za każdym
   razem, co dalej.
-- Utrzymać działający projekt uczciwie pod presją czasu — małe PR-y,
+- Trzymać się dyscypliny projektu mimo presji czasu — małe PR-y,
   faktycznie uruchamiane testy, faktycznie czytane recenzje.
 - Rozpoznać moment, w którym skrót, po który sięgasz, jest dokładnie
   tym, czemu Akt IV miał zapobiec.
@@ -24,14 +24,15 @@ Po tym laboratorium powinieneś/aś umieć:
 - Lab 26 ukończony: `PROJECT_PLAN.md` i
   `docs/adr/adr-001-language-choice.md` istnieją w Waszym własnym
   repozytorium zespołu.
-- Repozytorium Waszego zespołu ma skopiowany starter kapstone z Lab 26
-  (`examples/capstone-starters/<język>/` w repozytorium kursu) —
+- Repozytorium Waszego zespołu ma skopiowany starter projektu
+  końcowego z Lab 26 (`examples/capstone-starters/<język>/` w
+  repozytorium kursu) —
   działające "hello world" i jeden przechodzący test, w wybranym przez
   Was języku.
 - Jeśli pracujesz solo: ten lab obejmuje cały build Twojego MVP, nie
-  jedną 90-minutową sesję. Nie ściskaj pętli, żeby zmieściła się w
-  zegarku — albo rozłóż ten lab na tyle prawdziwych sesji, ile Twoje
-  MVP faktycznie potrzebuje, albo zawęź zakres MVP w
+  jedną 90-minutową sesję. Nie kompresuj tej pętli tylko po to, żeby
+  zmieścić się w jednej sesji — albo rozłóż ten lab na tyle prawdziwych
+  sesji, ile Twoje MVP faktycznie potrzebuje, albo zawęź zakres MVP w
   `PROJECT_PLAN.md` do czegoś, co jedna 90-minutowa sesja da radę
   uczciwie skończyć od początku do końca. Zespół rozkłada tę samą pracę
   między swoich członków.
@@ -55,8 +56,9 @@ sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
    - **Go:** `actions/setup-go@v7` z `go-version: '1.25'`, potem
      `go test ./...`. Bez osobnego kroku instalacji zależności.
    - **Java:** `actions/setup-java@v6` z `distribution: 'temurin'` i
-     `java-version: '21'`, potem `./gradlew test`. Committed wrapper
-     załatwia resztę — bez osobnego kroku instalacji Gradle w CI.
+     `java-version: '21'`, potem `./gradlew test`. Zacommitowany
+     wrapper załatwia resztę — bez osobnego kroku instalacji Gradle w
+     CI.
 2. Dla każdej możliwości MVP z Waszego planu (utworzenie rezerwacji,
    wylistowanie rezerwacji na dzień, anulowanie rezerwacji i cokolwiek
    jeszcze Wasz zespół zakresił), powtórz pełną pętlę: otwórz issue
@@ -93,13 +95,13 @@ pokazuje zielone na ostatnim commicie Waszej głównej gałęzi.
 
 ## Zastanów się
 
-- Którą część pętli z Aktu IV byłeś/aś najbardziej skłonny/a pominąć,
-  gdy nikt już nie patrzył lab-po-labie — napisanie najpierw failing
-  testu, napisanie prawdziwego opisu PR-a, czy faktyczne przeczytanie
-  diffa kolegi przed zaakceptowaniem?
-- Gdyby kolega z zespołu (albo Ty sam/a jako solo-recenzent) automatycznie
+- Którą część pętli z Aktu IV było najłatwiej pominąć, gdy nikt już nie
+  patrzył lab-po-labie — napisanie najpierw failing testu, napisanie
+  prawdziwego opisu PR-a, czy faktyczne przeczytanie diffa kolegi przed
+  zaakceptowaniem?
+- Gdyby kolega z zespołu (albo Ty jako solo-recenzent) automatycznie
   zaakceptował PR bez faktycznego czytania, w którym najwcześniejszym
-  momencie dalej w tym kapstone stałoby się to widoczne?
+  momencie dalej w tym projekcie końcowym stałoby się to widoczne?
 
 ## Jeśli utkniesz
 

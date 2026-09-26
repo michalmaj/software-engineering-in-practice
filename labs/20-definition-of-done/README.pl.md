@@ -9,7 +9,7 @@ mają rację, i oboje mają niepełny obraz.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Napisać konkretną, sprawdzalną Definition of Done dla konkretnego
   rodzaju projektu.
@@ -30,9 +30,9 @@ Po tym laboratorium powinieneś/aś umieć:
    zawierający jedną checklistę Definition of Done, 5-8 pozycji,
    używając checkboxów markdown (`- [ ] pozycja`), która miałaby
    zastosowanie do *każdej* przyszłej zmiany w
-   `examples/team-inventory`. Oprzyj ją na tym, czego faktycznie
-   użyłeś/aś w Labach 06-19 — testy, review, CI, dokumentacja — a nie
-   na generycznej liście, na którą jeszcze nie zapracowałeś/aś.
+   `examples/team-inventory`. Oprzyj ją na tym, co faktycznie było
+   używane w Labach 06-19 — testy, review, CI, dokumentacja — a nie na
+   generycznej liście, na jaką jeszcze nie zapracowano.
 2. Każda pozycja musi być sprawdzalna: odpowiadalna tak lub nie przez
    spojrzenie na coś konkretnego (kod wyjścia polecenia, istnienie
    pliku, stan PR-a) — a nie "kod jest czysty" czy "działa dobrze".

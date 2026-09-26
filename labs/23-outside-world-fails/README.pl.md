@@ -8,7 +8,7 @@ każdy serwis zewnętrzny — czasami nie odpowiada za pierwszym razem.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Opakować zawodne wywołanie w politykę ponawiania z maksymalną liczbą
   prób.
@@ -115,9 +115,9 @@ niepowodzenia).
   prawdziwa funkcja wspiera odczekiwanie. Dlaczego to jest właściwy
   kompromis dla testu, a niewłaściwy dla produkcji?
 - Zamówienie jest tworzone w bazie danych *przed* próbą powiadomienia,
-  a niepowodzenie powiadomienia go nie cofa. Co poszłoby źle, gdybyś
-  zbudował/a to w drugą stronę — najpierw powiadom, potem utwórz
-  zamówienie tylko jeśli powiadomienie się powiodło?
+  a niepowodzenie powiadomienia go nie cofa. Co poszłoby źle, gdyby to
+  zbudowano w drugą stronę — najpierw powiadom, potem utwórz zamówienie
+  tylko jeśli powiadomienie się powiodło?
 
 ## Jeśli utkniesz
 

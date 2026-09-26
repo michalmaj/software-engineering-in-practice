@@ -9,7 +9,7 @@ samym czasie, na razie nie dotykając nawzajem swojej pracy.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Utworzyć i przełączyć się na nową gałąź z konkretnego punktu startowego.
 - Wylistować istniejące gałęzie i wyjaśnić, co zawiera każda z nich.
@@ -25,7 +25,7 @@ Po tym laboratorium powinieneś/aś umieć:
 
 ## Twoje zadanie
 
-Zagrasz oboje "kolegów z zespołu" sam/a, jedna gałąź na raz.
+Obie role "kolegów z zespołu" zagrasz samodzielnie, jedna gałąź na raz.
 
 1. Potwierdź, że zaczynasz od czystego `main`: `git switch main`, potem
    `git status --short`. Jeśli coś wypisze, zacommituj to albo zrób
@@ -120,9 +120,9 @@ a `main` nadal nie ma żadnej z funkcji (to zadanie Lab 17).
 
 ## Zastanów się
 
-- Rozgałęziłeś/aś `feature/expiry-warning` z `main`, a nie z
+- `feature/expiry-warning` rozgałęziono z `main`, a nie z
   `feature/low-stock-warning`. Co byłoby inaczej w nadchodzącym mergu,
-  gdybyś zamiast tego rozgałęził/a ją z `feature/low-stock-warning`?
+  gdyby to rozgałęzienie poszło z `feature/low-stock-warning`?
 - Obie gałęzie zmieniły `summarize` w tym samym miejscu. Czy na tym
   etapie Git widzi w tym problem? Dlaczego tak albo dlaczego nie?
 

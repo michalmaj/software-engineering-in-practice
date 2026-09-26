@@ -10,7 +10,7 @@ zakres, projekt, język, plan — należy do Was jako zespołu.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Zamienić otwarty problem na spisany zakres, zestaw założeń i
   konkretne kryteria akceptacji MVP.
@@ -25,7 +25,7 @@ Po tym laboratorium powinieneś/aś umieć:
 - Laby 01-25 ukończone.
 - Jeśli jesteś w klasie: instruktor przydzielił Cię do zespołu 3-4
   osób. Jeśli pracujesz solo: Ty *jesteś* zespołem — wykonaj każdy krok
-  poniżej, włącznie z tymi o przydziale ról, decydując sam/a za siebie.
+  poniżej, włącznie z tymi o przydziale ról, decydując samodzielnie.
 - Prawie bez kodu: jedyny kod, którego dotkniesz, to starter kopiowany
   w kroku 4 poniżej, gdy Wasz zespół już zdecyduje o języku. Reszta
   tego labu to samo planowanie.
@@ -73,7 +73,7 @@ Po tym laboratorium powinieneś/aś umieć:
      się w Lab 27 (iteracja), 28 (zmiana wymagań), 29 (incydent) i 30
      (handover).
    - **Największe ryzyka**: 2-3 konkretne rzeczy, które mogłyby wykoleić
-     ten projekt, i co byś z każdą zrobił/a.
+     ten projekt, i co warto by z każdą zrobić.
 3. Zanim napiszecie ADR: dla tego capstone'u dozwolone są trzy języki,
    ale nie są równoważnymi prerequisite'ami. **Python** to w pełni
    wspierany domyślny wybór — nic poza tym, co ten kurs już zakłada.
@@ -155,7 +155,7 @@ co budujecie i dlaczego podjęliście takie wybory?
 
 ## Co dalej
 
-Macie plan i zapis decyzji. Teraz faktycznie budujecie tę rzecz —
-używając każdego nawyku z Aktu IV, naprawdę, w sposób ciągły.
+Macie plan i zapis decyzji. Teraz budujecie tę rzecz, używając każdego
+nawyku z Aktu IV, w sposób ciągły.
 
 Przejdź do [Lab 27 — Iteracja rozwojowa](../27-development-iteration/README.pl.md).

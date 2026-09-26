@@ -8,7 +8,7 @@ będzie nadal działać, i jak dowiedzą się, kiedy coś się zmieni.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Napisać wpis changeloga, który dokumentuje, co się zmieniło i
   dlaczego ma to znaczenie dla wywołującego.
@@ -48,7 +48,7 @@ Po tym laboratorium powinieneś/aś umieć:
      `PRAGMA table_info(orders)`, `ALTER TABLE orders ADD COLUMN
      priority TEXT`, jeśli jej brakuje) i wywołaj ją w `run()`, zaraz po
      `migrate_add_notes_column()`. Zaktualizuj swój fixture testowy w
-     ten sam sposób, w jaki zrobiłeś/aś to w Lab 22.
+     ten sam sposób, w jaki to zrobiono w Lab 22.
    - Zaktualizuj `create_order`, żeby przyjmowało i przechowywało
      opcjonalny parametr `priority: str = "normal"`. Zaktualizuj
      `get_order`, żeby uwzględniało `priority` w wyniku, domyślnie
@@ -135,10 +135,10 @@ origin` pokazuje, że dotarły też na remote, a oba checki
 
 ## Zastanów się
 
-- Nie musiałeś/aś zmienić ani jednego istniejącego testu, żeby dodać
-  `priority`. Co konkretnie w tym, *jak* to dodałeś/aś (jako
-  opcjonalne pole z wartością domyślną), sprawiło, że to prawda?
-- Gdybyś zamiast tego zmienił/a nazwę `items` na `line_items`, każdy
+- Nie trzeba było zmienić ani jednego istniejącego testu, żeby dodać
+  `priority`. Co konkretnie w tym, *jak* to dodano (jako opcjonalne
+  pole z wartością domyślną), sprawiło, że to prawda?
+- Gdyby zamiast tego zmieniono nazwę `items` na `line_items`, każdy
   test budujący ciało żądania musiałby się zmienić. Czy to samo w
   sobie jest dobrym sygnałem, że "ta zmiana jest łamiąca", jeszcze
   zanim pomyślisz o zasadach SemVer?
@@ -162,7 +162,7 @@ origin` pokazuje, że dotarły też na remote, a oba checki
 - **Podpowiedź 4:** Otagowanie gałęzi funkcji przed jej zmergowaniem
   jest ryzykowne właśnie z powodu squash i rebase merge'y — każdy z
   nich może dać commitowi, który trafia na `main`, zupełnie inny hash
-  niż ten, który otagowałeś/aś, zostawiając Twój tag wskazujący na
+  niż ten, który został otagowany, zostawiając Twój tag wskazujący na
   commit, którego `main` w rzeczywistości nie zawiera. Otagowanie
   dopiero po `git pull --ff-only` na `main` całkowicie to omija.
 
