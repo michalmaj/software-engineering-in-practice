@@ -9,7 +9,7 @@ cebuli"), a Ty zaraz zmienisz schemat danych, które już istnieją.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Zastąpić stan w pamięci trwałym magazynem opartym na SQLite, nie
   zmieniając zewnętrznego kontraktu API.
@@ -75,7 +75,7 @@ Po tym laboratorium powinieneś/aś umieć:
    kolumny.
 8. Zaktualizuj swój fixture testowy w `tests/test_api.py`, żeby też
    wywoływał `db.migrate_add_notes_column()` zaraz po `db.init_db()`,
-   dokładnie tak jak przed chwilą zrobiłeś/aś w `run()`. Testy startują
+   dokładnie tak, jak to właśnie zrobiono w `run()`. Testy startują
    serwer bezpośrednio — nigdy nie przechodzą przez `run()` — więc jeśli
    to pominiesz, test `notes` dodawany w kroku 12 poniżej działa na
    bazie, która nigdy nie została zmigrowana, i tylko przypadkiem
@@ -131,9 +131,9 @@ Oczekiwane: `5 passed`.
 ## Zastanów się
 
 - Twoja migracja użyła `ALTER TABLE ... ADD COLUMN` bez klauzuli
-  domyślnej, więc istniejące wiersze dostają `NULL`. Dlaczego
-  musiałeś/aś obsłużyć ten `NULL` w kodzie Pythona `get_order`, zamiast
-  po prostu naprawić to raz w bazie danych?
+  domyślnej, więc istniejące wiersze dostają `NULL`. Dlaczego trzeba
+  było obsłużyć ten `NULL` w kodzie Pythona `get_order`, zamiast po
+  prostu naprawić to raz w bazie danych?
 - Część 1 (SQLite zamiast słownika) w ogóle nie zmieniła
   `CONTRACT.md`. Część 2 (`notes`) zmieniła. Jaka jest różnica między
   tymi dwoma rodzajami zmian, z punktu widzenia wywołującego?

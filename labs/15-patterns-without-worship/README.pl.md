@@ -3,18 +3,18 @@
 ## Sytuacja
 
 Spójrz jeszcze raz na słownik `DISCOUNT_CODES` w `discount_codes.py`
-oraz na trzy implementacje `Notifier` z Lab 14. Zbudowałeś/aś oba, zanim
+oraz na trzy implementacje `Notifier` z Lab 14. Zbudowano oba, zanim
 ktokolwiek powiedział Ci ich "oficjalną" nazwę. Okazuje się, że jedna
 istnieje.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
-- Rozpoznać wzorzec Strategy w kodzie, który już napisałeś/aś, zanim
-  poznasz jego nazwę.
-- Wyjaśnić Dependency Injection na przykładzie funkcji, którą już
-  napisałeś/aś (`send_receipt_ready`), a nie przez definicję.
+- Rozpoznać wzorzec Strategy w już napisanym kodzie, zanim poznasz jego
+  nazwę.
+- Wyjaśnić Dependency Injection na przykładzie już napisanej funkcji
+  (`send_receipt_ready`), a nie przez definicję.
 - Wyjaśnić, po jednym zdaniu, do czego służą Factory i Adapter.
 
 ## Zanim zaczniesz
@@ -55,7 +55,7 @@ Po tym laboratorium powinieneś/aś umieć:
    akurat sprowadza się do wyboru właściwej implementacji Strategy
    (wyobraź sobie funkcję `build_notifier(config)`, która zwraca
    `ConsoleNotifier` albo `InMemoryNotifier` w zależności od ustawienia
-   — nie zbudowałeś/aś takiej, ale teraz rozpoznasz, jak by wyglądała).
+   — nie zbudowano takiej, ale teraz rozpoznasz, jak by wyglądała).
    "Wybór strategii" to po prostu to, do czego Factory służy w tym
    ćwiczeniu, a nie czym Factory jest z natury. **Adapter** owija coś
    o niekompatybilnym interfejsie, żeby pasowało
@@ -86,7 +86,8 @@ cd examples/discount-codes/version-b && uv run pytest -v && cd - > /dev/null
 
 Oczekiwane: notatki istnieją, a zestaw testów przechodzi z jednym
 testem więcej niż wcześniej (9 razem, licząc od wcześniejszych 8 w
-Wersji B — 7 ship'owanych plus test `SAVE20`, który dodałeś/aś w Lab 12).
+Wersji B — 7 dostarczonych w starterze plus test `SAVE20` dodany w
+Lab 12).
 
 ## Zastanów się
 
@@ -94,17 +95,17 @@ Wersji B — 7 ship'owanych plus test `SAVE20`, który dodałeś/aś w Lab 12).
   nazwy. Która z nich opisuje *czym jest fragment kodu* (kształt), a
   która opisuje *jak fragment kodu coś otrzymuje* (relację)? Czy
   `DISCOUNT_CODES` jest bliżej jednego czy drugiego?
-- Teraz, gdy znasz te nazwy, czy sięgnąłbyś/sięgnęłabyś po "Strategy"
-  jako rozwiązanie pierwszego dnia Lab 12 — czy zobaczenie najpierw
+- Teraz, gdy znasz te nazwy, czy "Strategy" przyszłoby Ci do głowy jako
+  rozwiązanie pierwszego dnia Lab 12 — czy zobaczenie najpierw
   sprzężonej wersji (i odczucie jej kosztu) było konieczne, żeby docenić,
   co ten wzorzec faktycznie daje?
 
 ## Jeśli utkniesz
 
-- **Podpowiedź 1:** Jeśli nie jesteś pewien/pewna, czy coś "jest
-  Strategy", zapytaj: czy mógłbym/mogłabym wymienić ten konkretny
-  fragment na inną implementację tego samego kontraktu, nie zmieniając
-  kodu, który go wywołuje? Jeśli tak, to jest ten wzorzec.
+- **Podpowiedź 1:** Jeśli nie masz pewności, czy coś "jest Strategy",
+  zapytaj: dałoby się wymienić ten konkretny fragment na inną
+  implementację tego samego kontraktu, nie zmieniając kodu, który go
+  wywołuje? Jeśli tak, to jest ten wzorzec.
 - **Podpowiedź 2:** Dependency Injection tutaj to nie framework — to po
   prostu "wywołujący decyduje, której implementacji użyć, przekazując
   ją jako argument".
@@ -123,14 +124,14 @@ git status
 
 Jeśli to pokazuje cokolwiek niezacommitowanego, zacommituj i wypchnij to
 teraz (`git add -A && git commit -m "..."; git push`). Jeśli pokazuje
-czysto, jesteś gotów/gotowa.
+czysto, możesz kontynuować.
 
 ## Co dalej
 
-Zbudowałeś/aś małą funkcję, nadałeś/aś jej nazwę, którą rozpoznałby
-prawdziwy zespół inżynierski, i użyłeś/aś jej ponownie przy nowych
-wymaganiach bez obaw. Akt III jest zakończony. Dalej przestajesz
-pracować sam/sama — a "u mnie na komputerze działa" zamienia się w
-"działa, gdy ktoś inny dotknie mojego kodu".
+Masz już małą funkcję z nazwą, którą rozpoznałby prawdziwy zespół
+inżynierski, wykorzystaną ponownie przy nowych wymaganiach bez obaw.
+Akt III jest zakończony. Dalej przestajesz pracować w pojedynkę — a "u
+mnie na komputerze działa" zamienia się w "działa, gdy ktoś inny
+dotknie mojego kodu".
 
 Przejdź do [Lab 16 — Gałęzie istnieją, bo praca dzieje się równolegle](../16-parallel-branches/README.pl.md).

@@ -2,13 +2,13 @@
 
 ## Sytuacja
 
-Właśnie dołączyłeś/aś do projektu. Ktoś podał Ci laptopa albo, jak w tym
+Właśnie dołączasz do projektu. Ktoś podał Ci laptopa albo, jak w tym
 przypadku, świeżego GitHub Codespace'a. Zanim zmienisz choćby jedną linijkę
 kodu, musisz wiedzieć, gdzie jesteś, co jest dookoła i jak się poruszać.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Ustalić swoją bieżącą lokalizację w systemie plików i poruszać się między
   katalogami.
@@ -37,8 +37,8 @@ Pracując wyłącznie w terminalu:
    powłoka.
 6. Zapisz do `findings.txt` wynik tych pięciu poleceń, po jednym w linii,
    opisanych etykietą: `whoami`, `uname -a`, `echo "$HOME"`,
-   `echo "$PATH"`, `echo "$SHELL"`. Nie poznałeś/aś jeszcze edytora
-   tekstu, więc użyj tej jednej małej sztuczki: `>>` dopisuje linię
+   `echo "$PATH"`, `echo "$SHELL"`. Nie znasz jeszcze edytora tekstu,
+   więc użyj tej jednej małej sztuczki: `>>` dopisuje linię
    wyniku polecenia do pliku bez otwierania czegokolwiek —
    `echo "whoami: $(whoami)" >> ~/lab01-notes/findings.txt` dodaje
    jedną opisaną linię. Powtórz dla każdego z pięciu poleceń. (Poznasz
@@ -82,7 +82,7 @@ osiągalne z poziomu powłoki.
   ukrytych plików i `-a` dla `uname`.
 - **Podpowiedź 2:** Potrzebne polecenia to: `pwd`, `cd`, `ls -la`, `mkdir`,
   `touch`, `cat`, `whoami`, `uname -a`, `echo`, `which`, `less`.
-- **Podpowiedź 3:** Jeśli nie jesteś pewien/pewna, czy sztuczka z `>>`
+- **Podpowiedź 3:** Jeśli nie masz pewności, czy sztuczka z `>>`
   zadziałała, uruchom potem `cat ~/lab01-notes/findings.txt` i potwierdź,
   że wszystkie pięć linii tam jest — każde dopisanie powinno dodać
   dokładnie jedną nową linię.

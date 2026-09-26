@@ -8,7 +8,7 @@ gimnastykować. To nie może się powtórzyć."
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Odtworzyć zgłoszony incydent jako konkretny, failing test, zanim
   dotkniesz kodu implementacji.

@@ -6,7 +6,7 @@ Obie funkcje są gotowe. Czas wprowadzić je do `main`, jedna po drugiej.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Zmergować gałąź bez konfliktów i rozpoznać, jak wygląda czysty merge.
 - Odczytać znaczniki konfliktu Gita i zidentyfikować dokładnie, co
@@ -27,7 +27,7 @@ Po tym laboratorium powinieneś/aś umieć:
 2. Zmerguj pierwszą funkcję: `git merge feature/low-stock-warning`. To
    powinno zakończyć się bez żadnego konfliktu — przeczytaj komunikat,
    który wypisuje Git (prawdopodobnie fast-forward, bo `main` nie
-   ruszył się, odkąd się rozgałęziłeś/aś).
+   ruszył się, odkąd nastąpiło rozgałęzienie).
 3. Uruchom `uv run pytest -v`, żeby potwierdzić, że `main` ma teraz
    funkcję niskiego stanu i nadal przechodzi.
 4. Zmerguj drugą funkcję: `git merge feature/expiry-warning`. To
@@ -106,13 +106,13 @@ merge'a widoczny w logu.
   zatrzymuj się po pierwszym pliku.
 - **Podpowiedź 3:** Po edycji oba pliki powinny zawierać zero linii
   `<<<<<<<`, `=======` ani `>>>>>>>` — jeśli `grep` cokolwiek znajdzie
-  w którymkolwiek z nich, nie skończyłeś/aś.
+  w którymkolwiek z nich, to znak, że jeszcze nie koniec.
 
 ## Co dalej
 
-Rozwiązałeś/aś ten konflikt lokalnie, sam/a, potem dokończyłeś/aś merge
-bezpośrednio na `main`. W prawdziwym zespole taka zmiana przeszłaby
-przez review, zanim wylądowałaby na głównej gałęzi. Dalej zrobisz to
-poprawnie.
+Ten konflikt został rozwiązany lokalnie i samodzielnie, a merge
+dokończony bezpośrednio na `main`. W prawdziwym zespole taka zmiana
+przeszłaby przez review, zanim wylądowałaby na głównej gałęzi. Dalej
+zrobisz to poprawnie.
 
 Przejdź do [Lab 18 — Pull requesty i code review](../18-pull-requests-and-review/README.pl.md).

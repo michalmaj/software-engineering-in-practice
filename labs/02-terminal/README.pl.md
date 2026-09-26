@@ -2,13 +2,13 @@
 
 ## Sytuacja
 
-Wczoraj nauczyłeś/aś się rozglądać. Dziś musisz faktycznie coś zrobić bez
+Wczoraj udało Ci się nauczyć rozglądać. Dziś musisz faktycznie coś zrobić bez
 dotykania myszki: skopiować pliki, przeszukać ich zawartość, połączyć
 polecenia w łańcuch i uruchomić coś, co działa, dopóki tego nie zatrzymasz.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Kopiować, przenosić i usuwać pliki oraz katalogi z poziomu powłoki.
 - Przeszukiwać zawartość plików i znajdować pliki po nazwie.
@@ -64,8 +64,8 @@ find ~ -name findings.txt               # expect exactly one path
   do drugiego a przekierowaniem (`>`) do pliku?
 - Serwer działał dalej po naciśnięciu Enter w pierwszym poleceniu. Dlaczego
   terminal nie oddał Ci od razu nowego prompta?
-- Co zrobiłoby `>` (zamiast `>>`) z `findings.txt`, gdybyś użył/a go przez
-  pomyłkę w Lab 01?
+- Co zrobiłoby `>` (zamiast `>>`) z `findings.txt`, gdyby to była Twoja
+  pomyłka w Lab 01?
 
 ## Jeśli utkniesz
 
@@ -84,4 +84,4 @@ Potrafisz już uruchamiać rzeczy i sprawdzać ich wynik — ale nie masz
 jeszcze sposobu, żeby stwierdzić, co zmieniło się w tym projekcie od
 wczoraj, ani żeby cofnąć pomyłkę. Do tego służy system kontroli wersji.
 
-Przejdź do [Lab 03 — Odziedziczyłeś/aś repozytorium](../03-inherited-repository/README.pl.md).
+Przejdź do [Lab 03 — Dziedziczysz repozytorium](../03-inherited-repository/README.pl.md).

@@ -9,7 +9,7 @@ ani co się dzieje, gdy ktoś się pomyli przy wpisywaniu.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Zamienić niejasne zlecenie na listę konkretnych pytań doprecyzowujących.
 - Zamienić ustalone wymaganie na konkretne przykłady wejście/wyjście.
@@ -23,9 +23,9 @@ Po tym laboratorium powinieneś/aś umieć:
 
 ## Twoje zadanie
 
-1. Zanim przeczytasz dalej, zapisz co najmniej pięć pytań, które
-   zadałbyś/zadałabyś właścicielowi restauracji o "kodach rabatowych
-   przy kasie". Umieść je w
+1. Zanim przeczytasz dalej, zapisz co najmniej pięć pytań, jakie warto
+   zadać właścicielowi restauracji o "kodach rabatowych przy kasie".
+   Umieść je w
    `labs/11-changed-requirements/my-clarifying-questions.md`. Pomyśl o:
    jakie kody istnieją, ile jest wart każdy, czy łączą się z istniejącym
    rabatem lojalnościowym, co się dzieje przy nierozpoznanym kodzie i
@@ -71,9 +71,9 @@ potwierdzając, że każdy przykład rozstrzyga się jednoznacznie.
 
 ## Zastanów się
 
-- Z pięciu pytań, które napisałeś/aś, ile już było odpowiedzianych przez
-  ustaloną specyfikację? Ile nie było — i co zrobiłbyś/zrobiłabyś z
-  nimi w prawdziwym projekcie?
+- Z Twoich pięciu pytań, ile już było odpowiedzianych przez ustaloną
+  specyfikację? Ile nie było — i co warto by z nimi zrobić w prawdziwym
+  projekcie?
 - "Nierozpoznany kod to błąd" samo w sobie jest decyzją projektową, a
   nie oczywistym domyślnym zachowaniem. Co zmieniłoby się w zachowaniu
   systemu, gdyby właściciel powiedział zamiast tego "po prostu ignoruj
@@ -87,8 +87,8 @@ potwierdzając, że każdy przykład rozstrzyga się jednoznacznie.
 - **Podpowiedź 2:** Dla tabeli przykładów wybierz konkretne liczby —
   rzeczywistą sumę zamówienia, rzeczywisty kod, rzeczywisty oczekiwany
   wynik — a nie opisy w stylu "jakieś zamówienie".
-- **Podpowiedź 3:** Jeśli nie jesteś pewien/pewna, czy `SAVE10`
-  stosuje się przed czy po rabacie lojalnościowym, przeczytaj ponownie
+- **Podpowiedź 3:** Jeśli nie masz pewności, czy `SAVE10` stosuje się
+  przed czy po rabacie lojalnościowym, przeczytaj ponownie
   ustaloną specyfikację — mówi to wprost.
 
 Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
@@ -98,7 +98,7 @@ sobie ten nawyk już teraz.
 
 ## Co dalej
 
-Wiesz już dokładnie, co trzeba zbudować. Teraz: gdzie w kodzie ta
-zmiana właściwie powinna trafić?
+Wiesz już, co trzeba zbudować. Teraz: gdzie w kodzie powinna trafić ta
+zmiana?
 
 Przejdź do [Lab 12 — Gdzie powinna trafić ta zmiana?](../12-change-surface/README.pl.md).

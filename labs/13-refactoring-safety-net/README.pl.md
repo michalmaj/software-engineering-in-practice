@@ -10,7 +10,7 @@ nie zrobią się czerwone.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Wykonać zmianę strukturalną małymi krokami, z których każdy jest
   zweryfikowany testami.
@@ -39,14 +39,13 @@ niż przez pojedynczy krok, w trakcie którego akurat jesteś.
    code)`, która wyszukuje kod i rzuca `ValueError` dla czegokolwiek
    nierozpoznanego — dokładnie jak w Wersji B.
 2. Uruchom pełny zestaw testów. Nadal powinien przechodzić — na razie
-   tylko *dodałeś/aś* plik, nic w `calculator.py` jeszcze go nie
-   wywołuje.
+   tylko *dodano* plik, nic w `calculator.py` jeszcze go nie wywołuje.
 3. W `calculator.py` zastąp łańcuch `if/elif/else` wewnątrz
    `calculate_bill` pojedynczym wywołaniem `apply_discount_code`, tylko
    gdy `discount_code is not None`.
 4. Uruchom zestaw testów natychmiast ponownie. Musi nadal przechodzić —
-   jeśli nie przechodzi, zmieniłeś/aś zachowanie, a nie tylko strukturę.
-   Napraw to, zanim zrobisz cokolwiek innego.
+   jeśli nie przechodzi, to znak, że zmieniło się zachowanie, a nie
+   tylko struktura. Napraw to, zanim zrobisz cokolwiek innego.
 5. Usuń teraz nieużywaną logikę wbudowaną, jeśli coś z niej zostało.
    Uruchom testy jeszcze raz na koniec.
 
@@ -73,21 +72,21 @@ Oczekiwane: wszystkie testy przechodzą, a wypisuje się `decoupled`
 
 ## Zastanów się
 
-- Na którym pojedynczym kroku, gdybyś zrobił/a literówkę, zestaw
-  testów powiedziałby Ci o tym natychmiast — a na którym kroku mogłaby
+- Na którym pojedynczym kroku, gdyby wkradła się literówka, zestaw
+  testów powiedziałby o tym natychmiast — a na którym kroku mogłaby
   wkraść się cicha zmiana zachowania, której żaden obecny test nie
   wyłapuje?
-- Właśnie zamieniłeś/aś Wersję A w coś strukturalnie identycznego z
-  Wersją B. Jaki był faktyczny *dowód*, na każdym kroku, że nie
-  zmieniłeś/aś tego, co robi program?
+- Wersja A właśnie zmieniła się w coś strukturalnie identycznego z
+  Wersją B. Jaki był faktyczny *dowód*, na każdym kroku, że to, co robi
+  program, się nie zmieniło?
 
 ## Jeśli utkniesz
 
 - **Podpowiedź 1:** Kroki 1-2 to czyste dodawanie — nic istniejącego
   się nie zmienia, więc nic jeszcze nie może się zepsuć. To celowe: na
   tym etapie istniejące zachowanie nadal chroni zestaw testów
-  regresyjnych; kolejny krok to przepuszczenie przez nową strukturę
-  prawdziwego zachowania.
+  regresyjnych; kolejny krok to przepuszczenie go przez nową
+  strukturę.
 - **Podpowiedź 2:** Krok 3 to jednolinijkowe zastąpienie całego bloku
   `if discount_code == "SAVE10": ... elif ...: ... else: raise ...`
   przez `code_discount = apply_discount_code(after_loyalty,

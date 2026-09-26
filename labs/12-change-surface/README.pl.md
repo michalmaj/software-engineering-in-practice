@@ -8,7 +8,7 @@ identycznie. Zaraz odkryjesz, że nie są jednakowo drogie w rozbudowie.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Zidentyfikować, które pliki nowe wymaganie zmusza Cię dotknąć w danym
   projekcie.
@@ -40,8 +40,9 @@ procent).
    `bill["total"] == 53.14`.
 2. Dodaj obsługę `SAVE20` do **Wersji B**
    (`examples/discount-codes/version-b/`). Dodaj tam odpowiedni test.
-3. Dla każdej wersji zapisz: który plik(i) faktycznie musiałeś/aś
-   zmienić? Jaki *inny* kod znajduje się w tym pliku obok Twojej
+3. Dla każdej wersji zapisz: który plik (albo pliki) rzeczywiście
+   trzeba było zmienić? Jaki *inny* kod znajduje się w tym pliku obok
+   Twojej
    zmiany — kod odpowiedzialny za coś niezwiązanego z kodami
    rabatowymi?
 4. Odpowiedz, w pliku notatek
@@ -73,10 +74,10 @@ notatki porównawcze istnieją.
 
 - Obie wersje wymagały zmiany dokładnie jednego pliku. Czy "ta sama
   liczba zmienionych plików" oznacza "ten sam koszt zmiany"? Co
-  faktycznie różni oba pliki, które zmieniłeś/aś?
-- Czy w Wersji B mógłbyś/mogłabyś dodać czwarty kod rabatowy, nie
-  czytając ani jednej linii `calculator.py`? Co to mówi o tym, jak
-  sprzężony jest `discount_codes.py` z resztą logiki rachunku?
+  faktycznie różni oba zmienione pliki?
+- Czy w Wersji B dałoby się dodać czwarty kod rabatowy, nie czytając
+  ani jednej linii `calculator.py`? Co to mówi o tym, jak sprzężony
+  jest `discount_codes.py` z resztą logiki rachunku?
 
 ## Jeśli utkniesz
 
@@ -96,9 +97,9 @@ sobie ten nawyk już teraz.
 
 ## Co dalej
 
-Poczułeś/aś różnicę między projektem, który czyni nowe wymaganie
-tanim, a takim, który czyni je jedynie możliwym. Wersja A wciąż ma
-sprzężony kształt — i wciąż ma prawdziwe testy. Dalej zamienisz Wersję
-A w coś bliższego Wersji B, nie psując niczego po drodze.
+Czuć już różnicę między projektem, który ogranicza koszt nowego
+wymagania, a takim, który tylko je umożliwia. Wersja A wciąż ma
+sprzężony kształt, i wciąż ma testy. Dalej zamienisz Wersję A w coś
+bliższego Wersji B, nie psując niczego po drodze.
 
 Przejdź do [Lab 13 — Refaktoryzacja z siatką bezpieczeństwa](../13-refactoring-safety-net/README.pl.md).

@@ -9,14 +9,14 @@ było zbudowane wokół jednej rezerwacji, jednego stolika.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Zaimplementować prawdziwą zmianę wymagań względem własnego,
   istniejącego projektu, a nie przykładu-zabawki.
 - Zidentyfikować dokładnie, które pliki i kształty danych zmiana Cię
   zmusza dotknąć — a których nie.
-- Ocenić uczciwie, czy Wasz projekt z Lab 26-27 uczynił tę zmianę tanią
-  czy drogą, i wyjaśnić dlaczego.
+- Ocenić uczciwie, czy Wasz projekt z Lab 26-27 ograniczył koszt tej
+  zmiany, czy go zwiększył, i wyjaśnić dlaczego.
 
 ## Zanim zaczniesz
 

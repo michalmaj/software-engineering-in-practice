@@ -9,7 +9,7 @@ nigdy nie zostało zapisane.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Dodać komunikaty logowania z poziomami (`INFO`, `WARNING`, `ERROR`) w
   momentach, które mają znaczenie w cyklu życia żądania.
@@ -81,10 +81,9 @@ logowania.
 
 ## Zastanów się
 
-- Mógłbyś/mogłabyś użyć `print()` wszędzie zamiast `logging`. Co
-  tracisz, robiąc tak — konkretnie, co mógł sprawdzić `caplog` w
-  wywołaniach `logging`, czego nie mógłby sprawdzić w wywołaniach
-  `print`?
+- Dałoby się użyć `print()` wszędzie zamiast `logging`. Co się przez to
+  traci — konkretnie, co mógł sprawdzić `caplog` w wywołaniach
+  `logging`, czego nie mógłby sprawdzić w wywołaniach `print`?
 - Dlaczego nieudana próba ponowienia `notify_kitchen` loguje na
   `WARNING` przy każdej próbie, ale `ERROR` tylko raz, na końcu, zamiast
   `ERROR` przy każdej nieudanej próbie?
@@ -106,8 +105,7 @@ logowania.
 
 ## Co dalej
 
-Masz testy, review, CI, a teraz logi — system potrafi sam się
-wytłumaczyć. Dalej musisz zdecydować, co właściwie oznacza "ta wersja",
-gdy przekazujesz ją komuś innemu.
+Masz testy, review, CI, a teraz logi. Dalej musisz zdecydować, co
+oznacza "ta wersja", gdy przekazujesz ją komuś innemu.
 
 Przejdź do [Lab 25 — Wydanie i kompatybilność](../25-release-and-compatibility/README.pl.md).
