@@ -71,16 +71,16 @@ same environment, with nothing to install on your own machine first.
 - **The environment is Linux-based** (Ubuntu), regardless of what your
   own laptop runs. Every command and path in this course assumes a
   Unix-like shell.
-- **Create it from your own fork**, not the original course repository
-  — you need write access for later labs that have you commit and push.
+- **Create it from your own fork**, not the original course repository.
+  You need write access for later labs that have you commit and push.
   Creating a Codespace on the original repository instead of your fork
   is the single most common setup mistake; double-check the repository
   name in the URL before continuing.
 - **Open the terminal** with **Terminal → New Terminal** once the
   Codespace finishes initializing.
-- **Verify your toolchain** by running `./scripts/check-environment.sh`
-  — it checks the versions this course actually needs and tells you
-  exactly what's missing or mismatched.
+- **Verify your toolchain** by running `./scripts/check-environment.sh`,
+  which checks the versions this course needs and tells you what's
+  missing or mismatched.
 - **Stop Codespaces you're not using** from
   [github.com/codespaces](https://github.com/codespaces) (or let them
   auto-suspend). Codespaces has monthly usage limits; stopping one

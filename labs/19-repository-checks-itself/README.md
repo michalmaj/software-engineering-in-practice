@@ -82,13 +82,12 @@ commands in the same directory, the PR check will match.
 
 ## Think about it
 
-- In Lab 18, a reviewer could have skipped actually running your tests
-  and just trusted the PR description. What changed once the workflow
-  existed — who, or what, is now actually responsible for catching an
-  untested change?
+- In Lab 18, a reviewer could have skipped running your tests and just
+  trusted the PR description. What changed once the workflow existed —
+  who, or what, is now responsible for catching an untested change?
 - The workflow runs the exact same commands you've been running by
-  hand for several labs. What did automating them actually buy you,
-  if the commands themselves didn't change?
+  hand for several labs. What did automating them buy you, if the
+  commands themselves didn't change?
 
 ## If you get stuck
 
@@ -130,7 +129,7 @@ commands in the same directory, the PR check will match.
 
 ## What's next
 
-You have tests, review, and CI. Given all of that, when exactly is a
-change actually "done"?
+You have tests, review, and CI. Given all of that, when is a change
+"done"?
 
 Continue to [Lab 20 — What does "done" mean?](../20-definition-of-done/README.md).

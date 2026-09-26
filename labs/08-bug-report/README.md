@@ -88,7 +88,7 @@ habit now.
 ## What's next
 
 You have a green suite and a real fix behind it. Next, a different kind
-of check: not "is this correct," but "is this written the way the team
-agreed to write things."
+of check: not correctness, but whether the code is written the way the
+team agreed to write it.
 
 Continue to [Lab 09 — Machines can check boring things](../09-automated-checks/README.md).

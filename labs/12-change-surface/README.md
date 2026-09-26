@@ -40,8 +40,8 @@ percentage).
 2. Add support for `SAVE20` to **Version B**
    (`examples/discount-codes/version-b/`). Add the equivalent test
    there too.
-3. For each version, write down: which file(s) did you actually have to
-   change? In that file, what *other* code sits right next to your
+3. For each version, write down: which file(s) did you have to change?
+   In that file, what *other* code sits right next to your
    change — code responsible for something unrelated to discount
    codes?
 4. Answer, in a notes file
@@ -97,8 +97,8 @@ habit now.
 
 You've felt the difference between a design that makes a new
 requirement cheap and one that makes it merely possible. Version A
-still has the coupled shape — and it still has real tests. Next,
-you'll turn Version A into something closer to Version B, without
-breaking anything along the way.
+still has the coupled shape, and it still has tests. Next, you'll turn
+Version A into something closer to Version B, without breaking
+anything along the way.
 
 Continue to [Lab 13 — Refactoring with a safety net](../13-refactoring-safety-net/README.md).

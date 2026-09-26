@@ -80,8 +80,7 @@ latest commit message appears there too.
 - **Hint 2:** If `git push` is rejected, it usually means the remote has
   commits you don't have locally yet — `git pull` first, then push again.
 - **Hint 3:** `origin` is just a name (a local alias) for a remote URL —
-  it's not a special Git keyword, it's simply the conventional default
-  name.
+  it's not a special Git keyword, just the conventional default name.
 
 ## What's next
 

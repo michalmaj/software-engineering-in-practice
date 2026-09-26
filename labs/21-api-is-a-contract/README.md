@@ -108,6 +108,6 @@ plus a green check on the pull request that merged this lab's work.
 ## What's next
 
 Your API works — until you restart it and every order you created
-disappears. Next, the data has to actually survive.
+disappears. Next, the data has to survive.
 
 Continue to [Lab 22 — Code changed, old data remained](../22-data-outlives-code/README.md).

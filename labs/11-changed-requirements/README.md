@@ -95,7 +95,7 @@ habit now.
 
 ## What's next
 
-You know exactly what needs to be built. Now: where in the code should
-this change actually go?
+You know what needs to be built. Now: where in the code should this
+change go?
 
 Continue to [Lab 12 — Where should this change go?](../12-change-surface/README.md).

@@ -45,7 +45,7 @@ Working only in the terminal:
    `>>` properly, alongside `>` and `|`, in Lab 02 — this is the one
    piece you need early to finish this lab.)
 7. Use `which` to find out where the `python3` and `git` executables
-   actually live on disk.
+   live on disk.
 8. Open `findings.txt` with `less` and confirm its contents.
 
 ## Acceptance criteria
@@ -89,7 +89,7 @@ reachable from your shell.
 ## What's next
 
 You can now move around and inspect your environment. Next, the terminal
-stops being just a place to run one command at a time — you'll start
+stops being just a place to run one command at a time: you'll start
 combining commands and managing running processes.
 
 Continue to [Lab 02 — The terminal is a development tool](../02-terminal/README.md).
