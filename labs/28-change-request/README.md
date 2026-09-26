@@ -36,26 +36,46 @@ After this lab you should be able to:
 > not "combine any two tables," it's "these two tables happen to be
 > pushed-together-able in the dining room."
 
-1. Implement this change in your own codebase.
-2. Before writing any code, write down (in
-   `labs/28-change-request/impact-notes.md`) a prediction: which files
+1. Create a branch for this change (for example
+   `feature/combined-tables`).
+2. Before writing any code, write down a prediction in
+   `docs/change-request-impact.md` (in your team's own repository —
+   create `docs/` if it doesn't exist yet): which files or components
    do you expect to touch, and does your current data model already
    have a natural place to represent "this reservation uses more than
-   one table"?
+   one table"? Commit this prediction by itself, as its own commit,
+   before any implementation code exists — for example
+   `docs: predict impact of combined-table change`. This is the
+   "before" record you'll compare against later; writing it after the
+   fact would make it a retrospective pretending to be a prediction.
 3. Implement the change, updating and adding tests as needed. If an
    existing test needed to change just because of a data shape rename
    (not because its actual behavior assertion was wrong), note that
-   specifically in `impact-notes.md` — that's exactly the kind of
-   change-surface cost Lab 12 asked you to watch for.
-4. After merging, update `impact-notes.md` with what actually happened:
-   how close was your prediction? Which files actually changed?
+   specifically in `docs/change-request-impact.md` — that's exactly
+   the kind of change-surface cost Lab 12 asked you to watch for.
+4. Before opening the PR for review — not after merging — update the
+   same `docs/change-request-impact.md` with what actually happened:
+   which files or components actually changed, how that compares to
+   your prediction, any coupling you didn't expect, and what turned
+   out easier or harder than expected. Change surface is a signal to
+   analyze, not a score to minimize — several sensibly-related files
+   changing for a good reason can be a better outcome than a hack that
+   only touched one. This update has to land in the same PR as the
+   implementation, not a follow-up commit after merge.
+5. Open the PR, get it reviewed, and merge only once CI is green —
+   same loop as Lab 27.
 
 ## Acceptance criteria
 
 - The combined-table behavior is implemented, tested, reviewed, and
   merged through the same PR workflow as Lab 27.
-- `impact-notes.md` contains both the *before* prediction and the
-  *after* reality, and is honest about any mismatch.
+- `docs/change-request-impact.md` contains both the *before* prediction
+  and the *after* reality, and is honest about any mismatch.
+- The prediction exists as its own commit in Git history, before any
+  commit that implements the change — not written after the fact.
+- The actual-impact update was part of the same pull request that
+  implemented the change: `git status --short` is clean after merge,
+  with no separate documentation commit added afterward.
 - Your full test suite (MVP + this change) passes with CI green.
 
 ## Verification

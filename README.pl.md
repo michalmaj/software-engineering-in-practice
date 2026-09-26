@@ -127,7 +127,13 @@ potrzebujesz tylko JDK.
 
 Python niesie większość kursu; Go i Java pojawiają się od Lab 14 przy
 okazji jawnych porównań między-językowych. We wszystkich trzech język
-jest medium — przedmiotem jest inżynieria oprogramowania.
+jest medium — przedmiotem jest inżynieria oprogramowania. Gdy Wasz
+zespół wybiera jeden z nich dla capstone'u w Akcie VI (Lab 26), tylko
+Python jest w pełni wspieranym domyślnym wyborem bez żadnego wymogu
+znajomości języka poza tym, co już zakłada kurs — wybór Go albo Javy
+jest tam świadomym kompromisem: uczysz się podstaw tego języka
+równolegle z pracą inżynierską, to nie jest równoważny, bezkosztowy
+wybór.
 
 ## Jak działają laby
 

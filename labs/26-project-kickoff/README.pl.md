@@ -74,8 +74,19 @@ Po tym laboratorium powinieneś/aś umieć:
      (handover).
    - **Największe ryzyka**: 2-3 konkretne rzeczy, które mogłyby wykoleić
      ten projekt, i co byś z każdą zrobił/a.
-3. Napiszcie `docs/adr/adr-001-language-choice.md` (w Waszym nowym
-   repozytorium) używając tego szablonu:
+3. Zanim napiszecie ADR: dla tego capstone'u dozwolone są trzy języki,
+   ale nie są równoważnymi prerequisite'ami. **Python** to w pełni
+   wspierany domyślny wybór — nic poza tym, co ten kurs już zakłada.
+   **Go** i **Java** to prawdziwe opcje też, ale tylko jeśli Wasz
+   zespół już zna podstawy tego języka, albo świadomie bierze na siebie
+   naukę go równolegle z pracą inżynierską — Lab 14 pokazał, jak każdy
+   z nich wygląda, dla porównania, ale to nie był kurs języka. Wybór
+   języka, którego Wasz zespół nie zna, nie jest bezkosztowym wyborem
+   między równoważnymi opcjami; to druga, osobna rzecz do nauczenia się
+   na wierzchu tego capstone'u. Żaden wybór nie jest oceniany — po
+   prostu podjęcie go z tym kompromisem na oku, a potem napiszcie
+   `docs/adr/adr-001-language-choice.md` (w Waszym nowym repozytorium)
+   używając tego szablonu:
    ```markdown
    # ADR-001: Wybór języka implementacji
 

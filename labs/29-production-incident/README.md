@@ -33,38 +33,44 @@ Follow **Path A** if this is reproducible in your system today. Follow
 **Path B** if your team already prevents exact same-day/same-time-slot
 double-booking — don't force a fake bug either way.
 
+1. Create a branch for this fix (for example `fix/double-booking`).
+   An incident under pressure is exactly when it's tempting to commit
+   straight to `main` and skip branch/PR/review — that's precisely the
+   moment the workflow exists for. Nothing about "it's an incident"
+   suspends it.
+
 **Path A — the bug is real:**
 
-1. Reproduce it: create two reservations for the same day and exact
+2. Reproduce it: create two reservations for the same day and exact
    time slot, small enough that your assignment logic gives both the
    same table.
-2. Write a failing test capturing the exact defect: two reservations
+3. Write a failing test capturing the exact defect: two reservations
    for the same day/time slot must never be assigned an overlapping set
    of tables.
-3. Fix the defect with the smallest change that makes the new test pass
+4. Fix the defect with the smallest change that makes the new test pass
    without breaking any existing test.
-4. Continue to step 5 below.
+5. Continue to step 6 below.
 
 **Path B — you already prevent this:**
 
-1. Write a test *proving* the protection exists (two reservations, same
+2. Write a test *proving* the protection exists (two reservations, same
    exact day/time slot, must get non-overlapping tables) — this should
    already pass, demonstrating the coverage, not creating it.
-2. Now go one level deeper: two reservations at the *same table*, on
+3. Now go one level deeper: two reservations at the *same table*, on
    the same day, at times that are different strings but would
    realistically overlap in a real dining room — for example `19:00`
    and `19:15`, if a table is occupied for roughly 90 minutes.
    Reproduce this against your own system.
-3. Write a failing test capturing this: two reservations whose time
+4. Write a failing test capturing this: two reservations whose time
    slots are within your system's assumed occupancy window must not
    share a table, even if the time-slot strings aren't identical.
-4. Fix it — this will likely require treating `time_slot` as a
+5. Fix it — this will likely require treating `time_slot` as a
    comparable time value with a duration, not just a string to compare
-   for exact equality. Continue to step 5 below.
+   for exact equality. Continue to step 6 below.
 
 **Both paths:**
 
-5. Write `POSTMORTEM.md`, blameless — no names, no blame — covering:
+6. Write `POSTMORTEM.md`, blameless — no names, no blame — covering:
    what happened, customer impact, root cause (a design gap, not a
    "someone made a mistake" narrative), how it was detected (a customer
    complaint, not a monitoring alert — note that explicitly), the fix,
@@ -73,6 +79,12 @@ double-booking — don't force a fake bug either way.
    you followed Path B, also note in the postmortem that your team's
    original design already covered the simpler case, and describe the
    deeper gap you found instead.
+7. Run the full test suite, then commit the fix, the regression test,
+   and `POSTMORTEM.md` on this branch — together or as a couple of
+   small commits, as long as all three land before the PR.
+8. Push the branch, open a PR, and get it reviewed — a review doesn't
+   need to be long for an obvious hotfix, but it still has to happen.
+   Merge only once CI is green.
 
 ## Acceptance criteria
 
@@ -83,6 +95,12 @@ double-booking — don't force a fake bug either way.
   its fix and passes after, without breaking any earlier test.
 - `POSTMORTEM.md` exists, is blameless, and ends with a concrete
   systemic recommendation — not just "be more careful."
+- The fix, its regression test, and `POSTMORTEM.md` were merged through
+  a pull request with a green CI check, not committed directly to
+  `main` — incident or not.
+- After this lab, `main` contains the fix, the regression test, and
+  `POSTMORTEM.md`, and the full suite (including the new regression
+  test) still passes.
 
 ## Verification
 

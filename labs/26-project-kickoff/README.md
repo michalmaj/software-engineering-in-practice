@@ -69,8 +69,19 @@ After this lab you should be able to:
      (iteration), 28 (change request), 29 (incident), and 30 (handover).
    - **Top risks**: 2-3 specific things that could derail this project,
      and what you'd do about each.
-3. Write `docs/adr/adr-001-language-choice.md` (in your new repository)
-   using this template:
+3. Before you write the ADR: three languages are allowed for this
+   capstone, but they aren't equivalent prerequisites. **Python** is
+   the fully-supported default — nothing beyond what this course
+   already assumes. **Go** and **Java** are real options too, but only
+   if your team already knows the language's basics, or is knowingly
+   taking on learning it alongside the software-engineering work —
+   Lab 14 showed you what each looks like for comparison, it wasn't a
+   language course. Picking a language your team doesn't know isn't a
+   cost-free choice between equivalents; it's a second, separate thing
+   to learn on top of this capstone. Neither choice is judged — just
+   make it with that trade-off in view, then write
+   `docs/adr/adr-001-language-choice.md` (in your new repository) using
+   this template:
    ```markdown
    # ADR-001: Choice of implementation language
 

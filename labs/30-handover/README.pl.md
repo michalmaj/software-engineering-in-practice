@@ -44,22 +44,36 @@ Po tym laboratorium powinieneś/aś umieć:
 
 **Jeśli odbieracie (albo oceniacie własny projekt solo):**
 
-5. Sklonujcie repozytorium do świeżej lokalizacji, której wcześniej nie
-   dotykaliście.
+Nie masz uprawnień do zapisu w repozytorium zespołu oryginalnego i nie
+powinieneś/aś ich potrzebować — cała ta ścieżka działa przez fork i
+pull request, tak samo jak zewnętrzny kontrybutor pracowałby z
+dowolnym projektem, którego nie jest właścicielem.
+
+5. Zrób fork repozytorium zespołu oryginalnego na GitHubie, potem
+   sklonuj *swój własny fork* do świeżej lokalizacji, której wcześniej
+   nie dotykałeś/aś.
 6. Podążajcie wyłącznie za spisanym `README.md`, żeby skonfigurować
    projekt i uruchomić jego sprawdzenia. Nie zadawajcie jeszcze
    oryginalnemu zespołowi pytania doprecyzowującego — zanotujcie
    wszędzie, gdzie utknęliście albo musieliście zgadywać.
 7. Przejrzyjcie `ARCHITECTURE.md` i kod na tyle, żeby zlokalizować,
    gdzie wprowadzilibyście małą zmianę.
-8. Wprowadźcie jedną małą, prawdziwą zmianę w ustalonym limicie czasu
-   (30 minut to rozsądnie): dodajcie nową możliwość tylko-do-odczytu
-   (na przykład "znajdź rezerwację po jej id") z własnym testem, i
-   sprawcie, żeby przechodził razem z istniejącym zestawem testów.
-9. Napiszcie `HANDOVER_NOTES.md` (ze strony odbierającej) odpowiadając:
-   co zadziałało samą dokumentacją, co nie, i jaka jedna zmiana w
-   README albo dokumentacji oryginalnego zespołu zaoszczędziłaby Wam
-   najwięcej czasu.
+8. Utwórz gałąź w swoim własnym forku i wprowadź jedną małą, prawdziwą
+   zmianę w ustalonym limicie czasu (30 minut to rozsądnie): dodaj nową
+   możliwość tylko-do-odczytu (na przykład "znajdź rezerwację po jej
+   id") z własnym testem, spraw, żeby przechodził razem z istniejącym
+   zestawem testów, a potem wypchnij gałąź do swojego forka.
+9. Otwórz pull request z Twojego forka z powrotem do repozytorium
+   zespołu oryginalnego. Czy go zmergują, to ich decyzja, nie wymóg
+   tego laba — otwarcie poprawnego, gotowego do review PR-a do repo,
+   którego nie jesteś właścicielem, to jest faktyczna umiejętność, którą
+   ten lab sprawdza.
+10. Napiszcie `HANDOVER_NOTES.md` (ze strony odbierającej) odpowiadając:
+    co zadziałało samą dokumentacją, co nie, i jaka jedna zmiana w
+    README albo dokumentacji oryginalnego zespołu zaoszczędziłaby Wam
+    najwięcej czasu. Umieśćcie to w tym samym pull requeście (albo
+    zlinkujcie z jego opisu), żeby feedback faktycznie dotarł do
+    zespołu oryginalnego, nie tylko do Waszego forka.
 
 ## Kryteria akceptacji
 
@@ -67,10 +81,11 @@ Po tym laboratorium powinieneś/aś umieć:
   wystarczają same w sobie (zweryfikowane przez faktyczne użycie ich
   przez stronę odbierającą, i tylko ich).
 - Strona odbierająca pomyślnie skonfigurowała projekt, uruchomiła jego
-  sprawdzenia na zielono, i zmergowała jedną małą, przetestowaną
-  zmianę bez bezpośredniej pomocy oryginalnych autorów.
+  sprawdzenia na zielono, i otworzyła pull request — z własnego forka,
+  nie z gałęzi w repozytorium oryginalnym — z jedną małą, przetestowaną
+  zmianą, bez bezpośredniej pomocy oryginalnych autorów.
 - `HANDOVER_NOTES.md` istnieje z konkretnym, uczciwym feedbackiem — nie
-  "poszło dobrze".
+  "poszło dobrze" — i dociera do zespołu oryginalnego przez PR.
 
 ## Weryfikacja
 
@@ -106,6 +121,12 @@ repozytorium.
   i głównie-do-czytania (wyszukiwanie, filtr, pomocnik formatowania) —
   ten lab dotyczy jakości handoveru, nie testowania surowej szybkości
   implementacji zespołu odbierającego.
+- **Podpowiedź 4:** Jeśli repozytorium zespołu oryginalnego jest
+  prywatne i forkowanie nie jest proste w Waszej organizacji, dodanie
+  jako collaborator jest rozsądnym zamiennikiem — ale fork-i-PR to
+  ścieżka, przez którą ten lab faktycznie przechodzi, bo to ta, która
+  działa bez konieczności ręcznego zarządzania uprawnieniami do
+  repozytorium przez kogokolwiek.
 
 ## Co dalej
 
