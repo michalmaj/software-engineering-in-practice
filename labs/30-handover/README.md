@@ -124,8 +124,7 @@ repository.
 
 ## What's next
 
-This is the last lab. You've gone from finding your way around a
-terminal to handing off a tested, reviewed, incident-hardened project
-that someone else can pick up and keep going. That last sentence is the
-actual definition of software engineering this course has been arguing
-for since Lab 01.
+This is the last lab. You started by learning to find your way around
+a terminal. You're finishing by handing off a tested, reviewed,
+incident-hardened project that someone else can pick up and keep
+going.

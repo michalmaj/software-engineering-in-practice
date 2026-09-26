@@ -100,8 +100,7 @@ Expected: all tests pass, including the two new logging tests.
 
 ## What's next
 
-You have tests, review, CI, and now logs — the system can explain
-itself. Next, you have to decide what "this version" even means when
-you hand it to someone else.
+You have tests, review, CI, and now logs. Next, you have to decide
+what "this version" even means when you hand it to someone else.
 
 Continue to [Lab 25 — Release and compatibility](../25-release-and-compatibility/README.md).

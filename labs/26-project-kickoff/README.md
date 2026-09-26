@@ -148,7 +148,7 @@ building and why you made the choices you made?
 
 ## What's next
 
-You have a plan and a decision record. Now you actually build the
-thing — using every workflow habit from Act IV, for real, continuously.
+You have a plan and a decision record. Now you build the thing, using
+every workflow habit from Act IV, continuously.
 
 Continue to [Lab 27 — Development iteration](../27-development-iteration/README.md).

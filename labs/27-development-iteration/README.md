@@ -110,7 +110,7 @@ on the latest commit to your main branch.
 
 ## What's next
 
-Your MVP works, is tested, and is reviewed. Now the requirement changes
-— and you find out what your design actually cost you.
+Your MVP works, is tested, and is reviewed. Now the requirement
+changes, and you find out what your design cost you.
 
 Continue to [Lab 28 — Change request](../28-change-request/README.md).
