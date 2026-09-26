@@ -47,7 +47,7 @@ projekt zespołowy → przekazanie
 | I   | 01-05 | Jestem developerem                          |
 | II  | 06-10 | Kod to jeszcze nie projekt                  |
 | III | 11-15 | Oprogramowanie musi przetrwać zmianę        |
-| IV  | 16-20 | Nie pracujesz sam/sama                      |
+| IV  | 16-20 | Nie pracujesz w pojedynkę                   |
 | V   | 21-25 | System żyje w większym świecie              |
 | VI  | 26-30 | Jesteście zespołem inżynierskim             |
 
@@ -113,9 +113,9 @@ cd software-engineering-in-practice
 | Go        | 1.25.x                 |
 | JDK       | 21                     |
 
-Gradle **nie** jest wymaganiem globalnym: starter Java na kapstone ma
-już własny, committed Gradle Wrapper (`./gradlew`), więc lokalnie
-potrzebujesz tylko JDK.
+Gradle **nie** jest wymaganiem globalnym: starter Java do projektu
+końcowego ma już własny, zacommitowany Gradle Wrapper (`./gradlew`),
+więc lokalnie potrzebujesz tylko JDK.
 
 ## Języki i narzędzia
 
@@ -149,7 +149,7 @@ jako część zajęć w klasie.
 |-----|-------|-----|-------|
 | [01](labs/01-workstation/README.pl.md) | Witaj na swoim stanowisku pracy | [16](labs/16-parallel-branches/README.pl.md) | Gałęzie istnieją, bo praca dzieje się równolegle |
 | [02](labs/02-terminal/README.pl.md) | Terminal jako narzędzie pracy | [17](labs/17-merge-conflict/README.pl.md) | Konflikt scalania |
-| [03](labs/03-inherited-repository/README.pl.md) | Odziedziczyłeś/aś repozytorium | [18](labs/18-pull-requests-and-review/README.pl.md) | Pull requesty i code review |
+| [03](labs/03-inherited-repository/README.pl.md) | Dziedziczysz repozytorium | [18](labs/18-pull-requests-and-review/README.pl.md) | Pull requesty i code review |
 | [04](labs/04-local-vs-remote/README.pl.md) | Lokalne to nie zdalne | [19](labs/19-repository-checks-itself/README.pl.md) | Repozytorium powinno sprawdzać się samo |
 | [05](labs/05-works-on-my-machine/README.pl.md) | "Działa na moim komputerze" | [20](labs/20-definition-of-done/README.pl.md) | Co oznacza "zrobione"? |
 | [06](labs/06-from-script-to-project/README.pl.md) | Od skryptu do projektu | [21](labs/21-api-is-a-contract/README.pl.md) | API to kontrakt |
@@ -174,7 +174,7 @@ uczy.
 
 ## Współpraca / zgłaszanie problemów
 
-Znalazłeś/aś błąd, niejasną instrukcję albo coś, co nie działa w Twoim
+Widzisz błąd, niejasną instrukcję albo coś, co nie działa w Twoim
 środowisku? Otwórz issue.
 
 ## Licencjonowanie
