@@ -43,21 +43,33 @@ After this lab you should be able to:
 
 **If you are receiving (or evaluating your own project solo):**
 
-5. Clone the repository into a fresh location you haven't touched
-   before.
+You don't have write access to the originating team's repository, and
+shouldn't need it — this whole path works through a fork and a pull
+request, the same way an outside contributor would work with any
+project they don't own.
+
+5. Fork the originating team's repository on GitHub, then clone *your
+   own fork* into a fresh location you haven't touched before.
 6. Follow only the written `README.md` to set up the project and run
    its checks. Do not ask the original team a clarifying question yet
    — note anywhere you got stuck or had to guess.
 7. Skim `ARCHITECTURE.md` and the codebase enough to locate where you'd
    make a small change.
-8. Make one small, real change within a fixed time box (30 minutes is
-   reasonable): add a new read-only capability (for example, "find a
-   reservation by its id") with its own test, and get it passing
-   against the existing test suite.
-9. Write `HANDOVER_NOTES.md` (from the receiving side) answering: what
-   worked from the documentation alone, what didn't, and what one
-   change to the original team's README or docs would have saved you
-   the most time.
+8. Create a branch in your own fork, and make one small, real change
+   within a fixed time box (30 minutes is reasonable): add a new
+   read-only capability (for example, "find a reservation by its id")
+   with its own test, get it passing against the existing test suite,
+   then push the branch to your own fork.
+9. Open a pull request from your fork back to the originating team's
+   repository. Whether they merge it is their call, not a requirement
+   of this lab — opening a correct, reviewable PR against a repo you
+   don't own is the actual skill being tested.
+10. Write `HANDOVER_NOTES.md` (from the receiving side) answering: what
+    worked from the documentation alone, what didn't, and what one
+    change to the original team's README or docs would have saved you
+    the most time. Include it in the same pull request (or link it from
+    the PR description) so the feedback actually reaches the
+    originating team, not just your own fork.
 
 ## Acceptance criteria
 
@@ -65,10 +77,11 @@ After this lab you should be able to:
   are sufficient on their own (verified by the receiving side actually
   using only them).
 - The receiving side successfully set up the project, ran its checks
-  green, and merged one small tested change without direct help from
-  the original authors.
+  green, and opened a pull request — from their own fork, not a branch
+  on the originating repository — with one small, tested change, without
+  direct help from the original authors.
 - `HANDOVER_NOTES.md` exists with specific, honest feedback — not "it
-  went fine."
+  went fine" — and reaches the originating team through the PR.
 
 ## Verification
 
@@ -103,6 +116,11 @@ repository.
   read-mostly (a lookup, a filter, a formatting helper) — this lab is
   about handover quality, not about testing the receiving team's
   raw implementation speed.
+- **Hint 4:** If the originating team's repository is private and
+  forking isn't straightforward for your organization, being added as
+  a collaborator is a reasonable substitute — but fork-and-PR is the
+  path this lab actually walks through, since it's the one that works
+  without anyone having to manage repository permissions by hand.
 
 ## What's next
 
