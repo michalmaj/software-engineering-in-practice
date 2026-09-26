@@ -13,7 +13,7 @@ ludzi.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Odróżnić to, co sprawdza formatter, od tego, co sprawdza linter, a oba
   od tego, co sprawdza test.
@@ -69,10 +69,10 @@ Oczekiwane: oba polecenia Ruff nie zgłaszają niczego do poprawy, a
 
 ## Zastanów się
 
-- Które z trzech narzędzi, których teraz użyłeś/aś na tym projekcie
-  (`pytest`, `ruff format`, `ruff check`), mogłoby w zasadzie powiedzieć
-  Ci, że Twój kod jest "poprawny"? Które mogą powiedzieć jedynie, że
-  jest "spójny" albo "wolny od oczywistych pomyłek"?
+- Które z trzech narzędzi użytych teraz na tym projekcie (`pytest`,
+  `ruff format`, `ruff check`) mogłoby w zasadzie powiedzieć Ci, że Twój
+  kod jest "poprawny"? Które mogą powiedzieć jedynie, że jest "spójny"
+  albo "wolny od oczywistych pomyłek"?
 - Dlaczego uruchamiać formatter i linter jako dwa osobne polecenia
   zamiast jednego?
 
@@ -86,7 +86,7 @@ Oczekiwane: oba polecenia Ruff nie zgłaszają niczego do poprawy, a
   dotykania czegokolwiek — użyj najpierw `--check`.
 - **Podpowiedź 3:** Jeśli `ruff check .` nie zgłasza zupełnie niczego w
   Twoim własnym kodzie, to prawidłowy wynik, a nie znak, że coś
-  zrobiłeś/aś źle — oznacza, że Twój kod z Labów 06-08 był już czysty.
+  zrobiono źle — oznacza, że Twój kod z Labów 06-08 był już czysty.
 
 Zanim pójdziesz dalej: zacommituj i wypchnij wszystko z tego laba
 (`git add -A && git commit -m "..."; git push`). Nic później jeszcze

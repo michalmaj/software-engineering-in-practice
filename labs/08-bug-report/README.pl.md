@@ -2,14 +2,14 @@
 
 ## Sytuacja
 
-Przychodzi e-mail: "Zamówiłem/am jedzenie za $60 i dostałem/am rabat
+Przychodzi e-mail: "Zamówiliśmy jedzenie za $60 i dostaliśmy rabat
 lojalnościowy, ale podatek na rachunku wygląda na za wysoki jak na
 kwotę po rabacie." Twój zestaw testów jest zielony. Klient mimo to ma
 rację.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Zamienić zgłoszenie błędu na konkretny, failing test, zanim dotkniesz
   jakiegokolwiek kodu implementacji.
@@ -70,8 +70,8 @@ Oczekiwane: wszystkie testy `PASSED`; wypisany słownik pokazuje
 - Twoje testy z Lab 07 były zielone *przed* tą poprawką, a błąd mimo to
   istniał. Co konkretnie sprawiło, że ten błąd był niewidoczny dla tego
   zestawu testów?
-- Naprawiłeś/aś błąd w `calculate_bill`, a nie w samym `calculate_tax`.
-  Dlaczego `calculate_tax` nie musiało się zmienić?
+- Błąd został naprawiony w `calculate_bill`, a nie w samym
+  `calculate_tax`. Dlaczego `calculate_tax` nie musiało się zmienić?
 
 ## Jeśli utkniesz
 
@@ -93,7 +93,7 @@ sobie ten nawyk już teraz.
 ## Co dalej
 
 Masz zielony zestaw testów i prawdziwą poprawkę za nim. Dalej: inny
-rodzaj sprawdzenia — nie "czy to poprawne", tylko "czy to jest napisane
-tak, jak zespół się umówił".
+rodzaj sprawdzenia — nie poprawność, tylko to, czy kod jest napisany
+tak, jak zespół się umówił.
 
 Przejdź do [Lab 09 — Maszyny mogą sprawdzać nudne rzeczy](../09-automated-checks/README.pl.md).

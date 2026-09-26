@@ -1,14 +1,14 @@
-# Lab 03 — Odziedziczyłeś/aś repozytorium
+# Lab 03 — Dziedziczysz repozytorium
 
 ## Sytuacja
 
-Dostałeś/aś dostęp do tego właśnie repozytorium. Zanim cokolwiek zmienisz,
+Masz dostęp do tego właśnie repozytorium. Zanim cokolwiek zmienisz,
 musisz wiedzieć, jak sprawdzić, w jakim jest stanie, i jak zapisać własną
 zmianę, niczego nie tracąc.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Wyjaśnić różnicę między katalogiem roboczym, obszarem stagingu a
   lokalnym repozytorium.
@@ -64,8 +64,8 @@ wc -l < labs/03-inherited-repository/notes/my-observations.txt  # expect >= 3
 
 - `git diff` i `git diff --staged` pokazały różne rzeczy. Dlaczego Git w
   ogóle rozróżnia te dwa stany?
-- Gdybyś uruchomił/a `git commit` bez wcześniejszego `git add`, co
-  stałoby się z Twoim nowym plikiem?
+- Gdyby `git commit` poszedł bez wcześniejszego `git add`, co stałoby
+  się z Twoim nowym plikiem?
 
 ## Jeśli utkniesz
 

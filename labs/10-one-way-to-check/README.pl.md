@@ -3,19 +3,19 @@
 ## Sytuacja
 
 Nowa osoba w projekcie pyta: "jak jeszcze raz uruchomić testy? I czy
-najpierw było `ruff check`, czy `ruff format`?" Wpisywałeś/aś te
-polecenia tyle razy, że już o nich nie myślisz — dokładnie dlatego nowa
-osoba nie powinna musieć pytać.
+najpierw było `ruff check`, czy `ruff format`?" Te polecenia wpisujesz
+tyle razy, że już o nich nie myślisz — dokładnie dlatego nowa osoba nie
+powinna musieć pytać.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Opakować sekwencję poleceń w mały, czytelny skrypt powłoki.
 - Wyjaśnić, dlaczego skrypt na poziomie projektu jest lepszy niż
   instrukcja w README, którą czytelnik musi ręcznie przepisać.
 - Wyjaśnić, co oznacza "brak ukrytej magii" dla automatyzacji, którą
-  sam/a piszesz.
+  piszesz samodzielnie.
 
 ## Zanim zaczniesz
 
@@ -72,8 +72,8 @@ Twojej strony.
   linia w Twoim skrypcie temu zapobiega?
 - Czy jest coś w tym, co robią te skrypty, co nie jest widoczne po
   prostu przez ich przeczytanie? Gdyby kolega z zespołu zapytał, "co
-  właściwie uruchamia `check.sh`", czy mógłbyś/mogłabyś po prostu
-  pokazać mu ten plik?
+  właściwie uruchamia `check.sh`", czy dałoby się po prostu pokazać mu
+  ten plik?
 
 ## Jeśli utkniesz
 
@@ -93,8 +93,8 @@ sobie ten nawyk już teraz.
 
 ## Co dalej
 
-Wziąłeś/aś jeden skrypt i zamieniłeś/aś go w mały, dobrze przetestowany,
-spójnie sprawdzany projekt. Akt II jest zakończony. Dalej sam projekt
+Ten jeden skrypt zmienił się w mały, dobrze przetestowany, spójnie
+sprawdzany projekt. Akt II jest zakończony. Dalej sam projekt
 będzie musiał przetrwać rzeczywistą zmianę wymagań — a to jest miejsce,
 w którym zaczyna liczyć się projektowanie (design).
 

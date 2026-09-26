@@ -3,14 +3,14 @@
 ## Sytuacja
 
 Twój przerobiony pakiet `billing` zachowuje się tak samo jak stary
-skrypt — sprawdziłeś/aś to raz, ręcznie, przez `diff`. To się nie
+skrypt — sprawdzono to raz, ręcznie, przez `diff`. To się nie
 skaluje: nie możesz ponownie uruchamiać ręcznego diffa za każdym razem,
 gdy dotkniesz jednej linijki. Potrzebujesz testów, które uruchamiają się
 same.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Napisać test jednostkowy metodą Arrange-Act-Assert.
 - Wyjaśnić, czym jest "jednostka" w "teście jednostkowym", w kontekście
@@ -67,11 +67,12 @@ pominięty.
 
 - Wszystkie sześć Twoich testów przechodzi. Czy to dowodzi, że
   `calculate_bill` jest poprawne dla *każdego* zamówienia, czy tylko dla
-  konkretnych danych, których użyłeś/aś?
-- Przetestowałeś/aś mały zamówienie i wartość wystarczająco dużą, by
-  uruchomić rabat, osobno w `calculate_discount` — ale czy przetestowałeś
-  samo `calculate_bill` z zamówieniem na tyle dużym, żeby uruchomić
-  rabat? Co mogłoby to ujawnić, czego Twoje obecne testy nie wyłapią?
+  konkretnych użytych danych?
+- Małe zamówienie i wartość wystarczająco dużą, by uruchomić rabat,
+  przetestowano osobno w `calculate_discount` — ale czy samo
+  `calculate_bill` zostało przetestowane z zamówieniem na tyle dużym,
+  żeby uruchomić rabat? Co mogłoby to ujawnić, czego Twoje obecne testy
+  nie wyłapią?
 
 ## Jeśli utkniesz
 

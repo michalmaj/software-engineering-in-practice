@@ -8,7 +8,7 @@ się wywala. Jego maszyna i Twoja najwyraźniej nie są tą samą maszyną.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Wyjaśnić, dlaczego "u mnie działa" nie jest dowodem na to, że program
   jest poprawnie zapakowany.
@@ -55,9 +55,10 @@ Po tym laboratorium powinieneś/aś umieć:
 - `uv run pytest` przechodzi wewnątrz `labs/05-works-on-my-machine/`.
 - `.venv/` i `uv.lock` istnieją w tym katalogu (uv je utworzył; nie pisz
   żadnego z nich ręcznie).
-- `uv.lock`, utworzony przez `uv sync` (nie ship'owany ze starterem),
-  jest zacommitowany do repozytorium — lock file jest przydatny
-  koledze z zespołu tylko wtedy, gdy faktycznie jest wpięty do repo.
+- `uv.lock`, utworzony przez `uv sync` (nie dostarczany razem ze
+  starterem), jest zacommitowany do repozytorium — lock file jest
+  przydatny koledze z zespołu tylko wtedy, gdy faktycznie jest wpięty
+  do repo.
 - `notes/my-observations.txt` odpowiada na wszystkie trzy punkty z kroku
   6, plus na pytanie o devcontainer z kroku 7.
 

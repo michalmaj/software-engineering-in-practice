@@ -9,7 +9,7 @@ możliwości zmiany jednej części bez ponownego czytania całości.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Rozdzielić odrębne odpowiedzialności skryptu na osobne moduły.
 - Wyjaśnić różnicę między czystą funkcją obliczeniową a punktem wejścia
@@ -85,9 +85,9 @@ Oczekiwane: `IDENTICAL` i `bill.py correctly removed`.
 
 ## Zastanów się
 
-- Właśnie udowodniłeś/aś, że refaktor nie zmienił zachowania, ręcznym
-  `diff`. Co musiałbyś/abyś powtarzać ręcznie za każdym razem, gdy
-  zmienisz jeszcze jedną linijkę, bez zautomatyzowanego testu?
+- Manualny `diff` właśnie udowodnił, że refaktor nie zmienił zachowania.
+  Co trzeba by powtarzać ręcznie za każdym razem, gdy zmienisz jeszcze
+  jedną linijkę, bez zautomatyzowanego testu?
 - `calculate_tax` potrzebuje tylko jednej liczby, żeby wykonać swoje
   zadanie. Dlaczego to jest użyteczna właściwość funkcji?
 
@@ -108,7 +108,7 @@ sobie ten nawyk już teraz.
 
 ## Co dalej
 
-Twój refaktor zachował zachowanie — ale "zachowane" to nie to samo co
+Twój refaktor zachował zachowanie. Ale "zachowane" to nie to samo co
 "poprawne", a jedynym sposobem sprawdzenia jednego i drugiego jest teraz
 czytanie kodu na oko. Dalej nauczysz komputer, żeby sprawdzał to za
 Ciebie.

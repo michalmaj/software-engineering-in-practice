@@ -3,12 +3,12 @@
 ## Sytuacja
 
 Twój commit z Lab 03 bezpiecznie siedzi w lokalnym repozytorium. Kolega z
-zespołu pyta: "wypchnąłeś/aś to już?". Zdajesz sobie sprawę, że tak
+zespołu pyta: "masz to już wypchnięte?". Zdajesz sobie sprawę, że tak
 naprawdę nie wiesz jeszcze, co to pytanie właściwie oznacza.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Wyjaśnić różnicę między katalogiem roboczym, lokalnym repozytorium a
   repozytorium zdalnym.
@@ -92,8 +92,8 @@ potwierdź, że Twój ostatni commit też się tam pojawia.
 ## Co dalej
 
 Potrafisz już opisać, gdzie fizycznie istnieje Twój kod. Ale do tej pory
-każdy projekt, którego dotykałeś/aś, był na tyle mały, że dało się go
-uruchomić z pamięci. Dalej zobaczysz, co się dzieje, gdy projekt działa
+każdy Twój projekt był na tyle mały, że dało się go uruchomić z pamięci.
+Dalej zobaczysz, co się dzieje, gdy projekt działa
 "tylko na mojej maszynie" i nigdzie indziej.
 
 Przejdź do [Lab 05 — "Działa na moim komputerze"](../05-works-on-my-machine/README.pl.md).

@@ -10,7 +10,7 @@ ceremonii.
 
 ## Cele nauki
 
-Po tym laboratorium powinieneś/aś umieć:
+Po tym labie potrafisz:
 
 - Wyjaśnić, co czyni coś "kontraktem" niezależnie od składni
   konkretnego języka, która go wyraża.
@@ -49,7 +49,7 @@ Po tym laboratorium powinieneś/aś umieć:
    `NotifierCheck.java` dodaj drugie sprawdzenie, że
    `ReceiptService.sendReceiptReady(new SilentNotifier(), "A123")`
    działa bez rzucania wyjątku.
-5. Dla każdego języka zanotuj: czy musiałeś/aś napisać cokolwiek
+5. Dla każdego języka zanotuj: czy trzeba było napisać cokolwiek
    deklarującego, że `SilentNotifier` implementuje kontrakt `Notifier`,
    czy język wywnioskował to sam z samej metody?
 
