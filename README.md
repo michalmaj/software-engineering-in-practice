@@ -120,7 +120,12 @@ is a JDK.
 
 Python carries most of the course; Go and Java appear from Lab 14
 onward for explicit cross-language comparisons. In all three, the
-language is the medium — the subject is software engineering.
+language is the medium — the subject is software engineering. When
+your team picks one for the Act VI capstone (Lab 26), only Python is a
+fully-supported default with no language prerequisite beyond the
+course itself — choosing Go or Java there is a deliberate trade-off of
+learning that language's basics alongside the software-engineering
+work, not an equivalent, cost-free option.
 
 ## How the labs work
 
