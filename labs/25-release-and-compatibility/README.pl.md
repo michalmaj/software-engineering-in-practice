@@ -24,13 +24,22 @@ Po tym laboratorium powinieneś/aś umieć:
 
 ## Twoje zadanie
 
-1. Napisz `CHANGELOG.md` w `examples/order-api/`, w prostym formacie w
+1. Utwórz gałąź `feature/changelog-baseline` z `main`.
+2. Napisz `CHANGELOG.md` w `examples/order-api/`, w prostym formacie w
    stylu "Keep a Changelog", z jednym wpisem `## [1.0.0]` wymieniającym
    wszystko, co robi API na koniec Lab 24: dwa endpointy, trwałość w
    SQLite, migrację `notes`, wrapper retry i strukturalne logowanie.
-2. Zacommituj `CHANGELOG.md`, potem otaguj bieżący commit:
-   `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`.
-3. Teraz wprowadź jedną prawdziwą, addytywną zmianę: dodaj opcjonalne
+3. Zacommituj `CHANGELOG.md`, wypchnij gałąź, otwórz pull request i
+   zmerguj, gdy CI jest zielone — ta sama pętla co w reszcie Aktu V.
+4. Wróć do `main` i pobierz merge: `git switch main`, potem
+   `git pull --ff-only`. Potwierdź, że zestaw testów nadal przechodzi
+   (`uv run pytest`), a potem — dopiero teraz, na tym już zmergowanym
+   commicie — otaguj wydanie:
+   `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`, i wypchnij tag:
+   `git push origin order-api-v1.0.0`.
+5. Utwórz drugą gałąź, `feature/priority-field`, z już zaktualizowanego
+   `main`.
+6. Teraz wprowadź jedną prawdziwą, addytywną zmianę: dodaj opcjonalne
    pole `priority` do `POST /orders`, domyślnie `"normal"`, gdy
    wywołujący je pominie. To musi być prawdziwe, przechowywane pole, nie
    tylko wartość doklejona do odpowiedzi POST:
@@ -57,44 +66,53 @@ Po tym laboratorium powinieneś/aś umieć:
      przechowywane, nie tylko odbite w odpowiedzi tworzącej.
    - Uruchom też pełny istniejący zestaw testów, żeby potwierdzić, że
      żaden z nich nie musiał się zmienić, żeby to było prawdą.
-4. Zaktualizuj `CONTRACT.md` z Lab 21: udokumentuj nowe opcjonalne pole
+7. Zaktualizuj `CONTRACT.md` z Lab 21: udokumentuj nowe opcjonalne pole
    `priority` w ciele żądania `POST /orders` i jego obecność w każdej
-   odpowiedzi zwracającej zamówienie, włącznie z `GET`.
-5. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole, oraz
+   odpowiedzi zwracającej zamówienie, włącznie z `GET`. Dodaj też krótką
+   sekcję `## Compatibility assumption` stwierdzającą, że wywołujący mają
+   ignorować pola odpowiedzi, których nie rozpoznają — to dokładnie to
+   założenie sprawia, że pole addytywne jak `priority` jest wstecznie
+   kompatybilne w ogóle, a kolejny krok zależy od tego, że to jest
+   zapisane, nie tylko domyślnie zrozumiane.
+8. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole, oraz
    sekcję `## Compatibility notes` na dole pliku, opisującą (bez
    implementowania tego), jak wyglądałaby *łamiąca* wersja tego samego
    pomysłu zamiast tego — na przykład zmiana nazwy `items` na
    `line_items` w żądaniu/odpowiedzi — podając, którą pozycję SemVer
    (major/minor/patch) podniosłaby każda z dwóch zmian (ta prawdziwa
-   addytywna i ta hipotetyczna łamiąca), i dlaczego. Napisz obie te
-   rzeczy, zanim zacommitujesz i otagujesz, żeby changelog w otagowanym
-   commicie był kompletny, a nie dopisany później.
-6. Zacommituj, potem otaguj: `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`.
-7. Wypchnij oba tagi — wydanie, które istnieje tylko na Twojej maszynie,
-   nie jest wydaniem: `git push origin order-api-v1.0.0 order-api-v1.1.0`
-   (albo `git push --tags`, żeby wypchnąć wszystkie tagi naraz).
-8. Zrób pracę z tego labu na gałęzi (na przykład
-   `feature/release-and-compatibility`), wypchnij ją i otwórz pull
-   request. Zmerguj dopiero, gdy CI jest zielone — ta sama pętla co w
-   reszcie Aktu V.
+   addytywna i ta hipotetyczna łamiąca), i dlaczego, odwołując się do
+   założenia kompatybilności z `CONTRACT.md` jako faktycznego powodu,
+   dla którego zmiana addytywna kwalifikuje się jako wstecznie
+   kompatybilna. Napisz to wszystko, zanim zacommitujesz, żeby commit,
+   który w końcu zostanie otagowany, miał kompletny changelog, a nie
+   dopisany później.
+9. Zacommituj, wypchnij gałąź, otwórz pull request i zmerguj, gdy CI
+   jest zielone.
+10. Wróć do `main` i pobierz merge, potwierdź, że zestaw testów nadal
+    przechodzi, a potem otaguj:
+    `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`, i wypchnij tag:
+    `git push origin order-api-v1.1.0`.
 
 ## Kryteria akceptacji
 
 - `CHANGELOG.md` ma zarówno wpis `[1.0.0]`, jak i `[1.1.0]`, plus
-  sekcję `## Compatibility notes` rozważającą major kontra minor — i
-  oba były częścią tego samego commita, który został otagowany jako
-  `order-api-v1.1.0`.
-- `CONTRACT.md` dokumentuje nowe pole `priority`, także w odpowiedziach
-  `GET`.
+  sekcję `## Compatibility notes` rozważającą major kontra minor.
+- `CONTRACT.md` dokumentuje nowe pole `priority` (także w odpowiedziach
+  `GET`) i podaje założenie kompatybilności o ignorowaniu nieznanych
+  pól odpowiedzi.
 - Zarówno `order-api-v1.0.0`, jak i `order-api-v1.1.0` istnieją jako
-  opisane (annotated) tagi Gita, wypchnięte na Twój remote.
+  opisane (annotated) tagi Gita, wypchnięte na Twój remote — i każdy
+  został utworzony dopiero *po* zmergowaniu odpowiadającej mu zmiany do
+  `main`, nigdy wcześniej na gałęzi funkcji:
+  `git merge-base --is-ancestor <tag> main` się udaje dla obu.
 - Pole `priority` jest zaimplementowane i naprawdę przechowywane w
-  SQLite (`GET` po `POST` je zwraca, nie tylko sama odpowiedź `POST`),
-  poprawnie domyślne, ma własne przechodzące testy (jawna wartość,
-  pominięcie z domyślną, i round-trip POST-potem-GET), a każdy test
-  napisany przed tym labem nadal przechodzi bez modyfikacji.
-- Zmiany z tego labu zostały zmergowane przez pull request z zielonym
-  checkiem CI, nie zacommitowane bezpośrednio na `main`.
+  SQLite (`GET` po `POST` je zwraca, nie tylko sama odpowiedź `POST`, i
+  przetrwa restart serwera, bo to prawdziwa kolumna, nie wartość w
+  pamięci), poprawnie domyślne, ma własne przechodzące testy (jawna
+  wartość, pominięcie z domyślną, i round-trip POST-potem-GET), a każdy
+  test napisany przed tym labem nadal przechodzi bez modyfikacji.
+- Obie zmiany z tego labu zostały zmergowane przez pull requesty z
+  zielonym checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
 ## Weryfikacja
 
@@ -104,13 +122,16 @@ uv run pytest -v
 cat CHANGELOG.md
 git tag
 git ls-remote --tags origin
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
+git merge-base --is-ancestor order-api-v1.1.0^{commit} main && echo "v1.1.0 is on main"
 cd -
 ```
 
 Oczekiwane: wszystkie testy przechodzą, `CHANGELOG.md` pokazuje oba
 wpisy plus uwagi o kompatybilności, `git tag` wymienia zarówno
-`order-api-v1.0.0`, jak i `order-api-v1.1.0`, a `git ls-remote --tags
-origin` pokazuje, że dotarły też na remote.
+`order-api-v1.0.0`, jak i `order-api-v1.1.0`, `git ls-remote --tags
+origin` pokazuje, że dotarły też na remote, a oba checki
+`merge-base --is-ancestor` wypisują swoją linię potwierdzenia.
 
 ## Zastanów się
 
@@ -138,6 +159,12 @@ origin` pokazuje, że dotarły też na remote.
   zmienić swój kod wywołujący"; MINOR oznacza "nowa możliwość, nic
   innego się dla Ciebie nie zmienia"; PATCH oznacza "to samo
   zachowanie, naprawiono błąd".
+- **Podpowiedź 4:** Otagowanie gałęzi funkcji przed jej zmergowaniem
+  jest ryzykowne właśnie z powodu squash i rebase merge'y — każdy z
+  nich może dać commitowi, który trafia na `main`, zupełnie inny hash
+  niż ten, który otagowałeś/aś, zostawiając Twój tag wskazujący na
+  commit, którego `main` w rzeczywistości nie zawiera. Otagowanie
+  dopiero po `git pull --ff-only` na `main` całkowicie to omija.
 
 ## Co dalej
 
