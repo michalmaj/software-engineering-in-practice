@@ -72,9 +72,9 @@ Oczekiwane: plik istnieje, a liczba jest między 5 a 8.
 
 - **Podpowiedź 1:** Rozsądne kandydatki na pozycje: testy przechodzą
   lokalnie, testy przechodzą w CI, PR ma opis wyjaśniający dlaczego,
-  co najmniej jeden komentarz recenzji został uwzględniony, żadne
-  znaczniki konfliktu nigdzie nie pozostają, zmiana jest zmergowana
-  (nie tylko otwarta jako PR).
+  code review jest zakończone, a wszystkie merytoryczne komentarze
+  rozwiązane, żadne znaczniki konfliktu nigdzie nie pozostają, zmiana
+  jest zmergowana (nie tylko otwarta jako PR).
 - **Podpowiedź 2:** Jeśli pozycji nie da się sprawdzić uruchamiając
   polecenie albo patrząc na konkretny stan, przepisz ją, aż się da.
 - **Podpowiedź 3:** Co do stylu dobrego pliku checklisty/notatek,

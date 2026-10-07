@@ -15,7 +15,8 @@ After this lab you should be able to:
   exists, not just what changed.
 - Review a diff against a concrete checklist instead of a vague
   impression.
-- Leave actionable review comments and respond to them before merging.
+- Reach a real review outcome before merging — an actionable comment
+  addressed, or an approval backed by an actual checklist pass.
 
 ## Before you start
 
@@ -58,24 +59,29 @@ After this lab you should be able to:
      be reused instead of rewritten?
    - Would you understand this diff without asking the author a
      question?
-5. Leave at least one substantive review comment — on GitHub if paired;
-   in `labs/18-pull-requests-and-review/my-review-notes.md` if solo.
-   "Substantive" means it identifies something a reader would actually
-   want changed or clarified — not a rephrasing of the diff. If the
-   diff genuinely raises more than one such point, leave more than one;
-   don't manufacture a second comment just to hit a number.
-6. Address each comment (fix the code, or write a one-line reply
-   explaining why not), then merge the PR using GitHub's merge button —
-   not a local `git merge`.
+5. Depending on what the review actually finds:
+   - **It finds an actionable problem** — something a reader would
+     genuinely want changed or clarified, not a rephrasing of the
+     diff: leave at least one substantive comment (on GitHub if
+     paired; in `labs/18-pull-requests-and-review/my-review-notes.md`
+     if solo), then address it — fix the code, or reply explaining why
+     not — and confirm the fix is actually there.
+   - **It finds nothing actionable**: approve it (on GitHub if
+     paired), or write one line in `my-review-notes.md` if solo
+     confirming each checklist item was actually checked, not just
+     "looks good." Don't invent a comment just to produce one.
+6. Merge the PR using GitHub's merge button — not a local `git
+   merge` — once the review has reached one of those two outcomes.
 7. Pull the merged change into your local `main`.
 
 ## Acceptance criteria
 
 - A pull request existed with a description covering what/why/how
   verified.
-- At least one substantive review comment exists (on GitHub, or in
-  `my-review-notes.md` if solo) — specific enough that the author would
-  know exactly what to do with it.
+- The review reached one of two legitimate outcomes: a substantive
+  comment was left and addressed, or the PR was approved with a short
+  record that the checklist was actually checked — never a comment
+  manufactured just to satisfy this requirement.
 - After pulling, local `main` contains `reorder_report` and its test,
   and `uv run pytest` passes.
 
@@ -108,9 +114,10 @@ merge settings) for `feature/reorder-report`, and all tests passing.
 - **Hint 2:** "Reuse `low_stock_items`" means calling it from
   `reorder_report`, not copying its filtering logic into a second
   place.
-- **Hint 3:** If working solo, write your review comments as if you
-  won't remember any context six months from now — that constraint
-  makes vague comments obviously useless.
+- **Hint 3:** If working solo, write whatever you record — a comment
+  or the approval note — as if you won't remember any context six
+  months from now. That constraint makes vague notes obviously
+  useless, whichever outcome the review reached.
 
 ## What's next
 
