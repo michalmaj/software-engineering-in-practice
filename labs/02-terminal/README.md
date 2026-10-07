@@ -29,8 +29,13 @@ After this lab you should be able to:
 3. Search `findings.txt` for the line containing `whoami` using `grep`, and
    redirect that single matching line into a new file
    `~/lab02-notes/whoami-line.txt`.
-4. Use `find` to locate every file named `findings.txt` under your home
-   directory (there should be exactly one, from Lab 01).
+4. Use `find` to locate every file named `findings.txt` under
+   `~/lab01-notes/` and `~/lab02-notes/` — the two directories you've
+   created so far — and pipe the result into `wc -l` to count the
+   matches: `find ~/lab01-notes ~/lab02-notes -name findings.txt | wc
+   -l`. Expect `1`: the original is still in `lab01-notes`; the copy
+   you made in step 1 is named `findings.bak.txt`, not `findings.txt`,
+   so it doesn't match.
 5. Start a simple long-running server:
    `python3 -m http.server 8000` from your home directory.
 6. While it's running, in a **second terminal**, confirm it responds:
@@ -53,7 +58,7 @@ After this lab you should be able to:
 test -f ~/lab02-notes/findings.bak.txt && echo "backup exists"
 test -f ~/lab02-notes/whoami-line.txt && echo "grep output exists"
 wc -l < ~/lab02-notes/whoami-line.txt   # expect exactly 1
-find ~ -name findings.txt               # expect exactly one path
+find ~/lab01-notes ~/lab02-notes -name findings.txt | wc -l   # expect exactly 1
 ```
 
 ## Think about it
@@ -67,8 +72,9 @@ find ~ -name findings.txt               # expect exactly one path
 
 ## If you get stuck
 
-- **Hint 1:** You need `cp`, `mv`, `rm` for file manipulation; `grep` and
-  `find` for searching; `>` and `>>` for redirection; `|` for piping.
+- **Hint 1:** You need `cp`, `mv`, `rm` for file manipulation; `grep`,
+  `find`, and `wc` for searching and counting; `>` and `>>` for
+  redirection; `|` for piping.
 - **Hint 2:** `grep "whoami" file > out.txt` writes matching lines from
   `file` into `out.txt`, overwriting it if it exists.
 - **Hint 3:** To run a command and free up your terminal immediately, you

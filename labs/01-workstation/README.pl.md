@@ -15,7 +15,7 @@ Po tym labie potrafisz:
 - Wylistować pliki, w tym ukryte, i odczytać podstawowy wynik listowania w
   formacie długim.
 - Tworzyć i sprawdzać pliki oraz katalogi z poziomu terminala.
-- Wyjaśnić własnymi słowami, czym są `$HOME`, `$PATH` i bieżąca powłoka.
+- Wyjaśnić własnymi słowami, czym są `$HOME`, `$PATH` i `$SHELL`.
 
 ## Zanim zaczniesz
 
@@ -33,8 +33,8 @@ Pracując wyłącznie w terminalu:
 2. Wylistuj zawartość katalogu domowego, wliczając pliki ukryte.
 3. Utwórz katalog `lab01-notes` wewnątrz katalogu domowego.
 4. W jego wnętrzu utwórz plik `findings.txt`.
-5. Uruchom `echo "$SHELL"` i przeczytaj, co wypisuje — to Twoja bieżąca
-   powłoka.
+5. Uruchom `echo "$SHELL"` i przeczytaj, co wypisuje: pokazuje
+   skonfigurowany shell logowania.
 6. Zapisz do `findings.txt` wynik tych pięciu poleceń, po jednym w linii,
    opisanych etykietą: `whoami`, `uname -a`, `echo "$HOME"`,
    `echo "$PATH"`, `echo "$SHELL"`. Nie znasz jeszcze edytora tekstu,
@@ -53,7 +53,7 @@ Pracując wyłącznie w terminalu:
 - `~/lab01-notes/findings.txt` istnieje i zawiera pięć opisanych linii z
   prawdziwym wynikiem z Twojej maszyny (nie wymyślonym).
 - Potrafisz, bez ponownego sprawdzania, podać ścieżkę swojego katalogu
-  domowego i nazwę swojej bieżącej powłoki.
+  domowego i nazwę swojego skonfigurowanego shella logowania.
 - Potrafisz w jednym lub dwóch zdaniach wyjaśnić, do czego służy `$PATH`.
 
 ## Weryfikacja
