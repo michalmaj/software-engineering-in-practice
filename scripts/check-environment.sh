@@ -93,7 +93,7 @@ check "uv (Lab 05)" uv \
 
 check "Go (Lab 14)" go \
   'go version | grep -oE "go[0-9]+\.[0-9]+(\.[0-9]+)?" | head -1 | sed "s/^go//"' \
-  "series:1.25" || ANY_FAILED=1
+  "series:1.27" || ANY_FAILED=1
 
 check "Java runtime (Lab 14)" java \
   'java -version 2>&1 | grep -oE "\"[0-9]+(\.[0-9]+)*" | head -1 | tr -d "\""' \

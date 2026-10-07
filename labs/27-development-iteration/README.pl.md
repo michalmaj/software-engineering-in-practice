@@ -53,7 +53,7 @@ sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
      wersję wprost), potem zainstaluj `uv` i uruchom `uv sync --locked`
      oraz `uv run pytest` — te same dwa polecenia co w Lab 19,
      zastosowane do Waszego repozytorium.
-   - **Go:** `actions/setup-go@v7` z `go-version: '1.25'`, potem
+   - **Go:** `actions/setup-go@v7` z `go-version: '1.27'`, potem
      `go test ./...`. Bez osobnego kroku instalacji zależności.
    - **Java:** `actions/setup-java@v6` z `distribution: 'temurin'` i
      `java-version: '21'`, potem `./gradlew test`. Zacommitowany
