@@ -14,8 +14,12 @@ Po tym labie potrafisz:
 
 - Wyjaśnić, co czyni coś "kontraktem" niezależnie od składni
   konkretnego języka, która go wyraża.
-- Porównać strukturalne typowanie Pythona (`Protocol`), niejawne
-  spełnianie interfejsu w Go i jawne `implements` w Javie.
+- Porównać, jak każdy język rozpoznaje, że coś spełnia kontrakt: jawne,
+  sprawdzane przez kompilator `implements` w Javie; niejawne, ale
+  wciąż sprawdzane przez kompilator strukturalne dopasowanie w Go;
+  oraz runtime'owe duck typing w Pythonie, gdzie `Protocol` tylko
+  dokumentuje kształt dla statycznego type checkera — checkera, który
+  w tym labie nigdy nie jest uruchamiany.
 - Dodać nową implementację istniejącego kontraktu we wszystkich trzech
   językach.
 
@@ -49,18 +53,23 @@ Po tym labie potrafisz:
    `NotifierCheck.java` dodaj drugie sprawdzenie, że
    `ReceiptService.sendReceiptReady(new SilentNotifier(), "A123")`
    działa bez rzucania wyjątku.
-5. Dla każdego języka zanotuj: czy trzeba było napisać cokolwiek
-   deklarującego, że `SilentNotifier` implementuje kontrakt `Notifier`,
-   czy język wywnioskował to sam z samej metody?
+5. Dla każdego języka zanotuj, jak rozpoznawane jest spełnienie
+   kontraktu: czy trzeba było napisać cokolwiek deklarującego, że
+   `SilentNotifier` implementuje kontrakt `Notifier`, czy kompilator
+   wywnioskował to sam z samej metody, czy nic to w ogóle nie
+   sprawdzało?
 
 ## Kryteria akceptacji
 
 - Wszystkie trzy języki mają działający `SilentNotifier` i
   przechodzące sprawdzenie dla niego, obok istniejących sprawdzeń
   `ConsoleNotifier` / `InMemoryNotifier`.
-- Potrafisz podać, dla każdego z trzech języków, czy zadeklarowanie "to
-  implementuje ten kontrakt" było jawne (napisane przez Ciebie), czy
-  niejawne (wywnioskowane przez kompilator/runtime).
+- Potrafisz podać, dla każdego z trzech języków, jak rozpoznawane jest
+  spełnienie kontraktu: jawne `implements` w Javie, sprawdzane przez
+  kompilator; niejawne strukturalne dopasowanie w Go, też sprawdzane
+  przez kompilator; albo runtime'owe duck typing w Pythonie, gdzie nic
+  tego nie sprawdza — `send` musi po prostu istnieć w momencie
+  wywołania.
 
 ## Weryfikacja
 
@@ -75,12 +84,14 @@ sprawdzeniami `SilentNotifier`.
 
 ## Zastanów się
 
-- `Protocol` w Pythonie i `interface` w Go pozwalają spełnić kontrakt
-  po prostu przez posiadanie właściwej metody — bez jawnej deklaracji.
-  Java wymaga `implements Notifier` w definicji klasy. Które podejście
-  wyłapałoby literówkę w nazwie metody *wcześniej*: w momencie, gdy
-  piszesz `SilentNotifier`, czy dopiero gdy coś próbuje użyć go jako
-  `Notifier` i zawodzi?
+- `interface` w Go i `Protocol` w Pythonie pozwalają spełnić kontrakt
+  po prostu przez posiadanie właściwej metody, bez jawnej deklaracji —
+  ale kompilator Go faktycznie sprawdza to dopasowanie w momencie, gdy
+  przekazujesz swój typ tam, gdzie oczekiwany jest interfejs, podczas
+  gdy Python w tym labie nie uruchamia żadnego takiego sprawdzenia.
+  Który z trzech języków wyłapałby literówkę w nazwie metody
+  *najwcześniej*: Java i Go w czasie kompilacji, czy Python dopiero
+  wtedy, gdy coś faktycznie wywoła brakującą metodę w runtime?
 - Gdyby kolega z zespołu dał Ci klasę z metodą `send(String message)`,
   ale *zapomniał* napisać na niej `implements Notifier`, czy Java
   pozwoliłaby Ci przekazać ją wszędzie tam, gdzie oczekiwany jest
@@ -100,8 +111,9 @@ sprawdzeniami `SilentNotifier`.
 - **Podpowiedź 2:** Konkretnie w Javie, zapomnienie `implements
   Notifier` nie powstrzyma `SilentNotifier` przed skompilowaniem — ale
   *powstrzyma* Cię przed przekazaniem gołego `SilentNotifier` do
-  `sendReceiptReady`, które oczekuje `Notifier`. To jest konkretna
-  różnica względem Pythona/Go, na którą warto uważać.
+  `sendReceiptReady`, które oczekuje `Notifier`. Porównaj to z Go, gdzie
+  to samo strukturalne sprawdzenie dzieje się niejawnie w czasie
+  kompilacji, i z Pythonem, gdzie żadne takie sprawdzenie nie zachodzi.
 - **Podpowiedź 3:** Nic z tego nie wymaga narzędzia budowania — `uv
   run pytest` dla Pythona, `go test ./...` dla Go oraz `javac *.java -d
   out && java -cp out NotifierCheck` dla Javy to jedyne trzy potrzebne

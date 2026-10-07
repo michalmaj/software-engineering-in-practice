@@ -49,7 +49,7 @@ Working from your own `PROJECT_PLAN.md`'s MVP scope:
      directly), then install `uv` and run `uv sync --locked` and
      `uv run pytest` — the same two commands as Lab 19, applied to your
      own repository.
-   - **Go:** `actions/setup-go@v7` with `go-version: '1.25'`, then
+   - **Go:** `actions/setup-go@v7` with `go-version: '1.27'`, then
      `go test ./...`. No separate dependency-install step.
    - **Java:** `actions/setup-java@v6` with `distribution: 'temurin'`
      and `java-version: '21'`, then `./gradlew test`. The committed

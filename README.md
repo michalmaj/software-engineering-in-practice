@@ -4,7 +4,7 @@
 
 [![Course Health](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml/badge.svg)](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml)
 [![Python 3.13](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/)
-[![Go 1.25](https://img.shields.io/badge/Go-1.25-00ADD8)](https://go.dev/)
+[![Go 1.27](https://img.shields.io/badge/Go-1.27-00ADD8)](https://go.dev/)
 [![Java 21](https://img.shields.io/badge/Java-21-ED8B00)](https://adoptium.net/)
 [![30 Labs](https://img.shields.io/badge/30%20Labs-orange)](#course-map)
 [![Bilingual EN | PL](https://img.shields.io/badge/EN%20%7C%20PL-9cf)](README.pl.md)
@@ -103,7 +103,7 @@ cd software-engineering-in-practice
 |--------|-------------------|
 | Python | 3.13.x             |
 | `uv`   | 0.11.21 exactly    |
-| Go     | 1.25.x             |
+| Go     | 1.27.x             |
 | JDK    | 21                 |
 
 Gradle is **not** a global requirement: the Java capstone starter ships

@@ -55,8 +55,8 @@ After this lab you should be able to:
 
 ## Acceptance criteria
 
-- `api.py` and `kitchen_client.py` both configure and use a named
-  logger (not bare `print`).
+- Logging is configured once, in `api.py`'s `run()`; both `api.py` and
+  `kitchen_client.py` use named loggers (not bare `print`).
 - Order creation logs at `INFO` with the order id; a missing order logs
   at `WARNING` with the requested id; a retry failure logs at
   `WARNING`, and exhausting all retries logs at `ERROR`.

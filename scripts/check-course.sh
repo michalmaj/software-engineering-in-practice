@@ -150,6 +150,28 @@ done < <(git ls-files -- '*/go.mod' 'go.mod')
 [ "$go_failed" -eq 0 ] && ok "All Go project test suites pass"
 echo
 
+echo "== Java notifier example (javac + run) =="
+notifier_java_dir="examples/notifier/java"
+if [ -d "$notifier_java_dir" ]; then
+  tmp_dir=$(mktemp -d)
+  trap 'rm -rf "$tmp_dir"' EXIT
+  if ! javac "$notifier_java_dir"/*.java -d "$tmp_dir" > /tmp/notifier_javac_err.$$ 2>&1; then
+    fail "$notifier_java_dir: javac failed to compile"
+    sed 's/^/      /' /tmp/notifier_javac_err.$$
+  elif ! (cd "$tmp_dir" && java -cp . NotifierCheck) > /tmp/notifier_run_err.$$ 2>&1; then
+    fail "$notifier_java_dir: NotifierCheck failed"
+    sed 's/^/      /' /tmp/notifier_run_err.$$
+  else
+    ok "$notifier_java_dir: javac + NotifierCheck passed"
+  fi
+  rm -f /tmp/notifier_javac_err.$$ /tmp/notifier_run_err.$$
+  rm -rf "$tmp_dir"
+  trap - EXIT
+else
+  echo "  (no $notifier_java_dir — skipping)"
+fi
+echo
+
 echo "== Java capstone starter (committed Gradle Wrapper) =="
 java_dir="examples/capstone-starters/java"
 if [ -d "$java_dir" ]; then

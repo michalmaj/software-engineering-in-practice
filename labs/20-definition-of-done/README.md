@@ -67,9 +67,10 @@ Expected: file exists, and the count is between 5 and 8.
 ## If you get stuck
 
 - **Hint 1:** Reasonable candidate items: tests pass locally, tests
-  pass in CI, the PR has a description explaining why, at least one
-  review comment was addressed, no conflict markers remain anywhere,
-  the change is merged (not just opened as a PR).
+  pass in CI, the PR has a description explaining why, code review is
+  completed and any actionable comments are resolved, no conflict
+  markers remain anywhere, the change is merged (not just opened as a
+  PR).
 - **Hint 2:** If an item can't be checked by running a command or
   looking at a specific piece of state, rewrite it until it can.
 - **Hint 3:** For the style of a good checklist/notes file, look back

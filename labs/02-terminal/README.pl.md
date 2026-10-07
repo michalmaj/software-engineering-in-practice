@@ -31,7 +31,12 @@ Po tym labie potrafisz:
    i przekieruj tę jedną pasującą linię do nowego pliku
    `~/lab02-notes/whoami-line.txt`.
 4. Użyj `find`, żeby zlokalizować każdy plik o nazwie `findings.txt` w
-   Twoim katalogu domowym (powinien być dokładnie jeden, z Lab 01).
+   `~/lab01-notes/` i `~/lab02-notes/` — dwóch katalogach, które dotąd
+   utworzyłeś — i przekaż wynik przez pipe do `wc -l`, żeby zliczyć
+   dopasowania: `find ~/lab01-notes ~/lab02-notes -name findings.txt |
+   wc -l`. Oczekiwane: `1` — oryginał wciąż jest w `lab01-notes`; kopia
+   z kroku 1 nazywa się `findings.bak.txt`, nie `findings.txt`, więc
+   się nie liczy.
 5. Uruchom prosty, długo działający serwer:
    `python3 -m http.server 8000` z Twojego katalogu domowego.
 6. Gdy działa, w **drugim terminalu** potwierdź, że odpowiada:
@@ -55,7 +60,7 @@ Po tym labie potrafisz:
 test -f ~/lab02-notes/findings.bak.txt && echo "backup exists"
 test -f ~/lab02-notes/whoami-line.txt && echo "grep output exists"
 wc -l < ~/lab02-notes/whoami-line.txt   # expect exactly 1
-find ~ -name findings.txt               # expect exactly one path
+find ~/lab01-notes ~/lab02-notes -name findings.txt | wc -l   # expect exactly 1
 ```
 
 ## Zastanów się
@@ -70,8 +75,8 @@ find ~ -name findings.txt               # expect exactly one path
 ## Jeśli utkniesz
 
 - **Podpowiedź 1:** Potrzebujesz `cp`, `mv`, `rm` do operacji na plikach;
-  `grep` i `find` do wyszukiwania; `>` i `>>` do przekierowań; `|` do
-  przekazywania wyjścia.
+  `grep`, `find` i `wc` do wyszukiwania i zliczania; `>` i `>>` do
+  przekierowań; `|` do przekazywania wyjścia.
 - **Podpowiedź 2:** `grep "whoami" plik > wyjscie.txt` zapisuje pasujące
   linie z `plik` do `wyjscie.txt`, nadpisując go, jeśli istnieje.
 - **Podpowiedź 3:** Żeby uruchomić polecenie i od razu odzyskać terminal,

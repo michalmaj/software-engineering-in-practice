@@ -57,8 +57,9 @@ Po tym labie potrafisz:
 
 ## Kryteria akceptacji
 
-- Zarówno `api.py`, jak i `kitchen_client.py` konfigurują i używają
-  nazwanego loggera (nie gołego `print`).
+- Logowanie jest skonfigurowane raz, w `run()` w `api.py`; zarówno
+  `api.py`, jak i `kitchen_client.py` używają nazwanych loggerów (nie
+  gołego `print`).
 - Utworzenie zamówienia loguje na `INFO` z id zamówienia; brakujące
   zamówienie loguje na `WARNING` z żądanym id; nieudana próba
   ponowienia loguje na `WARNING`, a wyczerpanie wszystkich prób loguje

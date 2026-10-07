@@ -13,8 +13,11 @@ After this lab you should be able to:
 
 - Explain what makes something a "contract" independent of any one
   language's syntax for expressing it.
-- Compare Python's structural typing (`Protocol`), Go's implicit
-  interface satisfaction, and Java's explicit `implements`.
+- Compare how each language recognizes that something satisfies a
+  contract: Java's explicit, compiler-checked `implements`; Go's
+  implicit but still compiler-checked structural match; and Python's
+  runtime duck typing, where `Protocol` only documents the shape for a
+  static type checker — a checker this lab never runs.
 - Add a new implementation of an existing contract in all three
   languages.
 
@@ -46,18 +49,22 @@ After this lab you should be able to:
    `NotifierCheck.java`, add a second check that
    `ReceiptService.sendReceiptReady(new SilentNotifier(), "A123")` runs
    without throwing.
-5. For each language, note: did you have to write anything declaring
-   that `SilentNotifier` implements the `Notifier` contract, or did the
-   language figure that out from the method alone?
+5. For each language, note how satisfying the contract gets
+   recognized: did you have to write anything declaring that
+   `SilentNotifier` implements the `Notifier` contract, did the
+   compiler work it out from the method alone, or did nothing check it
+   at all?
 
 ## Acceptance criteria
 
 - All three languages have a working `SilentNotifier` and a passing
   check for it, alongside the existing `ConsoleNotifier` /
   `InMemoryNotifier` checks.
-- You can state, for each of the three languages, whether declaring
-  "this implements that contract" was explicit (written by you) or
-  implicit (inferred by the compiler/runtime).
+- You can state, for each of the three languages, how satisfying the
+  contract gets recognized: Java's explicit `implements`, checked by
+  the compiler; Go's implicit structural match, also checked by the
+  compiler; or Python's runtime duck typing, where nothing checks it
+  at all — `send` just has to exist by the time it's called.
 
 ## Verification
 
@@ -71,12 +78,14 @@ Expected: all three succeed, including your new `SilentNotifier` checks.
 
 ## Think about it
 
-- Python's `Protocol` and Go's `interface` both let you satisfy a
-  contract just by having the right method — no explicit declaration.
-  Java requires `implements Notifier` in the class definition. Which
-  approach would catch a typo in the method name *earlier*: at the
-  moment you write `SilentNotifier`, or only when something tries to
-  use it as a `Notifier` and fails?
+- Go's `interface` and Python's `Protocol` both let you satisfy a
+  contract just by having the right method, with no explicit
+  declaration — but Go's compiler actually checks that match the
+  moment you pass your type where the interface is expected, while
+  Python runs no such check at all in this lab. Which of the three
+  languages would catch a typo in the method name *earliest*: Java and
+  Go at compile time, or Python only when something actually calls the
+  missing method at runtime?
 - If a teammate handed you a class with a `send(String message)`
   method but *forgot* to write `implements Notifier` on it, would Java
   let you pass it anywhere a `Notifier` is expected? Would Python or Go
@@ -96,8 +105,9 @@ Expected: all three succeed, including your new `SilentNotifier` checks.
 - **Hint 2:** In Java specifically, forgetting `implements Notifier`
   will not stop `SilentNotifier` from compiling — but it *will* stop
   you from passing a bare `SilentNotifier` to `sendReceiptReady`,
-  which expects a `Notifier`. That's the concrete difference from
-  Python/Go to watch for.
+  which expects a `Notifier`. Watch that against Go, where the same
+  structural check happens implicitly at compile time, and against
+  Python, where no such check happens at all.
 - **Hint 3:** None of this requires a build tool — `uv run pytest` for
   Python, `go test ./...` for Go, and `javac *.java -d out && java -cp
   out NotifierCheck` for Java are the only three commands you need.

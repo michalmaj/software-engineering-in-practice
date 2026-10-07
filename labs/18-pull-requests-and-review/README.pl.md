@@ -15,8 +15,9 @@ Po tym labie potrafisz:
   istnieje, a nie tylko co się zmieniło.
 - Zrecenzować diff według konkretnej checklisty, a nie mglistego
   wrażenia.
-- Zostawić praktyczne komentarze recenzji i odpowiedzieć na nie przed
-  mergem.
+- Doprowadzić recenzję do realnego wyniku przed mergem — albo
+  merytorycznego komentarza, który został zaadresowany, albo approvala
+  popartego faktycznym przejściem checklisty.
 
 ## Zanim zaczniesz
 
@@ -60,26 +61,31 @@ Po tym labie potrafisz:
    - Czy jest tu logika powielona z `low_stock_items`, która powinna
      być ponownie użyta zamiast przepisana?
    - Czy ten diff byłby zrozumiały bez zadawania autorowi pytania?
-5. Zostaw co najmniej jeden merytoryczny komentarz recenzji — na
-   GitHubie, jeśli w parze; w
-   `labs/18-pull-requests-and-review/my-review-notes.md`, jeśli solo.
-   "Merytoryczny" znaczy, że wskazuje coś, co czytelnik faktycznie
-   chciałby zmienić albo doprecyzować — nie parafrazę diffa. Jeśli diff
-   naprawdę daje powód do więcej niż jednego takiego punktu, zostaw
-   więcej; nie wymuszaj drugiego komentarza tylko po to, żeby osiągnąć
-   liczbę.
-6. Zajmij się każdym komentarzem (napraw kod albo napisz jednolinijkową
-   odpowiedź wyjaśniającą dlaczego nie), potem zmerguj PR przyciskiem
-   merge'a na GitHubie — nie lokalnym `git merge`.
+5. W zależności od tego, co faktycznie wykaże recenzja:
+   - **Znajduje merytoryczny problem** — coś, co czytelnik faktycznie
+     chciałby zmienić albo doprecyzować, nie parafrazę diffa: zostaw
+     co najmniej jeden merytoryczny komentarz (na GitHubie, jeśli w
+     parze; w `labs/18-pull-requests-and-review/my-review-notes.md`,
+     jeśli solo), potem zajmij się nim — napraw kod albo odpowiedz,
+     wyjaśniając dlaczego nie — i potwierdź, że poprawka faktycznie
+     tam jest.
+   - **Nie znajduje niczego merytorycznego**: zaakceptuj PR (approval
+     na GitHubie, jeśli w parze), albo napisz jedną linię w
+     `my-review-notes.md`, jeśli solo, potwierdzającą, że każda
+     pozycja checklisty była faktycznie sprawdzona, nie tylko "wygląda
+     dobrze". Nie wymyślaj komentarza tylko po to, żeby go mieć.
+6. Zmerguj PR przyciskiem merge'a na GitHubie — nie lokalnym `git
+   merge` — gdy recenzja dojdzie do jednego z tych dwóch wyników.
 7. Pobierz zmergowaną zmianę do swojego lokalnego `main`.
 
 ## Kryteria akceptacji
 
 - Istniał pull request z opisem obejmującym co/dlaczego/jak
   zweryfikowano.
-- Istnieje co najmniej jeden merytoryczny komentarz recenzji (na
-  GitHubie albo w `my-review-notes.md`, jeśli solo) — na tyle
-  konkretny, żeby autor wiedział dokładnie, co z nim zrobić.
+- Recenzja doszła do jednego z dwóch uprawnionych wyników: zostawiono
+  merytoryczny komentarz i zaadresowano go, albo PR zaakceptowano z
+  krótkim zapisem, że checklista była faktycznie sprawdzona — nigdy
+  komentarza wymyślonego tylko po to, żeby spełnić to wymaganie.
 - Po pobraniu lokalny `main` zawiera `reorder_report` i jego test, a
   `uv run pytest` przechodzi.
 
@@ -113,10 +119,11 @@ przechodzące.
 - **Podpowiedź 2:** "Ponowne użycie `low_stock_items`" oznacza
   wywołanie jej z `reorder_report`, a nie skopiowanie jej logiki
   filtrowania w drugie miejsce.
-- **Podpowiedź 3:** Jeśli pracujesz solo, pisz komentarze recenzji tak,
-  jakby ktoś, kto je czyta, nie pamiętał za sześć miesięcy żadnego
-  kontekstu — to ograniczenie sprawia, że mgliste komentarze stają się
-  oczywiście bezużyteczne.
+- **Podpowiedź 3:** Jeśli pracujesz solo, pisz to, co zapisujesz —
+  komentarz albo notatkę z approvala — tak, jakby ktoś, kto to czyta,
+  nie pamiętał za sześć miesięcy żadnego kontekstu. To ograniczenie
+  sprawia, że mgliste notatki stają się oczywiście bezużyteczne,
+  niezależnie od tego, do jakiego wyniku doszła recenzja.
 
 ## Co dalej
 

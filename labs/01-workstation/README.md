@@ -14,8 +14,7 @@ After this lab you should be able to:
   directories.
 - List files, including hidden ones, and read a basic long-listing output.
 - Create and inspect files and directories from the command line.
-- Explain what `$HOME`, `$PATH`, and the current shell are, in your own
-  words.
+- Explain what `$HOME`, `$PATH`, and `$SHELL` are, in your own words.
 
 ## Before you start
 
@@ -33,8 +32,8 @@ Working only in the terminal:
 2. List the contents of your home directory, including hidden files.
 3. Create a directory called `lab01-notes` inside your home directory.
 4. Inside it, create a file called `findings.txt`.
-5. Run `echo "$SHELL"` and read what it prints — that's your current
-   shell.
+5. Run `echo "$SHELL"` and read what it prints: it shows your
+   configured login shell.
 6. Write into `findings.txt` the output of these five commands, one per
    line, labeled: `whoami`, `uname -a`, `echo "$HOME"`, `echo "$PATH"`,
    `echo "$SHELL"`. You haven't learned a text editor yet, so use this
@@ -53,7 +52,7 @@ Working only in the terminal:
 - `~/lab01-notes/findings.txt` exists and contains five labeled lines with
   real output from your machine (not made up).
 - You can state, without looking it up again, what your home directory path
-  is and what your current shell is.
+  is and what your configured login shell is.
 - You can explain what `$PATH` is used for, in one or two sentences.
 
 ## Verification

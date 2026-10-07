@@ -24,7 +24,7 @@ LAB_COUNT = 30
 # README.md and README.pl.md: real executable/config snippets, not prose
 # templates a student fills in (e.g. Lab 26's ADR template, which is
 # deliberately written in whichever language the README is).
-PARITY_LANGUAGES = {"bash", "sh", "shell", "python", "yaml", "yml"}
+PARITY_LANGUAGES = {"bash", "sh", "shell", "python", "yaml", "yml", "go", "java"}
 # This script's own path, and check-course.sh, legitimately mention the
 # AI-attribution strings below as search patterns — exclude them from
 # the scan of everything else.
