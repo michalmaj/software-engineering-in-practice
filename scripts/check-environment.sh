@@ -107,6 +107,13 @@ check "javac / JDK (Lab 14)" javac \
   'javac --version 2>&1 | grep -oE "[0-9]+(\.[0-9]+)*" | head -1' \
   "series:21" || ANY_FAILED=1
 
+if command -v curl > /dev/null 2>&1; then
+  echo "OK       curl (Lab 02) available"
+else
+  echo "MISSING  curl (Lab 02) — not on PATH"
+  ANY_FAILED=1
+fi
+
 echo
 echo "Missing something, or does a version not match? See the root README's"
 echo "toolchain table for how to install or switch to the required version."
