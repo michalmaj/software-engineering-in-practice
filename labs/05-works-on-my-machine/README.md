@@ -2,9 +2,15 @@
 
 ## Story
 
-A teammate sends you `main.py` from this folder and says "just run it, it
-prints a nice message." You try `python3 main.py`. It crashes. Their
-machine and yours are apparently not the same machine.
+A teammate sends you `main.py` and says "just run it, it prints a nice
+message." You try `python3 main.py`. It crashes. Their machine and
+yours are apparently not the same machine.
+
+This lab's code lives in `examples/works-on-my-machine/python/` —
+`examples/` is where every persistent project in this course lives,
+starting here. The rest of this page is the Python path; there's a
+Go and Java preview of the same lesson at the very end, but the
+course currently only continues past this lab in Python.
 
 ## Learning objectives
 
@@ -21,8 +27,8 @@ After this lab you should be able to:
 ## Before you start
 
 - Lab 04 complete.
-- Current directory: `labs/05-works-on-my-machine/` for all commands
-  below, unless stated otherwise.
+- Current directory: `examples/works-on-my-machine/python/` for all
+  commands below, unless stated otherwise.
 - `uv` installed. If you're in this repository's Codespace/devcontainer,
   it's already set up (see the root [`README.md`](../../README.md)). If
   you don't have it yet, install it with:
@@ -38,9 +44,10 @@ After this lab you should be able to:
 3. Run `uv sync`. Look at what appeared in this directory afterward.
 4. Run `uv run python main.py`. Compare this result with step 1.
 5. Run `uv run pytest` and confirm the test suite passes.
-6. In a new file `labs/05-works-on-my-machine/notes/my-observations.txt`,
-   write, in your own words: (a) why step 1 failed, (b) what `uv sync`
-   created and why, (c) what would happen to a teammate who only ran
+6. Back in the repository root, in a new file
+   `labs/05-works-on-my-machine/notes/my-observations.txt`, write, in
+   your own words: (a) why step 1 failed, (b) what `uv sync` created
+   and why, (c) what would happen to a teammate who only ran
    `python3 main.py` on their own machine without ever running `uv sync`.
 7. Open `.devcontainer/devcontainer.json` at the repository root and find
    the line that provisions Python. Add one more sentence to your notes
@@ -48,24 +55,24 @@ After this lab you should be able to:
 
 ## Acceptance criteria
 
-- `uv run pytest` passes inside `labs/05-works-on-my-machine/`.
+- `uv run pytest` passes inside `examples/works-on-my-machine/python/`.
 - `.venv/` and `uv.lock` exist in that directory (uv created them; do not
   hand-write either).
 - `uv.lock`, created by `uv sync` (not shipped with the starter), is
   committed to the repository. A lock file is only useful to a teammate
   if it's checked in.
-- `notes/my-observations.txt` answers all three points from step 6, plus
-  the devcontainer question from step 7.
+- `labs/05-works-on-my-machine/notes/my-observations.txt` answers all
+  three points from step 6, plus the devcontainer question from step 7.
 
 ## Verification
 
 ```bash
-cd labs/05-works-on-my-machine
+cd examples/works-on-my-machine/python
 uv run pytest
 test -f uv.lock && echo "lock file exists"
 test -d .venv && echo "virtualenv exists"
-test -f notes/my-observations.txt && echo "notes exist"
 cd -
+test -f labs/05-works-on-my-machine/notes/my-observations.txt && echo "notes exist"
 ```
 
 ## Think about it

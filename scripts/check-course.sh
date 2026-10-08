@@ -23,11 +23,11 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
 fi
 
 # Projects that deliberately ship a pyproject.toml without a committed
-# uv.lock — right now, only Lab 05 itself, whose whole point is having
-# the student generate and commit their own uv.lock. Any other project
-# with no lockfile is a real problem, not another exception, so it's
-# not auto-detected: it has to be added here on purpose.
-KNOWN_UNLOCKED_PROJECTS=("labs/05-works-on-my-machine")
+# uv.lock — right now, only the Lab 05 Python starter, whose whole point
+# is having the student generate and commit their own uv.lock. Any other
+# project with no lockfile is a real problem, not another exception, so
+# it's not auto-detected: it has to be added here on purpose.
+KNOWN_UNLOCKED_PROJECTS=("examples/works-on-my-machine/python")
 
 is_known_unlocked() {
   local dir="$1" known

@@ -2,9 +2,16 @@
 
 ## Sytuacja
 
-Kolega z zespołu przysyła Ci `main.py` z tego folderu i mówi "po prostu to
-uruchom, wypisuje ładny komunikat". Próbujesz `python3 main.py`. Program
-się wywala. Jego maszyna i Twoja najwyraźniej nie są tą samą maszyną.
+Kolega z zespołu przysyła Ci `main.py` i mówi "po prostu to uruchom,
+wypisuje ładny komunikat". Próbujesz `python3 main.py`. Program się
+wywala. Jego maszyna i Twoja najwyraźniej nie są tą samą maszyną.
+
+Kod tego laba mieszka w `examples/works-on-my-machine/python/` —
+`examples/` to miejsce, w którym żyje każdy trwały projekt tego kursu,
+zaczynając od tego laba. Reszta tej strony to ścieżka Pythona; na
+samym końcu jest podglądowa (preview) wersja tej samej lekcji w Go i
+Javie, ale kurs na razie kontynuuje się po tym labie wyłącznie w
+Pythonie.
 
 ## Cele nauki
 
@@ -21,8 +28,8 @@ Po tym labie potrafisz:
 ## Zanim zaczniesz
 
 - Lab 04 ukończony.
-- Bieżący katalog: `labs/05-works-on-my-machine/` dla wszystkich poleceń
-  poniżej, chyba że zaznaczono inaczej.
+- Bieżący katalog: `examples/works-on-my-machine/python/` dla
+  wszystkich poleceń poniżej, chyba że zaznaczono inaczej.
 - Zainstalowane `uv`. Jeśli jesteś w Codespace/devcontainerze tego
   repozytorium, jest już gotowe (patrz główny
   [`README.pl.md`](../../README.pl.md)). Jeśli jeszcze go nie masz,
@@ -40,8 +47,9 @@ Po tym labie potrafisz:
 3. Uruchom `uv sync`. Zobacz, co pojawiło się w tym katalogu.
 4. Uruchom `uv run python main.py`. Porównaj ten wynik z krokiem 1.
 5. Uruchom `uv run pytest` i potwierdź, że testy przechodzą.
-6. W nowym pliku `labs/05-works-on-my-machine/notes/my-observations.txt`
-   zapisz własnymi słowami: (a) dlaczego krok 1 się nie powiódł, (b) co
+6. Z powrotem w katalogu głównym repozytorium, w nowym pliku
+   `labs/05-works-on-my-machine/notes/my-observations.txt` zapisz
+   własnymi słowami: (a) dlaczego krok 1 się nie powiódł, (b) co
    utworzył `uv sync` i po co, (c) co stałoby się z kolegą z zespołu,
    który uruchomiłby tylko `python3 main.py` na swojej maszynie, nigdy nie
    wykonawszy `uv sync`.
@@ -52,25 +60,26 @@ Po tym labie potrafisz:
 
 ## Kryteria akceptacji
 
-- `uv run pytest` przechodzi wewnątrz `labs/05-works-on-my-machine/`.
+- `uv run pytest` przechodzi wewnątrz `examples/works-on-my-machine/python/`.
 - `.venv/` i `uv.lock` istnieją w tym katalogu (uv je utworzył; nie pisz
   żadnego z nich ręcznie).
 - `uv.lock`, utworzony przez `uv sync` (nie dostarczany razem ze
   starterem), jest zacommitowany do repozytorium — lock file jest
   przydatny koledze z zespołu tylko wtedy, gdy faktycznie jest wpięty
   do repo.
-- `notes/my-observations.txt` odpowiada na wszystkie trzy punkty z kroku
-  6, plus na pytanie o devcontainer z kroku 7.
+- `labs/05-works-on-my-machine/notes/my-observations.txt` odpowiada na
+  wszystkie trzy punkty z kroku 6, plus na pytanie o devcontainer z
+  kroku 7.
 
 ## Weryfikacja
 
 ```bash
-cd labs/05-works-on-my-machine
+cd examples/works-on-my-machine/python
 uv run pytest
 test -f uv.lock && echo "lock file exists"
 test -d .venv && echo "virtualenv exists"
-test -f notes/my-observations.txt && echo "notes exist"
 cd -
+test -f labs/05-works-on-my-machine/notes/my-observations.txt && echo "notes exist"
 ```
 
 ## Zastanów się
