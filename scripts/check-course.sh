@@ -243,6 +243,77 @@ else
 fi
 echo
 
+# Act II's restaurant-bill starters are intentionally pre-Lab-06: one
+# monolithic entry point each, no package split, no tests, and the
+# tax-before-discount bug Lab 08 teaches students to find. This section
+# only confirms each one still runs and produces the expected receipt
+# for the committed example order (the same $38 order that doesn't
+# trigger the buggy discount path) — it must never run Lab 07's tests
+# or Lab 08's fix on the student's behalf.
+echo "== Act II restaurant-bill starters (black-box smoke test) =="
+EXPECTED_RECEIPT_LINE='Total: $46.74'
+
+py_bill_starter="examples/restaurant-bill/python/bill.py"
+if [ -f "$py_bill_starter" ]; then
+  if py_bill_output=$(python3 "$py_bill_starter" 2>&1) && printf '%s\n' "$py_bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
+    ok "$py_bill_starter: runs and produces the expected receipt"
+  else
+    fail "$py_bill_starter: did not run, or produced an unexpected receipt"
+    printf '%s\n' "$py_bill_output" | sed 's/^/      /'
+  fi
+else
+  echo "  (no $py_bill_starter — skipping)"
+fi
+
+go_bill_dir="examples/restaurant-bill/go"
+if [ -f "$go_bill_dir/main.go" ]; then
+  if go_bill_output=$(cd "$go_bill_dir" && go run main.go 2>&1) && printf '%s\n' "$go_bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
+    ok "$go_bill_dir: runs and produces the expected receipt"
+  else
+    fail "$go_bill_dir: did not run, or produced an unexpected receipt"
+    printf '%s\n' "$go_bill_output" | sed 's/^/      /'
+  fi
+else
+  echo "  (no $go_bill_dir/main.go — skipping)"
+fi
+
+java_bill_dir="examples/restaurant-bill/java"
+if [ -d "$java_bill_dir" ]; then
+  wrapper_ok=1
+  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
+    if [ ! -s "$java_bill_dir/$f" ]; then
+      fail "$java_bill_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
+      wrapper_ok=0
+    fi
+  done
+  if [ ! -x "$java_bill_dir/gradlew" ]; then
+    fail "$java_bill_dir/gradlew is not executable (chmod +x it and commit the mode change)"
+    wrapper_ok=0
+  fi
+
+  if [ "$wrapper_ok" -eq 1 ]; then
+    ok "Gradle Wrapper files present and executable"
+    if java_bill_output=$(cd "$java_bill_dir" && ./gradlew run --console=plain --quiet 2>&1); then
+      if printf '%s\n' "$java_bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
+        ok "$java_bill_dir: runs and produces the expected receipt"
+      else
+        fail "$java_bill_dir: ran but produced an unexpected receipt"
+        printf '%s\n' "$java_bill_output" | sed 's/^/      /'
+      fi
+    else
+      fail "$java_bill_dir: ./gradlew run failed"
+      printf '%s\n' "$java_bill_output" | sed 's/^/      /'
+    fi
+    (cd "$java_bill_dir" && ./gradlew --stop > /dev/null 2>&1) || true
+    rm -rf "$java_bill_dir/build" "$java_bill_dir/.gradle"
+  else
+    echo "      Skipping ./gradlew run — wrapper isn't intact."
+  fi
+else
+  echo "  (no $java_bill_dir — skipping)"
+fi
+echo
+
 if [ "$FAILED" -eq 1 ]; then
   echo "Course health check FAILED. See the FAIL lines above for what to fix."
   exit 1
