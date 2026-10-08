@@ -9,8 +9,10 @@ yours are apparently not the same machine.
 This lab's code lives in `examples/works-on-my-machine/python/` —
 `examples/` is where every persistent project in this course lives,
 starting here. The rest of this page is the Python path; there's a
-Go and Java preview of the same lesson at the very end, but the
-course currently only continues past this lab in Python.
+Go and Java preview of this same reproducibility lesson at the very
+end. Labs 06-10 (Act II) also have real Go and Java tracks now, built
+around a different, self-contained project — you don't need this
+lab's Go/Java preview to start there.
 
 ## Learning objectives
 
@@ -113,16 +115,15 @@ Continue to [Lab 06 — From script to project](../06-from-script-to-project/REA
 
 ## Preview: the same lesson in Go and Java
 
-Python is the only language this course currently supports all the way
-through. Everything above this section is the real, complete Lab 05 —
-do that if you want to keep going into Lab 06 and the rest of the
-course today.
+Everything above this section is the real, complete Lab 05 in Python.
 
-The two sections below are a **preview**: a self-contained way to feel
-the same reproducible-environment lesson using Go's and Java's own
-toolchains. They don't continue into Lab 06 — there is no Go or Java
-Lab 06 yet. Treat this as an early look at a track this course is
-still building, not a second way to complete the course.
+The two sections below are a **preview** of this specific
+reproducibility lesson, not of the whole course: a self-contained way
+to feel it using Go's and Java's own toolchains. They're optional —
+Act II's Go and Java tracks (Lab 06 onward) use a different project
+and don't require you to have done this preview first. Past Lab 10,
+though, Go and Java don't continue yet; Labs 11-30 are Python-only for
+now.
 
 ### Go (preview)
 

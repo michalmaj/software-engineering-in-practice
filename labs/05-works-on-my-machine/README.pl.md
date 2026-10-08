@@ -9,9 +9,11 @@ wywala. Jego maszyna i Twoja najwyraźniej nie są tą samą maszyną.
 Kod tego laba mieszka w `examples/works-on-my-machine/python/` —
 `examples/` to miejsce, w którym żyje każdy trwały projekt tego kursu,
 zaczynając od tego laba. Reszta tej strony to ścieżka Pythona; na
-samym końcu jest podglądowa (preview) wersja tej samej lekcji w Go i
-Javie, ale kurs na razie kontynuuje się po tym labie wyłącznie w
-Pythonie.
+samym końcu jest podglądowa (preview) wersja tej samej lekcji o
+odtwarzalności w Go i Javie. Laby 06-10 (Akt II) mają teraz też
+prawdziwe ścieżki Go i Java, zbudowane wokół innego, samodzielnego
+projektu — nie potrzebujesz podglądu Go/Java z tego laba, żeby tam
+zacząć.
 
 ## Cele nauki
 
@@ -123,16 +125,14 @@ Przejdź do [Lab 06 — Od skryptu do projektu](../06-from-script-to-project/REA
 
 ## Podgląd: ta sama lekcja w Go i Javie
 
-Python jest na razie jedynym językiem, który ten kurs wspiera od
-początku do końca. Wszystko powyżej tej sekcji to prawdziwy, kompletny
-Lab 05 — zrób to, jeśli chcesz kontynuować do Lab 06 i reszty kursu już
-teraz.
+Wszystko powyżej tej sekcji to prawdziwy, kompletny Lab 05 w Pythonie.
 
-Dwie sekcje poniżej to **podgląd (preview)**: samodzielny sposób, żeby
-poczuć tę samą lekcję o odtwarzalnym środowisku, używając własnych
-toolchainów Go i Javy. Nie prowadzą do Lab 06 — nie istnieje jeszcze
-Lab 06 dla Go albo Javy. Traktuj to jako wczesny podgląd ścieżki, którą
-ten kurs wciąż buduje, nie jako drugi sposób na ukończenie kursu.
+Dwie sekcje poniżej to **podgląd** tej konkretnej lekcji o
+odtwarzalności, nie całego kursu: samodzielny sposób, żeby ją poczuć,
+używając własnych toolchainów Go i Javy. Są opcjonalne — ścieżki Go i
+Java Aktu II (Lab 06 i dalej) używają innego projektu i nie wymagają,
+żebyś najpierw zrobił/a ten podgląd. Za Lab 10 Go i Java jednak jeszcze
+nie kontynuują; Laby 11-30 są na razie tylko w Pythonie.
 
 ### Go (podgląd)
 
