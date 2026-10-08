@@ -2,9 +2,10 @@
 
 ## Sytuacja
 
-Właśnie dołączasz do projektu. Ktoś podał Ci laptopa albo, jak w tym
-przypadku, świeżego GitHub Codespace'a. Zanim zmienisz choćby jedną linijkę
-kodu, musisz wiedzieć, gdzie jesteś, co jest dookoła i jak się poruszać.
+Właśnie dołączasz do projektu. Ktoś podał Ci laptopa — ten, który masz
+teraz przed sobą, świeżo skonfigurowany. Zanim zmienisz choćby jedną
+linijkę kodu, musisz wiedzieć, gdzie jesteś, co jest dookoła i jak się
+poruszać.
 
 ## Cele nauki
 
@@ -19,9 +20,9 @@ Po tym labie potrafisz:
 
 ## Zanim zaczniesz
 
-- Masz otwarte środowisko (Codespaces albo lokalne — zobacz główny
-  [`README.pl.md`](../../README.pl.md)).
-- Masz otwarty zintegrowany terminal.
+- Masz własną kopię tego repozytorium otwartą w VS Code, z działającym
+  terminalem wewnątrz — jeśli jeszcze tam nie jesteś, podążaj najpierw za
+  [`START-HERE.pl.md`](../../START-HERE.pl.md).
 - Żadne wcześniejsze laboratorium nie jest wymagane — to jest pierwsze.
 
 ## Twoje zadanie
@@ -45,7 +46,7 @@ Pracując wyłącznie w terminalu:
    `>>` porządnie, razem z `>` i `|`, w Lab 02 — to jeden element,
    którego potrzebujesz wcześniej, żeby skończyć ten lab.)
 7. Użyj `which`, żeby sprawdzić, gdzie na dysku faktycznie znajdują się
-   programy `python3` i `git`.
+   programy `git` i `code`.
 8. Otwórz `findings.txt` poleceniem `less` i potwierdź jego zawartość.
 
 ## Kryteria akceptacji
@@ -61,8 +62,8 @@ Pracując wyłącznie w terminalu:
 ```bash
 test -f ~/lab01-notes/findings.txt && echo "file exists"
 wc -l < ~/lab01-notes/findings.txt   # expect at least 5
-which python3
 which git
+which code
 ```
 
 Jeśli obie komendy `which` wypisują ścieżkę (a nie błąd), Twoje narzędzia są

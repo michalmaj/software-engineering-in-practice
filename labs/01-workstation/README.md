@@ -2,9 +2,10 @@
 
 ## Story
 
-You just joined a software project. Someone handed you a laptop, or in this
-case, a fresh GitHub Codespace. Before you can change a single line of code,
-you need to know where you are, what's around you, and how to move.
+You just joined a software project. Someone handed you a laptop — the one
+in front of you right now, freshly set up. Before you can change a single
+line of code, you need to know where you are, what's around you, and how
+to move.
 
 ## Learning objectives
 
@@ -18,9 +19,9 @@ After this lab you should be able to:
 
 ## Before you start
 
-- You have an environment open (Codespaces or local — see the root
-  [`README.md`](../../README.md)).
-- You have an integrated terminal open.
+- You have your own copy of this repository open in VS Code, with a
+  working terminal inside it — if you're not there yet, follow
+  [`START-HERE.md`](../../START-HERE.md) first.
 - No previous lab is required — this is the first one.
 
 ## Your task
@@ -43,7 +44,7 @@ Working only in the terminal:
    labeled line. Repeat for each of the five commands. (You'll learn
    `>>` properly, alongside `>` and `|`, in Lab 02 — this is the one
    piece you need early to finish this lab.)
-7. Use `which` to find out where the `python3` and `git` executables
+7. Use `which` to find out where the `git` and `code` executables
    live on disk.
 8. Open `findings.txt` with `less` and confirm its contents.
 
@@ -60,8 +61,8 @@ Working only in the terminal:
 ```bash
 test -f ~/lab01-notes/findings.txt && echo "file exists"
 wc -l < ~/lab01-notes/findings.txt   # expect at least 5
-which python3
 which git
+which code
 ```
 
 If both `which` commands print a path (not an error), your tools are

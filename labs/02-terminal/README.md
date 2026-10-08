@@ -36,19 +36,24 @@ After this lab you should be able to:
    -l`. Expect `1`: the original is still in `lab01-notes`; the copy
    you made in step 1 is named `findings.bak.txt`, not `findings.txt`,
    so it doesn't match.
-5. Start a simple long-running server:
-   `python3 -m http.server 8000` from your home directory.
-6. While it's running, in a **second terminal**, confirm it responds:
-   `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8000/`
-   (expect `200`).
-7. Stop the server in the first terminal with `Ctrl+C`. Confirm in the
-   second terminal that the same `curl` command now fails to connect.
+5. Start a simple long-running process in your home directory — a loop
+   that appends the current time to a file once a second, forever,
+   until you stop it:
+   `while true; do date >> ~/lab02-notes/ticker.txt; sleep 1; done`.
+6. While it's running, in a **second terminal**, confirm it's actually
+   making progress by checking the line count twice, a couple of
+   seconds apart: `wc -l ~/lab02-notes/ticker.txt` (expect the second
+   number to be higher than the first).
+7. Stop the process in the first terminal with `Ctrl+C`. Confirm in
+   the second terminal that the line count has stopped growing: run
+   `wc -l ~/lab02-notes/ticker.txt` twice more, a couple of seconds
+   apart, and expect the same number both times.
 
 ## Acceptance criteria
 
 - `~/lab02-notes/findings.bak.txt` and `~/lab02-notes/whoami-line.txt` both
   exist, and the latter contains exactly one line, matching `whoami`.
-- You can point to the exact command that stopped the server, and explain
+- You can point to the exact command that stopped the process, and explain
   what signal `Ctrl+C` sends.
 - You can explain the difference between `>` and `>>`.
 
@@ -65,7 +70,7 @@ find ~/lab01-notes ~/lab02-notes -name findings.txt | wc -l   # expect exactly 1
 
 - What is the practical difference between piping (`|`) one command into
   another and redirecting (`>`) into a file?
-- The server kept running after you pressed Enter on the first command.
+- The process kept running after you pressed Enter on the first command.
   Why didn't your terminal give you a new prompt right away?
 - What would `>` (instead of `>>`) have done to `findings.txt` if you had
   used it in Lab 01 by mistake?

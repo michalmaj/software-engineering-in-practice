@@ -37,20 +37,25 @@ Po tym labie potrafisz:
    wc -l`. Oczekiwane: `1` — oryginał wciąż jest w `lab01-notes`; kopia
    z kroku 1 nazywa się `findings.bak.txt`, nie `findings.txt`, więc
    się nie liczy.
-5. Uruchom prosty, długo działający serwer:
-   `python3 -m http.server 8000` z Twojego katalogu domowego.
-6. Gdy działa, w **drugim terminalu** potwierdź, że odpowiada:
-   `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8000/`
-   (oczekiwane `200`).
-7. Zatrzymaj serwer w pierwszym terminalu przez `Ctrl+C`. Potwierdź w
-   drugim terminalu, że to samo polecenie `curl` teraz nie łączy się.
+5. Uruchom prosty, długo działający proces w swoim katalogu domowym —
+   pętlę, która co sekundę dopisuje aktualny czas do pliku, w kółko, aż
+   go zatrzymasz:
+   `while true; do date >> ~/lab02-notes/ticker.txt; sleep 1; done`.
+6. Gdy działa, w **drugim terminalu** potwierdź, że faktycznie robi
+   postępy, sprawdzając liczbę linii dwa razy, z kilkusekundową
+   przerwą: `wc -l ~/lab02-notes/ticker.txt` (oczekiwane: druga liczba
+   jest wyższa niż pierwsza).
+7. Zatrzymaj proces w pierwszym terminalu przez `Ctrl+C`. Potwierdź w
+   drugim terminalu, że liczba linii przestała rosnąć: uruchom
+   `wc -l ~/lab02-notes/ticker.txt` jeszcze dwa razy, z kilkusekundową
+   przerwą, i oczekuj tej samej liczby oba razy.
 
 ## Kryteria akceptacji
 
 - `~/lab02-notes/findings.bak.txt` oraz `~/lab02-notes/whoami-line.txt`
   istnieją, a ten drugi zawiera dokładnie jedną linię, pasującą do
   `whoami`.
-- Potrafisz wskazać dokładne polecenie, które zatrzymało serwer, i
+- Potrafisz wskazać dokładne polecenie, które zatrzymało proces, i
   wyjaśnić, jaki sygnał wysyła `Ctrl+C`.
 - Potrafisz wyjaśnić różnicę między `>` a `>>`.
 
@@ -67,7 +72,7 @@ find ~/lab01-notes ~/lab02-notes -name findings.txt | wc -l   # expect exactly 1
 
 - Jaka jest praktyczna różnica między przekazaniem (`|`) jednego polecenia
   do drugiego a przekierowaniem (`>`) do pliku?
-- Serwer działał dalej po naciśnięciu Enter w pierwszym poleceniu. Dlaczego
+- Proces działał dalej po naciśnięciu Enter w pierwszym poleceniu. Dlaczego
   terminal nie oddał Ci od razu nowego prompta?
 - Co zrobiłoby `>` (zamiast `>>`) z `findings.txt`, gdyby to była Twoja
   pomyłka w Lab 01?

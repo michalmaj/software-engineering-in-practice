@@ -2,6 +2,11 @@
 
 [Read this in English →](README.md)
 
+**Nowy/a tutaj? → [Zacznij tutaj](START-HERE.pl.md)** przeprowadzi Cię
+przez konfigurację komputera (Windows, macOS albo Linux) i otwarcie tego
+repozytorium — bez zakładanego doświadczenia z terminalem, Gitem czy
+GitHubem.
+
 [![Course Health](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml/badge.svg)](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml)
 [![Python 3.13](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/)
 [![Go 1.27](https://img.shields.io/badge/Go-1.27-00ADD8)](https://go.dev/)
@@ -53,8 +58,78 @@ projekt zespołowy → przekazanie
 
 ## Zacznij tutaj
 
-Preferowana ścieżka to: **fork → Codespace → terminal → Lab 01.** Ten
-kurs nie zakłada GitHub Classroom — wystarczy zwykłe konto na GitHubie.
+Nowy/a w terminalu, Gicie albo GitHubie? Podążaj najpierw za
+[`START-HERE.pl.md`](START-HERE.pl.md) — wybiera właściwy przewodnik dla
+Twojego komputera (Windows, macOS albo Linux) i przeprowadza Cię przez
+instalację Gita i VS Code, fork tego repozytorium i jego klonowanie,
+zakładając zerowe wcześniejsze doświadczenie.
+
+Już czujesz się swobodnie z Gitem i terminalem? Krótka wersja:
+
+1. Zrób fork tego repozytorium (przycisk **Fork** w prawym górnym rogu
+   strony GitHub).
+2. Sklonuj swój fork i otwórz go w VS Code — zobacz
+   [`START-HERE.pl.md`](START-HERE.pl.md) po dokładne komendy dla
+   swojego systemu.
+3. Otwórz
+   [`labs/01-workstation/README.pl.md`](labs/01-workstation/README.pl.md)
+   i zaczynaj.
+
+Wolisz środowisko w przeglądarce zamiast instalować coś lokalnie? Zobacz
+[GitHub Codespaces](#github-codespaces) poniżej.
+
+## Konfiguracja lokalna (ścieżka domyślna)
+
+Windows, macOS i Linux to teraz równoprawne, w pełni wspierane ścieżki —
+nie fallback. [`START-HERE.pl.md`](START-HERE.pl.md) i przewodniki pod
+[`docs/setup/`](docs/setup/) prowadzą przez każdą z nich w pełnym,
+krok-po-kroku szczególe.
+
+Samo zdobycie repozytorium na swój komputer wymaga tylko Gita — bez
+Docker Desktop, bez WSL, bez GitHub Desktop. **Nie** będziesz potrzebować
+Pythona, Go ani JDK, aż dotrzesz do labu, w którym wybierasz track
+językowy — instalowanie wszystkich trzech toolchainów na starcie nie
+jest potrzebne i nie jest oczekiwane na Lab 01.
+
+Gdy już wybierzesz track językowy, kolejne laby potrzebują prawdziwego
+toolchainu, i nie będziemy udawać inaczej:
+
+| Narzędzie | Wymagana wersja      |
+|-----------|------------------------|
+| Python    | 3.13.x                 |
+| `uv`      | dokładnie 0.11.21      |
+| Go        | 1.27.x                 |
+| JDK       | 21                     |
+
+Gradle **nie** jest wymaganiem globalnym: startery Java mają już własny,
+zacommitowany Gradle Wrapper (`./gradlew`), więc lokalnie potrzebujesz
+tylko JDK. Żeby sprawdzić swój toolchain względem tej tabeli w
+dowolnym momencie, uruchom `./scripts/check-environment.sh` — to
+narzędzie referencyjne dla późniejszych labów, nie brama dla Lab 01.
+
+## GitHub Codespaces
+
+Wolisz nie instalować niczego lokalnie? Codespaces uruchamia ten kurs w
+środowisku w przeglądarce, zamiast na Twoim własnym komputerze — nic do
+instalowania, ale wymaga stabilnego internetu na każdą sesję, a darmowy
+limit GitHuba ma miesięczne ograniczenia.
+
+- **Utwórz go na swoim forku**, nie na oryginalnym repozytorium kursu —
+  potrzebujesz uprawnień do zapisu do kolejnych labów, które każą Ci
+  commitować i pushować. Utworzenie Codespace'a na oryginalnym
+  repozytorium zamiast na swoim forku to najczęstszy błąd na starcie —
+  sprawdź dwa razy nazwę repozytorium w adresie URL, zanim przejdziesz
+  dalej.
+- **Otwórz terminal** przez **Terminal → New Terminal**, gdy Codespace
+  skończy się inicjalizować.
+- **Toolchain jest już zainstalowany** — Python, Go i JDK są już
+  skonfigurowane. Uruchomienie `./scripts/check-environment.sh` jest
+  opcjonalne, przydatne tylko, jeśli chcesz potwierdzić, że wersje
+  zgadzają się z tabelą powyżej; nie jest wymagane, żeby zacząć Lab 01.
+- **Zatrzymuj Codespace'y, z których nie korzystasz** z poziomu
+  [github.com/codespaces](https://github.com/codespaces) (albo pozwól
+  im się automatycznie uśpić). Codespaces ma miesięczne limity użycia;
+  zatrzymanie nie usuwa Twojej pracy.
 
 1. Zrób fork tego repozytorium (przycisk **Fork** w prawym górnym rogu
    strony GitHub).
@@ -64,58 +139,6 @@ kurs nie zakłada GitHub Classroom — wystarczy zwykłe konto na GitHubie.
 4. Otwórz
    [`labs/01-workstation/README.pl.md`](labs/01-workstation/README.pl.md)
    i zaczynaj.
-
-## GitHub Codespaces
-
-Codespaces to zalecany sposób przechodzenia tego kursu: każdy dostaje to
-samo środowisko, bez niczego do instalowania na własnej maszynie na
-starcie.
-
-- **Dlaczego z tego korzystamy:** brak lokalnego setupu, brak "u mnie
-  działa" jeszcze przed Labem 1, i działa z dowolnej maszyny, która
-  potrafi uruchomić przeglądarkę.
-- **Środowisko jest oparte na Linuksie** (Ubuntu), niezależnie od tego,
-  co masz na własnym laptopie. Każde polecenie i ścieżka w tym kursie
-  zakłada powłokę uniksopodobną.
-- **Utwórz go na swoim forku**, nie na oryginalnym repozytorium kursu —
-  potrzebujesz uprawnień do zapisu do kolejnych labów, które każą Ci
-  commitować i pushować. Utworzenie Codespace'a na oryginalnym
-  repozytorium zamiast na swoim forku to najczęstszy błąd na starcie —
-  sprawdź dwa razy nazwę repozytorium w adresie URL, zanim przejdziesz
-  dalej.
-- **Otwórz terminal** przez **Terminal → New Terminal**, gdy Codespace
-  skończy się inicjalizować.
-- **Zweryfikuj swój toolchain**, uruchamiając
-  `./scripts/check-environment.sh` — sprawdza wersje, których ten kurs
-  faktycznie potrzebuje, i mówi dokładnie, czego brakuje albo co się nie
-  zgadza.
-- **Zatrzymuj Codespace'y, z których nie korzystasz** z poziomu
-  [github.com/codespaces](https://github.com/codespaces) (albo pozwól
-  im się automatycznie uśpić). Codespaces ma miesięczne limity użycia;
-  zatrzymanie nie usuwa Twojej pracy.
-
-## Lokalne środowisko uniksopodobne
-
-Linux i macOS to wspierany fallback. Samo zdobycie repozytorium wymaga
-tylko Gita i forka — bez Docker Desktop, bez WSL. Same laby jednak
-potrzebują prawdziwego toolchainu, i nie będziemy udawać inaczej:
-
-```bash
-git clone <your-fork-url>
-cd software-engineering-in-practice
-./scripts/check-environment.sh
-```
-
-| Narzędzie | Wymagana wersja      |
-|-----------|------------------------|
-| Python    | 3.13.x                 |
-| `uv`      | dokładnie 0.11.21      |
-| Go        | 1.27.x                 |
-| JDK       | 21                     |
-
-Gradle **nie** jest wymaganiem globalnym: starter Java do projektu
-końcowego ma już własny, zacommitowany Gradle Wrapper (`./gradlew`),
-więc lokalnie potrzebujesz tylko JDK.
 
 ## Języki i narzędzia
 
