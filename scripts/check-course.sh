@@ -205,6 +205,44 @@ else
 fi
 echo
 
+# This is a second, deliberately explicit copy of the capstone check
+# above rather than a loop over every `*/gradlew` — generalizing Java
+# project discovery (the same way Python/Go are already discovered via
+# `*/pyproject.toml` and `*/go.mod`) is a later migration stage's job,
+# once there's more than one or two Gradle starters to justify it.
+echo "== Java works-on-my-machine starter (committed Gradle Wrapper) =="
+java_womm_dir="examples/works-on-my-machine/java"
+if [ -d "$java_womm_dir" ]; then
+  wrapper_ok=1
+  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
+    if [ ! -s "$java_womm_dir/$f" ]; then
+      fail "$java_womm_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
+      wrapper_ok=0
+    fi
+  done
+  if [ ! -x "$java_womm_dir/gradlew" ]; then
+    fail "$java_womm_dir/gradlew is not executable (chmod +x it and commit the mode change)"
+    wrapper_ok=0
+  fi
+
+  if [ "$wrapper_ok" -eq 1 ]; then
+    ok "Gradle Wrapper files present and executable"
+    echo "  -- $java_womm_dir --"
+    if (cd "$java_womm_dir" && ./gradlew test); then
+      ok "$java_womm_dir: ./gradlew test passed"
+    else
+      fail "$java_womm_dir: ./gradlew test failed"
+    fi
+    (cd "$java_womm_dir" && ./gradlew --stop > /dev/null 2>&1) || true
+    rm -rf "$java_womm_dir/build" "$java_womm_dir/.gradle"
+  else
+    echo "      Skipping ./gradlew test — wrapper isn't intact."
+  fi
+else
+  echo "  (no $java_womm_dir — skipping)"
+fi
+echo
+
 if [ "$FAILED" -eq 1 ]; then
   echo "Course health check FAILED. See the FAIL lines above for what to fix."
   exit 1
