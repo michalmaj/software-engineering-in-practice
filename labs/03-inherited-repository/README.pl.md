@@ -19,9 +19,9 @@ Po tym labie potrafisz:
 ## Zanim zaczniesz
 
 - Lab 02 ukończony.
-- Jesteś wewnątrz klona tego repozytorium (Codespaces daje Ci go od razu;
-  lokalnie użyj polecenia `git clone` z głównego
-  [`README.pl.md`](../../README.pl.md)).
+- Jesteś wewnątrz własnego klona tego repozytorium (skonfigurowałeś/aś to
+  w [`START-HERE.pl.md`](../../START-HERE.pl.md) — albo, jeśli używasz
+  Codespaces, jest już dla Ciebie przygotowany).
 - Bieżący katalog: katalog główny repozytorium.
 
 ## Twoje zadanie

@@ -21,14 +21,19 @@ After this lab you should be able to:
 ## Before you start
 
 - Lab 03 complete — you have at least one local commit.
-- Your repository has a configured remote (Codespaces and a normal `git
-  clone` both set this up automatically).
+- Your repository has a configured remote (cloning your fork, whether
+  via [`START-HERE.md`](../../START-HERE.md) or Codespaces, sets this
+  up automatically).
 - Current directory: the repository root.
 - If `git remote -v` shows a URL that is *not* your own fork (it points
-  to the original course repository instead), stop here — go back to
-  the root [`README.md`](../../README.md)'s fork instructions before
-  continuing. Pushing to a repository you don't own will fail with a
-  permissions error.
+  to the original course repository instead), stop here — see
+  [`docs/setup/already-have-a-fork.md`](../../docs/setup/already-have-a-fork.md)
+  before continuing. Pushing to a repository you don't own will fail
+  with a permissions error.
+- This lab is also where you'll push to GitHub for the first time. If
+  Git asks you to authenticate and you're not sure what to do, see
+  [`docs/setup/github-auth.md`](../../docs/setup/github-auth.md) —
+  it's written for exactly this moment.
 
 ## Your task
 

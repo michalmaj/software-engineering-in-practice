@@ -19,9 +19,9 @@ After this lab you should be able to:
 ## Before you start
 
 - Lab 02 complete.
-- You are inside a clone of this repository (Codespaces already gives you
-  one; locally, use the `git clone` command from the root
-  [`README.md`](../../README.md)).
+- You are inside your own clone of this repository (you set this up in
+  [`START-HERE.md`](../../START-HERE.md) — or, if you're using
+  Codespaces instead, it's already provided for you).
 - Current directory: the repository root.
 
 ## Your task

@@ -22,15 +22,20 @@ Po tym labie potrafisz:
 ## Zanim zaczniesz
 
 - Lab 03 ukończony — masz co najmniej jeden lokalny commit.
-- Twoje repozytorium ma skonfigurowany remote (Codespaces i zwykłe `git
-  clone` ustawiają to automatycznie).
+- Twoje repozytorium ma skonfigurowany remote (klonowanie swojego forka,
+  czy to przez [`START-HERE.pl.md`](../../START-HERE.pl.md), czy przez
+  Codespaces, ustawia to automatycznie).
 - Bieżący katalog: katalog główny repozytorium.
 - Jeśli `git remote -v` pokazuje adres URL, który *nie* jest Twoim
   własnym forkiem (wskazuje na oryginalne repozytorium kursu), zatrzymaj
-  się tutaj — wróć do instrukcji forkowania w głównym
-  [`README.pl.md`](../../README.pl.md), zanim będziesz kontynuować.
-  Push do repozytorium, którego nie jesteś właścicielem, zawiedzie z
-  błędem uprawnień.
+  się tutaj — zobacz
+  [`docs/setup/already-have-a-fork.pl.md`](../../docs/setup/already-have-a-fork.pl.md),
+  zanim będziesz kontynuować. Push do repozytorium, którego nie jesteś
+  właścicielem, zawiedzie z błędem uprawnień.
+- To jest też lab, w którym robisz push do GitHuba po raz pierwszy.
+  Jeśli Git prosi Cię o autoryzację i nie jesteś pewien/pewna, co zrobić,
+  zobacz [`docs/setup/github-auth.pl.md`](../../docs/setup/github-auth.pl.md)
+  — jest napisane właśnie na ten moment.
 
 ## Twoje zadanie
 
