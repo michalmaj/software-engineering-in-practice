@@ -243,6 +243,48 @@ else
 fi
 echo
 
+# Act III's discount-codes Java variants (version-a: coupled,
+# version-b: decoupled) are both finished, ready-to-run comparison
+# material for Lab 12 — unlike Act II's restaurant-bill starters,
+# these already have their full test suites. Only SAVE10/SAVE5/unknown
+# are covered here; SAVE20 (Lab 12) and SAVE_FLAT2 (Lab 15) are each
+# student work and must not appear in this public tree.
+for discount_codes_java_dir in \
+  "examples/discount-codes/version-a/java" \
+  "examples/discount-codes/version-b/java"; do
+  echo "== Java discount-codes $discount_codes_java_dir (committed Gradle Wrapper) =="
+  if [ -d "$discount_codes_java_dir" ]; then
+    wrapper_ok=1
+    for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
+      if [ ! -s "$discount_codes_java_dir/$f" ]; then
+        fail "$discount_codes_java_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
+        wrapper_ok=0
+      fi
+    done
+    if [ ! -x "$discount_codes_java_dir/gradlew" ]; then
+      fail "$discount_codes_java_dir/gradlew is not executable (chmod +x it and commit the mode change)"
+      wrapper_ok=0
+    fi
+
+    if [ "$wrapper_ok" -eq 1 ]; then
+      ok "Gradle Wrapper files present and executable"
+      echo "  -- $discount_codes_java_dir --"
+      if (cd "$discount_codes_java_dir" && ./gradlew test); then
+        ok "$discount_codes_java_dir: ./gradlew test passed"
+      else
+        fail "$discount_codes_java_dir: ./gradlew test failed"
+      fi
+      (cd "$discount_codes_java_dir" && ./gradlew --stop > /dev/null 2>&1) || true
+      rm -rf "$discount_codes_java_dir/build" "$discount_codes_java_dir/.gradle"
+    else
+      echo "      Skipping ./gradlew test — wrapper isn't intact."
+    fi
+  else
+    echo "  (no $discount_codes_java_dir — skipping)"
+  fi
+  echo
+done
+
 # Act II's restaurant-bill starters are intentionally pre-Lab-06: one
 # monolithic entry point each, no package split, no tests, and the
 # tax-before-discount bug Lab 08 teaches students to find. This section
