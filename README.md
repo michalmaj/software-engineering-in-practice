@@ -2,6 +2,10 @@
 
 [Czytaj po polsku →](README.pl.md)
 
+**New here? → [Start here](START-HERE.md)** walks you through setting
+up your computer (Windows, macOS, or Linux) and opening this
+repository — no terminal, Git, or GitHub experience assumed.
+
 [![Course Health](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml/badge.svg)](https://github.com/michalmaj/software-engineering-in-practice/actions/workflows/course-health.yml)
 [![Python 3.13](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/)
 [![Go 1.27](https://img.shields.io/badge/Go-1.27-00ADD8)](https://go.dev/)
@@ -50,54 +54,40 @@ team project → handover
 
 ## Start here
 
-The preferred path is: **fork → Codespace → terminal → Lab 01.** This
-course doesn't assume GitHub Classroom — just a regular GitHub account.
+New to terminals, Git, or GitHub? Follow
+[`START-HERE.md`](START-HERE.md) first — it picks the right guide for
+your computer (Windows, macOS, or Linux) and walks you through
+installing Git and VS Code, forking this repository, and cloning it,
+assuming no prior experience.
 
-1. Fork this repository (**Fork** button, top right of the GitHub page).
-2. On **your fork**, open **Code → Codespaces → Create codespace on
-   main**.
-3. Open the integrated terminal (**Terminal → New Terminal**).
-4. Open [`labs/01-workstation/README.md`](labs/01-workstation/README.md)
+Already comfortable with Git and a terminal? The short version:
+
+1. Fork this repository (**Fork** button, top right of the GitHub
+   page).
+2. Clone your fork and open it in VS Code — see
+   [`START-HERE.md`](START-HERE.md) for the exact commands for your
+   system.
+3. Open [`labs/01-workstation/README.md`](labs/01-workstation/README.md)
    and begin.
 
-## GitHub Codespaces
+Prefer a browser-based environment instead of installing anything
+locally? See [GitHub Codespaces](#github-codespaces) below.
 
-Codespaces is the recommended way to run this course: everyone gets the
-same environment, with nothing to install on your own machine first.
+## Local setup (the default path)
 
-- **Why we use it:** no local setup, no "works on my machine" before
-  Lab 1 even starts, and it works from any machine that can run a
-  browser.
-- **The environment is Linux-based** (Ubuntu), regardless of what your
-  own laptop runs. Every command and path in this course assumes a
-  Unix-like shell.
-- **Create it from your own fork**, not the original course repository.
-  You need write access for later labs that have you commit and push.
-  Creating a Codespace on the original repository instead of your fork
-  is the single most common setup mistake; double-check the repository
-  name in the URL before continuing.
-- **Open the terminal** with **Terminal → New Terminal** once the
-  Codespace finishes initializing.
-- **Verify your toolchain** by running `./scripts/check-environment.sh`,
-  which checks the versions this course needs and tells you what's
-  missing or mismatched.
-- **Stop Codespaces you're not using** from
-  [github.com/codespaces](https://github.com/codespaces) (or let them
-  auto-suspend). Codespaces has monthly usage limits; stopping one
-  doesn't delete your work.
+Windows, macOS, and Linux are all equally supported, first-class paths
+— not a fallback. [`START-HERE.md`](START-HERE.md) and the guides
+under [`docs/setup/`](docs/setup/) walk through each one in full,
+click-by-click detail.
 
-## Local Unix-like setup
+Getting the repository itself onto your computer only needs Git — no
+Docker Desktop, no WSL, no GitHub Desktop. You will **not** need
+Python, Go, or a JDK until you reach the lab where you pick a language
+track — installing all three toolchains up front isn't necessary and
+isn't expected for Lab 01.
 
-Linux and macOS are a supported fallback. Getting the repository itself
-needs only Git and a fork — no Docker Desktop, no WSL. The labs
-themselves, though, do need a real toolchain, and we won't pretend
-otherwise:
-
-```bash
-git clone <your-fork-url>
-cd software-engineering-in-practice
-./scripts/check-environment.sh
-```
+Once you've picked a language track, later labs do need a real
+toolchain, and we won't pretend otherwise:
 
 | Tool   | Required version |
 |--------|-------------------|
@@ -106,9 +96,41 @@ cd software-engineering-in-practice
 | Go     | 1.27.x             |
 | JDK    | 21                 |
 
-Gradle is **not** a global requirement: the Java capstone starter ships
-its own committed Gradle Wrapper (`./gradlew`), so all you need locally
-is a JDK.
+Gradle is **not** a global requirement: Java starters ship their own
+committed Gradle Wrapper (`./gradlew`), so all you need locally is a
+JDK. To check your toolchain against this table at any point, run
+`./scripts/check-environment.sh` — it's a reference tool for later
+labs, not a gate for Lab 01.
+
+## GitHub Codespaces
+
+Prefer not to install anything locally? Codespaces runs this course in
+a browser-based environment instead of on your own machine — nothing
+to install, but it needs a stable internet connection for every
+session, and GitHub's free tier has monthly usage limits.
+
+- **Create it from your own fork**, not the original course repository.
+  You need write access for later labs that have you commit and push.
+  Creating a Codespace on the original repository instead of your fork
+  is the single most common setup mistake; double-check the repository
+  name in the URL before continuing.
+- **Open the terminal** with **Terminal → New Terminal** once the
+  Codespace finishes initializing.
+- **The toolchain is already installed** — Python, Go, and the JDK all
+  come preconfigured. Running `./scripts/check-environment.sh` is
+  optional, useful only if you want to confirm versions match the table
+  above; it's not required to start Lab 01.
+- **Stop Codespaces you're not using** from
+  [github.com/codespaces](https://github.com/codespaces) (or let them
+  auto-suspend). Codespaces has monthly usage limits; stopping one
+  doesn't delete your work.
+
+1. Fork this repository (**Fork** button, top right of the GitHub page).
+2. On **your fork**, open **Code → Codespaces → Create codespace on
+   main**.
+3. Open the integrated terminal (**Terminal → New Terminal**).
+4. Open [`labs/01-workstation/README.md`](labs/01-workstation/README.md)
+   and begin.
 
 ## Languages and tools
 
