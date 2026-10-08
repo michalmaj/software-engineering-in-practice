@@ -179,3 +179,27 @@ Czego to uczy: linia `go` w `go.mod` to prawdziwe, wymuszane wymaganie,
 tak jak `pyproject.toml` i `uv.lock` dla Pythona — nie komentarz, który
 nikt nie sprawdza.
 
+### Java (podgląd)
+
+Starter: `examples/works-on-my-machine/java/`. Wymaga JDK 21 i
+zacommitowanego Gradle Wrapper — bez globalnej instalacji Gradle.
+
+1. Potwierdź, że starter działa dokładnie tak, jak jest zacommitowany:
+   ```bash
+   cd examples/works-on-my-machine/java
+   ./gradlew test build
+   ```
+   Oczekiwane: `BUILD SUCCESSFUL`.
+2. W swojej własnej kopii roboczej otwórz `build.gradle` i znajdź
+   `JavaLanguageVersion.of(21)`. Zmień `21` na `25`.
+3. Uruchom `./gradlew build` jeszcze raz. Przeczytaj błąd — Gradle
+   mówi wprost, że żaden zainstalowany JDK nie spełnia tego, czego
+   teraz żąda projekt, i że nie jest skonfigurowany, żeby którykolwiek
+   pobrać.
+4. Zmień `25` z powrotem na `21`. Uruchom `./gradlew build` jeszcze raz
+   i potwierdź, że jest znowu zielone.
+
+Czego to uczy: wersja toolchaina mieszka w `build.gradle`,
+zacommitowana razem z kodem, z tego samego powodu, dla którego sam
+Gradle Wrapper przypina, który Gradle uruchamia ten projekt — żadne z
+nich nie jest pozostawione temu, co akurat jest na maszynie.
