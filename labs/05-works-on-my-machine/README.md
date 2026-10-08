@@ -110,3 +110,60 @@ stay in a single file for long. Next, you'll deal with a script that has
 grown past the point where "just one file" still works.
 
 Continue to [Lab 06 — From script to project](../06-from-script-to-project/README.md).
+
+## Preview: the same lesson in Go and Java
+
+Python is the only language this course currently supports all the way
+through. Everything above this section is the real, complete Lab 05 —
+do that if you want to keep going into Lab 06 and the rest of the
+course today.
+
+The two sections below are a **preview**: a self-contained way to feel
+the same reproducible-environment lesson using Go's and Java's own
+toolchains. They don't continue into Lab 06 — there is no Go or Java
+Lab 06 yet. Treat this as an early look at a track this course is
+still building, not a second way to complete the course.
+
+### Go (preview)
+
+Starter: `examples/works-on-my-machine/go/`. Requires Go 1.27.x (see
+the root README's toolchain table).
+
+1. Confirm the starter works exactly as committed:
+   ```bash
+   cd examples/works-on-my-machine/go
+   go test ./...
+   go run .
+   ```
+   Expect `ok` and `It works on my machine!`.
+2. In your own working copy — not the committed file — open `go.mod`
+   and bump the `go` line one minor version higher than this course's
+   current baseline (`go 1.27` becomes `go 1.28`), to simulate a
+   project that now asks for a newer Go than a strict teammate's
+   machine has.
+3. Run `GOTOOLCHAIN=local go build ./...`. Read the error. It's real:
+   `GOTOOLCHAIN=local` tells Go "never download a different toolchain,
+   only use what's already on this machine" — the same trade-off a
+   strict offline or locked-down CI machine might make on purpose.
+4. Run the same build again *without* `GOTOOLCHAIN=local`, i.e. with
+   Go's actual default (`auto`): `go build ./...`. You'll see one of
+   two things, depending on whether Go 1.28 has shipped by the time
+   you try this: either it downloads and the build proceeds, or it
+   fails with `toolchain not available`. Either way, notice this is a
+   *different* failure than step 3's — `auto` actually tried to help;
+   it just can't invent a release that doesn't exist yet. `local`
+   didn't try at all.
+5. Change `go.mod` back to `go 1.27` — the real, committed value. Run
+   `go build ./...` again (still the default `auto`, no env var).
+   This succeeds, every time, because `1.27` is a real, released
+   version Go can always resolve, whether or not it already happened
+   to be on this exact machine. That's the actual lesson: `auto`
+   quietly does whatever the real, committed `go.mod` needs; `local`
+   does nothing and complains loudly.
+6. Confirm `go test ./...` passes again on the restored, committed
+   state — that's what Course Health checks.
+
+What this is teaching: `go.mod`'s `go` line is a real, enforced
+requirement, the same way `pyproject.toml` and `uv.lock` are for
+Python — not a comment nobody checks.
+

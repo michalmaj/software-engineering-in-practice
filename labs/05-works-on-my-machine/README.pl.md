@@ -120,3 +120,62 @@ zostają w jednym pliku na długo. Dalej zajmiesz się skryptem, który
 urósł ponad punkt, w którym "po prostu jeden plik" wciąż działa.
 
 Przejdź do [Lab 06 — Od skryptu do projektu](../06-from-script-to-project/README.pl.md).
+
+## Podgląd: ta sama lekcja w Go i Javie
+
+Python jest na razie jedynym językiem, który ten kurs wspiera od
+początku do końca. Wszystko powyżej tej sekcji to prawdziwy, kompletny
+Lab 05 — zrób to, jeśli chcesz kontynuować do Lab 06 i reszty kursu już
+teraz.
+
+Dwie sekcje poniżej to **podgląd (preview)**: samodzielny sposób, żeby
+poczuć tę samą lekcję o odtwarzalnym środowisku, używając własnych
+toolchainów Go i Javy. Nie prowadzą do Lab 06 — nie istnieje jeszcze
+Lab 06 dla Go albo Javy. Traktuj to jako wczesny podgląd ścieżki, którą
+ten kurs wciąż buduje, nie jako drugi sposób na ukończenie kursu.
+
+### Go (podgląd)
+
+Starter: `examples/works-on-my-machine/go/`. Wymaga Go 1.27.x (patrz
+tabela toolchainu w głównym README).
+
+1. Potwierdź, że starter działa dokładnie tak, jak jest zacommitowany:
+   ```bash
+   cd examples/works-on-my-machine/go
+   go test ./...
+   go run .
+   ```
+   Oczekiwane: `ok` i `It works on my machine!`.
+2. W swojej własnej kopii roboczej — nie w zacommitowanym pliku —
+   otwórz `go.mod` i podnieś linię `go` o jedną wersję minor ponad
+   obecny baseline kursu (`go 1.27` staje się `go 1.28`), żeby
+   zasymulować projekt, który teraz wymaga nowszego Go, niż ma ściśle
+   skonfigurowana maszyna kolegi z zespołu.
+3. Uruchom `GOTOOLCHAIN=local go build ./...`. Przeczytaj błąd. Jest
+   prawdziwy: `GOTOOLCHAIN=local` mówi Go "nigdy nie pobieraj innego
+   toolchaina, używaj wyłącznie tego, co już jest na tej maszynie" —
+   ten sam kompromis, na który może świadomie zdecydować się ściśle
+   offline'owa albo zablokowana maszyna CI.
+4. Uruchom ten sam build jeszcze raz, *bez* `GOTOOLCHAIN=local`, czyli
+   z rzeczywistym domyślnym ustawieniem Go (`auto`): `go build ./...`.
+   Zobaczysz jedną z dwóch rzeczy, zależnie od tego, czy Go 1.28 było
+   już wydane w momencie, gdy to robisz: albo się pobierze i build
+   przejdzie, albo zawiedzie z `toolchain not available`. Tak czy
+   inaczej, zauważ, że to *inna* awaria niż w kroku 3 — `auto`
+   faktycznie próbował pomóc; po prostu nie może wymyślić wydania,
+   które jeszcze nie istnieje. `local` nawet nie spróbował.
+5. Zmień `go.mod` z powrotem na `go 1.27` — prawdziwą, zacommitowaną
+   wartość. Uruchom `go build ./...` jeszcze raz (wciąż domyślne
+   `auto`, bez zmiennej środowiskowej). Udaje się, za każdym razem,
+   bo `1.27` to prawdziwa, wydana wersja, którą Go zawsze potrafi
+   rozwiązać, niezależnie od tego, czy akurat już była na tej
+   konkretnej maszynie. To jest właściwa lekcja: `auto` po cichu robi
+   to, czego potrzebuje prawdziwy, zacommitowany `go.mod`; `local` nie
+   robi nic i głośno narzeka.
+6. Potwierdź, że `go test ./...` znowu przechodzi na przywróconym,
+   zacommitowanym stanie — to właśnie sprawdza Course Health.
+
+Czego to uczy: linia `go` w `go.mod` to prawdziwe, wymuszane wymaganie,
+tak jak `pyproject.toml` i `uv.lock` dla Pythona — nie komentarz, który
+nikt nie sprawdza.
+
