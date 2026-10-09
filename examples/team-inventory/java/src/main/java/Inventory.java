@@ -15,10 +15,24 @@ public class Inventory {
         }
     }
 
+    public static List<String> expiringItems(List<Item> inventory, int days) {
+        List<String> names = new ArrayList<>();
+        for (Item item : inventory) {
+            if (item.expiresInDays <= days) {
+                names.add(item.name);
+            }
+        }
+        return names;
+    }
+
     public static String summarize(List<Item> inventory) {
         List<String> lines = new ArrayList<>(List.of("Inventory Summary", "-----------------"));
         for (Item item : inventory) {
             lines.add(item.name + ": " + item.quantity + " units");
+        }
+        List<String> expiring = expiringItems(inventory, 3);
+        if (!expiring.isEmpty()) {
+            lines.add("Expiring soon: " + String.join(", ", expiring));
         }
         return String.join("\n", lines);
     }
