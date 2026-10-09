@@ -21,30 +21,78 @@ After this lab you should be able to:
 ## Before you start
 
 - Lab 17 complete: `main` has both the low-stock and expiry-warning
-  features, merged.
+  features, merged, in your chosen track.
 - Your `examples/team-inventory/` work lives in **your own** GitHub
   repository or fork — this lab's PR happens there, not against the
   shared course repository.
 - If your instructor has paired you with a classmate for this lab, plan
   to swap pull requests with them in step 4.
 
+### Python
+
+- Current directory: `examples/team-inventory/python/`.
+
+### Go
+
+- Current directory: `examples/team-inventory/go/`.
+
+### Java
+
+- Current directory: `examples/team-inventory/java/`.
+
 ## Your task
 
 1. Create branch `feature/reorder-report` from `main`.
+
+### Python
+
 2. Add a function `reorder_report(inventory: list[dict], threshold: int
    = 5) -> str` that reuses `low_stock_items` and returns a formatted
    string like `"Reorder needed: Tomatoes, Milk"` (or `"Nothing to
-   reorder."` if the list is empty). Add a test. Commit.
-3. Push the branch and open a pull request. **If you're working from a
-   fork**, `gh pr create` defaults to opening the PR against the
-   *original* repository's default branch, not your own fork's `main`
-   — for this exercise (and every PR in this course from now on), you
-   want the PR to target your own fork. Either use the GitHub web UI
-   (which shows you the base repository before you confirm), or run
-   `gh repo set-default <your-fork>` once so `gh pr create` defaults to
-   your fork, and double-check the base repository shown before
-   submitting either way. Write a description covering: what changed,
-   why, and how you verified it (which commands you ran).
+   reorder."` if the list is empty). Insert it immediately above
+   `summarize`. Add a test. Commit.
+
+### Go
+
+2. Add a function `func ReorderReport(inventory []Item, threshold int)
+   string` that reuses `LowStockItems` and returns a formatted string
+   like `"Reorder needed: Tomatoes, Milk"` (or `"Nothing to reorder."`
+   if the list is empty). Insert it immediately above `Summarize`. Add
+   a test. Commit.
+
+### Java
+
+2. Add a method `public static String reorderReport(List<Item>
+   inventory, int threshold)` that reuses `lowStockItems` and returns
+   a formatted string like `"Reorder needed: Tomatoes, Milk"` (or
+   `"Nothing to reorder."` if the list is empty). Insert it
+   immediately above `summarize`. Add a test. Commit.
+
+## All tracks
+
+3. Push the branch and open a pull request. Figure out where it's
+   actually going first — **don't assume**:
+   - **GitHub's web UI** (the reliable path for a first PR): click
+     **Compare & pull request** on your pushed branch, or go to your
+     fork's **Pull requests** tab and click **New pull request**.
+     Before clicking the final **Create pull request** button, read
+     the **base repository** and **base branch** shown at the top of
+     the page — they must be *your own* fork and *your own* `main`,
+     not the course repository you originally forked from. GitHub
+     sometimes defaults the base to the repository you forked *from*,
+     which is exactly the wrong target here.
+   - **`gh pr create`** (optional — only if you already have GitHub
+     CLI installed; this course never requires installing it): it
+     defaults to opening the PR against the repository you forked
+     *from*, not your own fork — run `gh repo set-default
+     <your-fork>` once so it defaults correctly, and double-check the
+     base repository it prints before confirming, either way.
+
+   Never direct this (or any future) PR at the shared course
+   repository — it's always your own fork's `main`.
+
+   Write a description covering: what changed, why, and how you
+   verified it (which commands you ran).
 4. Review it, using the checklist below:
    - **Paired:** ask your instructor-assigned partner to swap PRs —
      review theirs, they review yours.
@@ -55,8 +103,8 @@ After this lab you should be able to:
    - Does the description explain *why*, not just *what*?
    - Does the test actually exercise the new behavior, not just call
      the function once?
-   - Is there logic here duplicated from `low_stock_items` that should
-     be reused instead of rewritten?
+   - Is there logic here duplicated from the low-stock function that
+     should be reused instead of rewritten?
    - Would you understand this diff without asking the author a
      question?
 5. Depending on what the review actually finds:
@@ -76,21 +124,42 @@ After this lab you should be able to:
 
 ## Acceptance criteria
 
-- A pull request existed with a description covering what/why/how
+- A pull request existed, targeting **your own fork's** `main` (never
+  the course repository), with a description covering what/why/how
   verified.
 - The review reached one of two legitimate outcomes: a substantive
   comment was left and addressed, or the PR was approved with a short
   record that the checklist was actually checked — never a comment
   manufactured just to satisfy this requirement.
-- After pulling, local `main` contains `reorder_report` and its test,
-  and `uv run pytest` passes.
+- After pulling, local `main` contains the new function/method and its
+  test, and your track's test command passes.
 
 ## Verification
 
+### Python
+
 ```bash
-cd examples/team-inventory
+cd examples/team-inventory/python
 git log --oneline -3
 uv run pytest -v
+cd -
+```
+
+### Go
+
+```bash
+cd examples/team-inventory/go
+git log --oneline -3
+go test ./... -v
+cd -
+```
+
+### Java
+
+```bash
+cd examples/team-inventory/java
+git log --oneline -3
+./gradlew test
 cd -
 ```
 
@@ -108,16 +177,21 @@ merge settings) for `feature/reorder-report`, and all tests passing.
 
 ## If you get stuck
 
-- **Hint 1:** `gh pr create --fill` uses your branch's commit messages
-  to pre-fill the PR title and body — faster than typing both by hand,
-  though you should still improve the description afterward.
-- **Hint 2:** "Reuse `low_stock_items`" means calling it from
-  `reorder_report`, not copying its filtering logic into a second
-  place.
+- **Hint 1:** On the web UI, the base repository and base branch are
+  shown as two dropdowns right at the top of the "Open a pull request"
+  page — read them before you read anything else on that page.
+- **Hint 2:** "Reuse the low-stock function" means calling it from
+  your new function/method, not copying its filtering logic into a
+  second place.
 - **Hint 3:** If working solo, write whatever you record — a comment
   or the approval note — as if you won't remember any context six
   months from now. That constraint makes vague notes obviously
   useless, whichever outcome the review reached.
+
+Before moving on: commit and push everything from this lab
+(`git add -A && git commit -m "..."; git push`). Nothing later assumes
+a clean tree yet, but Act IV (starting at Lab 16) does — get in the
+habit now.
 
 ## What's next
 
