@@ -455,13 +455,7 @@ Aktu V, każda zmiana w labie przechodzi przez nią, teraz obejmując
 ## Co dalej
 
 Twoje API działa — dopóki go nie zrestartujesz i każde zamówienie,
-które stworzyłeś/aś, zniknie. Dalej dane muszą przetrwać.
-
-(Go i Java nie kontynuują dalej stąd jeszcze: Laby 22-25 są na razie
-tylko w Pythonie, tak samo jak Laby 11-30 zostały tylko w Pythonie po
-podglądach Aktu II i Aktu III. Jeśli realizowałeś/aś Go albo Javę, to
-jest granica tego, co jest obecnie zbudowane dla Aktu V — wszystko,
-czego właśnie poćwiczyłeś/aś o kontraktach, walidacji i CI, wciąż
-dotyczy tego, co przyjdzie dalej, w jakimkolwiek języku.)
+które stworzyłeś/aś, zniknie. Dalej dane muszą przetrwać — w Pythonie,
+Go i Javie.
 
 Przejdź do [Lab 22 — Kod się zmienił, stare dane zostały](../22-data-outlives-code/README.pl.md).

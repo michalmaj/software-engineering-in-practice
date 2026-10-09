@@ -439,13 +439,7 @@ of Act V, every lab's changes go through it, now covering `order-api`.
 ## What's next
 
 Your API works — until you restart it and every order you created
-disappears. Next, the data has to survive.
-
-(Go and Java don't continue past here yet: Labs 22-25 are Python-only
-for now, the same way Labs 11-30 stayed Python-only after Act II and
-Act III's previews. If you've been following Go or Java, this is the
-edge of what's currently built for Act V — everything you just
-practiced about contracts, validation, and CI still applies to
-whatever comes next, in any language.)
+disappears. Next, the data has to survive — in Python, Go, and Java
+alike.
 
 Continue to [Lab 22 — Code changed, old data remained](../22-data-outlives-code/README.md).
