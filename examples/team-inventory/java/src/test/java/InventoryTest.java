@@ -32,4 +32,22 @@ class InventoryTest {
 
         assertEquals(List.of("Milk"), result);
     }
+
+    @Test
+    void reorderReportListsLowStockItems() {
+        List<Inventory.Item> inventory = List.of(new Inventory.Item("Milk", 2, 1));
+
+        String result = Inventory.reorderReport(inventory, 5);
+
+        assertEquals("Reorder needed: Milk", result);
+    }
+
+    @Test
+    void reorderReportWhenNothingIsLow() {
+        List<Inventory.Item> inventory = List.of(new Inventory.Item("Flour", 40, 120));
+
+        String result = Inventory.reorderReport(inventory, 5);
+
+        assertEquals("Nothing to reorder.", result);
+    }
 }
