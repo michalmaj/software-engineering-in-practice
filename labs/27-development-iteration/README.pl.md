@@ -74,6 +74,50 @@ sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
    `PROJECT_PLAN.md` powinny być spełnione i zmergowane do głównej
    gałęzi, z zielonym CI.
 
+## Realistyczne 90 minut
+
+To jedna z najcięższych sesji w całym kursie — nie nazywajcie tego
+"małym zadaniem" tylko dlatego, że sama pętla jest znajoma z Aktu IV;
+zbudowanie czterech prawdziwych możliwości przez tę pętlę, przez tyle
+PR-ów, ile to zajmie, to naprawdę więcej pracy niż jakikolwiek
+pojedynczy wcześniejszy lab. Przybliżony kształt jednej sesji:
+
+1. **Setup repo/CI i weryfikacja startera** — potwierdźcie, że starter
+   nadal przechodzi swój jeden test w Waszym własnym repozytorium,
+   potem zróbcie zielone CI na samym tym, zanim powstanie jakikolwiek
+   kod TableTime.
+2. **Najpierw jeden mały vertical slice** — wybierzcie pojedynczą
+   najprostszą możliwość (zwykle jest to utworzenie rezerwacji) i
+   przeprowadźcie ją całą przez branch → test → implementacja → PR →
+   merge raz, żeby sama pętla została udowodniona, zanim zaczniecie na
+   niej polegać przy wszystkim innym.
+3. **Pozostałe możliwości**, każda przez tę samą pętlę.
+4. **Integracja** — jeśli jesteście zespołem pracującym nad osobnymi
+   możliwościami równolegle, to tutaj gałęzie się spotykają, a
+   konflikty, jeśli są, zostają rozwiązane.
+5. **Ostatni przebieg**: pełny zestaw testów zielony, każde kryterium
+   akceptacji MVP z `PROJECT_PLAN.md` faktycznie odhaczone, nie
+   założone.
+
+Traktujcie granicę między krokami 1 i 2 jako Wasz pierwszy checkpoint —
+jeśli musicie się zatrzymać i wrócić później (w przyszłym tygodniu albo
+jutro), zatrzymanie się tam, z zielonym CI i niczym niezacommitowanym,
+to czyste miejsce, żeby wrócić. To samo dotyczy momentu po każdej
+możliwości w kroku 3.
+
+Bądźcie uczciwi co do ryzyka, osobno dla każdego języka: zespół nowy w
+ceremonii Go albo Javy (struktura projektu, narzędzie budowania,
+obsługa JSON bez frameworka) prawdopodobnie spędzi więcej tej sesji na
+mechanice niż zespół pracujący w Pythonie, który niesie najmniejszy
+koszt setupu z tej trójki. Jeśli Wasz zespół jest nowy w wybranym
+języku *i* nowy w pracy w ten sposób jako zespół, ukończenie całego MVP
+w jednej 90-minutowej sesji może nie być realistyczne — to nie porażka
+tego labu, to dokładnie ten rodzaj szacunku, dla którego istnieją plan
+kamieni milowych i lista ryzyk w `PROJECT_PLAN.md`. Nie wymyślajcie
+pomiaru czasu, którego faktycznie nie zrobiliście; jeśli sesja się
+przeciąga, powiedzcie to we własnych aktualizacjach planu zamiast po
+cichu zawężać zakres, żeby zegar się zgadzał.
+
 ## Kryteria akceptacji
 
 - CI jest skonfigurowane i zielone na Waszej głównej gałęzi.
@@ -85,9 +129,25 @@ sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
 
 ## Weryfikacja
 
+Uruchom z korzenia repozytorium Waszego zespołu, w zależności od tego,
+co ustaliliście w ADR z Lab 26:
+
+### Python
+
 ```bash
-# run from your team's own repository, with whatever command runs your tests
-<your test command>
+uv run pytest -v
+```
+
+### Go
+
+```bash
+go test ./...
+```
+
+### Java
+
+```bash
+./gradlew test
 ```
 
 Oczekiwane: Wasz pełny zestaw testów przechodzi, a Wasz dostawca CI

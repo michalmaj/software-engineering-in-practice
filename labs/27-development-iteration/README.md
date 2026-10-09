@@ -68,6 +68,47 @@ Working from your own `PROJECT_PLAN.md`'s MVP scope:
    `PROJECT_PLAN.md` should all be satisfied and merged to your main
    branch, with CI green.
 
+## A realistic 90 minutes
+
+This is one of the heaviest sessions in the whole course — don't call
+it "a small task" just because the loop itself is familiar from
+Act IV; building four real capabilities through that loop, across
+however many PRs it takes, is genuinely more work than any single
+earlier lab. A rough shape for one session:
+
+1. **Repo/CI setup and starter verification** — confirm the starter
+   still passes its one test in your own repository, then get CI
+   green on that alone, before any TableTime code exists.
+2. **One small vertical slice first** — pick the single simplest
+   capability (creating a reservation is usually it) and take it all
+   the way through branch → test → implementation → PR → merge once,
+   so the loop itself is proven before you're relying on it for
+   everything else.
+3. **The remaining capabilities**, each through the same loop.
+4. **Integration** — if you're a team working on separate capabilities
+   in parallel, this is where branches meet and conflicts, if any,
+   get resolved.
+5. **A final pass**: full suite green, every MVP acceptance criterion
+   from `PROJECT_PLAN.md` checked off for real, not assumed.
+
+Treat the boundary between steps 1 and 2 as your first checkpoint —
+if you have to stop and resume later (next week, or tomorrow), stopping
+there, with CI green and nothing uncommitted, is a clean place to pick
+back up. The same is true after each capability in step 3 lands.
+
+Be honest about the risk, separately per language: a team new to Go's
+or Java's ceremony (project structure, the build tool, JSON handling
+without a framework) will likely spend more of this session on
+mechanics than a team working in Python, which carries the least
+incidental setup cost of the three. If your team is new to your
+chosen language *and* new to working this way as a team, finishing
+the entire MVP in one 90-minute session may not be realistic — that's
+not a failure of this lab, it's exactly the kind of estimate
+`PROJECT_PLAN.md`'s milestone plan and risk list exist to carry. Don't
+invent a time measurement you didn't actually take; if a session runs
+long, say so in your own plan updates rather than quietly shrinking
+scope to make the clock look right.
+
 ## Acceptance criteria
 
 - CI is configured and green on your main branch.
@@ -79,9 +120,25 @@ Working from your own `PROJECT_PLAN.md`'s MVP scope:
 
 ## Verification
 
+Run from your team's own repository root, whichever matches your
+Lab 26 ADR:
+
+### Python
+
 ```bash
-# run from your team's own repository, with whatever command runs your tests
-<your test command>
+uv run pytest -v
+```
+
+### Go
+
+```bash
+go test ./...
+```
+
+### Java
+
+```bash
+./gradlew test
 ```
 
 Expected: your full test suite passes, and your CI provider shows green
