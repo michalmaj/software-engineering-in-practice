@@ -26,6 +26,27 @@ Po tym labie potrafisz:
   wymiany. Jeśli solo: ocenisz własny projekt jako "zespół
   odbierający", tak jakby widziano go po raz pierwszy.
 
+### Notatka dla prowadzących parujących zespoły
+
+Parujcie zespoły, które użyły **tego samego tracku językowego**,
+kiedy tylko możecie — Python z Pythonem, Go z Go, Java z Javą. Zespół
+odbierający powinien już mieć zainstalowany toolchain i zapamiętaną
+komendę testów z własnej pracy w Akcie V i VI; to właśnie pozwala temu
+labowi testować jakość dokumentacji i handover konkretnie, nie to, czy
+ktoś potrafi zainstalować toolchain nieznanego języka pod presją czasu.
+Jeśli mix językowy zespołów w Waszej klasie naprawdę nie dzieli się
+równo na pary w tym samym języku, nie każcie zespołowi instalować
+toolchainu, którego nigdy nie używał, tylko po to, żeby wymusić
+parowanie — parujcie między językami tylko wtedy, gdy zespół odbierający
+już ma dostępny ten toolchain z innego powodu (na przykład z własnego
+doświadczenia z Lab 14), i jasno powiedzcie, że faktyczny handover kodu
+(kroki 6-9 poniżej) jest opcjonalny, jeśli toolchain naprawdę nie jest
+dostępny: dokładny przegląd samej dokumentacji to prawdziwa, uczciwa
+alternatywa, ale musi być zaraportowany jako taki w
+`HANDOVER_NOTES.md`, nie opisany tak, jakby pełny handover kodu się
+wydarzył, gdy się nie wydarzył. Nie wymagajcie Codespaces, żeby to
+obejść — model local-first z reszty kursu wciąż tu obowiązuje.
+
 ## Twoje zadanie
 
 **Jeśli przekazujecie (zespół oryginalny):**
@@ -89,11 +110,13 @@ dowolnym projektem, którego nie jest właścicielem.
 
 ## Weryfikacja
 
-```bash
-# from the receiving side, in a completely fresh clone
-<the setup commands from the originating team's README>
-<the test command from the originating team's README>
-```
+Nie ma tu jednej komendy — cały sens polega na tym, że to własny
+`README.md` zespołu oryginalnego definiuje komendy setupu i testów, a
+to zależy od tego, jaki język wybrali. Po stronie odbierającej, na
+zupełnie świeżym klonie: podążaj za krokami setupu spisanymi w
+`README.md` zespołu oryginalnego dokładnie tak, jak są napisane, potem
+uruchom komendę testów, którą określa (`uv run pytest`, `go test
+./...`, albo `./gradlew test`, zależnie od ich tracku).
 
 Oczekiwane: oba się udają, używając wyłącznie tego, co spisane w
 repozytorium.
