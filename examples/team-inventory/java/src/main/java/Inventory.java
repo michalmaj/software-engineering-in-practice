@@ -35,6 +35,14 @@ public class Inventory {
         return names;
     }
 
+    public static String reorderReport(List<Item> inventory, int threshold) {
+        List<String> items = lowStockItems(inventory, threshold);
+        if (items.isEmpty()) {
+            return "Nothing to reorder.";
+        }
+        return "Reorder needed: " + String.join(", ", items);
+    }
+
     public static String summarize(List<Item> inventory) {
         List<String> lines = new ArrayList<>(List.of("Inventory Summary", "-----------------"));
         for (Item item : inventory) {
