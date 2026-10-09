@@ -80,9 +80,25 @@ After this lab you should be able to:
 
 ## Verification
 
+Run from your team's own repository root, whichever matches your
+Lab 26 ADR:
+
+### Python
+
 ```bash
-# from your team's own repository
-<your test command>
+uv run pytest -v
+```
+
+### Go
+
+```bash
+go test ./...
+```
+
+### Java
+
+```bash
+./gradlew test
 ```
 
 Expected: full suite green, including new tests for the combined-table
@@ -90,8 +106,8 @@ behavior and for a party too large for any combination being rejected.
 
 ## Think about it
 
-- If your data model already had a `table_ids: list` instead of a
-  single `table_id`, this change would have been much smaller. Was that
+- If your data model already stored a small collection of table ids
+  instead of a single one, this change would have been much smaller. Was that
   because your team predicted this requirement, or because of an
   unrelated decision that happened to leave room for it?
 - Compare this change's actual cost to how confident your `PROJECT_PLAN.md`
@@ -100,10 +116,12 @@ behavior and for a party too large for any combination being rejected.
 
 ## If you get stuck
 
-- **Hint 1:** If your MVP stored a single `table_id` per reservation,
-  the smallest correct change is usually to store a list of table ids
-  everywhere that field is read or written — resist the urge to add a
-  second, parallel field just for the combined case.
+- **Hint 1:** If your MVP stored a single table id per reservation,
+  the smallest correct change is usually to store a small collection
+  of table ids everywhere that field is read or written — whatever
+  your language makes idiomatic (a Python `list`, a Go slice, a Java
+  `List<String>`, and so on) — resist the urge to add a second,
+  parallel field just for the combined case.
 - **Hint 2:** Decide your combinable pairs as static, known data (a
   fixed list), not as "any two tables that happen to add up" — the
   brief specifically says these are physically fixed pairs.
