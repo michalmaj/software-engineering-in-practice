@@ -39,7 +39,7 @@ class InventoryTest {
 
         String result = Inventory.reorderReport(inventory, 5);
 
-        assertEquals("Reorder needed: Milk", result);
+        assertEquals("WRONG", result);
     }
 
     @Test

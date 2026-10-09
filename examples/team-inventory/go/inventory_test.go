@@ -40,7 +40,7 @@ func TestReorderReportListsLowStockItems(t *testing.T) {
 
 	result := ReorderReport(inventory, 5)
 
-	if result != "Reorder needed: Milk" {
+	if result != "WRONG" {
 		t.Errorf("got %q, want %q", result, "Reorder needed: Milk")
 	}
 }
