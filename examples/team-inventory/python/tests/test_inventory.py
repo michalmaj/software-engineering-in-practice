@@ -30,7 +30,7 @@ def test_reorder_report_lists_low_stock_items():
 
     result = reorder_report(inventory)
 
-    assert result == "WRONG"
+    assert result == "Reorder needed: Milk"
 
 
 def test_reorder_report_when_nothing_is_low():
