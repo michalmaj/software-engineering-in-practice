@@ -1,4 +1,5 @@
 import json
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 ORDERS: dict[str, dict] = {}
@@ -58,4 +59,4 @@ def run(port: int = 8000) -> None:
 
 
 if __name__ == "__main__":
-    run()
+    run(port=int(os.environ.get("PORT", 8000)))

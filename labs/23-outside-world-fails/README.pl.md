@@ -21,7 +21,7 @@ Po tym labie potrafisz:
 
 - Lab 22 ukończony: zamówienia są trwałe w SQLite, migracja `notes`
   działa.
-- Bieżący katalog: `examples/order-api/`.
+- Bieżący katalog: `examples/order-api/python/`.
 
 ## Twoje zadanie
 
@@ -100,7 +100,7 @@ Po tym labie potrafisz:
 ## Weryfikacja
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cd -
 ```

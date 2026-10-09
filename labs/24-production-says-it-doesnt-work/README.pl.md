@@ -22,7 +22,7 @@ Po tym labie potrafisz:
 
 - Lab 23 ukończony: `call_with_retries` i `notify_kitchen` istnieją i
   są podłączone do `do_POST`.
-- Bieżący katalog: `examples/order-api/`.
+- Bieżący katalog: `examples/order-api/python/`.
 
 ## Twoje zadanie
 
@@ -72,7 +72,7 @@ Po tym labie potrafisz:
 ## Weryfikacja
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cd -
 ```

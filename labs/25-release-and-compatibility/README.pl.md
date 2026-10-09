@@ -20,12 +20,12 @@ Po tym labie potrafisz:
 
 - Lab 24 ukończony: `uv run pytest` przechodzi ze wszystkimi testami z
   Labów 21-24.
-- Bieżący katalog: `examples/order-api/`.
+- Bieżący katalog: `examples/order-api/python/`.
 
 ## Twoje zadanie
 
 1. Utwórz gałąź `feature/changelog-baseline` z `main`.
-2. Napisz `CHANGELOG.md` w `examples/order-api/`, w prostym formacie w
+2. Napisz `CHANGELOG.md` w `examples/order-api/python/`, w prostym formacie w
    stylu "Keep a Changelog", z jednym wpisem `## [1.0.0]` wymieniającym
    wszystko, co robi API na koniec Lab 24: dwa endpointy, trwałość w
    SQLite, migrację `notes`, wrapper retry i strukturalne logowanie.
@@ -117,7 +117,7 @@ Po tym labie potrafisz:
 ## Weryfikacja
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cat CHANGELOG.md
 git tag

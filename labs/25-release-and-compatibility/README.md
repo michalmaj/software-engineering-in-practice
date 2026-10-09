@@ -21,12 +21,12 @@ After this lab you should be able to:
 
 - Lab 24 complete: `uv run pytest` passes with all tests from Labs
   21-24.
-- Current directory: `examples/order-api/`.
+- Current directory: `examples/order-api/python/`.
 
 ## Your task
 
 1. Create branch `feature/changelog-baseline` from `main`.
-2. Write `CHANGELOG.md` in `examples/order-api/`, following a simple
+2. Write `CHANGELOG.md` in `examples/order-api/python/`, following a simple
    "Keep a Changelog"-style format, with one `## [1.0.0]` entry listing
    everything the API does as of Lab 24: the two endpoints, SQLite
    persistence, the `notes` migration, the retry wrapper, and
@@ -118,7 +118,7 @@ After this lab you should be able to:
 ## Verification
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cat CHANGELOG.md
 git tag

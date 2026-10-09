@@ -20,7 +20,7 @@ After this lab you should be able to:
 ## Before you start
 
 - Lab 22 complete: orders persist in SQLite, `notes` migration works.
-- Current directory: `examples/order-api/`.
+- Current directory: `examples/order-api/python/`.
 
 ## Your task
 
@@ -96,7 +96,7 @@ After this lab you should be able to:
 ## Verification
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cd -
 ```

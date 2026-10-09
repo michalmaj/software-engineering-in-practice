@@ -22,7 +22,7 @@ Po tym labie potrafisz:
 
 - Lab 21 ukończony: `CONTRACT.md` istnieje, walidacja pozycji działa,
   `uv run pytest` przechodzi z 4 testami.
-- Bieżący katalog: `examples/order-api/`.
+- Bieżący katalog: `examples/order-api/python/`.
 
 ## Twoje zadanie
 
@@ -121,7 +121,7 @@ Po tym labie potrafisz:
 ## Weryfikacja
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cd -
 ```

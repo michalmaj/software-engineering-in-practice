@@ -393,6 +393,61 @@ else
 fi
 echo
 
+# Act V's order-api Java starter is pre-Lab-21: a working server and
+# the baseline test suite, no per-item validation yet. That rule, and
+# the CONTRACT.md documenting it, are each Lab 21 student work and
+# must not appear in this public tree.
+echo "== Java order-api starter (committed Gradle Wrapper) =="
+order_api_java_dir="examples/order-api/java"
+if [ -d "$order_api_java_dir" ]; then
+  wrapper_ok=1
+  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
+    if [ ! -s "$order_api_java_dir/$f" ]; then
+      fail "$order_api_java_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
+      wrapper_ok=0
+    fi
+  done
+  if [ ! -x "$order_api_java_dir/gradlew" ]; then
+    fail "$order_api_java_dir/gradlew is not executable (chmod +x it and commit the mode change)"
+    wrapper_ok=0
+  fi
+
+  if [ "$wrapper_ok" -eq 1 ]; then
+    ok "Gradle Wrapper files present and executable"
+    echo "  -- $order_api_java_dir --"
+    if (cd "$order_api_java_dir" && ./gradlew test); then
+      ok "$order_api_java_dir: ./gradlew test passed"
+    else
+      fail "$order_api_java_dir: ./gradlew test failed"
+    fi
+    (cd "$order_api_java_dir" && ./gradlew --stop > /dev/null 2>&1) || true
+    rm -rf "$order_api_java_dir/build" "$order_api_java_dir/.gradle"
+  else
+    echo "      Skipping ./gradlew test — wrapper isn't intact."
+  fi
+else
+  echo "  (no $order_api_java_dir — skipping)"
+fi
+echo
+
+# Black-box HTTP contract checks against the order-api starters —
+# real requests over real sockets, never importing any of the three
+# servers' own code. This only checks the shared HTTP contract every
+# track already ships pre-Lab-21 — it must never check Lab 21's
+# per-item validation rule, which is student work.
+echo "== order-api starter HTTP contract (black-box, all three tracks) =="
+contract_harness="scripts/contract-tests/order-api/starter/check_contract.py"
+if [ -f "$contract_harness" ]; then
+  if python3 "$contract_harness"; then
+    ok "order-api starter contract: all three tracks passed"
+  else
+    fail "order-api starter contract: see output above"
+  fi
+else
+  echo "  (no $contract_harness — skipping)"
+fi
+echo
+
 if [ "$FAILED" -eq 1 ]; then
   echo "Course health check FAILED. See the FAIL lines above for what to fix."
   exit 1
