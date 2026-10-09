@@ -2,6 +2,10 @@ def low_stock_items(inventory: list[dict], threshold: int = 5) -> list[str]:
     return [item["name"] for item in inventory if item["quantity"] < threshold]
 
 
+def expiring_items(inventory: list[dict], days: int = 3) -> list[str]:
+    return [item["name"] for item in inventory if item["expires_in_days"] <= days]
+
+
 def summarize(inventory: list[dict]) -> str:
     lines = ["Inventory Summary", "-----------------"]
     for item in inventory:
@@ -9,6 +13,9 @@ def summarize(inventory: list[dict]) -> str:
     low_stock = low_stock_items(inventory)
     if low_stock:
         lines.append(f"Low stock: {', '.join(low_stock)}")
+    expiring = expiring_items(inventory)
+    if expiring:
+        lines.append(f"Expiring soon: {', '.join(expiring)}")
     return "\n".join(lines)
 
 
