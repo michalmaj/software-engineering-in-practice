@@ -1,0 +1,22 @@
+name: verify team-inventory CI (Python)
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.2.0
+        with:
+          version: "0.11.21"
+      - name: Install dependencies
+        working-directory: examples/team-inventory/python
+        run: uv sync --locked
+      - name: Run tests
+        working-directory: examples/team-inventory/python
+        run: uv run pytest
