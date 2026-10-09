@@ -11,10 +11,24 @@ type Item struct {
 	ExpiresInDays int
 }
 
+func LowStockItems(inventory []Item, threshold int) []string {
+	var names []string
+	for _, item := range inventory {
+		if item.Quantity < threshold {
+			names = append(names, item.Name)
+		}
+	}
+	return names
+}
+
 func Summarize(inventory []Item) string {
 	lines := []string{"Inventory Summary", "-----------------"}
 	for _, item := range inventory {
 		lines = append(lines, fmt.Sprintf("%s: %d units", item.Name, item.Quantity))
+	}
+	lowStock := LowStockItems(inventory, 5)
+	if len(lowStock) > 0 {
+		lines = append(lines, fmt.Sprintf("Low stock: %s", strings.Join(lowStock, ", ")))
 	}
 	return strings.Join(lines, "\n")
 }
