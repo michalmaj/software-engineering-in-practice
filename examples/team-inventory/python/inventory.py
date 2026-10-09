@@ -6,6 +6,13 @@ def expiring_items(inventory: list[dict], days: int = 3) -> list[str]:
     return [item["name"] for item in inventory if item["expires_in_days"] <= days]
 
 
+def reorder_report(inventory: list[dict], threshold: int = 5) -> str:
+    items = low_stock_items(inventory, threshold)
+    if not items:
+        return "Nothing to reorder."
+    return f"Reorder needed: {', '.join(items)}"
+
+
 def summarize(inventory: list[dict]) -> str:
     lines = ["Inventory Summary", "-----------------"]
     for item in inventory:

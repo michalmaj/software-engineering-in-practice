@@ -1,4 +1,4 @@
-from inventory import expiring_items, low_stock_items, summarize
+from inventory import expiring_items, low_stock_items, reorder_report, summarize
 
 
 def test_summarize_lists_each_item_with_quantity():
@@ -23,3 +23,19 @@ def test_expiring_items_lists_items_within_days():
     result = expiring_items(inventory)
 
     assert result == ["Milk"]
+
+
+def test_reorder_report_lists_low_stock_items():
+    inventory = [{"name": "Milk", "quantity": 2, "expires_in_days": 1}]
+
+    result = reorder_report(inventory)
+
+    assert result == "Reorder needed: Milk"
+
+
+def test_reorder_report_when_nothing_is_low():
+    inventory = [{"name": "Flour", "quantity": 40, "expires_in_days": 120}]
+
+    result = reorder_report(inventory)
+
+    assert result == "Nothing to reorder."
