@@ -1,7 +1,14 @@
+def low_stock_items(inventory: list[dict], threshold: int = 5) -> list[str]:
+    return [item["name"] for item in inventory if item["quantity"] < threshold]
+
+
 def summarize(inventory: list[dict]) -> str:
     lines = ["Inventory Summary", "-----------------"]
     for item in inventory:
         lines.append(f"{item['name']}: {item['quantity']} units")
+    low_stock = low_stock_items(inventory)
+    if low_stock:
+        lines.append(f"Low stock: {', '.join(low_stock)}")
     return "\n".join(lines)
 
 
