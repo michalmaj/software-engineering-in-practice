@@ -19,7 +19,7 @@ After this lab you should be able to:
 
 ## Before you start
 
-- Labs 06-19 complete.
+- Labs 06-19 complete, in your chosen track.
 - No code for this lab — skim (don't re-derive) the "Acceptance
   criteria" sections of Labs 11 through 19 before starting.
 
@@ -28,9 +28,11 @@ After this lab you should be able to:
 1. Write `labs/20-definition-of-done/definition-of-done.md` containing
    a single Definition of Done checklist, 5-8 items, using markdown
    checkboxes (`- [ ] item`), that would apply to *any* future change
-   to `examples/team-inventory`. Base it on what you've actually used
-   in Labs 06-19 — tests, review, CI, documentation — not on a generic
-   list you haven't earned yet.
+   to `examples/team-inventory/<your-language>`. Base it on what
+   you've actually used in Labs 06-19 — tests, review, CI,
+   documentation — not on a generic list you haven't earned yet. This
+   is language-neutral: don't require a tool only one of the three
+   tracks happens to use.
 2. Each item must be checkable: answerable with yes or no by looking at
    something concrete (a command's exit code, a file's existence, a
    PR's state) — not "the code is clean" or "it works well."

@@ -20,7 +20,7 @@ Po tym labie potrafisz:
 
 ## Zanim zaczniesz
 
-- Laby 06-19 ukończone.
+- Laby 06-19 ukończone, w Twojej wybranej ścieżce.
 - Brak kodu w tym labie — przejrzyj (nie odtwarzaj od nowa) sekcje
   "Kryteria akceptacji" Labów 11 do 19, zanim zaczniesz.
 
@@ -30,9 +30,11 @@ Po tym labie potrafisz:
    zawierający jedną checklistę Definition of Done, 5-8 pozycji,
    używając checkboxów markdown (`- [ ] pozycja`), która miałaby
    zastosowanie do *każdej* przyszłej zmiany w
-   `examples/team-inventory`. Oprzyj ją na tym, co faktycznie było
-   używane w Labach 06-19 — testy, review, CI, dokumentacja — a nie na
-   generycznej liście, na jaką jeszcze nie zapracowano.
+   `examples/team-inventory/<twój-język>`. Oprzyj ją na tym, co
+   faktycznie było używane w Labach 06-19 — testy, review, CI,
+   dokumentacja — a nie na generycznej liście, na jaką jeszcze nie
+   zapracowano. To jest language-neutral: nie wymagaj narzędzia, które
+   akurat tylko jedna z trzech ścieżek używa.
 2. Każda pozycja musi być sprawdzalna: odpowiadalna tak lub nie przez
    spojrzenie na coś konkretnego (kod wyjścia polecenia, istnienie
    pliku, stan PR-a) — a nie "kod jest czysty" czy "działa dobrze".
