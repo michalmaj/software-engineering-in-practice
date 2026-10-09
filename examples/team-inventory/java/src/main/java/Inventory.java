@@ -15,10 +15,24 @@ public class Inventory {
         }
     }
 
+    public static List<String> lowStockItems(List<Item> inventory, int threshold) {
+        List<String> names = new ArrayList<>();
+        for (Item item : inventory) {
+            if (item.quantity < threshold) {
+                names.add(item.name);
+            }
+        }
+        return names;
+    }
+
     public static String summarize(List<Item> inventory) {
         List<String> lines = new ArrayList<>(List.of("Inventory Summary", "-----------------"));
         for (Item item : inventory) {
             lines.add(item.name + ": " + item.quantity + " units");
+        }
+        List<String> lowStock = lowStockItems(inventory, 5);
+        if (!lowStock.isEmpty()) {
+            lines.add("Low stock: " + String.join(", ", lowStock));
         }
         return String.join("\n", lines);
     }
