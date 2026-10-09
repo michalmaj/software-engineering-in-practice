@@ -7,14 +7,25 @@
 #
 #   ./scripts/check-course.sh
 #
-# Structural/content checks (lab layout, README pairs, broken links,
-# decisions/ leakage, AI-attribution strings, EN/PL code-block parity)
-# live in scripts/check_course_structure.py, since that's naturally
-# text-processing work. Everything below is toolchain-execution: syntax
-# checks, lockfile freshness, and each example project's own test suite.
+# Structure of this script:
+#   - Structural/content checks (lab layout, README pairs, broken links,
+#     decisions/ leakage, AI-attribution strings, EN/PL code-block
+#     parity) live in scripts/check_course_structure.py, since that's
+#     naturally text-processing work.
+#   - The PROJECT REGISTRY below is the authoritative list of every
+#     example project this repo is supposed to ship, and what kind of
+#     check each one needs. It exists so that an accidentally deleted
+#     project directory or manifest makes this script FAIL, instead of
+#     the normal `git ls-files`-based discovery loops just quietly not
+#     finding it and reporting nothing. See docs/maintainers/course-health.md
+#     for how to add a project to it.
+#   - Everything after the registry is toolchain-execution: syntax
+#     checks, lockfile freshness, and each example project's own test
+#     suite, dispatched by the registry.
 set -uo pipefail
 
 cd "$(dirname "$0")/.."
+REPO_ROOT="$(pwd)"
 
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
   echo "This check must be run from a Git clone of the repository."
@@ -22,30 +33,163 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
   exit 1
 fi
 
-# Projects that deliberately ship a pyproject.toml without a committed
-# uv.lock — right now, only the Lab 05 Python starter, whose whole point
-# is having the student generate and commit their own uv.lock. Any other
-# project with no lockfile is a real problem, not another exception, so
-# it's not auto-detected: it has to be added here on purpose.
-KNOWN_UNLOCKED_PROJECTS=("examples/works-on-my-machine/python")
-
-is_known_unlocked() {
-  local dir="$1" known
-  for known in "${KNOWN_UNLOCKED_PROJECTS[@]}"; do
-    [ "$dir" = "$known" ] && return 0
-  done
-  return 1
-}
-
 FAILED=0
 fail() {
   echo "FAIL  $1"
   FAILED=1
 }
+warn() {
+  echo "WARN  $1"
+}
 ok() {
   echo "OK    $1"
 }
 
+# ---------------------------------------------------------------------------
+# Project registry
+#
+# Format: "checktype|relative/path/to/project"
+#
+# checktype is one of:
+#   py            Python project with a committed uv.lock — `uv run pytest`.
+#   py-unlocked   Python project that deliberately ships no uv.lock yet
+#                 (Lab 05's whole point is having the student create one) —
+#                 run in a throwaway copy so `uv run` never writes a lock
+#                 file into the tracked tree.
+#   go            Go project — `go test ./...`.
+#   java-test     Java project with a committed Gradle Wrapper — `./gradlew test`.
+#   java-run      Java project with a committed Gradle Wrapper whose checked
+#                 behavior is its printed output, not a test suite (Act II's
+#                 restaurant-bill, which is deliberately untested) —
+#                 `./gradlew run` plus a grep for the expected receipt line.
+#   java-javac    Java project with no Gradle Wrapper at all (the notifier
+#                 example) — `javac` + `java` directly.
+#   sh-smoke      Script run directly with no test suite and no Gradle
+#                 (restaurant-bill's Python/Go sides) — run it and grep for
+#                 the expected receipt line.
+#
+# A project that *looks* like a check-type but has no test suite on
+# purpose (e.g. restaurant-bill) is registered with the checktype that
+# matches what it actually has, not forced into "py"/"go"/"java-test"
+# just to look uniform.
+PROJECT_REGISTRY=(
+  "py-unlocked|examples/works-on-my-machine/python"
+  "py|examples/discount-codes/version-a/python"
+  "py|examples/discount-codes/version-b/python"
+  "py|examples/team-inventory/python"
+  "py|examples/order-api/python"
+  "py|examples/capstone-starters/python"
+  "py|examples/notifier/python"
+
+  "go|examples/works-on-my-machine/go"
+  "go|examples/discount-codes/version-a/go"
+  "go|examples/discount-codes/version-b/go"
+  "go|examples/team-inventory/go"
+  "go|examples/order-api/go"
+  "go|examples/capstone-starters/go"
+  "go|examples/notifier/go"
+
+  "java-test|examples/works-on-my-machine/java"
+  "java-test|examples/discount-codes/version-a/java"
+  "java-test|examples/discount-codes/version-b/java"
+  "java-test|examples/team-inventory/java"
+  "java-test|examples/order-api/java"
+  "java-test|examples/capstone-starters/java"
+  "java-run|examples/restaurant-bill/java"
+  "java-javac|examples/notifier/java"
+
+  "sh-smoke|examples/restaurant-bill/python"
+  "sh-smoke|examples/restaurant-bill/go"
+)
+
+# "py-unlocked" projects are still discovered and run the same way "py"
+# ones are (both have a pyproject.toml, found by the same `git ls-files`
+# loops below) — this lookup only answers the one question that's
+# different about them: are they exempt from the "must have a committed
+# uv.lock" rule?
+is_registered_unlocked() {
+  local dir="$1" entry entry_type entry_path
+  for entry in "${PROJECT_REGISTRY[@]}"; do
+    entry_type="${entry%%|*}"
+    entry_path="${entry#*|}"
+    [ "$entry_type" = "py-unlocked" ] && [ "$entry_path" = "$dir" ] && return 0
+  done
+  return 1
+}
+
+registry_paths_of_type() {
+  local want="$1" entry entry_type entry_path
+  for entry in "${PROJECT_REGISTRY[@]}"; do
+    entry_type="${entry%%|*}"
+    entry_path="${entry#*|}"
+    [ "$entry_type" = "$want" ] && echo "$entry_path"
+  done
+}
+
+# ---------------------------------------------------------------------------
+# Gradle isolation
+#
+# In CI (GitHub Actions), gradle/actions/setup-gradle@v6 already caches the
+# default Gradle user home, so we use it as-is — it's a fresh, disposable VM
+# with nothing else running. On a maintainer's own machine, forcing all of
+# this script's `./gradlew --stop` calls at the *default* ~/.gradle would
+# shut down any unrelated Gradle daemon the maintainer has running for other
+# work (another project open in an IDE, for instance). A separate, stable
+# (not re-created per run) GRADLE_USER_HOME keeps this script's daemons
+# completely isolated from that, while still being a real on-disk cache
+# directory, so repeated local runs don't redownload the Gradle
+# distribution or dependencies every time — verified: first run against a
+# fresh isolated home took ~18s (one-time download), every run after was
+# ~3s, the same as using the default home.
+if [ "${GITHUB_ACTIONS:-}" != "true" ]; then
+  export GRADLE_USER_HOME="${TMPDIR:-/tmp}/software-engineering-in-practice-course-health-gradle-home"
+  mkdir -p "$GRADLE_USER_HOME"
+fi
+
+# Runs a Gradle Wrapper command in $1 without ever deleting a build/ or
+# .gradle/ directory that existed before this invocation — only ones this
+# invocation itself created. Always stops the daemon it may have started
+# (safe: see the GRADLE_USER_HOME isolation note above) before reporting.
+#
+# Usage: run_gradle_wrapper <dir> <gradle-args...>
+# Prints the command's combined output; returns its exit code.
+run_gradle_wrapper() {
+  local dir="$1"
+  shift
+  local had_build=0 had_gradle_dir=0
+  [ -d "$dir/build" ] && had_build=1
+  [ -d "$dir/.gradle" ] && had_gradle_dir=1
+
+  local output status
+  output=$(cd "$dir" && ./gradlew "$@" 2>&1)
+  status=$?
+  printf '%s\n' "$output"
+
+  (cd "$dir" && ./gradlew --stop > /dev/null 2>&1) || true
+  [ "$had_build" -eq 0 ] && rm -rf "$dir/build"
+  [ "$had_gradle_dir" -eq 0 ] && rm -rf "$dir/.gradle"
+
+  return "$status"
+}
+
+check_gradle_wrapper_committed() {
+  local dir="$1"
+  local wrapper_ok=1
+  local f
+  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
+    if [ ! -s "$dir/$f" ]; then
+      fail "$dir/$f missing or empty — Gradle Wrapper isn't fully committed"
+      wrapper_ok=0
+    fi
+  done
+  if [ ! -x "$dir/gradlew" ]; then
+    fail "$dir/gradlew is not executable (chmod +x it and commit the mode change)"
+    wrapper_ok=0
+  fi
+  return $((1 - wrapper_ok))
+}
+
+# ---------------------------------------------------------------------------
 echo "== Structure and content checks =="
 if ! python3 scripts/check_course_structure.py; then
   echo
@@ -54,6 +198,61 @@ if ! python3 scripts/check_course_structure.py; then
   echo "anything useful while the repo's basic shape is broken."
   exit 1
 fi
+echo
+
+echo "== Project registry (every expected example project is present) =="
+registry_failed=0
+
+while IFS='|' read -r entry_type entry_path; do
+  case "$entry_type" in
+    py|py-unlocked)
+      [ -f "$entry_path/pyproject.toml" ] || { fail "$entry_path: registered Python project is missing pyproject.toml"; registry_failed=1; }
+      ;;
+    go)
+      [ -f "$entry_path/go.mod" ] || { fail "$entry_path: registered Go project is missing go.mod"; registry_failed=1; }
+      ;;
+    java-test|java-run)
+      [ -f "$entry_path/gradlew" ] || { fail "$entry_path: registered Java project is missing gradlew"; registry_failed=1; }
+      ;;
+    java-javac)
+      [ -d "$entry_path" ] || { fail "$entry_path: registered Java project directory is missing"; registry_failed=1; }
+      ;;
+    sh-smoke)
+      [ -d "$entry_path" ] || { fail "$entry_path: registered smoke-test project directory is missing"; registry_failed=1; }
+      ;;
+  esac
+done < <(printf '%s\n' "${PROJECT_REGISTRY[@]}")
+
+# The reverse direction: a manifest exists that the registry above doesn't
+# know about. This must never be silently skipped — but it's also not
+# automatically a failure (the generic test loops below still pick it up
+# and run it regardless of registry membership), just a prompt to update
+# the registry on purpose.
+while IFS= read -r pyproject; do
+  dir=$(dirname "$pyproject")
+  [ "$dir" = "." ] && continue
+  if ! printf '%s\n' "${PROJECT_REGISTRY[@]}" | grep -qF "|$dir"; then
+    warn "$dir: has a pyproject.toml but isn't in PROJECT_REGISTRY (top of this script) — it will still be tested, but add it to the registry so a future deletion is caught"
+  fi
+done < <(git ls-files -- '*/pyproject.toml')
+
+while IFS= read -r gomod; do
+  dir=$(dirname "$gomod")
+  [ "$dir" = "." ] && continue
+  if ! printf '%s\n' "${PROJECT_REGISTRY[@]}" | grep -qF "|$dir"; then
+    warn "$dir: has a go.mod but isn't in PROJECT_REGISTRY (top of this script) — it will still be tested, but add it to the registry so a future deletion is caught"
+  fi
+done < <(git ls-files -- '*/go.mod')
+
+while IFS= read -r gradlew_file; do
+  dir=$(dirname "$gradlew_file")
+  if ! printf '%s\n' "${PROJECT_REGISTRY[@]}" | grep -qF "|$dir"; then
+    warn "$dir: has a committed Gradle Wrapper but isn't in PROJECT_REGISTRY (top of this script) — add it (java-test or java-run) so a future deletion is caught"
+  fi
+done < <(git ls-files -- '*/gradlew')
+
+[ "$registry_failed" -eq 0 ] && ok "Every registered project's manifest is present"
+[ "$registry_failed" -eq 1 ] && FAILED=1
 echo
 
 echo "== Python syntax (py_compile) =="
@@ -105,8 +304,8 @@ while IFS= read -r pyproject; do
   has_lock=0
   git ls-files --error-unmatch "$dir/uv.lock" > /dev/null 2>&1 && has_lock=1
 
-  if [ "$has_lock" -eq 0 ] && ! is_known_unlocked "$dir"; then
-    fail "$dir: no committed uv.lock and not in KNOWN_UNLOCKED_PROJECTS (top of this script) — commit a uv.lock, or add it there if it's deliberately unlocked like Lab 05"
+  if [ "$has_lock" -eq 0 ] && ! is_registered_unlocked "$dir"; then
+    fail "$dir: no committed uv.lock and not registered as py-unlocked (top of this script) — commit a uv.lock, or register it there if it's deliberately unlocked like Lab 05"
     pytest_failed=1
     continue
   fi
@@ -151,8 +350,7 @@ done < <(git ls-files -- '*/go.mod' 'go.mod')
 echo
 
 echo "== Java notifier example (javac + run) =="
-notifier_java_dir="examples/notifier/java"
-if [ -d "$notifier_java_dir" ]; then
+for notifier_java_dir in $(registry_paths_of_type java-javac); do
   tmp_dir=$(mktemp -d)
   trap 'rm -rf "$tmp_dir"' EXIT
   if ! javac "$notifier_java_dir"/*.java -d "$tmp_dir" > /tmp/notifier_javac_err.$$ 2>&1; then
@@ -167,160 +365,25 @@ if [ -d "$notifier_java_dir" ]; then
   rm -f /tmp/notifier_javac_err.$$ /tmp/notifier_run_err.$$
   rm -rf "$tmp_dir"
   trap - EXIT
-else
-  echo "  (no $notifier_java_dir — skipping)"
-fi
+done
 echo
 
-echo "== Java capstone starter (committed Gradle Wrapper) =="
-java_dir="examples/capstone-starters/java"
-if [ -d "$java_dir" ]; then
-  wrapper_ok=1
-  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
-    if [ ! -s "$java_dir/$f" ]; then
-      fail "$java_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
-      wrapper_ok=0
-    fi
-  done
-  if [ ! -x "$java_dir/gradlew" ]; then
-    fail "$java_dir/gradlew is not executable (chmod +x it and commit the mode change)"
-    wrapper_ok=0
-  fi
-
-  if [ "$wrapper_ok" -eq 1 ]; then
+echo "== Java projects with a test suite (committed Gradle Wrapper) =="
+for java_dir in $(registry_paths_of_type java-test); do
+  echo "== $java_dir =="
+  if check_gradle_wrapper_committed "$java_dir"; then
     ok "Gradle Wrapper files present and executable"
     echo "  -- $java_dir --"
-    if (cd "$java_dir" && ./gradlew test); then
+    if run_gradle_wrapper "$java_dir" test; then
       ok "$java_dir: ./gradlew test passed"
     else
       fail "$java_dir: ./gradlew test failed"
     fi
-    (cd "$java_dir" && ./gradlew --stop > /dev/null 2>&1) || true
-    rm -rf "$java_dir/build" "$java_dir/.gradle"
   else
     echo "      Skipping ./gradlew test — wrapper isn't intact."
-  fi
-else
-  echo "  (no $java_dir — skipping)"
-fi
-echo
-
-# This is a second, deliberately explicit copy of the capstone check
-# above rather than a loop over every `*/gradlew` — generalizing Java
-# project discovery (the same way Python/Go are already discovered via
-# `*/pyproject.toml` and `*/go.mod`) is a later migration stage's job,
-# once there's more than one or two Gradle starters to justify it.
-echo "== Java works-on-my-machine starter (committed Gradle Wrapper) =="
-java_womm_dir="examples/works-on-my-machine/java"
-if [ -d "$java_womm_dir" ]; then
-  wrapper_ok=1
-  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
-    if [ ! -s "$java_womm_dir/$f" ]; then
-      fail "$java_womm_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
-      wrapper_ok=0
-    fi
-  done
-  if [ ! -x "$java_womm_dir/gradlew" ]; then
-    fail "$java_womm_dir/gradlew is not executable (chmod +x it and commit the mode change)"
-    wrapper_ok=0
-  fi
-
-  if [ "$wrapper_ok" -eq 1 ]; then
-    ok "Gradle Wrapper files present and executable"
-    echo "  -- $java_womm_dir --"
-    if (cd "$java_womm_dir" && ./gradlew test); then
-      ok "$java_womm_dir: ./gradlew test passed"
-    else
-      fail "$java_womm_dir: ./gradlew test failed"
-    fi
-    (cd "$java_womm_dir" && ./gradlew --stop > /dev/null 2>&1) || true
-    rm -rf "$java_womm_dir/build" "$java_womm_dir/.gradle"
-  else
-    echo "      Skipping ./gradlew test — wrapper isn't intact."
-  fi
-else
-  echo "  (no $java_womm_dir — skipping)"
-fi
-echo
-
-# Act III's discount-codes Java variants (version-a: coupled,
-# version-b: decoupled) are both finished, ready-to-run comparison
-# material for Lab 12 — unlike Act II's restaurant-bill starters,
-# these already have their full test suites. Only SAVE10/SAVE5/unknown
-# are covered here; SAVE20 (Lab 12) and SAVE_FLAT2 (Lab 15) are each
-# student work and must not appear in this public tree.
-for discount_codes_java_dir in \
-  "examples/discount-codes/version-a/java" \
-  "examples/discount-codes/version-b/java"; do
-  echo "== Java discount-codes $discount_codes_java_dir (committed Gradle Wrapper) =="
-  if [ -d "$discount_codes_java_dir" ]; then
-    wrapper_ok=1
-    for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
-      if [ ! -s "$discount_codes_java_dir/$f" ]; then
-        fail "$discount_codes_java_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
-        wrapper_ok=0
-      fi
-    done
-    if [ ! -x "$discount_codes_java_dir/gradlew" ]; then
-      fail "$discount_codes_java_dir/gradlew is not executable (chmod +x it and commit the mode change)"
-      wrapper_ok=0
-    fi
-
-    if [ "$wrapper_ok" -eq 1 ]; then
-      ok "Gradle Wrapper files present and executable"
-      echo "  -- $discount_codes_java_dir --"
-      if (cd "$discount_codes_java_dir" && ./gradlew test); then
-        ok "$discount_codes_java_dir: ./gradlew test passed"
-      else
-        fail "$discount_codes_java_dir: ./gradlew test failed"
-      fi
-      (cd "$discount_codes_java_dir" && ./gradlew --stop > /dev/null 2>&1) || true
-      rm -rf "$discount_codes_java_dir/build" "$discount_codes_java_dir/.gradle"
-    else
-      echo "      Skipping ./gradlew test — wrapper isn't intact."
-    fi
-  else
-    echo "  (no $discount_codes_java_dir — skipping)"
   fi
   echo
 done
-
-# Act IV's team-inventory Java starter is pre-Lab-16: a summarize
-# method and one baseline test, nothing else. low_stock_items,
-# expiring_items, reorder_report, and the student's own CI workflow
-# are all Lab 16-19 work and must not appear in this public tree.
-echo "== Java team-inventory starter (committed Gradle Wrapper) =="
-team_inventory_java_dir="examples/team-inventory/java"
-if [ -d "$team_inventory_java_dir" ]; then
-  wrapper_ok=1
-  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
-    if [ ! -s "$team_inventory_java_dir/$f" ]; then
-      fail "$team_inventory_java_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
-      wrapper_ok=0
-    fi
-  done
-  if [ ! -x "$team_inventory_java_dir/gradlew" ]; then
-    fail "$team_inventory_java_dir/gradlew is not executable (chmod +x it and commit the mode change)"
-    wrapper_ok=0
-  fi
-
-  if [ "$wrapper_ok" -eq 1 ]; then
-    ok "Gradle Wrapper files present and executable"
-    echo "  -- $team_inventory_java_dir --"
-    if (cd "$team_inventory_java_dir" && ./gradlew test); then
-      ok "$team_inventory_java_dir: ./gradlew test passed"
-    else
-      fail "$team_inventory_java_dir: ./gradlew test failed"
-    fi
-    (cd "$team_inventory_java_dir" && ./gradlew --stop > /dev/null 2>&1) || true
-    rm -rf "$team_inventory_java_dir/build" "$team_inventory_java_dir/.gradle"
-  else
-    echo "      Skipping ./gradlew test — wrapper isn't intact."
-  fi
-else
-  echo "  (no $team_inventory_java_dir — skipping)"
-fi
-echo
 
 # Act II's restaurant-bill starters are intentionally pre-Lab-06: one
 # monolithic entry point each, no package split, no tests, and the
@@ -332,109 +395,69 @@ echo
 echo "== Act II restaurant-bill starters (black-box smoke test) =="
 EXPECTED_RECEIPT_LINE='Total: $46.74'
 
-py_bill_starter="examples/restaurant-bill/python/bill.py"
-if [ -f "$py_bill_starter" ]; then
-  if py_bill_output=$(python3 "$py_bill_starter" 2>&1) && printf '%s\n' "$py_bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
-    ok "$py_bill_starter: runs and produces the expected receipt"
-  else
-    fail "$py_bill_starter: did not run, or produced an unexpected receipt"
-    printf '%s\n' "$py_bill_output" | sed 's/^/      /'
-  fi
-else
-  echo "  (no $py_bill_starter — skipping)"
-fi
-
-go_bill_dir="examples/restaurant-bill/go"
-if [ -f "$go_bill_dir/main.go" ]; then
-  if go_bill_output=$(cd "$go_bill_dir" && go run main.go 2>&1) && printf '%s\n' "$go_bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
-    ok "$go_bill_dir: runs and produces the expected receipt"
-  else
-    fail "$go_bill_dir: did not run, or produced an unexpected receipt"
-    printf '%s\n' "$go_bill_output" | sed 's/^/      /'
-  fi
-else
-  echo "  (no $go_bill_dir/main.go — skipping)"
-fi
-
-java_bill_dir="examples/restaurant-bill/java"
-if [ -d "$java_bill_dir" ]; then
-  wrapper_ok=1
-  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
-    if [ ! -s "$java_bill_dir/$f" ]; then
-      fail "$java_bill_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
-      wrapper_ok=0
-    fi
-  done
-  if [ ! -x "$java_bill_dir/gradlew" ]; then
-    fail "$java_bill_dir/gradlew is not executable (chmod +x it and commit the mode change)"
-    wrapper_ok=0
-  fi
-
-  if [ "$wrapper_ok" -eq 1 ]; then
-    ok "Gradle Wrapper files present and executable"
-    if java_bill_output=$(cd "$java_bill_dir" && ./gradlew run --console=plain --quiet 2>&1); then
-      if printf '%s\n' "$java_bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
-        ok "$java_bill_dir: runs and produces the expected receipt"
+for sh_smoke_dir in $(registry_paths_of_type sh-smoke); do
+  case "$sh_smoke_dir" in
+    */python)
+      bill_script="$sh_smoke_dir/bill.py"
+      if [ -f "$bill_script" ]; then
+        if bill_output=$(python3 "$bill_script" 2>&1) && printf '%s\n' "$bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
+          ok "$bill_script: runs and produces the expected receipt"
+        else
+          fail "$bill_script: did not run, or produced an unexpected receipt"
+          printf '%s\n' "$bill_output" | sed 's/^/      /'
+        fi
       else
-        fail "$java_bill_dir: ran but produced an unexpected receipt"
+        fail "$bill_script: registered sh-smoke project is missing its entry point"
+      fi
+      ;;
+    */go)
+      if [ -f "$sh_smoke_dir/main.go" ]; then
+        if bill_output=$(cd "$sh_smoke_dir" && go run main.go 2>&1) && printf '%s\n' "$bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
+          ok "$sh_smoke_dir: runs and produces the expected receipt"
+        else
+          fail "$sh_smoke_dir: did not run, or produced an unexpected receipt"
+          printf '%s\n' "$bill_output" | sed 's/^/      /'
+        fi
+      else
+        fail "$sh_smoke_dir/main.go: registered sh-smoke project is missing its entry point"
+      fi
+      ;;
+    *)
+      fail "$sh_smoke_dir: sh-smoke registry entry doesn't end in /python or /go — don't know how to run it"
+      ;;
+  esac
+done
+
+for java_run_dir in $(registry_paths_of_type java-run); do
+  if check_gradle_wrapper_committed "$java_run_dir"; then
+    ok "Gradle Wrapper files present and executable"
+    if java_bill_output=$(run_gradle_wrapper "$java_run_dir" run --console=plain --quiet); then
+      if printf '%s\n' "$java_bill_output" | grep -qF "$EXPECTED_RECEIPT_LINE"; then
+        ok "$java_run_dir: runs and produces the expected receipt"
+      else
+        fail "$java_run_dir: ran but produced an unexpected receipt"
         printf '%s\n' "$java_bill_output" | sed 's/^/      /'
       fi
     else
-      fail "$java_bill_dir: ./gradlew run failed"
+      fail "$java_run_dir: ./gradlew run failed"
       printf '%s\n' "$java_bill_output" | sed 's/^/      /'
     fi
-    (cd "$java_bill_dir" && ./gradlew --stop > /dev/null 2>&1) || true
-    rm -rf "$java_bill_dir/build" "$java_bill_dir/.gradle"
   else
     echo "      Skipping ./gradlew run — wrapper isn't intact."
   fi
-else
-  echo "  (no $java_bill_dir — skipping)"
-fi
-echo
-
-# Act V's order-api Java starter is pre-Lab-21: a working server and
-# the baseline test suite, no per-item validation yet. That rule, and
-# the CONTRACT.md documenting it, are each Lab 21 student work and
-# must not appear in this public tree.
-echo "== Java order-api starter (committed Gradle Wrapper) =="
-order_api_java_dir="examples/order-api/java"
-if [ -d "$order_api_java_dir" ]; then
-  wrapper_ok=1
-  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
-    if [ ! -s "$order_api_java_dir/$f" ]; then
-      fail "$order_api_java_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
-      wrapper_ok=0
-    fi
-  done
-  if [ ! -x "$order_api_java_dir/gradlew" ]; then
-    fail "$order_api_java_dir/gradlew is not executable (chmod +x it and commit the mode change)"
-    wrapper_ok=0
-  fi
-
-  if [ "$wrapper_ok" -eq 1 ]; then
-    ok "Gradle Wrapper files present and executable"
-    echo "  -- $order_api_java_dir --"
-    if (cd "$order_api_java_dir" && ./gradlew test); then
-      ok "$order_api_java_dir: ./gradlew test passed"
-    else
-      fail "$order_api_java_dir: ./gradlew test failed"
-    fi
-    (cd "$order_api_java_dir" && ./gradlew --stop > /dev/null 2>&1) || true
-    rm -rf "$order_api_java_dir/build" "$order_api_java_dir/.gradle"
-  else
-    echo "      Skipping ./gradlew test — wrapper isn't intact."
-  fi
-else
-  echo "  (no $order_api_java_dir — skipping)"
-fi
+done
 echo
 
 # Black-box HTTP contract checks against the order-api starters —
 # real requests over real sockets, never importing any of the three
 # servers' own code. This only checks the shared HTTP contract every
 # track already ships pre-Lab-21 — it must never check Lab 21's
-# per-item validation rule, which is student work.
+# per-item validation rule, or anything from Labs 22-25, all of which
+# is student work. Post-Lab-25 behavior (SQLite, notes, retry,
+# logging, priority) is verified separately, by hand, against
+# disposable reference solutions — never against this committed
+# baseline, and never wired into this script. See
+# docs/maintainers/course-health.md for why that split exists.
 echo "== order-api starter HTTP contract (black-box, all three tracks) =="
 contract_harness="scripts/contract-tests/order-api/starter/check_contract.py"
 if [ -f "$contract_harness" ]; then
@@ -444,7 +467,7 @@ if [ -f "$contract_harness" ]; then
     fail "order-api starter contract: see output above"
   fi
 else
-  echo "  (no $contract_harness — skipping)"
+  fail "$contract_harness: missing — the order-api starter contract can't be verified"
 fi
 echo
 

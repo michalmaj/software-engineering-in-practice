@@ -23,6 +23,7 @@ With no --track, all three run. Exits non-zero if any check fails.
 from __future__ import annotations
 
 import argparse
+import collections
 import http.client
 import json
 import os
@@ -31,6 +32,8 @@ import signal
 import socket
 import subprocess
 import sys
+import tempfile
+import threading
 import time
 from pathlib import Path
 
@@ -68,6 +71,28 @@ TRACKS = {
 # project in this course.
 READY_TIMEOUT_SECONDS = 90
 
+# Keep this harness's stdout/stderr capture from growing without bound if
+# a server somehow produces a lot of output — only the tail is ever useful
+# for diagnosing a failure, and nothing is printed at all on success.
+OUTPUT_TAIL_LINES = 100
+
+# In CI (GitHub Actions), gradle/actions/setup-gradle@v6 already caches the
+# default Gradle user home in a fresh, disposable VM with nothing else
+# running, so using it as-is is both safe and fast. On a maintainer's own
+# machine, `./gradlew --stop` below would otherwise shut down *any*
+# Gradle daemon the maintainer has running for unrelated work (another
+# project open in an IDE, for instance) — a separate, stable (not
+# recreated per run, so the Gradle distribution/dependency download only
+# happens once) GRADLE_USER_HOME keeps this harness's daemon completely
+# isolated from that.
+def _gradle_env() -> dict[str, str]:
+    env = dict(os.environ)
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        gradle_home = Path(tempfile.gettempdir()) / "software-engineering-in-practice-course-health-gradle-home"
+        gradle_home.mkdir(parents=True, exist_ok=True)
+        env["GRADLE_USER_HOME"] = str(gradle_home)
+    return env
+
 
 class ContractError(AssertionError):
     pass
@@ -79,12 +104,27 @@ def find_free_port() -> int:
         return s.getsockname()[1]
 
 
-def wait_for_server(port: int, process: subprocess.Popen) -> None:
+def _drain_output(pipe, buffer: collections.deque) -> None:
+    """Runs in a background thread for the lifetime of the subprocess.
+    A pipe nobody reads from fills its OS buffer (64KB on Linux) and then
+    blocks the writer forever — this keeps it drained continuously,
+    keeping only the last OUTPUT_TAIL_LINES for diagnostics, discarding
+    the rest, so a chatty server can't grow this harness's memory either."""
+    try:
+        for line in pipe:
+            buffer.append(line.rstrip("\n"))
+    except (ValueError, OSError):
+        pass  # pipe closed out from under us during process teardown
+
+
+def wait_for_server(port: int, process: subprocess.Popen, output: collections.deque) -> None:
     deadline = time.monotonic() + READY_TIMEOUT_SECONDS
     while time.monotonic() < deadline:
         if process.poll() is not None:
+            tail = "\n".join(output)
             raise ContractError(
                 f"server process exited early (code {process.returncode}) before it ever accepted a connection"
+                + (f"\n--- last output ---\n{tail}" if tail else "")
             )
         try:
             with socket.create_connection(("localhost", port), timeout=1):
@@ -194,8 +234,17 @@ def run_checks(port: int) -> None:
 def run_track(name: str) -> list[str]:
     spec = TRACKS[name]
     port = find_free_port()
-    env = {**os.environ, "PORT": str(port)}
+    env = {**_gradle_env(), "PORT": str(port)}
     errors: list[str] = []
+    output: collections.deque = collections.deque(maxlen=OUTPUT_TAIL_LINES)
+
+    # Record which cleanup directories already existed *before* this run,
+    # so teardown only ever removes what this run itself created — never
+    # a build/.gradle a maintainer already had on disk for unrelated
+    # reasons. Matches scripts/check-course.sh's own cleanup discipline.
+    preexisting_cleanup_dirs = {
+        rel_dir for rel_dir in spec["cleanup_dirs"] if (spec["dir"] / rel_dir).exists()
+    }
 
     # start_new_session=True puts the launched command in its own
     # process group. This matters for Go specifically: `go run .`
@@ -215,27 +264,42 @@ def run_track(name: str) -> list[str]:
         text=True,
         start_new_session=True,
     )
+    drain_thread = threading.Thread(target=_drain_output, args=(process.stdout, output), daemon=True)
+    drain_thread.start()
     try:
-        wait_for_server(port, process)
+        wait_for_server(port, process, output)
         run_checks(port)
     except ContractError as e:
         errors.append(str(e))
     finally:
-        pgid = os.getpgid(process.pid)
+        # The server may already have exited on its own (a startup crash,
+        # for instance) by the time we get here — os.getpgid/os.killpg on
+        # an already-gone process raise ProcessLookupError, which must
+        # not be allowed to escape this cleanup and hide the real
+        # ContractError recorded above with a confusing traceback instead.
         try:
+            pgid = os.getpgid(process.pid)
             os.killpg(pgid, signal.SIGTERM)
             process.wait(timeout=15)
-        except (subprocess.TimeoutExpired, ProcessLookupError):
+        except ProcessLookupError:
+            pass
+        except subprocess.TimeoutExpired:
             try:
                 os.killpg(pgid, signal.SIGKILL)
             except ProcessLookupError:
                 pass
-            process.wait(timeout=15)
+            try:
+                process.wait(timeout=15)
+            except subprocess.TimeoutExpired:
+                pass
+        drain_thread.join(timeout=5)
+
         stop_cmd = spec.get("stop_cmd")
         if stop_cmd:
-            subprocess.run(stop_cmd, cwd=spec["dir"], capture_output=True)
+            subprocess.run(stop_cmd, cwd=spec["dir"], env=env, capture_output=True)
         for rel_dir in spec["cleanup_dirs"]:
-            shutil.rmtree(spec["dir"] / rel_dir, ignore_errors=True)
+            if rel_dir not in preexisting_cleanup_dirs:
+                shutil.rmtree(spec["dir"] / rel_dir, ignore_errors=True)
 
     return errors
 

@@ -165,9 +165,41 @@ Add three tests (any track): one asserting a `POST` that *does* send
 *omits* it gets `"normal"`; and one that `POST`s an order with an
 explicit `priority`, then `GET`s that same order by id and asserts the
 fetched order's `priority` matches — proving it's actually persisted,
-not just echoed in the creation response. Then run the full existing
-test suite too, to confirm none of those tests needed to change for
-this to be true.
+not just echoed in the creation response.
+
+None of those three tests touches the one case that actually matters
+most for a migration: a row that was already in the database *before*
+`migrate_add_priority_column()` ever ran, whose `priority` column is
+genuinely `NULL` — not defaulted, not omitted from a request, really
+`NULL` at the SQL level. Every one of the three tests above only ever
+creates *new* rows, through `create_order`/`createOrder`, which always
+writes a real value. Add a fourth test that proves the historical
+case directly:
+
+```text
+Old database row without priority
+→ upgrade schema
+→ GET historical order
+→ priority == "normal"
+```
+
+Write it by inserting a row with a raw `INSERT` statement that doesn't
+mention `priority` at all — bypassing `create_order`/`createOrder`
+entirely — *before* calling `migrate_add_priority_column()` in that
+test, so the column is genuinely absent (and then genuinely `NULL`
+once the migration adds it) for that one row, the same way a real
+pre-Lab-25 row would be. Then run the migration, then fetch that row
+through your normal `get_order`/`getOrder` path, and assert its
+`priority` comes back as `"normal"` — not `null`, not missing. This is
+a different, stronger test than the three above: it would have caught
+a real bug this course's own authors found while verifying this
+lab — a GET endpoint that maps a SQL `NULL` straight into the JSON
+response as `null`, which every one of the first three tests still
+passes, because none of them ever reads back a row whose `priority`
+column is actually `NULL`.
+
+Then run the full existing test suite too, to confirm none of the
+four new tests needed any earlier test to change for this to be true.
 
 7. Update `CONTRACT.md` from Lab 21: document the new optional
    `priority` field on `POST /orders`'s request body and its presence
@@ -218,9 +250,10 @@ this to be true.
   SQLite (a `GET` after a `POST` returns it, not just the `POST`
   response itself, and it survives a server restart, since it's a real
   column, not an in-memory or echoed-only value), defaults correctly,
-  has its own passing tests (explicit value, default omission, and the
-  POST-then-GET round trip), and every test written before this lab
-  still passes unmodified.
+  has its own passing tests (explicit value, default omission, the
+  POST-then-GET round trip, and a historical row whose `priority`
+  column is genuinely `NULL` mapping to `"normal"`, not `null`), and
+  every test written before this lab still passes unmodified.
 - Both of this lab's changes were merged through pull requests with a
   green CI check, not committed directly to `main`.
 
@@ -313,6 +346,13 @@ a tag you're unsure about.
 - **Hint 3:** MAJOR bumps mean "you might need to change your calling
   code"; MINOR bumps mean "new capability, nothing else changes for
   you"; PATCH bumps mean "same behavior, a bug got fixed."
+- **Hint 4:** For the historical-row test, open a raw
+  `sqlite3.connect(db.DB_PATH)` connection in the test itself and
+  `INSERT INTO orders (items, status, notes) VALUES (...)` directly —
+  no `priority` column mentioned at all — *before* calling
+  `db.migrate_add_priority_column()`. That's what makes the row
+  genuinely pre-migration, not just missing a value you could have
+  passed.
 
 ### Go
 
@@ -330,6 +370,12 @@ a tag you're unsure about.
 - **Hint 3:** `git tag --list "order-api-v*"` only lists tags matching
   that pattern — useful once you're also tagging things unrelated to
   `order-api` in the same repository.
+- **Hint 4:** For the historical-row test, open your own `sql.Open` +
+  `Exec` directly in the test, inserting straight into `orders` with
+  only `items` and `status` set — no `priority` — *before* calling
+  `migrateAddPriorityColumn()`. That's what makes the row genuinely
+  pre-migration, not just missing a value you could have passed to
+  `createOrder`.
 
 ### Java
 
@@ -346,6 +392,12 @@ a tag you're unsure about.
 - **Hint 3:** `git tag --list "order-api-v*"` only lists tags matching
   that pattern — useful once you're also tagging things unrelated to
   `order-api` in the same repository.
+- **Hint 4:** For the historical-row test, open your own
+  `DriverManager.getConnection(...)` directly in the test and insert
+  straight into `orders` with only `items` and `status` set — no
+  `priority` — *before* calling `OrderDb.migrateAddPriorityColumn()`.
+  That's what makes the row genuinely pre-migration, not just missing
+  a value you could have passed to `createOrder`.
 
 ## What's next
 

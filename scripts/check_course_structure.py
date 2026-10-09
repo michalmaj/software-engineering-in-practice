@@ -164,9 +164,11 @@ def check_ai_attribution() -> list[str]:
 FENCE_RE = re.compile(r"^(\s*)```([a-zA-Z0-9_+-]*)\s*$")
 
 
-def _extract_fenced_blocks(text: str, languages: set[str]) -> list[str]:
-    """Return the raw content of every fenced block whose language tag is
-    in `languages`, in document order, content only (no fence lines)."""
+def _extract_fenced_blocks(text: str, languages: set[str]) -> list[tuple[int, str]]:
+    """Return (starting_line, content) for every fenced block whose
+    language tag is in `languages`, in document order, content only (no
+    fence lines). starting_line is 1-indexed and points at the opening
+    fence, so an error message can send someone straight to it."""
     lines = text.splitlines()
     blocks = []
     i = 0
@@ -175,12 +177,13 @@ def _extract_fenced_blocks(text: str, languages: set[str]) -> list[str]:
         if m and m.group(2).lower() in languages:
             indent = m.group(1)
             close_re = re.compile(rf"^{re.escape(indent)}```\s*$")
+            start_line = i + 1
             j = i + 1
             body = []
             while j < len(lines) and not close_re.match(lines[j]):
                 body.append(lines[j])
                 j += 1
-            blocks.append("\n".join(body))
+            blocks.append((start_line, "\n".join(body)))
             i = j + 1
         else:
             i += 1
@@ -209,13 +212,13 @@ def check_code_block_parity() -> list[str]:
                 "match one-for-one"
             )
             continue
-        for idx, (e, p) in enumerate(zip(en_blocks, pl_blocks), start=1):
+        for idx, ((en_line, e), (pl_line, p)) in enumerate(zip(en_blocks, pl_blocks), start=1):
             if e != p:
                 errors.append(
                     f"{rel}: executable code block #{idx} differs between "
-                    "README.md and README.pl.md — commands, comments, and "
-                    "placeholders in code blocks must be byte-identical "
-                    "across languages"
+                    f"README.md:{en_line} and README.pl.md:{pl_line} — "
+                    "commands, comments, and placeholders in code blocks "
+                    "must be byte-identical across languages"
                 )
     return errors
 

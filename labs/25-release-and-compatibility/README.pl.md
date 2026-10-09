@@ -171,9 +171,42 @@ jeden sprawdzający, że `POST`, który je *pomija*, dostaje `"normal"`;
 i jeden, który wysyła `POST` z jawnym `priority`, a potem wykonuje
 `GET` tego samego zamówienia po id i sprawdza, że `priority`
 pobranego zamówienia się zgadza — dowodząc, że jest naprawdę
-przechowywane, nie tylko odbite w odpowiedzi tworzącej. Potem uruchom
-też pełny istniejący zestaw testów, żeby potwierdzić, że żaden z nich
-nie musiał się zmienić, żeby to było prawdą.
+przechowywane, nie tylko odbite w odpowiedzi tworzącej.
+
+Żaden z tych trzech testów nie dotyka przypadku, który ma największe
+znaczenie przy migracji: wiersza, który był już w bazie danych
+*zanim* `migrate_add_priority_column()` w ogóle się uruchomiło, i
+którego kolumna `priority` jest naprawdę `NULL` — nie domyślna, nie
+pominięta w żądaniu, naprawdę `NULL` na poziomie SQL. Każdy z
+powyższych trzech testów tworzy wyłącznie *nowe* wiersze, przez
+`create_order`/`createOrder`, które zawsze zapisują prawdziwą wartość.
+Dodaj czwarty test, który dowodzi historycznego przypadku wprost:
+
+```text
+Old database row without priority
+→ upgrade schema
+→ GET historical order
+→ priority == "normal"
+```
+
+Napisz go, wstawiając wiersz surową instrukcją `INSERT`, która w ogóle
+nie wspomina `priority` — z pominięciem `create_order`/`createOrder`
+całkowicie — *przed* wywołaniem `migrate_add_priority_column()` w tym
+teście, żeby kolumna była naprawdę nieobecna (a potem naprawdę `NULL`
+po dodaniu jej przez migrację) dla tego jednego wiersza, dokładnie tak,
+jak byłby prawdziwy wiersz sprzed Lab 25. Potem uruchom migrację,
+potem pobierz ten wiersz przez swoją zwykłą ścieżkę
+`get_order`/`getOrder`, i sprawdź, że jego `priority` wraca jako
+`"normal"` — nie `null`, nie brakujące. To inny, mocniejszy test niż
+powyższe trzy: wychwyciłby prawdziwy błąd, który autorzy tego kursu
+znaleźli podczas weryfikacji tego labu — endpoint GET mapujący SQL-owy
+`NULL` wprost na `null` w odpowiedzi JSON, co każdy z pierwszych trzech
+testów nadal przechodzi, bo żaden z nich nigdy nie odczytuje z powrotem
+wiersza, którego kolumna `priority` jest faktycznie `NULL`.
+
+Potem uruchom też pełny istniejący zestaw testów, żeby potwierdzić, że
+żaden wcześniejszy test nie musiał się zmienić z powodu tych czterech
+nowych.
 
 7. Zaktualizuj `CONTRACT.md` z Lab 21: udokumentuj nowe opcjonalne pole
    `priority` w ciele żądania `POST /orders` i jego obecność w każdej
@@ -223,9 +256,11 @@ nie musiał się zmienić, żeby to było prawdą.
   SQLite (`GET` po `POST` je zwraca, nie tylko sama odpowiedź `POST`, i
   przetrwa restart serwera, bo to prawdziwa kolumna, nie wartość w
   pamięci albo tylko odbita), poprawnie domyślne, ma własne
-  przechodzące testy (jawna wartość, pominięcie z domyślną, i
-  round-trip POST-potem-GET), a każdy test napisany przed tym labem
-  nadal przechodzi bez modyfikacji.
+  przechodzące testy (jawna wartość, pominięcie z domyślną, round-trip
+  POST-potem-GET, i historyczny wiersz, którego kolumna `priority`
+  jest naprawdę `NULL`, mapujący się na `"normal"`, nie `null`), a
+  każdy test napisany przed tym labem nadal przechodzi bez
+  modyfikacji.
 - Obie zmiany z tego labu zostały zmergowane przez pull requesty z
   zielonym checkiem CI, nie zacommitowane bezpośrednio na `main`.
 
@@ -322,6 +357,13 @@ co do którego nie jesteś pewny/a.
   zmienić swój kod wywołujący"; MINOR oznacza "nowa możliwość, nic
   innego się dla Ciebie nie zmienia"; PATCH oznacza "to samo
   zachowanie, naprawiono błąd".
+- **Podpowiedź 4:** Do testu historycznego wiersza otwórz surowe
+  połączenie `sqlite3.connect(db.DB_PATH)` wprost w teście i wykonaj
+  `INSERT INTO orders (items, status, notes) VALUES (...)` — bez
+  wspominania kolumny `priority` w ogóle — *przed* wywołaniem
+  `db.migrate_add_priority_column()`. To właśnie czyni ten wiersz
+  naprawdę sprzed migracji, nie tylko pominiętym z wartością, którą
+  mogłeś/aś przekazać.
 
 ### Go
 
@@ -338,6 +380,12 @@ co do którego nie jesteś pewny/a.
 - **Podpowiedź 3:** `git tag --list "order-api-v*"` wymienia tylko
   tagi zgodne z tym wzorcem — przydatne, gdy tagujesz też coś
   niezwiązanego z `order-api` w tym samym repozytorium.
+- **Podpowiedź 4:** Do testu historycznego wiersza otwórz własne
+  `sql.Open` + `Exec` wprost w teście, wstawiając do `orders` tylko
+  `items` i `status` — bez `priority` — *przed* wywołaniem
+  `migrateAddPriorityColumn()`. To właśnie czyni ten wiersz naprawdę
+  sprzed migracji, nie tylko pominiętym z wartością, którą mogłeś/aś
+  przekazać do `createOrder`.
 
 ### Java
 
@@ -355,6 +403,12 @@ co do którego nie jesteś pewny/a.
 - **Podpowiedź 3:** `git tag --list "order-api-v*"` wymienia tylko
   tagi zgodne z tym wzorcem — przydatne, gdy tagujesz też coś
   niezwiązanego z `order-api` w tym samym repozytorium.
+- **Podpowiedź 4:** Do testu historycznego wiersza otwórz własne
+  `DriverManager.getConnection(...)` wprost w teście i wstaw do
+  `orders` tylko `items` i `status` — bez `priority` — *przed*
+  wywołaniem `OrderDb.migrateAddPriorityColumn()`. To właśnie czyni ten
+  wiersz naprawdę sprzed migracji, nie tylko pominiętym z wartością,
+  którą mogłeś/aś przekazać do `createOrder`.
 
 ## Co dalej
 
