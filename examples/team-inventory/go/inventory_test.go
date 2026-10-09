@@ -14,3 +14,13 @@ func TestSummarizeListsEachItemWithQuantity(t *testing.T) {
 		t.Errorf("expected result to contain %q, got %q", "Flour: 40 units", result)
 	}
 }
+
+func TestExpiringItemsListsItemsWithinDays(t *testing.T) {
+	inventory := []Item{{Name: "Milk", Quantity: 2, ExpiresInDays: 1}}
+
+	result := ExpiringItems(inventory, 3)
+
+	if len(result) != 1 || result[0] != "Milk" {
+		t.Errorf("got %v, want [Milk]", result)
+	}
+}
