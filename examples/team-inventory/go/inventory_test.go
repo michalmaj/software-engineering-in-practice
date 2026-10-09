@@ -34,3 +34,23 @@ func TestExpiringItemsListsItemsWithinDays(t *testing.T) {
 		t.Errorf("got %v, want [Milk]", result)
 	}
 }
+
+func TestReorderReportListsLowStockItems(t *testing.T) {
+	inventory := []Item{{Name: "Milk", Quantity: 2, ExpiresInDays: 1}}
+
+	result := ReorderReport(inventory, 5)
+
+	if result != "Reorder needed: Milk" {
+		t.Errorf("got %q, want %q", result, "Reorder needed: Milk")
+	}
+}
+
+func TestReorderReportWhenNothingIsLow(t *testing.T) {
+	inventory := []Item{{Name: "Flour", Quantity: 40, ExpiresInDays: 120}}
+
+	result := ReorderReport(inventory, 5)
+
+	if result != "Nothing to reorder." {
+		t.Errorf("got %q, want %q", result, "Nothing to reorder.")
+	}
+}

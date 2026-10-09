@@ -31,6 +31,14 @@ func ExpiringItems(inventory []Item, days int) []string {
 	return names
 }
 
+func ReorderReport(inventory []Item, threshold int) string {
+	items := LowStockItems(inventory, threshold)
+	if len(items) == 0 {
+		return "Nothing to reorder."
+	}
+	return fmt.Sprintf("Reorder needed: %s", strings.Join(items, ", "))
+}
+
 func Summarize(inventory []Item) string {
 	lines := []string{"Inventory Summary", "-----------------"}
 	for _, item := range inventory {
