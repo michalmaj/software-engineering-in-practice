@@ -81,36 +81,57 @@ całkowicie i przejdź do [Brak uprawnień administratora?](#brak-uprawnień-adm
 poniżej, a potem wróć tutaj, gdy Git i VS Code będą już zainstalowane
 inną metodą.
 
-## Część 3 — Zainstaluj Git for Windows
+## Część 3 — Zainstaluj Git for Windows i VS Code
 
-Wciąż w **administratorskim** oknie PowerShell:
+Oba wymagają uprawnień administratora do instalacji przez Chocolatey —
+zrób je jedno po drugim, w tym samym oknie, zanim wrócisz do zwykłej
+(nieadministratorskiej) sesji do wszystkiego innego. Wciąż w
+**administratorskim** oknie PowerShell:
 
-1. ```powershell
+1. Zainstaluj Git:
+   ```powershell
    choco install git -y
    ```
-2. **Co powinieneś/aś zobaczyć:** wynik pobierania i instalacji,
+   **Co powinieneś/aś zobaczyć:** wynik pobierania i instalacji,
    kończący się czymś jak `git v2.xx.x already installed` albo
    komunikatem sukcesu. Może to zająć minutę lub dwie.
-3. Zamknij to okno PowerShell. Nie będziesz już potrzebować uprawnień
-   administratora w resztce tego kursu.
+2. Zainstaluj VS Code, w tym samym oknie:
+   ```powershell
+   choco install vscode -y
+   ```
+   **Co powinieneś/aś zobaczyć:** wynik instalacji kończący się
+   komunikatem sukcesu.
+3. Zamknij to **administratorskie** okno PowerShell całkowicie. Nie
+   będziesz już potrzebować uprawnień administratora w resztce tego
+   kursu — wszystko od teraz, włącznie z pierwszym otwarciem samego VS
+   Code, dzieje się w zwykłym oknie.
 4. Otwórz **zwykłe** (nieadministratorskie) okno PowerShell: naciśnij
    klawisz Windows, wpisz `powershell`, tym razem naciśnij **Enter**
    (bez prawego przycisku).
-5. Potwierdź, że Git się zainstalował:
+5. Potwierdź, że oba się zainstalowały:
    ```powershell
    git --version
+   code --version
    ```
-   **Co powinieneś/aś zobaczyć:** `git version 2.xx.x.windows.x`.
+   **Co powinieneś/aś zobaczyć:** `git version 2.xx.x.windows.x`, a
+   potem kilka linii informacji o wersji z VS Code.
 
-   **Jeśli widzisz** `git: The term 'git' is not recognized...`:
-   zamknij *wszystkie* okna PowerShell i terminala, włącznie z VS
-   Code, jeśli jest otwarty, i spróbuj jeszcze raz ze świeżo
-   otworzonego okna. Instalacja nowego programu czasem nie działa w
-   oknach, które były już otwarte wcześniej. Jeśli wciąż nie można go
-   znaleźć, zobacz [Jeśli utkniesz](#jeśli-utkniesz).
+   **Jeśli którekolwiek mówi "nie jest rozpoznawane"**: zamknij
+   *wszystkie* okna PowerShell i terminala, włącznie z VS Code, jeśli
+   jest otwarty, i spróbuj jeszcze raz ze świeżo otworzonego okna.
+   Instalacja nowego programu czasem nie działa w oknach, które były
+   już otwarte wcześniej. Jeśli wciąż nie można go znaleźć, zobacz
+   [Jeśli utkniesz](#jeśli-utkniesz).
+6. Otwórz sam VS Code po raz pierwszy: naciśnij klawisz Windows, wpisz
+   `code`, kliknij **Visual Studio Code**.
 
-**Skąd wiesz, że możesz kontynuować:** `git --version` wypisuje
-prawdziwy numer wersji.
+**Co powinieneś/aś zobaczyć:** otwiera się okno VS Code, z zakładką
+powitalną i pustym panelem Explorer po lewej (nic do pokazania jeszcze
+— to normalne, nie otworzyłeś/aś jeszcze żadnego projektu).
+
+**Skąd wiesz, że możesz kontynuować:** `git --version` i `code
+--version` oba wypisują prawdziwe informacje o wersji, i VS Code się
+otworzył.
 
 ## Część 4 — Znajdź Git Bash
 
@@ -128,7 +149,7 @@ tłem i promptem wyglądającym jak `ty@TWÓJKOMPUTER MINGW64 ~`. Właśnie
 polecenia.
 
 Możesz zamknąć to okno na razie — do Git Bash wrócisz przez VS Code w
-Części 6. Celem tego kroku było tylko potwierdzenie, że on tam
+Części 5. Celem tego kroku było tylko potwierdzenie, że on tam
 rzeczywiście jest.
 
 ### PowerShell kontra Git Bash kontra terminal VS Code — jaka jest różnica?
@@ -141,27 +162,11 @@ rzeczywiście jest.
   Windows. To właśnie zakłada każda instrukcja tego kursu — gdy lab
   mówi "uruchom to w swoim terminalu", oznacza Git Bash.
 - **Terminal VS Code** to po prostu panel terminala *wewnątrz* okna VS
-  Code. Domyślnie na Windowsie otwiera PowerShell — Część 6 poniżej
+  Code. Domyślnie na Windowsie otwiera PowerShell — Część 5 poniżej
   zmienia ten domyślny wybór na Git Bash, raz, żeby każdy terminal,
   który otworzysz wewnątrz VS Code od teraz, był już właściwy.
 
-## Część 5 — Zainstaluj VS Code
-
-1. Otwórz **zwykłe** okno PowerShell (klawisz Windows → wpisz
-   `powershell` → Enter — administrator niepotrzebny tutaj).
-2. ```powershell
-   choco install vscode -y
-   ```
-3. **Co powinieneś/aś zobaczyć:** wynik instalacji kończący się
-   komunikatem sukcesu.
-4. Zamknij to okno PowerShell, potem otwórz VS Code: naciśnij klawisz
-   Windows, wpisz `code`, kliknij **Visual Studio Code**.
-
-**Co powinieneś/aś zobaczyć:** otwiera się okno VS Code, z zakładką
-powitalną i pustym panelem Explorer po lewej (nic do pokazania jeszcze
-— to normalne, nie otworzyłeś/aś jeszcze żadnego projektu).
-
-## Część 6 — Ustaw Git Bash jako domyślny terminal w VS Code
+## Część 5 — Ustaw Git Bash jako domyślny terminal w VS Code
 
 Zrób to raz, teraz, żebyś nigdy więcej nie musiał/a o tym myśleć.
 
@@ -199,7 +204,7 @@ Jeśli **Git Bash** nigdy nie pojawił się na liście w kroku 4, albo
 nowy terminal wciąż jest PowerShellem po przejściu kroków 1–7:
 
 1. **Zrestartuj VS Code całkowicie** — zamknij każde okno, otwórz
-   ponownie i spróbuj Część 6 od kroku 1. VS Code skanuje profile
+   ponownie i spróbuj Część 5 od kroku 1. VS Code skanuje profile
    terminala takie jak Git Bash tylko przy starcie, więc może
    przegapić instalację, która zdarzyła się, gdy był już otwarty.
 2. Jeśli wciąż go nie ma, wskaż VS Code na Git Bash ręcznie:
@@ -217,16 +222,29 @@ nowy terminal wciąż jest PowerShellem po przejściu kroków 1–7:
      "terminal.integrated.defaultProfile.windows": "Git Bash"
      ```
    - Zapisz plik, potem powtórz kroki 5–8 powyżej.
-   - Jeśli Gita nie ma w `C:\Program Files\Git`, najpierw znajdź,
-     gdzie faktycznie jest: w oknie PowerShell uruchom
-     `(Get-Command git).Source` — wypisuje prawdziwą ścieżkę, a
-     `bash.exe` mieszka w tym samym folderze `Git\bin\`.
+   - Jeśli Gita nie ma w `C:\Program Files\Git`, znajdź, gdzie
+     faktycznie jest. W oknie PowerShell uruchom:
+     ```powershell
+     (Get-Command git).Source
+     ```
+     To wypisuje ścieżkę samego `git.exe` — zwykle wewnątrz folderu
+     `cmd\`, jak `C:\Program Files\Git\cmd\git.exe`. Nie zakładaj, że
+     `bash.exe` jest w tym samym folderze; nie jest — jest w
+     sąsiednim folderze `bin\`, jeden poziom wyżej. Żeby dostać
+     dokładną ścieżkę do użycia powyżej, uruchom:
+     ```powershell
+     Join-Path (Split-Path (Split-Path (Get-Command git).Source)) "bin\bash.exe"
+     ```
+     Zanim wkleisz tę ścieżkę do `settings.json`, potwierdź, że plik
+     faktycznie tam istnieje — otwórz ten folder w Eksploratorze
+     Windows i sprawdź, albo uruchom `Test-Path` na ścieżce, którą
+     wypisał PowerShell; powinno pokazać `True`.
 
-## Część 7 — Zrób fork, sklonuj i otwórz to repozytorium
+## Część 6 — Zrób fork, sklonuj i otwórz to repozytorium
 
 To jest faktyczny cel całej tej strony. Od teraz każdy krok dzieje się
 albo w przeglądarce, albo w terminalu Git Bash wewnątrz VS Code z
-Części 6.
+Części 5.
 
 **Masz już fork albo lokalną kopię z wcześniejszej próby?** Nie
 powtarzaj tych kroków na ślepo — przejdź najpierw do
@@ -273,7 +291,7 @@ zawiera *Twój* username z GitHuba, nie `michalmaj`.
 
 ### 7.3 — Sklonuj je na swój komputer
 
-Z powrotem w terminalu Git Bash wewnątrz VS Code (Część 6):
+Z powrotem w terminalu Git Bash wewnątrz VS Code (Część 5):
 
 1. Zdecyduj, gdzie powinny żyć Twoje projekty, i utwórz ten folder,
    jeśli jeszcze nie istnieje. Rozsądny, prosty wybór:
@@ -336,7 +354,7 @@ teraz `labs`, `examples`, `scripts`, `README.md` i więcej — to samo,
 co `ls` pokazał Ci w 7.3.
 
 5. Otwórz terminal wewnątrz tego okna (**Terminal → New Terminal**) —
-   powinien już domyślnie być Git Bash, bo ustawiłeś/aś to w Części 6.
+   powinien już domyślnie być Git Bash, bo ustawiłeś/aś to w Części 5.
    Potwierdź, że jesteś we właściwym miejscu:
    ```bash
    pwd
