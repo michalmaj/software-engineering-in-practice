@@ -74,28 +74,43 @@ check() {
   fi
 }
 
-echo "Checking your environment against what this course's labs need:"
+echo "This checks every tool used anywhere in the course, across all three"
+echo "language tracks at once — it's a shared reference tool, not a"
+echo "single-track pass/fail gate, and not something Lab 01 requires you to"
+echo "run. If you've already picked a track, only your own track's row (plus"
+echo "Git) needs to say OK right now — MISSING on the other two languages is"
+echo "completely normal and expected, not a sign anything is broken. Each"
+echo "row names the first lab that actually needs it, so a MISSING or"
+echo "MISMATCH for a lab you haven't reached yet isn't something to fix"
+echo "today either."
 echo
 
 ANY_FAILED=0
 
-check "Git (Lab 01)" git \
+check "Git (needed from the very start, to clone this repository)" git \
   'git --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | head -1' \
   "ge:2.30" || ANY_FAILED=1
 
-check "Python 3 (Lab 01)" python3 \
+if command -v curl > /dev/null 2>&1; then
+  echo "OK       curl (needed from Lab 21 on, for every track; also used by the Python track's uv installer) available"
+else
+  echo "MISSING  curl (needed from Lab 21 on, for every track; also used by the Python track's uv installer) — not on PATH"
+  ANY_FAILED=1
+fi
+
+check "Python 3 — Python track only, from Lab 05 on" python3 \
   'python3 --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+"' \
   "series:3.13" || ANY_FAILED=1
 
-check "uv (Lab 05)" uv \
+check "uv — Python track only, from Lab 05 on" uv \
   'uv --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | head -1' \
   "exact:0.11.21" || ANY_FAILED=1
 
-check "Go (Lab 14)" go \
+check "Go — Go track only, from Lab 05 on" go \
   'go version | grep -oE "go[0-9]+\.[0-9]+(\.[0-9]+)?" | head -1 | sed "s/^go//"' \
   "series:1.27" || ANY_FAILED=1
 
-check "Java runtime (Lab 14)" java \
+check "Java runtime — Java track only, from Lab 05 on" java \
   'java -version 2>&1 | grep -oE "\"[0-9]+(\.[0-9]+)*" | head -1 | tr -d "\""' \
   "series:21" || ANY_FAILED=1
 
@@ -103,19 +118,13 @@ check "Java runtime (Lab 14)" java \
 # Some systems (stock macOS included) have a `java`/`javac` stub on PATH
 # that prints an "install a JDK" message instead of a version; that
 # already surfaces as UNKNOWN below, not a false OK.
-check "javac / JDK (Lab 14)" javac \
+check "javac / JDK — Java track only, from Lab 05 on" javac \
   'javac --version 2>&1 | grep -oE "[0-9]+(\.[0-9]+)*" | head -1' \
   "series:21" || ANY_FAILED=1
 
-if command -v curl > /dev/null 2>&1; then
-  echo "OK       curl (Lab 02) available"
-else
-  echo "MISSING  curl (Lab 02) — not on PATH"
-  ANY_FAILED=1
-fi
-
 echo
-echo "Missing something, or does a version not match? See the root README's"
-echo "toolchain table for how to install or switch to the required version."
+echo "Missing something, or does a version not match, for the track and lab"
+echo "you're actually on right now? See the root README's toolchain table"
+echo "for how to install or switch to the required version."
 
 exit "$ANY_FAILED"
