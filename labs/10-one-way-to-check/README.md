@@ -252,10 +252,8 @@ Lab 16) assumes a clean tree from here on.
 
 You've taken a one-file monolith and turned it into a small,
 well-tested, consistently-checked project, in your language of choice.
-Act II is done — for all three tracks. (Go and Java don't continue past
-here yet: Labs 11-30 are Python-only for now. If you've been following
-Go or Java, this is the edge of what's currently built; everything you
-just learned about structure, tests, bugs, and checks still applies to
-whatever you build next, in any language.)
+Act II is done — for all three tracks, and so is everything through
+Act VI: Go and Java keep going all the way to the capstone now, in the
+same language you've been using since this act.
 
 Continue to [Lab 11 — The client changed their mind](../11-changed-requirements/README.md).

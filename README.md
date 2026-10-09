@@ -24,7 +24,8 @@ repository — no terminal, Git, or GitHub experience assumed.
 course told as one continuous, progressive story, not a catalogue of
 technologies. It's built for university students taking a Software
 Engineering lab course — no prior professional development experience
-assumed, just basic Python.
+assumed, just basic programming in the language you'll pick for your
+track (Python, Go, or Java).
 
 ## Core idea
 
@@ -140,14 +141,18 @@ session, and GitHub's free tier has monthly usage limits.
 | Go        | standard Go tooling      | `go test`                 |
 | Java      | JDK 21 + Gradle Wrapper  | JUnit, via `./gradlew test` |
 
-Python carries most of the course; Go and Java appear from Lab 14
-onward for explicit cross-language comparisons. In all three, the
-language is the medium — the subject is software engineering. When
-your team picks one for the Act VI capstone (Lab 26), only Python is a
-fully-supported default with no language prerequisite beyond the
-course itself — choosing Go or Java there is a deliberate trade-off of
-learning that language's basics alongside the software-engineering
-work, not an equivalent, cost-free option.
+Labs 01-04 are one shared path, language-agnostic. From Lab 05 on,
+you pick one of three practical language tracks — Python, Go, or Java
+— and use it consistently from there through the Act VI capstone; Lab
+14 is a deliberate pause to compare how the same idea looks across all
+three, not a switch of track. In all three, the language is the
+medium — the subject is software engineering. What's assumed going in
+is basic programming experience in whichever language you pick, not
+specifically Python.
+
+Go and Java tracks are still being hardened across the whole course —
+treat them as **preview** until a final cross-track audit lands, even
+though Labs 05-30 already have real, working content in all three.
 
 ## How the labs work
 

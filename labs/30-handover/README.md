@@ -26,6 +26,27 @@ After this lab you should be able to:
   another team for a swap. If solo: you'll evaluate your own project as
   the "receiving team," pretending you've never seen it.
 
+### A note for instructors pairing teams
+
+Pair teams that used the **same language track** whenever you can —
+Python with Python, Go with Go, Java with Java. The receiving team
+should already have the toolchain installed and the test command
+memorized from their own Act V and Act VI work; that's what lets this
+lab test documentation and handover quality specifically, not whether
+someone can install an unfamiliar language's tooling under time
+pressure. If your class's team-language mix genuinely doesn't divide
+evenly into same-language pairs, don't ask a team to install a
+toolchain they've never used just to force a pairing — pair across
+languages only when the receiving team already has that toolchain
+available for another reason (for example, from their own Lab 14
+experience), and be explicit that the actual code handover (steps 6-9
+below) is optional if the toolchain truly isn't available: a thorough
+documentation-only review is a real, honest fallback, but it must be
+reported as that in `HANDOVER_NOTES.md`, not described as if a full
+code handover happened when it didn't. Don't require Codespaces to
+work around this — the local-first model from the rest of the course
+still applies here.
+
 ## Your task
 
 **If you are handing over (the originating team):**
@@ -85,11 +106,13 @@ project they don't own.
 
 ## Verification
 
-```bash
-# from the receiving side, in a completely fresh clone
-<the setup commands from the originating team's README>
-<the test command from the originating team's README>
-```
+There's no single command here — the whole point is that the
+originating team's own `README.md` is what defines the setup and test
+commands, and that varies by which language they chose. From the
+receiving side, in a completely fresh clone: follow the setup steps
+written in the originating team's `README.md` exactly as written, then
+run the test command it specifies (`uv run pytest`, `go test ./...`,
+or `./gradlew test`, depending on their track).
 
 Expected: both succeed using nothing but what's written in the
 repository.

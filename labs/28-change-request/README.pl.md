@@ -85,9 +85,25 @@ Po tym labie potrafisz:
 
 ## Weryfikacja
 
+Uruchom z korzenia repozytorium Waszego zespołu, w zależności od tego,
+co ustaliliście w ADR z Lab 26:
+
+### Python
+
 ```bash
-# from your team's own repository
-<your test command>
+uv run pytest -v
+```
+
+### Go
+
+```bash
+go test ./...
+```
+
+### Java
+
+```bash
+./gradlew test
 ```
 
 Oczekiwane: pełny zestaw zielony, włącznie z nowymi testami dla
@@ -96,8 +112,8 @@ jakąkolwiek kombinację.
 
 ## Zastanów się
 
-- Gdyby Wasz model danych miał już `table_ids: list` zamiast
-  pojedynczego `table_id`, ta zmiana byłaby dużo mniejsza. Czy to
+- Gdyby Wasz model danych miał już przechowywaną małą kolekcję id
+  stolików zamiast pojedynczego, ta zmiana byłaby dużo mniejsza. Czy to
   dlatego, że Wasz zespół przewidział to wymaganie, czy z powodu
   niepowiązanej decyzji, która akurat zostawiła na to miejsce?
 - Porównaj faktyczny koszt tej zmiany z tym, jak pewny siebie
@@ -106,10 +122,12 @@ jakąkolwiek kombinację.
 
 ## Jeśli utkniesz
 
-- **Podpowiedź 1:** Jeśli Wasze MVP przechowywało pojedynczy
-  `table_id` na rezerwację, najmniejsza poprawna zmiana to zwykle
-  przechowywanie listy id stolików wszędzie tam, gdzie to pole jest
-  czytane albo zapisywane — oprzyjcie się pokusie dodania drugiego,
+- **Podpowiedź 1:** Jeśli Wasze MVP przechowywało pojedyncze id
+  stolika na rezerwację, najmniejsza poprawna zmiana to zwykle
+  przechowywanie małej kolekcji id stolików wszędzie tam, gdzie to
+  pole jest czytane albo zapisywane — czymkolwiek Wasz język czyni
+  idiomatycznym (Pythonowa `list`, slice w Go, `List<String>` w
+  Javie, i tak dalej) — oprzyjcie się pokusie dodania drugiego,
   równoległego pola tylko dla przypadku łączonego.
 - **Podpowiedź 2:** Zdecydujcie swoje łączalne pary jako statyczne,
   znane dane (stała lista), a nie "dowolne dwa stoliki, które akurat

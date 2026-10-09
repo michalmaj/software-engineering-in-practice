@@ -258,11 +258,8 @@ się od Lab 16) zakłada czyste drzewo od teraz.
 
 Zmieniłeś/aś jednoplikowy monolit w mały, dobrze przetestowany,
 konsekwentnie sprawdzany projekt, w swoim wybranym języku. Akt II jest
-zakończony — dla wszystkich trzech ścieżek. (Go i Java nie kontynuują
-dalej stąd jeszcze: Laby 11-30 są na razie tylko w Pythonie. Jeśli
-realizowałeś/aś Go albo Javę, to jest granica tego, co jest obecnie
-zbudowane; wszystko, czego się właśnie nauczyłeś/aś o strukturze,
-testach, bugach i kontrolach, wciąż dotyczy tego, co zbudujesz
-następnie, w jakimkolwiek języku.)
+zakończony — dla wszystkich trzech ścieżek, tak samo jak wszystko aż do
+Aktu VI: Go i Java kontynuują teraz aż do capstone, w tym samym języku,
+którego używasz od tego aktu.
 
 Przejdź do [Lab 11 — Klient zmienił zdanie](../11-changed-requirements/README.pl.md).
