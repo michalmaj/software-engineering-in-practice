@@ -121,9 +121,9 @@ The two sections below are a **preview** of this specific
 reproducibility lesson, not of the whole course: a self-contained way
 to feel it using Go's and Java's own toolchains. They're optional —
 Act II's Go and Java tracks (Lab 06 onward) use a different project
-and don't require you to have done this preview first. Past Lab 10,
-though, Go and Java don't continue yet; Labs 11-30 are Python-only for
-now.
+and don't require you to have done this preview first. Go and Java
+now continue all the way through the rest of the course — Labs 11-30
+have real tracks in all three languages too.
 
 ### Go (preview)
 

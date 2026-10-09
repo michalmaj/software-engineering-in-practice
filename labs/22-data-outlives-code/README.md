@@ -607,14 +607,8 @@ alone would have caught if you'd skipped the real restarts.
 ## What's next
 
 Your data survives restarts and schema changes, in whichever track you
-followed. From here, Go and Java pause as a preview — Labs 23-25 are
-Python-only for now, the same way Labs 11-30 stayed Python-only after
-Act II and Act III's previews. Everything you just practiced about
-persistence, migration, and test isolation still applies to whatever
-comes next, in any language.
-
-If you're continuing in Python: the kitchen wants a notification sent
-to an external delivery service — and that service doesn't always
-answer.
+followed. The kitchen wants a notification sent to an external
+delivery service next — and that service doesn't always answer, in
+Python, Go, or Java alike.
 
 Continue to [Lab 23 — The outside world fails](../23-outside-world-fails/README.md).

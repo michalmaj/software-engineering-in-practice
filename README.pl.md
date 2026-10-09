@@ -26,7 +26,7 @@ inżynierii oprogramowania, opowiedziany jako jedna ciągła, progresywna
 historia, a nie katalog technologii. Jest pomyślany dla studentów kursu
 laboratoryjnego z Inżynierii Oprogramowania — nie zakłada wcześniejszego
 doświadczenia zawodowego w programowaniu, tylko podstawową znajomość
-Pythona.
+języka, który wybierzesz dla swojego tracku (Python, Go albo Java).
 
 ## Główna idea
 
@@ -148,15 +148,19 @@ limit GitHuba ma miesięczne ograniczenia.
 | Go        | standardowe narzędzia Go    | `go test`                     |
 | Java      | JDK 21 + Gradle Wrapper     | JUnit, przez `./gradlew test` |
 
-Python niesie większość kursu; Go i Java pojawiają się od Lab 14 przy
-okazji jawnych porównań między-językowych. We wszystkich trzech język
-jest medium — przedmiotem jest inżynieria oprogramowania. Gdy Wasz
-zespół wybiera jeden z nich dla capstone'u w Akcie VI (Lab 26), tylko
-Python jest w pełni wspieranym domyślnym wyborem bez żadnego wymogu
-znajomości języka poza tym, co już zakłada kurs — wybór Go albo Javy
-jest tam świadomym kompromisem: uczysz się podstaw tego języka
-równolegle z pracą inżynierską, to nie jest równoważny, bezkosztowy
-wybór.
+Laby 01-04 to jedna wspólna ścieżka, niezależna od języka. Od Lab 05
+wybierasz jeden z trzech praktycznych tracków językowych — Python, Go
+albo Java — i używasz go konsekwentnie od tego miejsca aż po capstone
+Aktu VI; Lab 14 to celowa przerwa, żeby porównać, jak ten sam pomysł
+wygląda we wszystkich trzech, nie zmiana tracku. We wszystkich trzech
+język jest medium — przedmiotem jest inżynieria oprogramowania. Tym,
+co jest zakładane na wejściu, są podstawy programowania w wybranym
+przez Ciebie języku, niekoniecznie w Pythonie.
+
+Tracki Go i Java są wciąż utwardzane w całym kursie — traktuj je jako
+**podgląd (PREVIEW)**, dopóki nie wyląduje finalny cross-track audit,
+mimo że Laby 05-30 już mają prawdziwą, działającą treść we wszystkich
+trzech.
 
 ## Jak działają laby
 

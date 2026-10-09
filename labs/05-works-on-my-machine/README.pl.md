@@ -131,8 +131,9 @@ Dwie sekcje poniżej to **podgląd** tej konkretnej lekcji o
 odtwarzalności, nie całego kursu: samodzielny sposób, żeby ją poczuć,
 używając własnych toolchainów Go i Javy. Są opcjonalne — ścieżki Go i
 Java Aktu II (Lab 06 i dalej) używają innego projektu i nie wymagają,
-żebyś najpierw zrobił/a ten podgląd. Za Lab 10 Go i Java jednak jeszcze
-nie kontynuują; Laby 11-30 są na razie tylko w Pythonie.
+żebyś najpierw zrobił/a ten podgląd. Go i Java teraz kontynuują przez
+resztę kursu — Laby 11-30 mają prawdziwe ścieżki też w obu tych
+językach.
 
 ### Go (podgląd)
 

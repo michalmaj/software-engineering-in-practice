@@ -630,14 +630,8 @@ prawdziwe restarty.
 ## Co dalej
 
 Twoje dane przetrwają restarty i zmiany schematu, w którymkolwiek
-tracku realizowałeś/aś. Od tego miejsca Go i Java robią przerwę jako
-podgląd — Laby 23-25 są na razie tylko w Pythonie, tak samo jak Laby
-11-30 zostały tylko w Pythonie po podglądach Aktu II i Aktu III.
-Wszystko, czego właśnie poćwiczyłeś/aś o trwałości danych, migracji i
-izolacji testów, wciąż dotyczy tego, co przyjdzie dalej, w
-jakimkolwiek języku.
-
-Jeśli kontynuujesz w Pythonie: kuchnia chce wysłać powiadomienie do
-zewnętrznego serwisu dostawy — a ten serwis nie zawsze odpowiada.
+tracku realizowałeś/aś. Dalej kuchnia chce wysłać powiadomienie do
+zewnętrznego serwisu dostawy — a ten serwis nie zawsze odpowiada, w
+Pythonie, Go i Javie tak samo.
 
 Przejdź do [Lab 23 — Świat zewnętrzny zawodzi](../23-outside-world-fails/README.pl.md).
