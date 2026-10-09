@@ -21,6 +21,16 @@ func LowStockItems(inventory []Item, threshold int) []string {
 	return names
 }
 
+func ExpiringItems(inventory []Item, days int) []string {
+	var names []string
+	for _, item := range inventory {
+		if item.ExpiresInDays <= days {
+			names = append(names, item.Name)
+		}
+	}
+	return names
+}
+
 func Summarize(inventory []Item) string {
 	lines := []string{"Inventory Summary", "-----------------"}
 	for _, item := range inventory {
@@ -29,6 +39,10 @@ func Summarize(inventory []Item) string {
 	lowStock := LowStockItems(inventory, 5)
 	if len(lowStock) > 0 {
 		lines = append(lines, fmt.Sprintf("Low stock: %s", strings.Join(lowStock, ", ")))
+	}
+	expiring := ExpiringItems(inventory, 3)
+	if len(expiring) > 0 {
+		lines = append(lines, fmt.Sprintf("Expiring soon: %s", strings.Join(expiring, ", ")))
 	}
 	return strings.Join(lines, "\n")
 }
