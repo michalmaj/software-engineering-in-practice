@@ -25,6 +25,16 @@ public class Inventory {
         return names;
     }
 
+    public static List<String> expiringItems(List<Item> inventory, int days) {
+        List<String> names = new ArrayList<>();
+        for (Item item : inventory) {
+            if (item.expiresInDays <= days) {
+                names.add(item.name);
+            }
+        }
+        return names;
+    }
+
     public static String summarize(List<Item> inventory) {
         List<String> lines = new ArrayList<>(List.of("Inventory Summary", "-----------------"));
         for (Item item : inventory) {
@@ -33,6 +43,10 @@ public class Inventory {
         List<String> lowStock = lowStockItems(inventory, 5);
         if (!lowStock.isEmpty()) {
             lines.add("Low stock: " + String.join(", ", lowStock));
+        }
+        List<String> expiring = expiringItems(inventory, 3);
+        if (!expiring.isEmpty()) {
+            lines.add("Expiring soon: " + String.join(", ", expiring));
         }
         return String.join("\n", lines);
     }
