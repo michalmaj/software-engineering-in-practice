@@ -22,7 +22,7 @@ After this lab you should be able to:
 
 - Lab 23 complete: `call_with_retries` and `notify_kitchen` exist and
   are wired into `do_POST`.
-- Current directory: `examples/order-api/`.
+- Current directory: `examples/order-api/python/`.
 
 ## Your task
 
@@ -68,7 +68,7 @@ After this lab you should be able to:
 ## Verification
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cd -
 ```

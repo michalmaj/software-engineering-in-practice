@@ -22,7 +22,7 @@ After this lab you should be able to:
 
 - Lab 21 complete: `CONTRACT.md` exists, item validation works, `uv
   run pytest` passes with 4 tests.
-- Current directory: `examples/order-api/`.
+- Current directory: `examples/order-api/python/`.
 
 ## Your task
 
@@ -115,7 +115,7 @@ After this lab you should be able to:
 ## Verification
 
 ```bash
-cd examples/order-api
+cd examples/order-api/python
 uv run pytest -v
 cd -
 ```
