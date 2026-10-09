@@ -285,6 +285,43 @@ for discount_codes_java_dir in \
   echo
 done
 
+# Act IV's team-inventory Java starter is pre-Lab-16: a summarize
+# method and one baseline test, nothing else. low_stock_items,
+# expiring_items, reorder_report, and the student's own CI workflow
+# are all Lab 16-19 work and must not appear in this public tree.
+echo "== Java team-inventory starter (committed Gradle Wrapper) =="
+team_inventory_java_dir="examples/team-inventory/java"
+if [ -d "$team_inventory_java_dir" ]; then
+  wrapper_ok=1
+  for f in gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties; do
+    if [ ! -s "$team_inventory_java_dir/$f" ]; then
+      fail "$team_inventory_java_dir/$f missing or empty — Gradle Wrapper isn't fully committed"
+      wrapper_ok=0
+    fi
+  done
+  if [ ! -x "$team_inventory_java_dir/gradlew" ]; then
+    fail "$team_inventory_java_dir/gradlew is not executable (chmod +x it and commit the mode change)"
+    wrapper_ok=0
+  fi
+
+  if [ "$wrapper_ok" -eq 1 ]; then
+    ok "Gradle Wrapper files present and executable"
+    echo "  -- $team_inventory_java_dir --"
+    if (cd "$team_inventory_java_dir" && ./gradlew test); then
+      ok "$team_inventory_java_dir: ./gradlew test passed"
+    else
+      fail "$team_inventory_java_dir: ./gradlew test failed"
+    fi
+    (cd "$team_inventory_java_dir" && ./gradlew --stop > /dev/null 2>&1) || true
+    rm -rf "$team_inventory_java_dir/build" "$team_inventory_java_dir/.gradle"
+  else
+    echo "      Skipping ./gradlew test — wrapper isn't intact."
+  fi
+else
+  echo "  (no $team_inventory_java_dir — skipping)"
+fi
+echo
+
 # Act II's restaurant-bill starters are intentionally pre-Lab-06: one
 # monolithic entry point each, no package split, no tests, and the
 # tax-before-discount bug Lab 08 teaches students to find. This section
