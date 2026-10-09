@@ -1,7 +1,14 @@
+def expiring_items(inventory: list[dict], days: int = 3) -> list[str]:
+    return [item["name"] for item in inventory if item["expires_in_days"] <= days]
+
+
 def summarize(inventory: list[dict]) -> str:
     lines = ["Inventory Summary", "-----------------"]
     for item in inventory:
         lines.append(f"{item['name']}: {item['quantity']} units")
+    expiring = expiring_items(inventory)
+    if expiring:
+        lines.append(f"Expiring soon: {', '.join(expiring)}")
     return "\n".join(lines)
 
 
