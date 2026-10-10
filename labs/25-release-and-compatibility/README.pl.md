@@ -21,80 +21,87 @@ Po tym labie potrafisz:
 ### Python
 
 - Lab 24 ukończony: `uv run pytest` przechodzi ze wszystkimi testami z
-  Labów 21-24.
+  Labów 21-24, `CHANGELOG.md` ma wpis `[1.0.0]`, a `order-api-v1.0.0`
+  istnieje jako opisany (annotated) tag na `main`, wypchnięty na Twój
+  remote.
 - Bieżący katalog: `examples/order-api/python/`.
 
 ### Go
 
 - Lab 24 ukończony: `go test ./...` przechodzi ze wszystkimi testami z
-  Labów 21-24.
+  Labów 21-24, `CHANGELOG.md` ma wpis `[1.0.0]`, a `order-api-v1.0.0`
+  istnieje jako opisany (annotated) tag na `main`, wypchnięty na Twój
+  remote.
 - Bieżący katalog: `examples/order-api/go/`.
 
 ### Java
 
 - Lab 24 ukończony: `./gradlew test` przechodzi ze wszystkimi testami z
-  Labów 21-24.
+  Labów 21-24, `CHANGELOG.md` ma wpis `[1.0.0]`, a `order-api-v1.0.0`
+  istnieje jako opisany (annotated) tag na `main`, wypchnięty na Twój
+  remote.
 - Bieżący katalog: `examples/order-api/java/`.
 
-Przypomnienie, zanim zaczniesz coś tagować: pracujesz we własnym forku
-repozytorium tego kursu, nie w osobnym repozytorium dla samego
-`order-api`. `examples/order-api/<język>/` to folder, nie własne
-repozytorium Git — jest dokładnie jeden katalog `.git`, w katalogu
-głównym Twojego forka, i każdy tag, który tworzysz, wskazuje commit
-*całego repozytorium kursu*, którego częścią jest Twoja praca nad
-`order-api`. Nigdy nie uruchamiaj `git init` wewnątrz
+Przypomnienie, zanim zaczniesz coś tagować w tym labie: pracujesz we
+własnym forku repozytorium tego kursu, nie w osobnym repozytorium dla
+samego `order-api`. `examples/order-api/<język>/` to folder, nie
+własne repozytorium Git — jest dokładnie jeden katalog `.git`, w
+katalogu głównym Twojego forka, i każdy tag, który tworzysz, wskazuje
+commit *całego repozytorium kursu*, którego częścią jest Twoja praca
+nad `order-api`. Nigdy nie uruchamiaj `git init` wewnątrz
 `examples/order-api/<język>/`. I sprawdź dwukrotnie, że `origin`
 wskazuje na Twój własny fork, zanim coś wypchniesz (`git remote -v`) —
 nie na oryginalne repozytorium kursu, do którego i tak nie masz
 dostępu do pushowania.
 
+### Jeśli Twój stan `v1.0.0` nie zgadza się z powyższym
+
+Sprawdź, w którym z tych stanów faktycznie jesteś, zanim napiszesz
+jakikolwiek kod — każdy ma konkretną, nie-destrukcyjną naprawę:
+
+- **`order-api-v1.0.0` istnieje, wskazuje na commit na `main`, a Twoje
+  testy przechodzą**: jesteś gotowy/a, także jeśli doszedłeś/aś do
+  tego stanu przez wcześniejszą wersję Lab 24 albo Lab 25, która
+  kazała Ci stworzyć tag samodzielnie — liczy się sam tag, nie to,
+  instrukcje którego laba go wyprodukowały. Przejdź do "Twojego
+  zadania" poniżej.
+- **Tag nie istnieje, bo Lab 24 nie jest dokończony**: wróć i dokończ
+  go, wliczając merge jego PR-a i tag — ten lab zakłada, że ten stan
+  istnieje, nie że możesz przeskoczyć i otagować to tutaj jako
+  dogrywkę.
+- **Tag istnieje, ale `git merge-base --is-ancestor
+  order-api-v1.0.0^{commit} main` nic nie wypisuje**: wskazuje na
+  commit, którego `main` w rzeczywistości nie zawiera — prawie
+  zawsze bo został utworzony na gałęzi funkcji przed merge'em. Nie
+  usuwaj go ani nie przenoś siłowo jeszcze. Ustal, na co faktycznie
+  wskazuje (`git show order-api-v1.0.0`) i czy ta praca kiedykolwiek
+  się zmergowała. Jeśli bazowa zmiana jest już na `main` pod innym
+  commitem (na przykład squash merge), usuń nieaktualny tag i
+  stwórz go na nowo na właściwym commicie `main`. Jeśli zmiana nigdy
+  się nie zmergowała, najpierw dokończ ten PR.
+- **PR z Lab 24 jest otwarty, ale jeszcze nie zmergowany**: dokończ to
+  najpierw — punkt startowy tego laba to zmergowane, otagowane
+  `v1.0.0`, nie takie w trakcie. Nie buduj pracy na `v1.1.0` na
+  niezmergowanej bazie — budowałbyś/abyś na gałęzi, która może się
+  jeszcze zmienić.
+- **Masz lokalne niezacommitowane zmiany z Lab 24**: zacommituj albo
+  zastaszuj je (`git stash -u`, jeśli są jakieś nieśledzone), zanim
+  zrobisz cokolwiek innego w tym labie — nie wyrzucaj ich, i nie
+  pozwól im jechać niezacommitowanym na nowej gałęzi, gdzie łatwo je
+  zgubić.
+
+Nigdy nie używaj `git tag -f`, `git push --force` ani
+`git reset --hard`, żeby wyjść z którejkolwiek z tych sytuacji — każda
+ma wolniejszą, bezpieczną naprawę powyżej.
+
 ## Twoje zadanie
 
-**Wydanie 1.0.0 — baseline:**
-
-1. Utwórz gałąź `feature/changelog-baseline` z `main`.
-2. Napisz `CHANGELOG.md` w `examples/order-api/<język>/`, w prostym
-   formacie w stylu "Keep a Changelog", z jednym wpisem `## [1.0.0]`
-   wymieniającym wszystko, co robi API na koniec Lab 24, z punktu
-   widzenia wywołującego: dwa endpointy, walidację żądań, trwałość w
-   SQLite, migrację `notes`, bounded retry wokół powiadomienia kuchni
-   i logowanie operacyjne. Nie musi wspominać szczegółów
-   implementacyjnych specyficznych dla Twojego języka, chyba że mają
-   znaczenie operacyjne albo kompatybilnościowe (na przykład: "dane są
-   przechowywane w SQLite" to warta linijka; "żądania obsługuje
-   `com.sun.net.httpserver.HttpServer`" nie jest). Jeśli zapisałeś/aś
-   tę listę na koniec Lab 24, wklej ją i przejdź prosto do kroku 3 —
-   odtwarzanie jej od zera tutaj to czas, którego nie odzyskasz.
-3. Uruchom pełny zestaw testów swojego tracku, żeby potwierdzić, że
-   nic nie jest zepsute, potem zacommituj `CHANGELOG.md`, wypchnij
-   gałąź, otwórz pull request i zmerguj, gdy CI jest zielone — ta sama
-   pętla co w reszcie Aktu V.
-4. Wróć do `main` i pobierz merge: `git switch main`, potem
-   `git pull --ff-only`. Potwierdź, że zestaw testów nadal przechodzi,
-   a potem — dopiero teraz, na tym już zmergowanym commicie — otaguj
-   wydanie:
-   `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`, i wypchnij tag:
-   `git push origin order-api-v1.0.0`.
-
-**Nigdy nie tagguj gałęzi funkcji przed jej zmergowaniem.** Squash i
-rebase merge'y mogą obie dać commitowi, który trafia na `main`,
-zupełnie inny hash niż ten na Twojej gałęzi — tag utworzony za wcześnie
-zostaje wskazujący na commit, którego `main` w rzeczywistości nie
-zawiera. Otagowanie dopiero po `git pull --ff-only` na `main`
-całkowicie to omija.
-
-"Wydanie" w tym labie to tag Gita, nic więcej — nie twórz GitHub
-Release i nie buduj ani nie publikuj żadnego binarium czy paczki.
-
-**Wydanie 1.1.0 — kompatybilna zmiana:**
-
-5. Utwórz drugą gałąź, `feature/priority-field`, z już zaktualizowanego
-   `main`.
-6. Teraz wprowadź jedną prawdziwą, addytywną zmianę: dodaj opcjonalne
-   pole `priority` do `POST /orders`, domyślnie `"normal"`, gdy
-   wywołujący je pominie. To musi być prawdziwe, przechowywane pole,
-   nie tylko wartość doklejona do odpowiedzi `POST` — `GET` później
-   też musi je zobaczyć, i musi przetrwać restart.
+1. Utwórz gałąź `feature/priority-field` z `main`.
+2. Wprowadź jedną prawdziwą, addytywną zmianę: dodaj opcjonalne pole
+   `priority` do `POST /orders`, domyślnie `"normal"`, gdy wywołujący
+   je pominie. To musi być prawdziwe, przechowywane pole, nie tylko
+   wartość doklejona do odpowiedzi `POST` — `GET` później też musi je
+   zobaczyć, i musi przetrwać restart.
 
 #### Python
 
@@ -117,14 +124,20 @@ Release i nie buduj ani nie publikuj żadnego binarium czy paczki.
 #### Go
 
 - W `db.go` dodaj `migrateAddPriorityColumn() error`, sprawdzając
-  kolumnę tak samo, jak już robi to `migrateAddNotesColumn` z Lab 22.
-  Jeśli nie chcesz duplikować tej pętli skanującej `PRAGMA
-  table_info` trzeci raz, wyciągnij ją raz do wspólnego helpera —
-  `hasColumn(name string) (bool, error)` — i niech obie funkcje
-  migracji go wywołują; istniejące testy `migrateAddNotesColumn` z
-  Lab 22 przechodzą tak samo, bo jej zachowanie się nie zmienia.
-  Wywołaj `migrateAddPriorityColumn()` w `main()`, zaraz po
+  kolumnę tak samo, jak już robi to `migrateAddNotesColumn` z Lab 22
+  — skopiuj tę samą formę skanowania `PRAGMA table_info` do nowej
+  funkcji; druga kopia sześciolinijkowej pętli to zupełnie dobry
+  sposób, żeby zmieścić się w 90 minutach tego labu, i nic tu nie
+  ocenia Cię za posiadanie tylko jednej kopii. Wywołaj
+  `migrateAddPriorityColumn()` w `main()`, zaraz po
   `migrateAddNotesColumn()`.
+  **Opcjonalnie, poza podstawową ścieżką:** jeśli skończysz z
+  realnym czasem w zapasie, wyciągnięcie wspólnej logiki skanowania
+  do `hasColumn(name string) (bool, error)` i wywołanie go z obu
+  funkcji migracji to rozsądny refactoring — istniejące testy
+  `migrateAddNotesColumn` z Lab 22 przechodzą tak samo, bo jej
+  zachowanie się nie zmienia — ale traktuj to jako cel rozszerzający,
+  nie część wymaganej ścieżki tego labu.
 - Daj `Order` pole `Priority string` (tag JSON `priority`).
   Zaktualizuj `createOrder`, żeby przyjmowało parametr `priority
   string`, przechowując go i zwracając. Zaktualizuj `getOrder`, żeby
@@ -144,13 +157,19 @@ Release i nie buduj ani nie publikuj żadnego binarium czy paczki.
 
 - W `OrderDb.java` dodaj `migrateAddPriorityColumn() throws
   SQLException`, sprawdzając kolumnę tak samo, jak już robi to
-  `migrateAddNotesColumn` z Lab 22. Jeśli nie chcesz duplikować tej
-  pętli skanującej `PRAGMA table_info` trzeci raz, wyciągnij ją raz do
-  wspólnego prywatnego helpera — `hasColumn(String name) throws
-  SQLException` — i niech obie metody migracji go wywołują; istniejące
-  testy `migrateAddNotesColumn` z Lab 22 przechodzą tak samo. Wywołaj
+  `migrateAddNotesColumn` z Lab 22 — skopiuj tę samą formę skanowania
+  `PRAGMA table_info` do nowej metody; druga kopia krótkiej pętli to
+  zupełnie dobry sposób, żeby zmieścić się w 90 minutach tego labu, i
+  nic tu nie ocenia Cię za posiadanie tylko jednej kopii. Wywołaj
   `migrateAddPriorityColumn()` w `Main`, zaraz po
   `migrateAddNotesColumn()`.
+  **Opcjonalnie, poza podstawową ścieżką:** jeśli skończysz z
+  realnym czasem w zapasie, wyciągnięcie wspólnej logiki skanowania
+  do prywatnego helpera `hasColumn(String name) throws SQLException` i
+  wywołanie go z obu metod migracji to rozsądny refactoring —
+  istniejące testy `migrateAddNotesColumn` z Lab 22 przechodzą tak
+  samo — ale traktuj to jako cel rozszerzający, nie część wymaganej
+  ścieżki tego labu.
 - Daj `Order` pole `final String priority` i zaktualizuj jego
   konstruktor, żeby je przyjmował. Zaktualizuj `createOrder`, żeby
   przyjmowało parametr `String priority`, przechowując go i zwracając.
@@ -210,7 +229,7 @@ Potem uruchom też pełny istniejący zestaw testów, żeby potwierdzić, że
 żaden wcześniejszy test nie musiał się zmienić z powodu tych czterech
 nowych.
 
-7. Zaktualizuj `CONTRACT.md` z Lab 21: udokumentuj nowe opcjonalne pole
+3. Zaktualizuj `CONTRACT.md` z Lab 21: udokumentuj nowe opcjonalne pole
    `priority` w ciele żądania `POST /orders` i jego obecność w każdej
    odpowiedzi zwracającej zamówienie, włącznie z `GET`. Dodaj też
    krótką sekcję `## Compatibility assumption` stwierdzającą, że
@@ -223,7 +242,7 @@ nowych.
    chroni — to założenie jest stwierdzeniem o tym, czego Twoje API
    oczekuje od swoich wywołujących, nie gwarancją, która działa
    niezależnie od tego, jak napisany jest wywołujący.
-8. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole, oraz
+4. Dodaj wpis `## [1.1.0]` do `CHANGELOG.md` opisujący nowe pole, oraz
    sekcję `## Compatibility notes` na dole pliku, opisującą (bez
    implementowania tego), jak wyglądałaby *łamiąca* wersja tego samego
    pomysłu zamiast tego — na przykład zmiana nazwy `items` na
@@ -235,64 +254,47 @@ nowych.
    kompatybilna. Napisz to wszystko, zanim zacommitujesz, żeby commit,
    który w końcu zostanie otagowany, miał kompletny changelog, a nie
    dopisany później.
-9. Zacommituj, wypchnij gałąź, otwórz pull request i zmerguj, gdy CI
+5. Zacommituj, wypchnij gałąź, otwórz pull request i zmerguj, gdy CI
    jest zielone.
-10. Wróć do `main` i pobierz merge, potwierdź, że zestaw testów nadal
-    przechodzi, a potem otaguj:
+6. Wróć do `main` i pobierz merge, potwierdź, że zestaw testów nadal
+   przechodzi, a potem otaguj:
     `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`, i wypchnij tag:
     `git push origin order-api-v1.1.0`.
 
 ## Realistyczne 90 minut
 
-Ten lab prosi o dwa kompletne cykle wydania w jednej sesji — każdy z
-własną gałęzią, implementacją, testami, PR-em, merge'em i tagiem. Bądź
-uczciwy/a wobec zegara. Z wpisem `[1.0.0]` w `CHANGELOG.md` już
-zapisanym na koniec Lab 24 (krok 2 powyżej), sam cykl `v1.0.0` jest
-krótki: utwórz gałąź, wklej szkic, potwierdź zestaw testów, zacommituj,
-PR, merge, tag — realistycznie 15-20 minut, nie 25-35, które zajęłoby
-to, zaczynając od pustego pliku. Wciąż zostaje cykl `v1.1.0`: prawdziwa
-migracja schematu, trzy proste testy plus subtelniejszy historyczny
-test `NULL`, aktualizacja `CONTRACT.md`, wpis `CHANGELOG.md`
-rozważający SemVer, i druga pełna pętla PR/CI/merge/tag. Nawet z
-czasem zaoszczędzonym na `v1.0.0`, ta kombinacja to pełne 90 minut dla
-samego Pythona, i prawdopodobnie dłużej dla Go i Javy, gdzie
-wyciągnięcie wspólnego helpera `hasColumn` i podłączenie drugiej
-migracji przez `main`/setup testowy to prawdziwa, dodatkowa ceremonia
-poza tym, czego potrzebuje Python. Przygotowanie z Lab 24 zwęża
-różnicę; nie zamyka jej.
+Ten lab jest teraz jednym cyklem wydania, nie dwoma — `v1.0.0` zostało
+otagowane na koniec Lab 24, więc wszystko tutaj budowane jest na już
+zmergowanym, już otagowanym punkcie startowym. Praca, która została:
+prawdziwa migracja schematu, trzy proste testy plus subtelniejszy
+historyczny test `NULL`, aktualizacja `CONTRACT.md`, wpis
+`CHANGELOG.md` rozważający SemVer, i jedna pełna pętla PR/CI/merge/tag.
+To prawdziwa sesja pracy, nie krótka, ale już nie konkuruje z drugim
+cyklem wydania o te same 90 minut.
 
-**`v1.0.0`, otagowany i wypchnięty, to prawdziwy, bezpieczny
-checkpoint** — nie częściowy. `CHANGELOG.md` jest kompletny dla
-wszystkiego przez Lab 24, tag istnieje na `main`, i nic nie jest
-niezacommitowane. Jeśli Wasza sesja się przeciąga, zatrzymanie się
-tutaj i zrobienie funkcji `priority` (krok 5 dalej) w osobnej sesji nic
-nie kosztuje: wracacie z czystego, otagowanego `main`, dokładnie tego
-stanu, który zakłada krok 5. Dla większości studentów — i dla
-większości Go i Javy konkretnie — traktujcie to jako oczekiwany punkt
-zatrzymania dla jednej sesji, z `v1.1.0` zaczynającym własną sesję, nie
-jako plan B na wypadek, gdyby szło wolno. Jeśli harmonogram Waszego
-kursu nie ma zapasowej sesji, żeby wchłonąć ten podział, to prawdziwe,
-otwarte pytanie organizacyjne dla kogoś planującego kalendarz kursu,
-nie coś, co którakolwiek z tych dwóch sesji rozwiąże, pracując szybciej.
+Czwarty test — historyczny wiersz z naprawdę `NULL` kolumną
+`priority` — to ten, który najprawdopodobniej zje nieplanowany czas,
+właśnie dlatego, że to ten, który autorzy tego labu sami popełnili
+błąd przy pierwszym podejściu (zobacz notatkę powyżej o błędzie, który
+by wychwycił). Dajcie mu potrzebny czas, zamiast go przyspieszać, żeby
+dopasować do trzech pozostałych, które są mechanicznie podobne do
+testów, które już napisaliście w Labach 21-23.
 
-Wewnątrz samej pracy nad `v1.1.0`, czwarty test — historyczny wiersz z
-naprawdę `NULL` kolumną `priority` — to ten, który najprawdopodobniej
-zje nieplanowany czas, właśnie dlatego, że to ten, który autorzy tego
-labu sami popełnili błąd przy pierwszym podejściu (zobacz notatkę w
-kroku 6 o błędzie, który by wychwycił). Dajcie mu potrzebny czas, zamiast
-go przyspieszać, żeby dopasować do trzech pozostałych, które są
-mechanicznie podobne do testów, które już napisaliście w Labach 21-23.
-
-Jeśli dwa kompletne wydania naprawdę nie mieszczą się w jednej sesji
-przy Waszym tempie, to realistyczny wynik dla tego labu, nie znak, że
-robicie coś źle — podzielcie na tagu `v1.0.0`, tak samo jak podzielilibyście
-jakikolwiek inny lab w punkcie, gdzie zestaw testów jest zielony i nic
-nie jest w połowie zrobione.
+Jeśli to wciąż nie zmieści się w jednym posiedzeniu w Twoim tempie, to
+realistyczny wynik, nie znak, że robisz coś źle — zatrzymaj się w
+miejscu, gdzie zestaw testów jest zielony i nic nie jest w połowie
+zrobione (na przykład tuż po tym, jak cztery testy przejdą, przed
+dotknięciem `CONTRACT.md` czy `CHANGELOG.md`), i dokończ resztę na
+następnej sesji. Nie ma tu tagu do podziału w połowie labu —
+`v1.1.0` istnieje tylko wtedy, gdy wszystko tutaj jest zmergowane —
+więc naturalnym punktem zatrzymania jest "testy zielone, nic nie jest
+w połowie zrobione", tak jak w każdym innym labie.
 
 ## Kryteria akceptacji
 
-- `CHANGELOG.md` ma zarówno wpis `[1.0.0]`, jak i `[1.1.0]`, plus
-  sekcję `## Compatibility notes` rozważającą major kontra minor.
+- `CHANGELOG.md` ma wpis `[1.1.0]` (na wierch wpisu `[1.0.0]`, który
+  dodał już Lab 24), plus sekcję `## Compatibility notes` rozważającą
+  major kontra minor.
 - `CONTRACT.md` dokumentuje nowe pole `priority` (także w odpowiedziach
   `GET`) i podaje założenie kompatybilności o ignorowaniu nieznanych
   pól odpowiedzi — bez przedstawiania go jako uniwersalnej gwarancji.
@@ -310,8 +312,8 @@ nie jest w połowie zrobione.
   jest naprawdę `NULL`, mapujący się na `"normal"`, nie `null`), a
   każdy test napisany przed tym labem nadal przechodzi bez
   modyfikacji.
-- Obie zmiany z tego labu zostały zmergowane przez pull requesty z
-  zielonym checkiem CI, nie zacommitowane bezpośrednio na `main`.
+- Zmiana z tego labu została zmergowana przez pull request z zielonym
+  checkiem CI, nie zacommitowana bezpośrednio na `main`.
 
 ## Weryfikacja
 
