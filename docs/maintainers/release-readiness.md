@@ -226,7 +226,119 @@ trimming its scope while keeping both releases and the historical-
 `NULL` test) in a dedicated follow-up PR — not as a half-measure
 inside this one.
 
-## Validation performed for this PR
+## 8. PR L — Lab 25's MAJOR resolved by moving `v1.0.0` into Lab 24
+
+**Base commit:** immediately after PR K / #41 merged, on branch
+`quality/lab24-25-release-workflow`.
+
+Section 2's open MAJOR — two full release cycles not reliably fitting
+Lab 25's single 90-minute session — is resolved here by a structural
+move, not by cutting scope: the `v1.0.0` release (branch, `CHANGELOG.md`
+`[1.0.0]`, PR, merge, tag, tag-reachability check) now happens inside
+Lab 24, on the same branch and PR as that lab's own logging work. Lab
+25 starts from an already-tagged `v1.0.0` and does exactly one release
+cycle: the `priority` field, its migration, four tests (including the
+historical-`NULL` one), `CONTRACT.md`, a `[1.1.0]` changelog entry with
+real SemVer reasoning, and one PR/CI/merge/tag loop ending in
+`v1.1.0`. No lab was added, no learning outcome was removed, and the
+historical-`NULL` test — the one this course's own authors got wrong
+on a first pass — is unchanged in all three tracks.
+
+### Before / after
+
+| | Before (PR K) | After (PR L) |
+|---|---|---|
+| Lab 24 | Logging only; Step 8 optional changelog *draft* in a scratch file, explicitly skippable | Logging **and** a mandatory, integrated `v1.0.0` release: `CHANGELOG.md` `[1.0.0]`, one branch/PR with logging, merge, tag, tag-reachability check (Steps 8-12) |
+| Lab 25 | Two release cycles: baseline `v1.0.0` (steps 1-4) then `priority`/`v1.1.0` (steps 5-10) | One release cycle: starts from Lab 24's already-tagged `v1.0.0`; only `priority`/`v1.1.0` remains |
+| Recovery guidance | None — assumed the happy path | New "If your `v1.0.0` state doesn't match the above" section: 5 explicit recovery scenarios (tag correct; Lab 24 unfinished; tag unreachable; Lab 24's PR unmerged; local uncommitted changes), all non-destructive, and explicit that a tag from an earlier version of these labs is still accepted |
+| Go/Java `hasColumn` ceremony | Framed as "if you'd rather not duplicate" | Reframed as an explicit stretch goal, stated as outside the core 90-minute path, so it can't be mistaken for required scope |
+| Maintainer-facing verdict | Lab 25: OPEN, MAJOR (unresolved) | Lab 25: resolved structurally; new risk disclosed on Lab 24 specifically, see below |
+
+### Real evidence this time: three independent hands-on walkthroughs
+
+Unlike PR K's Lab 25 analysis (a direct read of the lab's own steps,
+not independently re-implemented end to end for Go/Java), this PR
+built and ran the **entire restructured Lab 24 → Lab 25 sequence for
+real, independently, in all three languages**, in disposable local git
+repositories with real commits, branches, merges, and tags (not a real
+GitHub PR/CI run — that distinction is kept explicit throughout):
+
+- **Python, Go, Java** — each bootstrapped from that language's actual
+  `examples/order-api/<language>/` starter to the real "Lab 21-23
+  complete" state (persistence, `notes` migration, bounded retry),
+  confirmed green, then carried through the *actual* restructured Lab
+  24 text (logging, `CHANGELOG.md` `[1.0.0]`, branch, merge, tag,
+  `merge-base --is-ancestor` check — confirmed to print the success
+  line) and the *actual* restructured Lab 25 text (`priority` field,
+  migration, four tests, `CONTRACT.md`, `[1.1.0]` changelog with
+  SemVer reasoning, second branch, merge, tag).
+- **Both `order-api-v1.0.0` and `order-api-v1.1.0` confirmed as real
+  ancestors of `main`** via `git merge-base --is-ancestor` in all
+  three languages, with a clean two-merge-commit history in each.
+- **The historical-`NULL` `priority` test was proven real, not a
+  tautology, in all three languages**: the exact fix (defaulting a
+  `NULL`/empty stored `priority` to `"normal"`) was deliberately
+  reverted, the test was re-run and failed with precisely the
+  predicted wrong value (empty string in Python/Go, `null` in Java),
+  then the fix was restored and the full suite re-confirmed green.
+
+### Honest timebox, per lab, per language (the load-bearing evidence)
+
+Based on what the walkthroughs above actually required to implement,
+scaled to a beginner student (not this session's own execution speed)
+reading the lab text for the first time, including first-time
+dependency resolution, debugging typos, and GitHub PR/review/CI/merge
+turnaround:
+
+| | Lab 24 (logging + `v1.0.0`) | Lab 25 (`priority` + `v1.1.0`) |
+|---|---|---|
+| Python | ~50-75 min: logging (`caplog`, 2 tests) ~25-35 min + changelog/PR/merge/tag loop ~25-40 min | ~45-65 min: migration + 4 tests (mechanically similar to Lab 22-23) + `CONTRACT.md`/`CHANGELOG.md` SemVer writing + PR/merge/tag loop |
+| Go | ~50-75 min: `slog` setup is terser than Python's but the buffer-swap test pattern is a new idiom to copy correctly; same changelog/PR/merge/tag loop | ~55-80 min: same shape as Python, plus `sql.NullString` handling and a 6-column `PRAGMA table_info` `Scan` — a real, if small, source of beginner mistakes neither Python nor the changelog loop has |
+| Java | ~60-90 min: this lab's **pre-existing** heaviest-of-three logging ceremony (a new `LoggingConfig` class removing default handlers, a hand-written `ListLogHandler extends Handler` subclass for the two tests) plus the **newly mandatory** release loop on top of it | ~60-85 min: same shape as Go, plus JDBC's three-deep try-with-resources boilerplate on every query and a `ResultSet.getString` that returns Java `null` for SQL `NULL` directly (the exact bug this course's authors hit) |
+
+None of these ranges assume the dependency-download step is new
+inside Lab 24 — `sqlite-jdbc`/`modernc.org/sqlite` were already pulled
+in Lab 22, so that cost isn't paid twice.
+
+**The one real risk this PR did not have before writing it down:**
+Java's Lab 24 upper bound (~90 min) sits right at the limit, not
+comfortably under it. This is not a problem invented by this PR —
+Java's logging ceremony (the `LoggingConfig` class, the `ListLogHandler`
+subclass) already existed and was already the heaviest of the three
+languages before this PR touched anything; what this PR adds on top is
+the newly-mandatory release loop, which is identical git/GitHub
+mechanics across all three languages and isn't itself language-heavy.
+This is disclosed here rather than smoothed over.
+
+### GO/NO-GO for this PR's own scope
+
+**GO for Lab 24 and Lab 25, in all three languages, with one disclosed
+tight margin (Java's Lab 24).** The structural fix works: no language
+is carrying two release cycles in one session anymore, and the
+previously-MAJOR problem (a near-certain overrun from stacking two full
+release cycles) is gone. What remains is a narrower, disclosed risk —
+Java's Lab 24 landing close to 90 minutes for a slower beginner, a paced
+CI queue, or a first encounter with `java.util.logging`'s handler
+model — the same shape of risk this report already called a GO for Lab
+27 in Section 3, not the kind of near-certain overrun that justified
+Section 2's original MAJOR. If a maintainer wants more margin
+specifically for Java's Lab 24, the concrete, scoped option is moving
+Step 7 ("read your own logs by hand") to be explicitly optional/time-permitting
+in Java only, since it's the one step in that lab with no
+acceptance-criteria consequence if skipped — not revisiting the
+`v1.0.0`/`v1.1.0` split this PR just made.
+
+### Relationship to Section 7's verdicts
+
+Section 7's "Next major release: NO-GO until Lab 25's open MAJOR is
+resolved" was conditioned specifically on the two-release-cycle
+problem this PR resolves — that condition is now satisfied for Labs
+24-25 specifically. This PR does **not** itself recommend GO for a
+release or change the Go/Java FULLY SUPPORTED status; both remain
+exactly as Section 7 left them, since flipping either is explicitly
+out of scope for this PR and is a separate maintainer decision.
+
+## Validation performed for PR K
 
 - `./scripts/check-course.sh` — green, run twice, clean tree before
   and after both runs.
@@ -238,3 +350,32 @@ inside this one.
   languages, in the same position.
 - No starter solutions added or changed; no tracked `decisions/`; no
   AI attribution; no `Co-authored-by`.
+
+## Validation performed for PR L
+
+- Real, independent hands-on walkthroughs of the restructured Lab
+  24 → Lab 25 sequence in Python, Go, and Java, each in a disposable
+  local git repository: real commits, branches, merges, and tags —
+  not a real GitHub PR/CI run, a distinction kept explicit throughout
+  this section.
+- Both `order-api-v1.0.0` and `order-api-v1.1.0` confirmed as real
+  ancestors of `main` via `git merge-base --is-ancestor`, in all three
+  languages.
+- The historical-`NULL` `priority` test confirmed non-tautological in
+  all three languages, by deliberately reverting its fix, watching the
+  test fail with the exact predicted wrong value, then restoring the
+  fix and reconfirming the full suite green.
+- `./scripts/check-course.sh` — green, run twice, clean tree before
+  and after both runs.
+- `scripts/check_course_structure.py` — green: lab structure, README
+  pairs, broken links, no tracked `decisions/`, no AI-attribution
+  strings, EN/PL executable code-block parity.
+- Heading-level EN/PL parity confirmed by direct diff for both files
+  touched (Labs 24, 25) — same heading-level sequence, same order, in
+  both languages.
+- No starter solutions added or changed (`examples/order-api/` was not
+  touched — all work happened in disposable scratch copies outside the
+  repository, deleted after verification); no tracked `decisions/`; no
+  AI attribution; no `Co-authored-by`.
+- FULLY SUPPORTED status for Go/Java and the next-release recommendation
+  are unchanged by this PR, per explicit instruction.
