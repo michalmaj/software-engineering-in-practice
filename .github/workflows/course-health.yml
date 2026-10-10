@@ -46,3 +46,90 @@ jobs:
 
       - name: Run course health checks
         run: ./scripts/check-course.sh
+
+  windows-smoke-test:
+    # A narrow, targeted check of the Windows + Git Bash path real
+    # students follow (docs/setup/windows.md) — NOT the full
+    # three-language Course Health run above, and not a substitute for
+    # a human actually walking through that page on a real Windows 11
+    # machine with a GUI. GitHub's windows-latest is a Windows Server
+    # VM with no desktop session: it cannot click "Run as
+    # Administrator", show a UAC prompt, open VS Code's GUI, or
+    # confirm "Git Bash" appears in VS Code's terminal-profile
+    # dropdown. What it CAN confirm for real: that Git Bash actually
+    # starts and is actually Bash, that the exact path-computation
+    # logic docs/setup/windows.md now gives students for finding
+    # bash.exe actually resolves to a real file on this runner's Git
+    # for Windows layout, and that the terminal commands Labs 01-04
+    # rely on behave correctly under Git Bash on Windows, including
+    # inside a directory path containing a space. See
+    # docs/maintainers/windows-reality-check.md for the full matrix of
+    # what this does and does not prove. Same upstream-only reasoning
+    # as the course-health job above.
+    if: github.repository == 'michalmaj/software-engineering-in-practice'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: git --version and the real git.exe path (PowerShell)
+        shell: pwsh
+        run: |
+          git --version
+          $gitPath = (Get-Command git).Source
+          Write-Host "git.exe resolved to: $gitPath"
+          if (-not (Test-Path $gitPath)) {
+            throw "git --version worked but (Get-Command git).Source does not point at a real file"
+          }
+
+      - name: Locate bash.exe using the exact logic docs/setup/windows.md gives students (PowerShell)
+        shell: pwsh
+        run: |
+          $gitPath = (Get-Command git).Source
+          $bashPath = Join-Path (Split-Path (Split-Path $gitPath)) "bin\bash.exe"
+          Write-Host "Computed bash.exe path: $bashPath"
+          if (-not (Test-Path $bashPath)) {
+            throw "bash.exe is not where docs/setup/windows.md's Join-Path/Split-Path formula says it should be - that formula is wrong for this runner's actual Git for Windows layout"
+          }
+
+      - name: Confirm Git Bash actually starts and is actually Bash
+        shell: bash
+        run: |
+          set -e
+          echo "BASH_VERSION: $BASH_VERSION"
+          [ -n "$BASH_VERSION" ]
+
+      - name: Basic terminal commands a beginner uses in Labs 01-04
+        shell: bash
+        run: |
+          set -e
+          mkdir -p "$RUNNER_TEMP/lab01-notes" "$RUNNER_TEMP/lab02-notes"
+          cd "$RUNNER_TEMP/lab01-notes"
+          echo "whoami: $(whoami)" > findings.txt
+          cp findings.txt findings.bak.txt
+          mv findings.bak.txt "$RUNNER_TEMP/lab02-notes/"
+          grep whoami findings.txt > "$RUNNER_TEMP/lab02-notes/whoami-line.txt"
+          cat "$RUNNER_TEMP/lab02-notes/whoami-line.txt"
+          count=$(find "$RUNNER_TEMP/lab01-notes" "$RUNNER_TEMP/lab02-notes" -name findings.txt | wc -l)
+          echo "findings.txt matches: $count"
+          [ "$count" -eq 1 ]
+
+      - name: Clone into a path containing a space, and run the fork/clone checks Lab 03-04 teach
+        shell: bash
+        run: |
+          set -e
+          mkdir -p "$RUNNER_TEMP/with space/projects"
+          cd "$RUNNER_TEMP/with space/projects"
+          git clone --depth 1 https://github.com/michalmaj/software-engineering-in-practice.git test-clone
+          cd test-clone
+          pwd
+          git status
+          git remote -v
+          git branch
+          test -d labs && test -d examples && test -d scripts
+
+      - name: Run this repo's own check-environment.sh under Git Bash (informational)
+        shell: bash
+        continue-on-error: true
+        run: |
+          cd "$RUNNER_TEMP/with space/projects/test-clone"
+          bash scripts/check-environment.sh

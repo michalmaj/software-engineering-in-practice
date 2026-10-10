@@ -250,7 +250,7 @@ Części 5.
 powtarzaj tych kroków na ślepo — przejdź najpierw do
 [`already-have-a-fork.pl.md`](already-have-a-fork.pl.md).
 
-### 7.1 — Zrób fork repozytorium na GitHubie
+### 6.1 — Zrób fork repozytorium na GitHubie
 
 1. Upewnij się, że jesteś zalogowany/a na GitHubie — otwórz
    [github.com](https://github.com) w przeglądarce i sprawdź, czy
@@ -276,7 +276,7 @@ pokazuje, że powstało jako fork `michalmaj/software-engineering-in-practice`.
 **Skąd wiesz, że możesz kontynuować:** URL w adresie przeglądarki
 zawiera *Twój* username z GitHuba, nie `michalmaj`.
 
-### 7.2 — Skopiuj adres klonowania swojego forka
+### 6.2 — Skopiuj adres klonowania swojego forka
 
 1. Na stronie swojego forka (z poprzedniego kroku) kliknij zielony
    przycisk **Code**.
@@ -289,7 +289,7 @@ zawiera *Twój* username z GitHuba, nie `michalmaj`.
    ```
    z Twoim rzeczywistym username zamiast `<twój-username>`.
 
-### 7.3 — Sklonuj je na swój komputer
+### 6.3 — Sklonuj je na swój komputer
 
 Z powrotem w terminalu Git Bash wewnątrz VS Code (Część 5):
 
@@ -299,7 +299,7 @@ Z powrotem w terminalu Git Bash wewnątrz VS Code (Część 5):
    mkdir -p ~/projects
    cd ~/projects
    ```
-2. Sklonuj swój fork — wklej adres, który skopiowałeś/aś w 7.2.
+2. Sklonuj swój fork — wklej adres, który skopiowałeś/aś w 6.2.
    **Zastąp `<twój-username>` swoim rzeczywistym username z GitHuba**;
    nie wklejaj poniższej linii dosłownie:
    ```bash
@@ -339,11 +339,11 @@ Z powrotem w terminalu Git Bash wewnątrz VS Code (Część 5):
 **Skąd wiesz, że możesz kontynuować:** `git remote -v` pokazuje Twój
 własny username, a `ls` pokazuje `labs/`, `examples/` i `scripts/`.
 
-### 7.4 — Otwórz je w VS Code
+### 6.4 — Otwórz je w VS Code
 
 1. W VS Code otwórz menu **File → Open Folder…**
 2. Przejdź do folderu, który sklonowałeś/aś — jeśli podążyłeś/aś za
-   7.3 dokładnie, to `projects` → `software-engineering-in-practice`
+   6.3 dokładnie, to `projects` → `software-engineering-in-practice`
    wewnątrz Twojego folderu użytkownika Windows.
 3. Kliknij **Select Folder**.
 4. VS Code może zapytać "Do you trust the authors of the files in
@@ -351,7 +351,7 @@ własny username, a `ls` pokazuje `labs/`, `examples/` i `scripts/`.
 
 **Co powinieneś/aś zobaczyć:** panel Explorer po lewej wylistowuje
 teraz `labs`, `examples`, `scripts`, `README.md` i więcej — to samo,
-co `ls` pokazał Ci w 7.3.
+co `ls` pokazał Ci w 6.3.
 
 5. Otwórz terminal wewnątrz tego okna (**Terminal → New Terminal**) —
    powinien już domyślnie być Git Bash, bo ustawiłeś/aś to w Części 5.
@@ -363,7 +363,7 @@ co `ls` pokazał Ci w 7.3.
    `/software-engineering-in-practice`, a panel Explorer pokazuje
    folder `labs/`.
 
-### 7.5 — Znajdź Lab 01
+### 6.5 — Znajdź Lab 01
 
 1. W panelu Explorer po lewej kliknij, żeby rozwinąć folder `labs`.
 2. Znajdź i kliknij `01-workstation`, potem kliknij `README.pl.md`
@@ -380,7 +380,7 @@ sprawdzić, a potem zacznij lab.
 
 Nie wypchniesz niczego do GitHuba aż do połowy Lab 03 albo Lab 04 —
 klonowanie i czytanie nie wymagają zalogowania do samego Gita, tylko
-Twojej sesji przeglądarki z 7.1. Gdy tam dotrzesz i `git push`
+Twojej sesji przeglądarki z 6.1. Gdy tam dotrzesz i `git push`
 zapyta o autoryzację, zobacz
 [`github-auth.pl.md`](github-auth.pl.md) — jest napisane właśnie na
 ten moment, więc nie musisz tego czytać teraz.
@@ -454,7 +454,7 @@ mv software-engineering-in-practice software-engineering-in-practice.instructor-
 ```
 
 To zmienia nazwę źle sklonowanego folderu, odsuwając go z drogi,
-zamiast go usuwać, potem powtórz 7.1–7.4 tym razem z adresem *swojego*
+zamiast go usuwać, potem powtórz 6.1–6.4 tym razem z adresem *swojego*
 forka. Gdy Twoja prawdziwa kopia już działa, możesz usunąć
 przemianowany folder, jeśli chcesz, albo po prostu go zostawić — nie
 robi żadnej szkody, siedząc tam.

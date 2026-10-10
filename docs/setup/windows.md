@@ -245,7 +245,7 @@ VS Code from Part 5.
 Don't repeat these steps blindly — go to
 [`already-have-a-fork.md`](already-have-a-fork.md) first.
 
-### 7.1 — Fork the repository on GitHub
+### 6.1 — Fork the repository on GitHub
 
 1. Make sure you're logged in to GitHub — open
    [github.com](https://github.com) in your browser and check the
@@ -269,7 +269,7 @@ forked from `michalmaj/software-engineering-in-practice`.
 **How you know you can continue:** the URL in your browser's address
 bar contains *your* GitHub username, not `michalmaj`.
 
-### 7.2 — Copy your fork's clone URL
+### 6.2 — Copy your fork's clone URL
 
 1. On your fork's page (the one from the previous step), click the
    green **Code** button.
@@ -282,7 +282,7 @@ bar contains *your* GitHub username, not `michalmaj`.
    ```
    with your actual username in place of `<your-username>`.
 
-### 7.3 — Clone it onto your computer
+### 6.3 — Clone it onto your computer
 
 Back in the Git Bash terminal inside VS Code (Part 5):
 
@@ -292,7 +292,7 @@ Back in the Git Bash terminal inside VS Code (Part 5):
    mkdir -p ~/projects
    cd ~/projects
    ```
-2. Clone your fork — paste the URL you copied in 7.2. **Replace
+2. Clone your fork — paste the URL you copied in 6.2. **Replace
    `<your-username>` with your actual GitHub username**; don't paste
    the line below literally:
    ```bash
@@ -332,10 +332,10 @@ Back in the Git Bash terminal inside VS Code (Part 5):
 **How you know you can continue:** `git remote -v` shows your own
 username, and `ls` shows `labs/`, `examples/`, and `scripts/`.
 
-### 7.4 — Open it in VS Code
+### 6.4 — Open it in VS Code
 
 1. In VS Code, open the menu **File → Open Folder…**
-2. Navigate to the folder you cloned — if you followed 7.3 exactly,
+2. Navigate to the folder you cloned — if you followed 6.3 exactly,
    that's `projects` → `software-engineering-in-practice` inside your
    Windows user folder.
 3. Click **Select Folder**.
@@ -344,11 +344,11 @@ username, and `ls` shows `labs/`, `examples/`, and `scripts/`.
 
 **What you should see:** the Explorer panel on the left now lists
 `labs`, `examples`, `scripts`, `README.md`, and more — the same
-listing `ls` showed you in 7.3.
+listing `ls` showed you in 6.3.
 
 5. Open a terminal inside this window (**Terminal → New Terminal**) —
    it should already default to Git Bash, since you set that in Part
-   6. Confirm you're in the right place:
+   5. Confirm you're in the right place:
    ```bash
    pwd
    ```
@@ -356,7 +356,7 @@ listing `ls` showed you in 7.3.
    `/software-engineering-in-practice`, and the Explorer panel shows
    the `labs/` folder.
 
-### 7.5 — Find Lab 01
+### 6.5 — Find Lab 01
 
 1. In the Explorer panel on the left, click to expand the `labs`
    folder.
@@ -373,7 +373,7 @@ then start the lab.
 
 You won't push anything to GitHub until partway through Lab 03 or
 Lab 04 — cloning and reading don't require being logged in to Git
-itself, only your browser session from 7.1. When you get there and
+itself, only your browser session from 6.1. When you get there and
 `git push` asks you to authenticate, see
 [`github-auth.md`](github-auth.md) — it's written for that exact
 moment, so there's no need to read it now.
@@ -448,7 +448,7 @@ mv software-engineering-in-practice software-engineering-in-practice.instructor-
 ```
 
 This renames the mis-cloned folder out of the way instead of deleting
-it, then repeat 7.1–7.4 with your *own* fork's URL this time. Once
+it, then repeat 6.1–6.4 with your *own* fork's URL this time. Once
 your real copy is working, you can delete the renamed folder if you
 want, or just leave it — it isn't doing any harm sitting there.
 
