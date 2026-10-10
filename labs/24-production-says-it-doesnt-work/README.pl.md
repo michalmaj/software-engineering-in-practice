@@ -290,7 +290,23 @@ brakującego zamówienia) i odczytaj output logów w swoim terminalu.
 Potwierdź, że potrafisz powiedzieć, co się stało, bez otwierania pliku
 źródłowego.
 
-### Krok 8 — branch, PR, review, merge
+### Krok 8 — przygotowanie changeloga na następny lab (jeśli masz jeszcze czas)
+
+Lab 25 zaczyna się od napisania wpisu `## [1.0.0]` w `CHANGELOG.md`
+podsumowującego wszystko, co API robi na koniec *tego* laba, z punktu
+widzenia wywołującego: dwa endpointy, walidację żądań, trwałość w
+SQLite, migrację `notes`, bounded retry i logowanie operacyjne. Nic z
+tego nie zależy od niczego, co dodaje Lab 25 — masz już każdy fakt,
+którego potrzebuje, właśnie teraz, z pracą tego laba wciąż świeżą w
+głowie. Jeśli nie jesteś jeszcze na granicy czasu tej sesji, zapisz tę
+listę teraz w pliku szkicowym (nie zacommitowanym jako część PR-a
+tego labu — Lab 25 sam commituje `CHANGELOG.md`, jako swój pierwszy
+krok). Mając tę listę już napisaną, masz jedną rzecz mniej
+konkurującą o czas w labie, który ma do przejścia dwa pełne cykle
+wydania. Jeśli ta sesja jest już pełna, pomiń to — nic nie kosztuje
+napisanie tej samej listy od nowa na początku Lab 25.
+
+### Krok 9 — branch, PR, review, merge
 
 Zrób pracę z tego labu na gałęzi (na przykład
 `feature/production-logging`), wypchnij ją i otwórz pull request.
