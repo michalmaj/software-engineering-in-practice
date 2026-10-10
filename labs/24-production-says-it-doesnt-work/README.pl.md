@@ -290,28 +290,83 @@ brakującego zamówienia) i odczytaj output logów w swoim terminalu.
 Potwierdź, że potrafisz powiedzieć, co się stało, bez otwierania pliku
 źródłowego.
 
-### Krok 8 — przygotowanie changeloga na następny lab (jeśli masz jeszcze czas)
+### Krok 8 — napisz pierwszy wpis changeloga tej wersji
 
-Lab 25 zaczyna się od napisania wpisu `## [1.0.0]` w `CHANGELOG.md`
-podsumowującego wszystko, co API robi na koniec *tego* laba, z punktu
-widzenia wywołującego: dwa endpointy, walidację żądań, trwałość w
-SQLite, migrację `notes`, bounded retry i logowanie operacyjne. Nic z
-tego nie zależy od niczego, co dodaje Lab 25 — masz już każdy fakt,
-którego potrzebuje, właśnie teraz, z pracą tego laba wciąż świeżą w
-głowie. Jeśli nie jesteś jeszcze na granicy czasu tej sesji, zapisz tę
-listę teraz w pliku szkicowym (nie zacommitowanym jako część PR-a
-tego labu — Lab 25 sam commituje `CHANGELOG.md`, jako swój pierwszy
-krok). Mając tę listę już napisaną, masz jedną rzecz mniej
-konkurującą o czas w labie, który ma do przejścia dwa pełne cykle
-wydania. Jeśli ta sesja jest już pełna, pomiń to — nic nie kosztuje
-napisanie tej samej listy od nowa na początku Lab 25.
+**Wydanie**, przez resztę tego kursu, znaczy dokładnie jedno:
+konkretny commit na `main`, oznaczony tagiem Gita, na który
+wywołujący może wskazać i powiedzieć "integruję się z tym." Zaraz
+zrobisz pierwszy taki. Utwórz `CHANGELOG.md` w
+`examples/order-api/<język>/`, w prostym formacie w stylu "Keep a
+Changelog", z jednym wpisem `## [1.0.0]` wymieniającym wszystko, co
+robi API na koniec tego labu, z punktu widzenia wywołującego: dwa
+endpointy, walidację żądań, trwałość w SQLite, migrację `notes`,
+bounded retry wokół powiadomienia kuchni i logowanie operacyjne (to,
+co właśnie zbudowałeś/aś, powyżej). Nie musi wspominać szczegółów
+implementacyjnych specyficznych dla Twojego języka, chyba że mają
+znaczenie operacyjne albo kompatybilnościowe (na przykład: "dane są
+przechowywane w SQLite" to warta linijka; "żądania obsługuje
+`com.sun.net.httpserver.HttpServer`" nie jest). Dodaj ten plik do
+*tej samej* gałęzi co praca nad logowaniem w tym labie — nie do
+drugiej gałęzi, nie do drugiego PR-a. Czemu tagujemy *commit*, a nie
+po prostu pamiętamy "to jest wersja 1.0.0" nieformalnie: tag Gita to
+trwały, dający się udostępnić wskaźnik, który ktokolwiek w Waszym
+zespole (albo wywołujący) może wyciągnąć po nazwie, długo po tym, jak
+zapomnisz, jaki to był hash commita. Pełne uzasadnienie *numerów*
+wersji konkretnie — co sprawia, że kolejna zmiana to "1.1.0", a nie
+"2.0.0" — to zadanie Lab 25; ten lab potrzebuje tylko, żebyś nazwał/a
+punkt startowy.
 
-### Krok 9 — branch, PR, review, merge
+### Krok 9 — uruchom cały zestaw testów jeszcze raz
 
-Zrób pracę z tego labu na gałęzi (na przykład
-`feature/production-logging`), wypchnij ją i otwórz pull request.
-Zmerguj dopiero, gdy CI jest zielone — ta sama pętla co w reszcie
-Aktu V.
+Potwierdź, że pełny zestaw testów Twojego tracku nadal przechodzi z
+kodem logowania z tego labu i `CHANGELOG.md` obecnym. `CHANGELOG.md`
+to dokumentacja, nie kod — ten krok istnieje, żeby złapać
+niepowiązany przypadek, w którym coś z Kroków 1-7 wciąż było
+nieskończone, gdy zacząłeś/aś go pisać.
+
+### Krok 10 — branch, PR, review, merge
+
+Zrób pracę z tego labu — logowanie *i* `CHANGELOG.md` razem, jeden
+PR — na gałęzi (na przykład `feature/production-logging`), wypchnij
+ją i otwórz pull request. Zmerguj dopiero, gdy CI jest zielone — ta
+sama pętla co w reszcie Aktu V. Nie otwieraj drugiego PR-a dla
+changeloga; należy do tego jednego, bo dokumentuje dokładnie to, co
+ten PR dodaje.
+
+### Krok 11 — otaguj zmergowany commit jako `order-api-v1.0.0`
+
+Wróć do `main` i pobierz merge: `git switch main`, potem
+`git pull --ff-only`. Potwierdź, że zestaw testów nadal przechodzi na
+tym już zmergowanym commicie, a potem — dopiero teraz — otaguj go:
+`git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`, i wypchnij tag:
+`git push origin order-api-v1.0.0`.
+
+**Nigdy nie tagguj gałęzi funkcji przed jej zmergowaniem.** Squash i
+rebase merge'y mogą obie dać commitowi, który trafia na `main`,
+zupełnie inny hash niż ten na Twojej gałęzi — tag utworzony za
+wcześnie zostaje wskazujący na commit, którego `main` w
+rzeczywistości nie zawiera. Otagowanie dopiero po
+`git pull --ff-only` na `main` całkowicie to omija. "Wydanie" w tym
+labie to tag Gita, nic więcej — nie twórz GitHub Release i nie buduj
+ani nie publikuj żadnego binarium czy paczki.
+
+### Krok 12 — potwierdź, że tag jest faktycznie osiągalny z `main`
+
+```bash
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
+```
+
+**Jeśli to nic nie wypisze** (brak linii potwierdzenia, komenda po
+prostu się kończy): commit tego tagu w rzeczywistości jeszcze nie
+jest na `main`. Nie naprawiaj tego siłowo przez ponowne otagowanie
+`git tag -f` albo force-push — najpierw ustal, *dlaczego*, przez
+`git show order-api-v1.0.0` (na jaki commit tag faktycznie wskazuje?)
+i `git log main` (czy ten commit jest w historii `main` w ogóle?).
+Zwykłą przyczyną jest otagowanie przed merge'em, albo otagowanie
+lokalnej gałęzi, która nigdy faktycznie nie została
+wypchnięta/zmergowana. Napraw prawdziwy problem — najpierw zmerguj,
+potem otaguj wynikowy commit `main` — zamiast nadpisywać tag, co do
+którego nie jesteś pewny/a.
 
 ## Kryteria akceptacji
 
@@ -324,8 +379,15 @@ Aktu V.
   INFO i WARNING z Kroku 6.
 - Żaden `print`/`fmt.Println`/`System.out.println` nie zastępuje logu
   operacyjnego w kodzie tego labu.
+- `CHANGELOG.md` istnieje z wpisem `[1.0.0]` i był częścią tego
+  samego pull requesta co praca nad logowaniem — nie osobnego PR-a.
 - Zmiany z tego labu zostały zmergowane przez pull request z zielonym
   checkiem CI, nie zacommitowane bezpośrednio na `main`.
+- `order-api-v1.0.0` istnieje jako opisany (annotated) tag Gita,
+  wypchnięty na Twój remote, i został utworzony dopiero *po*
+  zmergowaniu tego PR-a, nigdy wcześniej na gałęzi funkcji:
+  `git merge-base --is-ancestor order-api-v1.0.0^{commit} main` się
+  udaje.
 
 ## Weryfikacja
 
@@ -334,7 +396,11 @@ Aktu V.
 ```bash
 cd examples/order-api/python
 uv run pytest -v
+cat CHANGELOG.md
 cd -
+git tag --list "order-api-v*"
+git ls-remote --tags origin
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
 ```
 
 ### Go
@@ -342,7 +408,11 @@ cd -
 ```bash
 cd examples/order-api/go
 go test ./... -v
+cat CHANGELOG.md
 cd -
+git tag --list "order-api-v*"
+git ls-remote --tags origin
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
 ```
 
 ### Java
@@ -350,11 +420,18 @@ cd -
 ```bash
 cd examples/order-api/java
 ./gradlew test
+cat CHANGELOG.md
 cd -
+git tag --list "order-api-v*"
+git ls-remote --tags origin
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
 ```
 
 Oczekiwane: wszystkie testy przechodzą (11 razem: 9 z Labów 21-23,
-plus dwa nowe testy logowania).
+plus dwa nowe testy logowania), `CHANGELOG.md` pokazuje wpis `[1.0.0]`,
+`git tag --list "order-api-v*"` wymienia `order-api-v1.0.0`,
+`git ls-remote --tags origin` pokazuje, że dotarł też na remote, a
+check `merge-base --is-ancestor` wypisuje swoją linię potwierdzenia.
 
 ## Zastanów się
 
@@ -424,11 +501,23 @@ plus dwa nowe testy logowania).
   (`logger.removeHandler(handler)`) — inaczej będzie dalej gromadzić
   rekordy z każdego kolejnego testu, który dotyka tego samego loggera.
 
+**Wszystkie ścieżki:**
+
+- **Podpowiedź 5:** Jeśli `git merge-base --is-ancestor` nic nie
+  wypisze po otagowaniu, prawie na pewno otagowałeś/aś przed
+  merge'em, albo otagowałeś/aś commit na gałęzi, a nie ten, który
+  teraz jest na `main` — przeczytaj jeszcze raz Krok 11, zanim
+  spróbujesz czegokolwiek innego; nie usuwaj ani nie przenoś tagu
+  siłowo, zanim nie wiesz, na jaki commit powinien faktycznie
+  wskazywać.
+
 ## Co dalej
 
-Masz testy, review, CI i teraz logi, w którymkolwiek tracku
-realizowałeś/aś — Python, Go i Java wszystkie kontynuują od tego
-miejsca, tak jak od Lab 21. Dalej musisz zdecydować, co właściwie
-znaczy "ta wersja", kiedy przekazujesz ją komuś innemu.
+Masz testy, review, CI, logi i otagowane `v1.0.0`, w którymkolwiek
+tracku realizowałeś/aś — Python, Go i Java wszystkie kontynuują od
+tego miejsca, tak jak od Lab 21. Dalej wprowadzasz jedną prawdziwą,
+kompatybilną zmianę do tej samej otagowanej wersji — i przekonujesz
+się, czego wymaga wydanie drugiego release'u bez łamania obietnic
+pierwszego.
 
 Przejdź do [Lab 25 — Wydanie i kompatybilność](../25-release-and-compatibility/README.pl.md).
