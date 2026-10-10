@@ -42,15 +42,13 @@ Po tym labie potrafisz:
 
 1. Utwórz branch `feature/ci-pipeline` z `main`.
 2. Utwórz `.github/workflows/team-inventory-ci.yml` (utwórz
-   `.github/workflows/`, jeśli nie istnieje) ze wspólnym triggerem
-   poniżej, plus kroki Twojej ścieżki.
-
-Wszystkie trzy ścieżki mają wspólny ten trigger — umieść go na
-początku pliku:
-
-```yaml
-on: [push, pull_request]
-```
+   `.github/workflows/`, jeśli nie istnieje). Skopiuj **kompletny**
+   workflow swojej ścieżki poniżej do tego jednego pliku, dokładnie
+   tak, jak jest pokazany — nie wklejaj do niego niczego innego
+   najpierw. Każda wersja poniżej to cały plik, z kluczem `on:` raz
+   wliczonym; wszystkie trzy ścieżki akurat mają ten sam trigger `on:
+   [push, pull_request]`, ale to nie jest osobny fragment do dodania
+   na wierch tego, co już jest w przykładzie Twojej ścieżki.
 
 ### Python
 

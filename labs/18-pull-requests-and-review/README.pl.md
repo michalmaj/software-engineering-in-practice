@@ -134,9 +134,12 @@ Po tym labie potrafisz:
   (nigdy repozytorium kursu), z opisem obejmującym co/czemu/jak
   zweryfikowane.
 - Review doszło do jednego z dwóch uprawnionych wyników: merytoryczny
-  komentarz został zostawiony i rozwiązany, albo PR został zatwierdzony
-  z krótkim zapisem, że checklista była faktycznie sprawdzona — nigdy
-  komentarz wymyślony tylko, żeby zaspokoić ten wymóg.
+  komentarz został zostawiony i rozwiązany, albo checklista nie
+  znalazła nic actionable, co potwierdza zatwierdzenie na GitHubie (w
+  parze) albo krótki, konkretny zapis w `my-review-notes.md` (solo —
+  GitHub nie pozwala formalnie zatwierdzić własnego pull requesta, więc
+  ta notatka jest solo-odpowiednikiem, nie gorszym zamiennikiem) —
+  nigdy komentarz wymyślony tylko, żeby zaspokoić ten wymóg.
 - Po pobraniu, lokalny `main` zawiera nową funkcję/metodę i jej test, a
   komenda testowa Twojej ścieżki przechodzi.
 

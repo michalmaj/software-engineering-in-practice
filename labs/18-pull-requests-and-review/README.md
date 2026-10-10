@@ -128,8 +128,11 @@ After this lab you should be able to:
   the course repository), with a description covering what/why/how
   verified.
 - The review reached one of two legitimate outcomes: a substantive
-  comment was left and addressed, or the PR was approved with a short
-  record that the checklist was actually checked — never a comment
+  comment was left and addressed, or the checklist found nothing
+  actionable, confirmed by a GitHub approval (paired) or a short,
+  specific record in `my-review-notes.md` (solo — GitHub does not let
+  you formally approve your own pull request, so this note is the
+  solo equivalent, not a lesser substitute) — never a comment
   manufactured just to satisfy this requirement.
 - After pulling, local `main` contains the new function/method and its
   test, and your track's test command passes.

@@ -41,14 +41,13 @@ After this lab you should be able to:
 
 1. Create branch `feature/ci-pipeline` from `main`.
 2. Create `.github/workflows/team-inventory-ci.yml` (create
-   `.github/workflows/` if it doesn't exist) with the shared trigger
-   below, plus your track's steps.
-
-All three tracks share this trigger — put it at the top of the file:
-
-```yaml
-on: [push, pull_request]
-```
+   `.github/workflows/` if it doesn't exist). Copy your track's
+   **complete** workflow below into that one file, exactly as shown —
+   don't paste anything else into it first. Each version below is the
+   whole file, `on:` key included once; all three tracks happen to
+   share the same `on: [push, pull_request]` trigger line, but that's
+   not a separate piece to add on top of what's already in your
+   track's example.
 
 ### Python
 
