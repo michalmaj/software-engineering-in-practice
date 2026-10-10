@@ -404,13 +404,8 @@ new logging tests).
 ## What's next
 
 You have tests, review, CI, and now logs, in whichever track you
-followed. From here, Go and Java's preview pauses again — Lab 25 stays
-Python-first for now, the same way it did after Lab 22. Everything
-you've built in Go and Java — validation, persistence, migration,
-retry, and logging — is a complete, working `order-api` on its own.
-
-If you're continuing in Python: you have tests, review, CI, and logs.
-Next, you have to decide what "this version" even means when you hand
-it to someone else.
+followed — Python, Go, and Java all keep going from here, the same way
+they have since Lab 21. Next, you have to decide what "this version"
+even means when you hand it to someone else.
 
 Continue to [Lab 25 — Release and compatibility](../25-release-and-compatibility/README.md).
