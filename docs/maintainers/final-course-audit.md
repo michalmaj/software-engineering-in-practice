@@ -105,6 +105,16 @@ behavior, not executed end-to-end on real hardware. This should be
 spot-checked on a real Windows 11 + Git Bash machine before the next
 cohort starts, ideally by someone following the page cold.
 
+**Update (PR I):** a real, narrow Windows GitHub Actions smoke test now
+executes the `bash.exe`-location fix and several other Git-Bash-
+specific steps on a genuine `windows-latest` runner — see
+[`windows-reality-check.md`](windows-reality-check.md) for the full
+results matrix. This confirms the `Join-Path`/`Split-Path` fix actually
+resolves on a real Git for Windows install, but a GitHub-hosted runner
+has no desktop session, so the Chocolatey install itself, UAC prompts,
+and the VS Code GUI terminal-profile flow remain **NOT INDEPENDENTLY
+VERIFIED** on real Windows 11 hardware.
+
 ### Lab 16-17 — the merge conflict's determinism (verified correct, no bug found)
 
 This was treated as the single highest-risk technical claim in Act
@@ -209,7 +219,7 @@ No regression found.
 | 3 | Windows setup's `bash.exe` location assumption (same folder as `git.exe`) was factually wrong | MAJOR | **Fixed** |
 | 4 | `check-environment.sh` mislabeled which lab needs which tool, and didn't explain that 2/3 language rows showing MISSING is normal | MAJOR | **Fixed** |
 | 5 | Full line-by-line editorial/naturalness audit of all 30×2 READMEs not completed (agent failures; time budget) | — | **Open, disclosed** |
-| 6 | Windows fixes not executed on a real Windows machine | — | **Open, disclosed (NOT INDEPENDENTLY VERIFIED)** |
+| 6 | Windows fixes not executed on a real Windows machine | — | **Partially closed (PR I): real CI execution on `windows-latest` added — see [`windows-reality-check.md`](windows-reality-check.md); real-GUI items remain open, disclosed (NOT INDEPENDENTLY VERIFIED)** |
 
 No BLOCKER remains open. Findings 5 and 6 are scope limitations of
 this specific audit pass, disclosed rather than hidden, and are
@@ -234,7 +244,12 @@ before this PR and are not newly introduced by it.
 
 - Real Windows 11 + Git Bash execution of the corrected
   `docs/setup/windows.md`/`.pl.md` — no Windows environment available
-  in this session.
+  in this session. **Update (PR I):** partially closed by a real
+  `windows-latest` GitHub Actions smoke test — see
+  [`windows-reality-check.md`](windows-reality-check.md). Items
+  requiring an actual desktop session (UAC prompts, a fresh Chocolatey
+  install, Git Bash appearing in VS Code's GUI terminal-profile menu,
+  the GitHub web UI fork step) remain not independently verified.
 - A full, exhaustive line-by-line editorial pass over all 30 labs'
   prose in both languages, and a full native-Polish naturalness read
   of all 30 `README.pl.md` files — this pass sampled a cross-section
