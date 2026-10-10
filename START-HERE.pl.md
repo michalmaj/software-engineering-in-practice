@@ -35,7 +35,7 @@ zainstaluj Git i VS Code, jeśli ich nie masz, zrób fork i sklonuj to
 repozytorium, i otwórz je w VS Code. Podążaj za tym dla swojego
 systemu od samego początku — nie musisz czytać dwóch pozostałych.
 
-Woli(sz) nie instalować niczego na własnym komputerze? Zobacz
+Wolisz nie instalować niczego na własnym komputerze? Zobacz
 [GitHub Codespaces](#github-codespaces-opcja-bez-instalacji) poniżej
 — to wciąż wspierana ścieżka, tylko już nie domyślna.
 
@@ -51,7 +51,7 @@ Nie musisz zaczynać od nowa.
   [`docs/setup/already-have-a-fork.pl.md`](docs/setup/already-have-a-fork.pl.md) —
   mówi, jak ją znaleźć, otworzyć i sprawdzić, czy jest w bezpiecznym
   stanie, bez odtwarzania czegokolwiek od nowa.
-- **"Coś pójło nie tak i nie jestem pewien/pewna, w jakim stanie
+- **"Coś poszło nie tak i nie jestem pewien/pewna, w jakim stanie
   jestem."** Zobacz
   [`docs/setup/troubleshooting.pl.md`](docs/setup/troubleshooting.pl.md).
 

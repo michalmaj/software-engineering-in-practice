@@ -22,7 +22,7 @@ tells you to stop and ask instead.
    If this prints a path, you have a local copy already — go to
    "I have a local copy already" below. If it prints nothing, you
    haven't cloned it yet — go to the "Clone your fork" step in your
-   system's guide ([Windows](windows.md#73--clone-it-onto-your-computer),
+   system's guide ([Windows](windows.md#63--clone-it-onto-your-computer),
    [macOS](macos.md#63--clone-it-onto-your-computer),
    [Linux](linux.md#63--clone-it-onto-your-computer)).
 
