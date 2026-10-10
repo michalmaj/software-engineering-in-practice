@@ -286,7 +286,23 @@ Run the server by hand, make a couple of requests (including one for a
 missing order), and read the log output in your terminal. Confirm you
 can tell what happened without opening your source file.
 
-### Step 8 — branch, PR, review, merge
+### Step 8 — a head start on next lab's changelog (if you have time left)
+
+Lab 25 opens by writing a `CHANGELOG.md` `[1.0.0]` entry summarizing
+everything the API does as of *this* lab, from a caller's point of
+view: the two endpoints, request validation, SQLite persistence, the
+`notes` migration, bounded retry, and operational logging. None of
+that depends on anything Lab 25 adds — you already have every fact it
+needs, right now, with this lab's work fresh in your head. If you're
+not already at the edge of this session's time, draft that list in a
+scratch file now (not committed as part of this lab's PR — Lab 25
+commits `CHANGELOG.md` itself, as its own first step). Having the list
+already written is one less thing competing for time in a lab that
+has two full release cycles to get through. If this session is
+already full, skip this — it costs nothing to write the same list
+fresh at the start of Lab 25 instead.
+
+### Step 9 — branch, PR, review, merge
 
 Do this lab's work on a branch (for example
 `feature/production-logging`), push it, and open a pull request. Merge

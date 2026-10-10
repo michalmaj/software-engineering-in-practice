@@ -39,8 +39,9 @@ After this lab you should be able to:
 This lab has no fixed list of features to build — that's the point.
 Working from your own `PROJECT_PLAN.md`'s MVP scope:
 
-1. Set up CI for your repository now, reusing the pattern from Lab 19:
-   a workflow that installs dependencies and runs your test suite on
+1. **If you didn't already set this up at the end of Lab 26**: set up
+   CI for your repository now, reusing the pattern from Lab 19: a
+   workflow that installs dependencies and runs your test suite on
    every push and pull request. Do this *before* building features, not
    after — you want it catching mistakes from your very first real PR.
    A short recipe for whichever language you chose in Lab 26:
@@ -95,6 +96,36 @@ Treat the boundary between steps 1 and 2 as your first checkpoint —
 if you have to stop and resume later (next week, or tomorrow), stopping
 there, with CI green and nothing uncommitted, is a clean place to pick
 back up. The same is true after each capability in step 3 lands.
+
+**A concrete split for a 3-4 person team.** Four parallel branches
+don't mean four times the speed — someone still has to review every
+PR, and "list" and "cancel" both need to read the same reservation
+data that "create" defines, so they can't start from nothing while
+"create" is still in flux. One workable division:
+
+- **One person (or pair) takes "create a reservation" first** —
+  it's the vertical slice, and it's the one capability that decides
+  the actual shape of a reservation and how tables get assigned to
+  one. Everyone else's work depends on that shape existing, even
+  informally, before they can write a test against it.
+- **Once that shape is pushed** (the PR doesn't need to be merged yet
+  for teammates to read the branch, but merged is cleaner if CI is
+  fast) **the remaining two people split "list" and "cancel"**,
+  working in parallel against that shape.
+- **A fourth person reviews** — real review, per Lab 18's checklist,
+  not a rubber stamp — freeing the implementers from context-switching
+  into reviewer mode on top of their own capability. If you're a
+  team of three, the person who finished "create" first reviews next,
+  then rejoins to help integrate.
+- **Integration is real work, not a formality**: if "list" and
+  "cancel" both touched the same file "create" introduced, expect at
+  least one merge conflict once both land — budget for it rather than
+  being surprised by it.
+
+This order (create → list/cancel in parallel → integrate) is the
+reason step 1 insists on CI *before* any feature work: the first real
+PR is also the first real test of whether the pipeline you're about
+to depend on four more times actually works.
 
 Be honest about the risk, separately per language: a team new to Go's
 or Java's ceremony (project structure, the build tool, JSON handling

@@ -62,7 +62,9 @@ dostępu do pushowania.
    implementacyjnych specyficznych dla Twojego języka, chyba że mają
    znaczenie operacyjne albo kompatybilnościowe (na przykład: "dane są
    przechowywane w SQLite" to warta linijka; "żądania obsługuje
-   `com.sun.net.httpserver.HttpServer`" nie jest).
+   `com.sun.net.httpserver.HttpServer`" nie jest). Jeśli zapisałeś/aś
+   tę listę na koniec Lab 24, wklej ją i przejdź prosto do kroku 3 —
+   odtwarzanie jej od zera tutaj to czas, którego nie odzyskasz.
 3. Uruchom pełny zestaw testów swojego tracku, żeby potwierdzić, że
    nic nie jest zepsute, potem zacommituj `CHANGELOG.md`, wypchnij
    gałąź, otwórz pull request i zmerguj, gdy CI jest zielone — ta sama
@@ -244,13 +246,20 @@ nowych.
 
 Ten lab prosi o dwa kompletne cykle wydania w jednej sesji — każdy z
 własną gałęzią, implementacją, testami, PR-em, merge'em i tagiem. Bądź
-uczciwy/a wobec zegara: ukończenie obu `v1.0.0` i `v1.1.0` naprawdę,
-wliczając wszystkie cztery testy `priority`, to pełne 90 minut dla
-samego Pythona, i prawdopodobnie dłużej dla Go i Javy, gdzie wyciągnięcie
-wspólnego helpera `hasColumn` i podłączenie drugiej migracji przez
-`main`/setup testowy to prawdziwa, dodatkowa ceremonia poza tym, czego
-potrzebuje Python. To nie powód, żeby coś z tego pominąć — to powód,
-żeby wiedzieć, gdzie można się zatrzymać.
+uczciwy/a wobec zegara. Z wpisem `[1.0.0]` w `CHANGELOG.md` już
+zapisanym na koniec Lab 24 (krok 2 powyżej), sam cykl `v1.0.0` jest
+krótki: utwórz gałąź, wklej szkic, potwierdź zestaw testów, zacommituj,
+PR, merge, tag — realistycznie 15-20 minut, nie 25-35, które zajęłoby
+to, zaczynając od pustego pliku. Wciąż zostaje cykl `v1.1.0`: prawdziwa
+migracja schematu, trzy proste testy plus subtelniejszy historyczny
+test `NULL`, aktualizacja `CONTRACT.md`, wpis `CHANGELOG.md`
+rozważający SemVer, i druga pełna pętla PR/CI/merge/tag. Nawet z
+czasem zaoszczędzonym na `v1.0.0`, ta kombinacja to pełne 90 minut dla
+samego Pythona, i prawdopodobnie dłużej dla Go i Javy, gdzie
+wyciągnięcie wspólnego helpera `hasColumn` i podłączenie drugiej
+migracji przez `main`/setup testowy to prawdziwa, dodatkowa ceremonia
+poza tym, czego potrzebuje Python. Przygotowanie z Lab 24 zwęża
+różnicę; nie zamyka jej.
 
 **`v1.0.0`, otagowany i wypchnięty, to prawdziwy, bezpieczny
 checkpoint** — nie częściowy. `CHANGELOG.md` jest kompletny dla
@@ -258,7 +267,13 @@ wszystkiego przez Lab 24, tag istnieje na `main`, i nic nie jest
 niezacommitowane. Jeśli Wasza sesja się przeciąga, zatrzymanie się
 tutaj i zrobienie funkcji `priority` (krok 5 dalej) w osobnej sesji nic
 nie kosztuje: wracacie z czystego, otagowanego `main`, dokładnie tego
-stanu, który zakłada krok 5.
+stanu, który zakłada krok 5. Dla większości studentów — i dla
+większości Go i Javy konkretnie — traktujcie to jako oczekiwany punkt
+zatrzymania dla jednej sesji, z `v1.1.0` zaczynającym własną sesję, nie
+jako plan B na wypadek, gdyby szło wolno. Jeśli harmonogram Waszego
+kursu nie ma zapasowej sesji, żeby wchłonąć ten podział, to prawdziwe,
+otwarte pytanie organizacyjne dla kogoś planującego kalendarz kursu,
+nie coś, co którakolwiek z tych dwóch sesji rozwiąże, pracując szybciej.
 
 Wewnątrz samej pracy nad `v1.1.0`, czwarty test — historyczny wiersz z
 naprawdę `NULL` kolumną `priority` — to ten, który najprawdopodobniej

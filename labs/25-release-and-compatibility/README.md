@@ -62,7 +62,10 @@ repository, which you don't have push access to anyway.
    mention implementation details specific to your language unless
    they matter operationally or for compatibility (for example: "data
    is stored in SQLite" is worth a line; "requests are handled by
-   `com.sun.net.httpserver.HttpServer`" isn't).
+   `com.sun.net.httpserver.HttpServer`" isn't). If you drafted this
+   list at the end of Lab 24, paste it in and move straight to step 3
+   — re-deriving it from scratch here is wasted time you don't get
+   back.
 3. Run your track's full test suite to confirm nothing is broken, then
    commit `CHANGELOG.md`, push the branch, open a pull request, and
    merge once CI is green — same loop as the rest of Act V.
@@ -237,20 +240,34 @@ four new tests needed any earlier test to change for this to be true.
 
 This lab asks for two complete release cycles in one session — each
 with its own branch, implementation, tests, PR, merge, and tag. Be
-honest with yourself about the clock: finishing both `v1.0.0` and
-`v1.1.0` for real, including all four `priority` tests, is a full
-90 minutes for Python alone, and likely longer for Go and Java, where
-extracting the shared `hasColumn` helper and wiring a second migration
-through `main`/test setup is real, additional ceremony beyond what
-Python needs. That's not a reason to skip any of it — it's a reason to
-know where you can stop.
+honest with yourself about the clock. With `CHANGELOG.md`'s `[1.0.0]`
+entry already drafted at the end of Lab 24 (step 2 above), the
+`v1.0.0` cycle itself is short: create the branch, paste in the draft,
+confirm the suite, commit, PR, merge, tag — realistically 15-20
+minutes, not the 25-35 it would take starting from a blank file. That
+still leaves the `v1.1.0` cycle: a real schema migration, three
+straightforward tests plus the subtler historical-`NULL` one, a
+`CONTRACT.md` update, a `CHANGELOG.md` entry reasoning about SemVer,
+and a second full PR/CI/merge/tag loop. Even with the `v1.0.0` time
+saved, that combination is a full 90 minutes for Python alone, and
+likely longer for Go and Java, where extracting the shared
+`hasColumn` helper and wiring a second migration through `main`/test
+setup is real, additional ceremony beyond what Python needs. The Lab
+24 head start narrows the gap; it does not close it.
 
 **`v1.0.0`, tagged and pushed, is a real, safe checkpoint** — not a
 partial one. `CHANGELOG.md` is complete for everything through Lab 24,
 the tag exists on `main`, and nothing is uncommitted. If your session
 is running long, stopping here and doing the `priority` feature
 (step 5 onward) in a separate sitting costs you nothing: you resume
-from a clean, tagged `main`, exactly the state step 5 assumes.
+from a clean, tagged `main`, exactly the state step 5 assumes. For
+most students — and for most of Go and Java specifically — treat this
+as the expected stopping point for one session, with `v1.1.0` starting
+a session of its own, rather than a fallback for when things go
+slowly. If your course schedule has no slack session to absorb that
+split, that is a real, open scheduling question for whoever plans the
+course calendar, not something either of these two sessions can
+resolve on its own by working faster.
 
 Inside the `v1.1.0` work itself, the fourth test — the historical row
 with a genuinely `NULL` `priority` column — is the one most likely to
