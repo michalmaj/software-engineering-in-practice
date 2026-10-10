@@ -16,6 +16,58 @@ sessions. Both open problems are evaluated against that constraint
 specifically — not "is this a lot of work" in the abstract, but "does
 this fit in the one session this course's structure gives it."
 
+---
+
+## Final maintainer decision after PR L (added by PR M)
+
+This document still contains, unedited, the history of how its own
+verdict changed: Section 2 recorded Lab 25's two-release-cycle load as
+an **OPEN MAJOR**; Section 7 recommended **NO-GO** on both FULLY
+SUPPORTED and the next release on that basis; Section 8 (added by PR
+L) then resolved that MAJOR and called Labs 24-25 a **GO** in all
+three languages. Reading Section 7 alone, without this note or
+Section 8, would give a reader a verdict that is no longer current.
+This section is the single place that states what is actually true
+now:
+
+- Section 7's NO-GO is preserved here as an accurate historical
+  record of what PR K concluded at the time — it is **not** edited or
+  retroactively softened.
+- The condition that NO-GO was contingent on — Lab 25 reliably
+  exceeding 90 minutes because it carried two full release cycles —
+  was resolved by PR L: `v1.0.0` now ships at the end of Lab 24, on
+  the same branch/PR as that lab's logging work, and Lab 25 does
+  exactly one release cycle (the `priority` field, ending in `v1.1.0`).
+- **Labs 24-25 have a GO in all three languages** (Python, Go, Java),
+  per PR L's real, independent, hands-on verification in all three —
+  not a text review.
+- **Java's Lab 24 still carries a disclosed, tight timing margin**
+  (roughly 60-90 minutes for a beginner) — this is not a new problem
+  invented by PR L; it is Java's pre-existing, heaviest-of-three
+  logging ceremony (a `LoggingConfig` class, a hand-written
+  `ListLogHandler` subclass) with the newly-mandatory release loop now
+  stacked on top. It is disclosed, not hidden, and is not treated as a
+  reason to withhold the GO above.
+- **Lab 27 remains a GO with a tight, disclosed margin**, exactly as
+  Section 3 already concluded — nothing in PR L or this PR revisits
+  that verdict.
+- With Lab 25's MAJOR resolved, **the status of all three language
+  tracks may move from PREVIEW to FULLY SUPPORTED** — this is a
+  maintainer decision made in PR M (see
+  [`final-course-audit.md`](final-course-audit.md) and the root
+  `README.md`/`README.pl.md` for where that decision is reflected
+  student-facing), not something this document decides on its own.
+- With that status change made, **`v2.0.0` may be prepared for
+  publication** once this PR is reviewed and merged — publishing the
+  tag and the GitHub Release itself remains a separate, later step,
+  not part of this PR.
+
+Nothing above changes any of this document's own time estimates to
+make them look better than the real walkthroughs found — the Java
+Lab 24 margin stays exactly as tight as Section 8 measured it.
+
+---
+
 ## 1. Summary of J1-J3
 
 Three prior PRs read all 60 Lab 01-30 README files (`.md` + `.pl.md`)

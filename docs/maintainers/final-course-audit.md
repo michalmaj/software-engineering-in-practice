@@ -290,3 +290,65 @@ chain's Windows path is still not independently verified on real
 hardware, and a full editorial pass has not yet been completed for
 every lab). Both are reasonable next steps, not reasons to withhold
 the GO on this audit's actual scope.
+
+## Update (PR M) — where this audit's open items stand now
+
+This audit (PR H) was explicitly a **BLOCKER-focused** pass: a mix of
+deep hands-on verification on a few high-risk items (Lab 05's
+three-track contradiction, the Windows Chocolatey ordering bug, Lab
+16-17's merge-conflict determinism) and a **sample**, not a full
+read, of the remaining labs' prose — disclosed plainly in "Sampled"
+and "NOT INDEPENDENTLY VERIFIED" above. Three follow-up PRs since then
+closed most of what this audit left open:
+
+- **[`windows-reality-check.md`](windows-reality-check.md) (PR I):**
+  added a real, narrow Windows GitHub Actions smoke test
+  (`windows-smoke-test`, running on genuine `windows-latest` runners)
+  that executes Labs 01-04's shared command sequence and the
+  `bash.exe`-location fix for real. This is real CI evidence, not a
+  GUI walkthrough — a fresh Chocolatey install, UAC prompts, and VS
+  Code's terminal-profile dropdown on a real Windows 11 desktop remain
+  **NOT INDEPENDENTLY VERIFIED**, exactly as disclosed when PR I
+  landed and unchanged since.
+- **[`editorial-audit-j1.md`](editorial-audit-j1.md) (Labs 01-10),
+  [`editorial-audit-j2.md`](editorial-audit-j2.md) (Labs 11-20), and
+  [`editorial-audit-j3.md`](editorial-audit-j3.md) (Labs 21-30):**
+  together these three PRs read all 60 `README.md`/`README.pl.md`
+  files in full — the exhaustive editorial pass this audit's finding
+  5 explicitly left undone. Each found and fixed real, disclosed bugs
+  (a Windows Python-naming issue in Labs 05-06, a stale "Go/Java
+  preview" claim in Lab 06, an unsafe `curl` placeholder in Lab 22,
+  among others). J3's own hands-on verification of Act V (Labs 21-25)
+  and Act VI (Labs 26-30) was a **full, real walkthrough in Python
+  only**; Go and Java were verified by reading the lab text against
+  the shared contract and starter structure in that pass, not by an
+  independent end-to-end re-implementation — J3 says this explicitly,
+  and it is repeated here rather than left implied. Separate,
+  independent hands-on evidence for Go and Java exists from other
+  work: PR F authored and verified the TableTime capstone (Labs
+  26-30) in all three languages when it was written, and PR L (below)
+  independently re-implemented and ran the full Labs 24-25 sequence
+  end-to-end in Go and Java specifically, not just Python.
+- **[`release-readiness.md`](release-readiness.md) (PR K, then PR
+  L's Section 8):** PR K resolved Lab 27's team-MVP timing risk (GO,
+  disclosed tight margin) but left Lab 25's two-release-cycle load as
+  an open MAJOR. PR L resolved that MAJOR structurally — moving the
+  `v1.0.0` release into Lab 24 so Lab 25 carries only one release
+  cycle — and verified the result with real, independent, hands-on
+  walkthroughs in Python, Go, **and** Java, including proving the
+  historical-`NULL` `priority` test is real by deliberately
+  reverting its fix and watching it fail. See that document's "Final
+  maintainer decision after PR L" section for the current, up-to-date
+  verdict; its Section 7 is preserved as the historical NO-GO this
+  update supersedes, not as the current status.
+
+With Lab 25's MAJOR resolved and this audit's own BLOCKER-level
+findings fixed and re-verified, PR M treats the condition this audit's
+own GO was deliberately silent on — "that remains a separate
+decision" — as satisfied, and records the move from PREVIEW to FULLY
+SUPPORTED for Python, Go, and Java in the root `README.md`/
+`README.pl.md` and in `release-readiness.md`'s own final-decision
+section. The Windows GUI, real cross-account GitHub collaboration, and
+the inherent uncertainty of expert-estimated (not empirically
+measured) 90-minute timeboxes remain disclosed, open evidence gaps —
+not resolved by this update, and not hidden by it either.

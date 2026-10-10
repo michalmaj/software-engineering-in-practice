@@ -149,26 +149,30 @@ limit GitHuba ma miesięczne ograniczenia.
 | Java      | JDK 21 + Gradle Wrapper     | JUnit, przez `./gradlew test` |
 
 Laby 01-04 to jedna wspólna ścieżka, niezależna od języka. Od Lab 05
-wybierasz jeden z trzech praktycznych tracków językowych — Python, Go
-albo Java — i używasz go konsekwentnie od tego miejsca aż po capstone
-Aktu VI; Lab 14 to celowa przerwa, żeby porównać, jak ten sam pomysł
-wygląda we wszystkich trzech, nie zmiana tracku. We wszystkich trzech
-język jest medium — przedmiotem jest inżynieria oprogramowania. Tym,
-co jest zakładane na wejściu, są podstawy programowania w wybranym
-przez Ciebie języku, niekoniecznie w Pythonie.
-
-Tracki Go i Java są wciąż utwardzane w całym kursie — traktuj je jako
-**podgląd (PREVIEW)**, dopóki nie wyląduje finalny cross-track audit,
-mimo że Laby 05-30 już mają prawdziwą, działającą treść we wszystkich
-trzech.
+wybierasz jeden z trzech równorzędnych, **w pełni wspieranych**
+tracków językowych — Python, Go albo Java, nie jeden główny język z
+dwoma pozostałymi jako przykładami — i używasz go konsekwentnie od
+tego miejsca aż po capstone Aktu VI: te same efekty nauki, prawdziwe
+działające startery i ten sam wzorzec komend do uruchamiania i
+testowania (tylko inne narzędzie językowe) we wszystkich trzech. Lab
+14 to celowa przerwa, żeby porównać, jak ten sam pomysł wygląda we
+wszystkich trzech — czytasz tam wszystkie trzy, ale implementujesz go
+wciąż tylko w wybranym, bez zmiany tracku. We wszystkich trzech język
+jest medium — przedmiotem jest inżynieria oprogramowania. Potrzebujesz
+tylko **jednego toolchaina** na cały kurs: tego, który wybierzesz w
+Lab 05, nie wszystkich trzech od razu.
 
 ## Jak działają laby
 
-Każdy lab ma tę samą strukturę: **Sytuacja → Cele nauki → Zanim
+Każdy lab ma ten sam szkielet: **Sytuacja → Cele nauki → Zanim
 zaczniesz → Twoje zadanie → Kryteria akceptacji → Weryfikacja →
-Zastanów się → Jeśli utkniesz → Co dalej.** Ta spójność jest celowa —
-te materiały są zaprojektowane do samodzielnej pracy, czy to solo, czy
-jako część zajęć w klasie.
+Zastanów się → Jeśli utkniesz → Co dalej.** Niektóre laby dodają
+sekcję tam, gdzie materiał tego wymaga — notatkę o czasie w
+cięższych sesjach, notatkę "Wszystkie ścieżki" albo (Lab 26) krótki
+zapis decyzji architektonicznej — zamiast wtłaczać każdy lab w
+identyczną długość. Ten szkielet jest celowy — te materiały są
+zaprojektowane do samodzielnej pracy, czy to solo, czy jako część
+zajęć w klasie.
 
 ## Mapa kursu
 
