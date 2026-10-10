@@ -42,7 +42,8 @@ Po tym labie potrafisz:
 Ten lab nie ma stałej listy funkcji do zbudowania — to jest właśnie
 sedno. Pracując z zakresu MVP z własnego `PROJECT_PLAN.md`:
 
-1. Skonfiguruj teraz CI dla swojego repozytorium, ponownie stosując
+1. **Jeśli nie zrobiliście tego już na koniec Lab 26**: skonfiguruj
+   teraz CI dla swojego repozytorium, ponownie stosując
    wzorzec z Lab 19: workflow, który instaluje zależności i uruchamia
    Wasz zestaw testów przy każdym push i pull requeście. Zrób to
    *przed* budowaniem funkcji, nie po — chcesz, żeby wyłapywało błędy
@@ -104,6 +105,39 @@ jeśli musicie się zatrzymać i wrócić później (w przyszłym tygodniu albo
 jutro), zatrzymanie się tam, z zielonym CI i niczym niezacommitowanym,
 to czyste miejsce, żeby wrócić. To samo dotyczy momentu po każdej
 możliwości w kroku 3.
+
+**Konkretny podział dla zespołu 3-4 osób.** Cztery równoległe gałęzie
+nie znaczą czterokrotnej szybkości — ktoś wciąż musi zrecenzować
+każdy PR, a "list" i "cancel" obie potrzebują czytać te same dane
+rezerwacji, które definiuje "create", więc nie mogą zacząć od zera,
+dopóki "create" wciąż się zmienia. Jeden działający podział:
+
+- **Jedna osoba (albo para) bierze "utworzenie rezerwacji" pierwsza**
+  — to jest vertical slice, i to ta możliwość, która decyduje o
+  faktycznej formie rezerwacji i o tym, jak stoliki są do niej
+  przydzielane. Praca każdego innego zależy od istnienia tej formy,
+  choćby nieformalnie, zanim będą mogli napisać wobec niej test.
+- **Gdy ta forma jest wypchnięta** (PR nie musi być jeszcze
+  zmergowany, żeby koledzy z zespołu mogli przeczytać gałąź, ale
+  zmergowany jest czystszy, jeśli CI jest szybkie), **pozostałe dwie
+  osoby dzielą "list" i "cancel"**, pracując równolegle wobec tej
+  formy.
+- **Czwarta osoba recenzuje** — prawdziwe review, według checklisty z
+  Lab 18, nie pieczątka — zwalniając implementujących z
+  przełączania się w tryb recenzenta na dodatek do własnej
+  możliwości. Jeśli jesteście zespołem trójosobowym, osoba, która
+  skończyła "create" pierwsza, recenzuje następnie, potem wraca,
+  żeby pomóc zintegrować.
+- **Integracja to prawdziwa praca, nie formalność**: jeśli "list" i
+  "cancel" obie dotknęły tego samego pliku, który wprowadziło
+  "create", oczekujcie co najmniej jednego konfliktu merge'a, gdy obie
+  wylądują — zaplanujcie na to czas, zamiast dać się tym zaskoczyć.
+
+Ta kolejność (create → list/cancel równolegle → integracja) jest
+powodem, czemu krok 1 upiera się przy CI *przed* jakąkolwiek pracą nad
+funkcjami: pierwszy prawdziwy PR jest też pierwszym prawdziwym testem
+tego, czy pipeline, na którym zamierzacie polegać jeszcze cztery razy,
+faktycznie działa.
 
 Bądźcie uczciwi co do ryzyka, osobno dla każdego języka: zespół nowy w
 ceremonii Go albo Javy (struktura projektu, narzędzie budowania,
