@@ -7,11 +7,11 @@ discount, tax, tip, total. It works. It is also one function (or one
 `main`, in Go and Java) that does five different jobs at once, with no
 way to change one part without rereading the whole thing.
 
-This is the first lab with three tracks: Python, Go, and Java. Pick the
-one you're following and read only that section wherever this page
-splits — the three starters solve the exact same problem with the same
-numbers, so whichever you picked earlier, the destination is the same
-kind of project, built the way your language actually builds projects.
+You picked your track in Lab 05 — Python, Go, or Java. Read only that
+section wherever this page splits — the three starters solve the exact
+same problem with the same numbers, so whichever one you picked, the
+destination is the same kind of project, built the way your language
+actually builds projects.
 
 ## Learning objectives
 
@@ -28,9 +28,9 @@ After this lab you should be able to:
 ## Before you start
 
 - Labs 01-04 complete.
-- Pick your track if you haven't already: Python, Go, or Java. All
-  three are real, complete paths through Labs 06-10 — none of them is a
-  preview.
+- Continue with the track you picked in Lab 05 — Python, Go, or Java.
+  All three are real, complete paths through Labs 06-10 — none of them
+  is a preview. You shouldn't need to pick again here.
 - If you already started this project at its old location
   (`examples/restaurant-bill/bill.py`, with no `python/` subfolder),
   nothing is lost: move whatever you'd already created into
@@ -55,9 +55,9 @@ After this lab you should be able to:
 - Go 1.27.x installed. Check with `go version`. If it's missing, install
   it from the official instructions at
   [go.dev/doc/install](https://go.dev/doc/install) — this course doesn't
-  use a Go version manager. (Lab 05 has an optional Go preview covering
-  the same toolchain-reproducibility idea this track builds on, but it
-  isn't required to start here.)
+  use a Go version manager. (Lab 05's Go track already walked you
+  through installing this and the `GOTOOLCHAIN` experiment — if you're
+  continuing on the same machine, it's already set up.)
 - Read `main.go` fully before changing anything.
 
 ### Java
@@ -68,17 +68,20 @@ After this lab you should be able to:
   the output). If it's missing, install Adoptium's Temurin 21 build from
   [adoptium.net](https://adoptium.net/temurin/releases/?version=21). No
   global Gradle install needed — this project ships its own committed
-  Gradle Wrapper (`./gradlew`). (Lab 05 has an optional Java preview
-  covering the same toolchain idea this track builds on, but it isn't
-  required to start here.)
+  Gradle Wrapper (`./gradlew`). (Lab 05's Java track already walked you
+  through installing this and the `JavaLanguageVersion` experiment — if
+  you're continuing on the same machine, it's already set up.)
 - Read `src/main/java/Main.java` fully before changing anything.
 
 ## Your task
 
 ### Python
 
-1. Run `python3 bill.py`, saving its output as a baseline you'll compare
-   against later: `python3 bill.py | tee /tmp/bill-before.txt`.
+1. Run `python3 bill.py` (Windows Git Bash: `python bill.py` — Windows'
+   official Python installer provides `python`, not `python3`), saving
+   its output as a baseline you'll compare against later:
+   `python3 bill.py | tee /tmp/bill-before.txt` (`python bill.py | tee
+   /tmp/bill-before.txt` on Windows).
 2. Identify the distinct responsibilities mixed together in `main()`:
    computing a subtotal, applying a discount, computing tax, computing a
    tip, and printing a receipt.
@@ -251,7 +254,6 @@ After this lab you should be able to:
 
 ```bash
 cd examples/restaurant-bill/python
-python3 -c "import billing.calculator as c; print(c.calculate_bill([('Burger',12.50,2),('Fries',4.00,2),('Soda',2.50,2)], 0.15))" 2>&1 || true
 uv run python main.py | tee /tmp/bill-after.txt
 diff /tmp/bill-before.txt /tmp/bill-after.txt && echo "IDENTICAL"
 test -f bill.py && echo "bill.py still exists — delete it" || echo "bill.py correctly removed"
