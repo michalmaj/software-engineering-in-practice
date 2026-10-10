@@ -37,7 +37,15 @@ After this lab you should be able to:
 5. Run `git diff --staged` and observe what it shows compared to plain
    `git diff`.
 6. Commit the staged change with a clear, English, present-tense message,
-   e.g. `docs: add lab 03 observations`.
+   e.g. `docs: add lab 03 observations`. If this is the first commit
+   you've ever made on this machine, Git may stop you with "Please tell
+   me who you are" instead of committing — it needs a name and email to
+   attach to every commit you make here. Run these two commands once
+   (use the email tied to your GitHub account), then repeat the commit:
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+   ```
 7. Run `git log` once more and confirm your commit appears at the top.
 
 ## Acceptance criteria
@@ -71,6 +79,9 @@ wc -l < labs/03-inherited-repository/notes/my-observations.txt  # expect >= 3
   --staged` shows what will actually go into the next commit.
 - **Hint 3:** A commit needs a message. Use `git commit -m "your message
   here"` rather than opening an editor, unless you're comfortable with one.
+- **Hint 4:** "Please tell me who you are" means Git has no `user.name`
+  or `user.email` configured yet on this machine — see step 6 above for
+  the two `git config --global` commands that fix this once, for good.
 
 ## What's next
 

@@ -8,12 +8,11 @@ jedna funkcja (albo jedno `main`, w Go i Javie), która robi pięć różnych
 rzeczy naraz, bez możliwości zmiany jednej części bez ponownego
 przeczytania całości.
 
-To pierwszy lab z trzema ścieżkami: Python, Go i Java. Wybierz tę, którą
-realizujesz, i czytaj tylko tę sekcję, gdziekolwiek ta strona się
-rozdziela — trzy startery rozwiązują dokładnie ten sam problem z tymi
-samymi liczbami, więc niezależnie od tego, którą wybrałeś/aś wcześniej,
-cel jest tym samym rodzajem projektu, zbudowanym tak, jak Twój język
-faktycznie buduje projekty.
+Swój track wybrałeś/aś w Lab 05 — Python, Go albo Java. Czytaj tylko tę
+sekcję, gdziekolwiek ta strona się rozdziela — trzy startery
+rozwiązują dokładnie ten sam problem z tymi samymi liczbami, więc
+niezależnie od tego, który wybrałeś/aś, cel jest tym samym rodzajem
+projektu, zbudowanym tak, jak Twój język faktycznie buduje projekty.
 
 ## Cele nauki
 
@@ -30,9 +29,10 @@ Po tym labie potrafisz:
 ## Zanim zaczniesz
 
 - Laby 01-04 ukończone.
-- Wybierz swój track, jeśli jeszcze tego nie zrobiłeś/aś: Python, Go
-  albo Java. Wszystkie trzy są prawdziwymi, kompletnymi ścieżkami przez
-  Laby 06-10 — żadna z nich nie jest podglądem.
+- Kontynuuj track, który wybrałeś/aś w Lab 05 — Python, Go albo Java.
+  Wszystkie trzy są prawdziwymi, kompletnymi ścieżkami przez Laby
+  06-10 — żadna z nich nie jest podglądem. Nie powinieneś/aś musieć
+  wybierać ponownie w tym miejscu.
 - Jeśli już zacząłeś/aś ten projekt w jego starej lokalizacji
   (`examples/restaurant-bill/bill.py`, bez podfolderu `python/`), nic
   nie jest stracone: przenieś to, co już stworzyłeś/aś, do
@@ -57,9 +57,9 @@ Po tym labie potrafisz:
 - Go 1.27.x zainstalowany. Sprawdź przez `go version`. Jeśli go nie ma,
   zainstaluj go z oficjalnych instrukcji na
   [go.dev/doc/install](https://go.dev/doc/install) — ten kurs nie używa
-  menedżera wersji Go. (Lab 05 ma opcjonalny podgląd Go, obejmujący tę
-  samą ideę odtwarzalności toolchainu, na której buduje ten track, ale
-  nie jest wymagany, żeby zacząć tutaj.)
+  menedżera wersji Go. (Track Go w Lab 05 już przeprowadził Cię przez
+  instalację tego i eksperyment z `GOTOOLCHAIN` — jeśli kontynuujesz na
+  tej samej maszynie, jest to już skonfigurowane.)
 - Przeczytaj `main.go` w całości, zanim coś zmienisz.
 
 ### Java
@@ -70,17 +70,21 @@ Po tym labie potrafisz:
   gdzieś w wyniku). Jeśli go nie ma, zainstaluj build Temurin 21 od
   Adoptium z [adoptium.net](https://adoptium.net/temurin/releases/?version=21).
   Globalny Gradle niepotrzebny — ten projekt ma własny, zacommitowany
-  Gradle Wrapper (`./gradlew`). (Lab 05 ma opcjonalny podgląd Java,
-  obejmujący tę samą ideę toolchainu, na której buduje ten track, ale
-  nie jest wymagany, żeby zacząć tutaj.)
+  Gradle Wrapper (`./gradlew`). (Track Java w Lab 05 już przeprowadził
+  Cię przez instalację tego i eksperyment z `JavaLanguageVersion` —
+  jeśli kontynuujesz na tej samej maszynie, jest to już
+  skonfigurowane.)
 - Przeczytaj `src/main/java/Main.java` w całości, zanim coś zmienisz.
 
 ## Twoje zadanie
 
 ### Python
 
-1. Uruchom `python3 bill.py`, zapisując jego wynik jako bazę do
-   późniejszego porównania: `python3 bill.py | tee /tmp/bill-before.txt`.
+1. Uruchom `python3 bill.py` (Windows w Git Bash: `python bill.py` —
+   oficjalny instalator Pythona dla Windows dostarcza `python`, nie
+   `python3`), zapisując jego wynik jako bazę do późniejszego
+   porównania: `python3 bill.py | tee /tmp/bill-before.txt` (`python
+   bill.py | tee /tmp/bill-before.txt` na Windows).
 2. Zidentyfikuj odrębne odpowiedzialności zmieszane razem w `main()`:
    obliczenie subtotal, zastosowanie rabatu, obliczenie podatku,
    obliczenie napiwku i wydrukowanie rachunku.
@@ -257,7 +261,6 @@ Po tym labie potrafisz:
 
 ```bash
 cd examples/restaurant-bill/python
-python3 -c "import billing.calculator as c; print(c.calculate_bill([('Burger',12.50,2),('Fries',4.00,2),('Soda',2.50,2)], 0.15))" 2>&1 || true
 uv run python main.py | tee /tmp/bill-after.txt
 diff /tmp/bill-before.txt /tmp/bill-after.txt && echo "IDENTICAL"
 test -f bill.py && echo "bill.py still exists — delete it" || echo "bill.py correctly removed"

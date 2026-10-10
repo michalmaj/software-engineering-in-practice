@@ -67,8 +67,14 @@ After this lab you should be able to:
 
 ### Python
 
-1. Without installing anything, try: `python3 main.py`. Read the
-   error.
+1. Without installing anything, try: `python3 main.py` (on Windows Git
+   Bash, use `python main.py` instead — Windows' official Python
+   installer provides a `python` command, not `python3`). Read the
+   error. If the shell instead says the command itself isn't found
+   (`command not found`), that's the same lesson one level further
+   down — this machine doesn't have a Python interpreter at all yet,
+   let alone this project's dependency. Either way, keep going; step 4
+   resolves both.
 2. Open `pyproject.toml` and identify which package the project
    depends on.
 3. Run `uv sync`. Look at what appeared in this directory afterward.
@@ -254,11 +260,11 @@ Expected: the `grep` line shows `JavaLanguageVersion.of(21)` (not
 - **Hint 1:** The whole lab is three commands: `uv sync`, `uv run
   python main.py`, `uv run pytest`. Everything else is reading and
   writing notes.
-- **Hint 2:** If `python3 main.py` "just works" for you without `uv
-  sync`, it's because `cowsay` happens to already be installed
-  globally on your machine — that's exactly the trap this lab is
-  about. Try it in a completely fresh Codespace to see the failure for
-  real.
+- **Hint 2:** If `python3 main.py` (or `python main.py` on Windows)
+  "just works" for you without `uv sync`, it's because `cowsay`
+  happens to already be installed globally on your machine — that's
+  exactly the trap this lab is about. Try it in a completely fresh
+  Codespace to see the failure for real.
 - **Hint 3:** `uv run <command>` runs `<command>` inside the project's
   own managed environment, without you needing to manually activate
   anything.

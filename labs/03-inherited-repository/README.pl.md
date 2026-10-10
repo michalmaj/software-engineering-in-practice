@@ -39,7 +39,16 @@ Po tym labie potrafisz:
 5. Uruchom `git diff --staged` i zaobserwuj, co pokazuje w porównaniu do
    zwykłego `git diff`.
 6. Zacommituj zmianę ze stagingu z jasnym, angielskim komunikatem w czasie
-   teraźniejszym, np. `docs: add lab 03 observations`.
+   teraźniejszym, np. `docs: add lab 03 observations`. Jeśli to Twój
+   pierwszy commit na tej maszynie, Git może zatrzymać Cię komunikatem
+   "Please tell me who you are" zamiast zacommitować — potrzebuje
+   imienia i e-maila do podpisywania każdego Twojego commita tutaj.
+   Uruchom te dwie komendy raz (użyj e-maila przypisanego do Twojego
+   konta GitHub), potem powtórz commit:
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+   ```
 7. Uruchom `git log` jeszcze raz i potwierdź, że Twój commit jest na
    szczycie.
 
@@ -77,6 +86,10 @@ wc -l < labs/03-inherited-repository/notes/my-observations.txt  # expect >= 3
 - **Podpowiedź 3:** Commit potrzebuje komunikatu. Użyj `git commit -m
   "twoja wiadomość"` zamiast otwierać edytor, chyba że czujesz się z nim
   swobodnie.
+- **Podpowiedź 4:** "Please tell me who you are" znaczy, że Git nie ma
+  jeszcze skonfigurowanego `user.name` ani `user.email` na tej maszynie
+  — zobacz krok 6 powyżej, dwie komendy `git config --global`, które
+  naprawiają to raz na zawsze.
 
 ## Co dalej
 

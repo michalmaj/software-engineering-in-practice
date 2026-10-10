@@ -68,8 +68,14 @@ Po tym labie potrafisz:
 
 ### Python
 
-1. Bez instalowania czegokolwiek, spróbuj: `python3 main.py`.
-   Przeczytaj błąd.
+1. Bez instalowania czegokolwiek, spróbuj: `python3 main.py` (na
+   Windows w Git Bash użyj `python main.py` — oficjalny instalator
+   Pythona dla Windows dostarcza polecenie `python`, nie `python3`).
+   Przeczytaj błąd. Jeśli powłoka zamiast tego mówi, że samo polecenie
+   nie zostało znalezione (`command not found`), to ta sama lekcja,
+   jeden poziom głębiej — ta maszyna nie ma jeszcze żadnego interpretera
+   Pythona, nie mówiąc o zależności tego projektu. Tak czy inaczej, idź
+   dalej — krok 4 rozwiązuje obie sprawy naraz.
 2. Otwórz `pyproject.toml` i zidentyfikuj, od jakiego pakietu
    faktycznie zależy projekt.
 3. Uruchom `uv sync`. Zobacz, co pojawiło się w tym katalogu.
@@ -266,11 +272,12 @@ zakończeniem); `./gradlew test build` kończy się `BUILD SUCCESSFUL`.
 - **Podpowiedź 1:** Całe laboratorium to trzy polecenia: `uv sync`, `uv
   run python main.py`, `uv run pytest`. Reszta to czytanie i pisanie
   notatek.
-- **Podpowiedź 2:** Jeśli `python3 main.py` "po prostu działa" u Ciebie
-  bez `uv sync`, to dlatego, że `cowsay` jest przypadkiem już
-  zainstalowany globalnie na Twojej maszynie — to dokładnie ta
-  pułapka, o której jest to laboratorium. Spróbuj w zupełnie świeżym
-  Codespace, żeby zobaczyć prawdziwą porażkę.
+- **Podpowiedź 2:** Jeśli `python3 main.py` (albo `python main.py` na
+  Windows) "po prostu działa" u Ciebie bez `uv sync`, to dlatego, że
+  `cowsay` jest przypadkiem już zainstalowany globalnie na Twojej
+  maszynie — to dokładnie ta pułapka, o której jest to laboratorium.
+  Spróbuj w zupełnie świeżym Codespace, żeby zobaczyć prawdziwą
+  porażkę.
 - **Podpowiedź 3:** `uv run <command>` uruchamia `<command>` wewnątrz
   środowiska zarządzanego przez sam projekt, bez potrzeby ręcznej
   aktywacji czegokolwiek.
