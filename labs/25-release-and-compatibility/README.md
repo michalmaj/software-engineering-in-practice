@@ -233,6 +233,39 @@ four new tests needed any earlier test to change for this to be true.
     `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`, and push it:
     `git push origin order-api-v1.1.0`.
 
+## A realistic 90 minutes
+
+This lab asks for two complete release cycles in one session — each
+with its own branch, implementation, tests, PR, merge, and tag. Be
+honest with yourself about the clock: finishing both `v1.0.0` and
+`v1.1.0` for real, including all four `priority` tests, is a full
+90 minutes for Python alone, and likely longer for Go and Java, where
+extracting the shared `hasColumn` helper and wiring a second migration
+through `main`/test setup is real, additional ceremony beyond what
+Python needs. That's not a reason to skip any of it — it's a reason to
+know where you can stop.
+
+**`v1.0.0`, tagged and pushed, is a real, safe checkpoint** — not a
+partial one. `CHANGELOG.md` is complete for everything through Lab 24,
+the tag exists on `main`, and nothing is uncommitted. If your session
+is running long, stopping here and doing the `priority` feature
+(step 5 onward) in a separate sitting costs you nothing: you resume
+from a clean, tagged `main`, exactly the state step 5 assumes.
+
+Inside the `v1.1.0` work itself, the fourth test — the historical row
+with a genuinely `NULL` `priority` column — is the one most likely to
+eat unplanned time, precisely because it's the one this lab's own
+authors got wrong on a first pass (see step 6's note about the bug it
+would have caught). Give it the time it needs rather than rushing it
+to match the other three, which are mechanically similar to tests
+you've already written in Labs 21-23.
+
+If two full releases genuinely don't fit in one sitting for your
+pace, that's a realistic outcome for this lab, not a sign you're doing
+it wrong — split at the `v1.0.0` tag, the same way you'd split any
+other lab at a point where the suite is green and nothing is
+half-finished.
+
 ## Acceptance criteria
 
 - `CHANGELOG.md` has both a `[1.0.0]` and a `[1.1.0]` entry, plus a
