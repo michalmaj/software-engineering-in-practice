@@ -286,27 +286,79 @@ Run the server by hand, make a couple of requests (including one for a
 missing order), and read the log output in your terminal. Confirm you
 can tell what happened without opening your source file.
 
-### Step 8 — a head start on next lab's changelog (if you have time left)
+### Step 8 — write this version's first changelog entry
 
-Lab 25 opens by writing a `CHANGELOG.md` `[1.0.0]` entry summarizing
-everything the API does as of *this* lab, from a caller's point of
+A **release**, for the rest of this course, means exactly one thing:
+a specific commit on `main`, marked with a Git tag, that a caller can
+point to and say "I'm integrating against this." You're about to make
+the first one. Create `CHANGELOG.md` in
+`examples/order-api/<language>/`, following a simple "Keep a
+Changelog"-style format, with one `## [1.0.0]` entry listing
+everything the API does as of this lab, from a caller's point of
 view: the two endpoints, request validation, SQLite persistence, the
-`notes` migration, bounded retry, and operational logging. None of
-that depends on anything Lab 25 adds — you already have every fact it
-needs, right now, with this lab's work fresh in your head. If you're
-not already at the edge of this session's time, draft that list in a
-scratch file now (not committed as part of this lab's PR — Lab 25
-commits `CHANGELOG.md` itself, as its own first step). Having the list
-already written is one less thing competing for time in a lab that
-has two full release cycles to get through. If this session is
-already full, skip this — it costs nothing to write the same list
-fresh at the start of Lab 25 instead.
+`notes` migration, bounded retry around the kitchen notification, and
+operational logging (what you just built, above). It doesn't need to
+mention implementation details specific to your language unless they
+matter operationally or for compatibility (for example: "data is
+stored in SQLite" is worth a line; "requests are handled by
+`com.sun.net.httpserver.HttpServer`" isn't). Add this file to the
+*same* branch as this lab's logging work — not a second branch, not a
+second PR. Why tag a *commit* rather than just remembering "this is
+version 1.0.0" informally: a Git tag is a permanent, shareable pointer
+anyone on your team (or a caller) can check out by name, long after
+you've forgotten which commit hash it was. The full reasoning behind
+version *numbers* specifically — what makes a later change "1.1.0"
+instead of "2.0.0" — is Lab 25's job; this lab only needs you to
+name the starting point.
 
-### Step 9 — branch, PR, review, merge
+### Step 9 — run the full suite once more
 
-Do this lab's work on a branch (for example
-`feature/production-logging`), push it, and open a pull request. Merge
-only once CI is green — same loop as the rest of Act V.
+Confirm your track's full test suite still passes with both this
+lab's logging code and `CHANGELOG.md` present. `CHANGELOG.md` is
+documentation, not code — this step exists to catch the unrelated
+case where something about Step 1-7 was still unfinished when you
+started writing it.
+
+### Step 10 — branch, PR, review, merge
+
+Do this lab's work — logging *and* `CHANGELOG.md` together, one PR —
+on a branch (for example `feature/production-logging`), push it, and
+open a pull request. Merge only once CI is green — same loop as the
+rest of Act V. Don't open a second PR for the changelog; it belongs in
+this one, since it documents exactly what this PR adds.
+
+### Step 11 — tag the merged commit as `order-api-v1.0.0`
+
+Switch back to `main` and pull the merge: `git switch main` then
+`git pull --ff-only`. Confirm the suite still passes on this
+already-merged commit, then — only now — tag it:
+`git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`, and push the tag:
+`git push origin order-api-v1.0.0`.
+
+**Never tag a feature branch before it merges.** Squash and rebase
+merges can both give the commit that lands on `main` a completely
+different hash than the one on your branch — a tag created too early
+ends up pointing at a commit `main` doesn't actually contain. Tagging
+only after `git pull --ff-only` on `main` sidesteps that entirely.
+This lab's "release" is a Git tag, nothing more — don't create a
+GitHub Release, and don't build or publish any binary or package.
+
+### Step 12 — confirm the tag is actually reachable from `main`
+
+```bash
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
+```
+
+**If this prints nothing at all** (no confirmation line, and the
+command just exits): that tag's commit isn't actually on `main` yet.
+Don't force-fix this by re-tagging with `git tag -f` or
+force-pushing — first find out *why*, with `git show
+order-api-v1.0.0` (which commit does the tag actually point at?) and
+`git log main` (is that commit in `main`'s history at all?). The usual
+cause is tagging before the merge, or tagging a local branch that was
+never actually pushed/merged. Fix the real problem — merge first, then
+tag the resulting `main` commit — rather than overwriting a tag you're
+unsure about.
 
 ## Acceptance criteria
 
@@ -319,8 +371,14 @@ only once CI is green — same loop as the rest of Act V.
   from Step 6.
 - No `print`/`fmt.Println`/`System.out.println` stands in for an
   operational log in this lab's code.
+- `CHANGELOG.md` exists with a `[1.0.0]` entry and was part of the
+  same pull request as the logging work — not a separate PR.
 - This lab's changes were merged through a pull request with a green
   CI check, not committed directly to `main`.
+- `order-api-v1.0.0` exists as an annotated Git tag, pushed to your
+  remote, and was created only *after* this PR merged, never on the
+  feature branch beforehand: `git merge-base --is-ancestor
+  order-api-v1.0.0^{commit} main` succeeds.
 
 ## Verification
 
@@ -329,7 +387,11 @@ only once CI is green — same loop as the rest of Act V.
 ```bash
 cd examples/order-api/python
 uv run pytest -v
+cat CHANGELOG.md
 cd -
+git tag --list "order-api-v*"
+git ls-remote --tags origin
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
 ```
 
 ### Go
@@ -337,7 +399,11 @@ cd -
 ```bash
 cd examples/order-api/go
 go test ./... -v
+cat CHANGELOG.md
 cd -
+git tag --list "order-api-v*"
+git ls-remote --tags origin
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
 ```
 
 ### Java
@@ -345,11 +411,18 @@ cd -
 ```bash
 cd examples/order-api/java
 ./gradlew test
+cat CHANGELOG.md
 cd -
+git tag --list "order-api-v*"
+git ls-remote --tags origin
+git merge-base --is-ancestor order-api-v1.0.0^{commit} main && echo "v1.0.0 is on main"
 ```
 
 Expected: all tests pass (11 total: 9 from Labs 21-23, plus the two
-new logging tests).
+new logging tests), `CHANGELOG.md` shows the `[1.0.0]` entry,
+`git tag --list "order-api-v*"` lists `order-api-v1.0.0`,
+`git ls-remote --tags origin` shows it made it to the remote too, and
+the `merge-base --is-ancestor` check prints its confirmation line.
 
 ## Think about it
 
@@ -417,11 +490,21 @@ new logging tests).
   otherwise it keeps accumulating records from every later test that
   touches the same logger.
 
+**All tracks:**
+
+- **Hint 5:** If `git merge-base --is-ancestor` prints nothing after
+  you tag, you almost certainly tagged before merging, or tagged a
+  branch commit instead of the one now on `main` — re-read Step 11
+  before trying anything else; don't delete or force-move the tag
+  until you know which commit it should actually point at.
+
 ## What's next
 
-You have tests, review, CI, and now logs, in whichever track you
-followed — Python, Go, and Java all keep going from here, the same way
-they have since Lab 21. Next, you have to decide what "this version"
-even means when you hand it to someone else.
+You have tests, review, CI, logs, and a tagged `v1.0.0`, in whichever
+track you followed — Python, Go, and Java all keep going from here,
+the same way they have since Lab 21. Next, you make one real,
+compatible change to that same tagged version — and find out what it
+takes to ship a second release without breaking the first one's
+promises.
 
 Continue to [Lab 25 — Release and compatibility](../25-release-and-compatibility/README.md).

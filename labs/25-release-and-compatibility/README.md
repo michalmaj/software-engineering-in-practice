@@ -22,76 +22,80 @@ After this lab you should be able to:
 ### Python
 
 - Lab 24 complete: `uv run pytest` passes with all tests from Labs
-  21-24.
+  21-24, `CHANGELOG.md` has a `[1.0.0]` entry, and `order-api-v1.0.0`
+  exists as an annotated tag on `main`, pushed to your remote.
 - Current directory: `examples/order-api/python/`.
 
 ### Go
 
 - Lab 24 complete: `go test ./...` passes with all tests from Labs
-  21-24.
+  21-24, `CHANGELOG.md` has a `[1.0.0]` entry, and `order-api-v1.0.0`
+  exists as an annotated tag on `main`, pushed to your remote.
 - Current directory: `examples/order-api/go/`.
 
 ### Java
 
 - Lab 24 complete: `./gradlew test` passes with all tests from Labs
-  21-24.
+  21-24, `CHANGELOG.md` has a `[1.0.0]` entry, and `order-api-v1.0.0`
+  exists as an annotated tag on `main`, pushed to your remote.
 - Current directory: `examples/order-api/java/`.
 
-A reminder before you start tagging anything: you're working in your
-own fork of this course's repository, not a separate repository for
-`order-api` alone. `examples/order-api/<language>/` is a folder, not
-a Git repository of its own — there's exactly one `.git` directory,
-at the root of your fork, and every tag you create points at a commit
-of the *whole course repo*, of which your `order-api` work is one
-part. Never run `git init` inside `examples/order-api/<language>/`.
-And double-check that `origin` points at your own fork before you
-push anything (`git remote -v`) — not at the original course
-repository, which you don't have push access to anyway.
+A reminder before you tag anything in this lab: you're working in
+your own fork of this course's repository, not a separate repository
+for `order-api` alone. `examples/order-api/<language>/` is a folder,
+not a Git repository of its own — there's exactly one `.git`
+directory, at the root of your fork, and every tag you create points
+at a commit of the *whole course repo*, of which your `order-api`
+work is one part. Never run `git init` inside
+`examples/order-api/<language>/`. And double-check that `origin`
+points at your own fork before you push anything (`git remote -v`) —
+not at the original course repository, which you don't have push
+access to anyway.
+
+### If your `v1.0.0` state doesn't match the above
+
+Check which of these you're actually in before writing any code —
+each has a specific, non-destructive fix:
+
+- **`order-api-v1.0.0` exists, points at a commit on `main`, and your
+  tests pass**: you're ready, including if you reached this state
+  through an earlier version of Lab 24 or Lab 25 that asked you to
+  create the tag yourself — the tag itself is what matters, not which
+  lab's instructions produced it. Continue to "Your task" below.
+- **The tag doesn't exist because Lab 24 isn't finished**: go back
+  and finish it, including its own PR merge and the tag — this lab
+  assumes that state exists, not that you can skip ahead and tag it
+  as an afterthought here.
+- **The tag exists but `git merge-base --is-ancestor
+  order-api-v1.0.0^{commit} main` prints nothing**: it's pointing at
+  a commit `main` doesn't actually contain — almost always because it
+  was created on a feature branch before merging. Don't delete or
+  force-move it yet. Find out what it actually points at
+  (`git show order-api-v1.0.0`) and whether that work ever
+  merged. If the underlying change is already on `main` under a
+  different commit (a squash merge, for example), delete the stale
+  tag and recreate it on the correct `main` commit. If the change
+  never merged, go finish that PR first.
+- **Lab 24's PR is open but not yet merged**: finish that first — this
+  lab's starting point is a merged, tagged `v1.0.0`, not an
+  in-progress one. Don't create `v1.1.0` work on top of an unmerged
+  base; you'd be building on a branch that might still change.
+- **You have local uncommitted changes left over from Lab 24**: commit
+  or stash them (`git stash -u` if any are untracked) before doing
+  anything else in this lab — don't discard them, and don't let them
+  ride along uncommitted into a new branch where they're easy to lose
+  track of.
+
+Never use `git tag -f`, `git push --force`, or `git reset --hard` to
+get out of any of these — every one of them has a slower, safe fix
+above.
 
 ## Your task
 
-**Release 1.0.0 — baseline:**
-
-1. Create branch `feature/changelog-baseline` from `main`.
-2. Write `CHANGELOG.md` in `examples/order-api/<language>/`, following
-   a simple "Keep a Changelog"-style format, with one `## [1.0.0]`
-   entry listing everything the API does as of Lab 24, from a caller's
-   point of view: the two endpoints, request validation, SQLite
-   persistence, the `notes` migration, bounded retry around the
-   kitchen notification, and operational logging. It doesn't need to
-   mention implementation details specific to your language unless
-   they matter operationally or for compatibility (for example: "data
-   is stored in SQLite" is worth a line; "requests are handled by
-   `com.sun.net.httpserver.HttpServer`" isn't). If you drafted this
-   list at the end of Lab 24, paste it in and move straight to step 3
-   — re-deriving it from scratch here is wasted time you don't get
-   back.
-3. Run your track's full test suite to confirm nothing is broken, then
-   commit `CHANGELOG.md`, push the branch, open a pull request, and
-   merge once CI is green — same loop as the rest of Act V.
-4. Switch back to `main` and pull the merge:
-   `git switch main` then `git pull --ff-only`. Confirm the suite
-   still passes, then — only now, on this already-merged commit — tag
-   the release:
-   `git tag -a order-api-v1.0.0 -m "order-api v1.0.0"`, and push it:
-   `git push origin order-api-v1.0.0`.
-
-**Never tag a feature branch before it merges.** Squash and rebase
-merges can both give the commit that lands on `main` a completely
-different hash than the one on your branch — a tag created too early
-ends up pointing at a commit `main` doesn't actually contain. Tagging
-only after `git pull --ff-only` on `main` sidesteps that entirely.
-
-This lab's "release" is a Git tag, nothing more — don't create a
-GitHub Release, and don't build or publish any binary or package.
-
-**Release 1.1.0 — compatible addition:**
-
-5. Create a second branch, `feature/priority-field`, from the
-   now-updated `main`.
-6. Now make one real, additive change: add an optional `priority`
-   field to `POST /orders`, defaulting to `"normal"` when the caller
-   omits it. This has to be a real, persisted field, not just a value
+1. Create branch `feature/priority-field` from `main`.
+2. Make one real, additive change: add an optional `priority` field
+   to `POST /orders`, defaulting to `"normal"` when the caller omits
+   it. This has to be a real, persisted field, not just a value
    echoed back in the `POST` response — a `GET` later must see it too,
    and it must survive a restart.
 
@@ -116,14 +120,19 @@ GitHub Release, and don't build or publish any binary or package.
 #### Go
 
 - In `db.go`, add `migrateAddPriorityColumn() error`, checking for the
-  column the same way Lab 22's `migrateAddNotesColumn` already does.
-  If you'd rather not duplicate that `PRAGMA table_info` scanning loop
-  a third time, extract it once into a shared helper —
-  `hasColumn(name string) (bool, error)` — and have both migration
-  functions call it; Lab 22's existing tests for
-  `migrateAddNotesColumn` keep passing either way, since its behavior
-  doesn't change. Call `migrateAddPriorityColumn()` in `main()`, right
-  after `migrateAddNotesColumn()`.
+  column the same way Lab 22's `migrateAddNotesColumn` already does —
+  copy that same `PRAGMA table_info` scanning shape into the new
+  function; a second copy of a six-line loop is a perfectly fine way
+  to stay inside this lab's 90 minutes, and nothing here grades you on
+  having only one copy. Call `migrateAddPriorityColumn()` in `main()`,
+  right after `migrateAddNotesColumn()`.
+  **Optional, outside the core path:** if you finish with real time to
+  spare, extracting the shared scanning logic into
+  `hasColumn(name string) (bool, error)` and having both migration
+  functions call it is a reasonable refactor — Lab 22's existing tests
+  for `migrateAddNotesColumn` keep passing either way, since its
+  behavior doesn't change — but treat it as a stretch goal, not part
+  of this lab's required path.
 - Give `Order` a `Priority string` field (JSON tag `priority`). Update
   `createOrder` to take a `priority string` parameter, storing and
   returning it. Update `getOrder` to read the `priority` column with
@@ -142,13 +151,19 @@ GitHub Release, and don't build or publish any binary or package.
 
 - In `OrderDb.java`, add `migrateAddPriorityColumn() throws
   SQLException`, checking for the column the same way Lab 22's
-  `migrateAddNotesColumn` already does. If you'd rather not duplicate
-  that `PRAGMA table_info` scanning loop a third time, extract it once
-  into a shared private helper — `hasColumn(String name) throws
-  SQLException` — and have both migration methods call it; Lab 22's
-  existing tests for `migrateAddNotesColumn` keep passing either way.
-  Call `migrateAddPriorityColumn()` in `Main`, right after
+  `migrateAddNotesColumn` already does — copy that same
+  `PRAGMA table_info` scanning shape into the new method; a second
+  copy of a short loop is a perfectly fine way to stay inside this
+  lab's 90 minutes, and nothing here grades you on having only one
+  copy. Call `migrateAddPriorityColumn()` in `Main`, right after
   `migrateAddNotesColumn()`.
+  **Optional, outside the core path:** if you finish with real time to
+  spare, extracting the shared scanning logic into a private
+  `hasColumn(String name) throws SQLException` helper and having both
+  migration methods call it is a reasonable refactor — Lab 22's
+  existing tests for `migrateAddNotesColumn` keep passing either
+  way — but treat it as a stretch goal, not part of this lab's
+  required path.
 - Give `Order` a `final String priority` field and update its
   constructor to take it. Update `createOrder` to take a `String
   priority` parameter, storing and returning it. Update `getOrder` to
@@ -204,7 +219,7 @@ column is actually `NULL`.
 Then run the full existing test suite too, to confirm none of the
 four new tests needed any earlier test to change for this to be true.
 
-7. Update `CONTRACT.md` from Lab 21: document the new optional
+3. Update `CONTRACT.md` from Lab 21: document the new optional
    `priority` field on `POST /orders`'s request body and its presence
    in every response that returns an order, including `GET`. Also add
    a short `## Compatibility assumption` section stating that clients
@@ -217,7 +232,7 @@ four new tests needed any earlier test to change for this to be true.
    assumption is a statement about what your API expects from its
    callers, not a guarantee that holds no matter how a caller is
    written.
-8. Add a `## [1.1.0]` entry to `CHANGELOG.md` describing the new
+4. Add a `## [1.1.0]` entry to `CHANGELOG.md` describing the new
    field, and a `## Compatibility notes` section at the bottom of the
    file describing (without implementing it) what a *breaking* version
    of this same idea would have looked like instead — for example,
@@ -229,64 +244,46 @@ four new tests needed any earlier test to change for this to be true.
    compatible. Write all of this before you commit, so the commit that
    eventually gets tagged has a complete changelog, not one finished
    after the fact.
-9. Commit, push the branch, open a pull request, and merge once CI is
+5. Commit, push the branch, open a pull request, and merge once CI is
    green.
-10. Switch back to `main` and pull the merge, confirm the suite still
-    passes, then tag:
-    `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`, and push it:
-    `git push origin order-api-v1.1.0`.
+6. Switch back to `main` and pull the merge, confirm the suite still
+   passes, then tag:
+   `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`, and push it:
+   `git push origin order-api-v1.1.0`.
 
 ## A realistic 90 minutes
 
-This lab asks for two complete release cycles in one session — each
-with its own branch, implementation, tests, PR, merge, and tag. Be
-honest with yourself about the clock. With `CHANGELOG.md`'s `[1.0.0]`
-entry already drafted at the end of Lab 24 (step 2 above), the
-`v1.0.0` cycle itself is short: create the branch, paste in the draft,
-confirm the suite, commit, PR, merge, tag — realistically 15-20
-minutes, not the 25-35 it would take starting from a blank file. That
-still leaves the `v1.1.0` cycle: a real schema migration, three
-straightforward tests plus the subtler historical-`NULL` one, a
-`CONTRACT.md` update, a `CHANGELOG.md` entry reasoning about SemVer,
-and a second full PR/CI/merge/tag loop. Even with the `v1.0.0` time
-saved, that combination is a full 90 minutes for Python alone, and
-likely longer for Go and Java, where extracting the shared
-`hasColumn` helper and wiring a second migration through `main`/test
-setup is real, additional ceremony beyond what Python needs. The Lab
-24 head start narrows the gap; it does not close it.
+This lab is now one release cycle, not two — `v1.0.0` was tagged at
+the end of Lab 24, so everything here builds on an already-merged,
+already-tagged starting point. The work that's left: a real schema
+migration, three straightforward tests plus the subtler
+historical-`NULL` one, a `CONTRACT.md` update, a `CHANGELOG.md` entry
+reasoning about SemVer, and one full PR/CI/merge/tag loop. That's a
+real session's worth of work, not a short one, but it no longer
+competes with a second release cycle for the same 90 minutes.
 
-**`v1.0.0`, tagged and pushed, is a real, safe checkpoint** — not a
-partial one. `CHANGELOG.md` is complete for everything through Lab 24,
-the tag exists on `main`, and nothing is uncommitted. If your session
-is running long, stopping here and doing the `priority` feature
-(step 5 onward) in a separate sitting costs you nothing: you resume
-from a clean, tagged `main`, exactly the state step 5 assumes. For
-most students — and for most of Go and Java specifically — treat this
-as the expected stopping point for one session, with `v1.1.0` starting
-a session of its own, rather than a fallback for when things go
-slowly. If your course schedule has no slack session to absorb that
-split, that is a real, open scheduling question for whoever plans the
-course calendar, not something either of these two sessions can
-resolve on its own by working faster.
+The fourth test — the historical row with a genuinely `NULL`
+`priority` column — is the one most likely to eat unplanned time,
+precisely because it's the one this lab's own authors got wrong on a
+first pass (see the note above about the bug it would have caught).
+Give it the time it needs rather than rushing it to match the other
+three, which are mechanically similar to tests you've already written
+in Labs 21-23.
 
-Inside the `v1.1.0` work itself, the fourth test — the historical row
-with a genuinely `NULL` `priority` column — is the one most likely to
-eat unplanned time, precisely because it's the one this lab's own
-authors got wrong on a first pass (see step 6's note about the bug it
-would have caught). Give it the time it needs rather than rushing it
-to match the other three, which are mechanically similar to tests
-you've already written in Labs 21-23.
-
-If two full releases genuinely don't fit in one sitting for your
-pace, that's a realistic outcome for this lab, not a sign you're doing
-it wrong — split at the `v1.0.0` tag, the same way you'd split any
-other lab at a point where the suite is green and nothing is
-half-finished.
+If this still doesn't fit in one sitting for your pace, that's a
+realistic outcome, not a sign you're doing it wrong — stop at a point
+where the suite is green and nothing is half-finished (for example,
+right after the four tests pass, before touching `CONTRACT.md` or
+`CHANGELOG.md`), and pick the rest up next session. There's no tag to
+split at mid-lab this time — `v1.1.0` only exists once everything here
+is merged — so the natural stopping point is "tests green, nothing
+half-finished," the same as any other lab.
 
 ## Acceptance criteria
 
-- `CHANGELOG.md` has both a `[1.0.0]` and a `[1.1.0]` entry, plus a
-  `## Compatibility notes` section reasoning about major vs. minor.
+- `CHANGELOG.md` has a `[1.1.0]` entry (on top of the `[1.0.0]` entry
+  Lab 24 already added), plus a `## Compatibility notes` section
+  reasoning about major vs. minor.
 - `CONTRACT.md` documents the new `priority` field (including on `GET`
   responses) and states the compatibility assumption about ignoring
   unknown response fields — without overstating it as a universal
@@ -304,8 +301,8 @@ half-finished.
   POST-then-GET round trip, and a historical row whose `priority`
   column is genuinely `NULL` mapping to `"normal"`, not `null`), and
   every test written before this lab still passes unmodified.
-- Both of this lab's changes were merged through pull requests with a
-  green CI check, not committed directly to `main`.
+- This lab's change was merged through a pull request with a green CI
+  check, not committed directly to `main`.
 
 ## Verification
 
