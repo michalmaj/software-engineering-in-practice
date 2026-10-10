@@ -240,6 +240,40 @@ nowych.
     `git tag -a order-api-v1.1.0 -m "order-api v1.1.0"`, i wypchnij tag:
     `git push origin order-api-v1.1.0`.
 
+## Realistyczne 90 minut
+
+Ten lab prosi o dwa kompletne cykle wydania w jednej sesji — każdy z
+własną gałęzią, implementacją, testami, PR-em, merge'em i tagiem. Bądź
+uczciwy/a wobec zegara: ukończenie obu `v1.0.0` i `v1.1.0` naprawdę,
+wliczając wszystkie cztery testy `priority`, to pełne 90 minut dla
+samego Pythona, i prawdopodobnie dłużej dla Go i Javy, gdzie wyciągnięcie
+wspólnego helpera `hasColumn` i podłączenie drugiej migracji przez
+`main`/setup testowy to prawdziwa, dodatkowa ceremonia poza tym, czego
+potrzebuje Python. To nie powód, żeby coś z tego pominąć — to powód,
+żeby wiedzieć, gdzie można się zatrzymać.
+
+**`v1.0.0`, otagowany i wypchnięty, to prawdziwy, bezpieczny
+checkpoint** — nie częściowy. `CHANGELOG.md` jest kompletny dla
+wszystkiego przez Lab 24, tag istnieje na `main`, i nic nie jest
+niezacommitowane. Jeśli Wasza sesja się przeciąga, zatrzymanie się
+tutaj i zrobienie funkcji `priority` (krok 5 dalej) w osobnej sesji nic
+nie kosztuje: wracacie z czystego, otagowanego `main`, dokładnie tego
+stanu, który zakłada krok 5.
+
+Wewnątrz samej pracy nad `v1.1.0`, czwarty test — historyczny wiersz z
+naprawdę `NULL` kolumną `priority` — to ten, który najprawdopodobniej
+zje nieplanowany czas, właśnie dlatego, że to ten, który autorzy tego
+labu sami popełnili błąd przy pierwszym podejściu (zobacz notatkę w
+kroku 6 o błędzie, który by wychwycił). Dajcie mu potrzebny czas, zamiast
+go przyspieszać, żeby dopasować do trzech pozostałych, które są
+mechanicznie podobne do testów, które już napisaliście w Labach 21-23.
+
+Jeśli dwa kompletne wydania naprawdę nie mieszczą się w jednej sesji
+przy Waszym tempie, to realistyczny wynik dla tego labu, nie znak, że
+robicie coś źle — podzielcie na tagu `v1.0.0`, tak samo jak podzielilibyście
+jakikolwiek inny lab w punkcie, gdzie zestaw testów jest zielony i nic
+nie jest w połowie zrobione.
+
 ## Kryteria akceptacji
 
 - `CHANGELOG.md` ma zarówno wpis `[1.0.0]`, jak i `[1.1.0]`, plus

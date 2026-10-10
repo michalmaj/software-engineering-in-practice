@@ -411,13 +411,8 @@ plus dwa nowe testy logowania).
 ## Co dalej
 
 Masz testy, review, CI i teraz logi, w którymkolwiek tracku
-realizowałeś/aś. Od tego miejsca podgląd Go i Javy znowu robi przerwę —
-Lab 25 na razie zostaje Python-first, tak samo jak po Lab 22. Wszystko,
-co zbudowałeś/aś w Go i Javie — walidacja, trwałość danych, migracja,
-retry i logowanie — to kompletne, działające `order-api` samo w sobie.
-
-Jeśli kontynuujesz w Pythonie: masz testy, review, CI i logi. Dalej
-musisz zdecydować, co właściwie znaczy "ta wersja", kiedy przekazujesz
-ją komuś innemu.
+realizowałeś/aś — Python, Go i Java wszystkie kontynuują od tego
+miejsca, tak jak od Lab 21. Dalej musisz zdecydować, co właściwie
+znaczy "ta wersja", kiedy przekazujesz ją komuś innemu.
 
 Przejdź do [Lab 25 — Wydanie i kompatybilność](../25-release-and-compatibility/README.pl.md).

@@ -451,10 +451,13 @@ curl -s -X POST http://localhost:8000/orders \
   -d '{"items": ["Burger"], "notes": "no onions"}'
 ```
 
-Zanotuj też id tego zamówienia, a potem je pobierz:
+Zanotuj też id tego zamówienia, a potem je pobierz — poniższy przykład
+używa `2`; zastąp go rzeczywistym id tego nowego zamówienia (`<` i `>`
+są specjalne dla Basha, więc nigdy nie wklejaj placeholdera jak
+`<new-order-id>` dosłownie):
 
 ```bash
-curl -s http://localhost:8000/orders/<new-order-id>
+curl -s http://localhost:8000/orders/2
 ```
 
 Potwierdź, że `notes` wraca jako `"no onions"`, niezmienione. Zatrzymaj
