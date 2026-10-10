@@ -142,25 +142,29 @@ session, and GitHub's free tier has monthly usage limits.
 | Java      | JDK 21 + Gradle Wrapper  | JUnit, via `./gradlew test` |
 
 Labs 01-04 are one shared path, language-agnostic. From Lab 05 on,
-you pick one of three practical language tracks — Python, Go, or Java
-— and use it consistently from there through the Act VI capstone; Lab
-14 is a deliberate pause to compare how the same idea looks across all
-three, not a switch of track. In all three, the language is the
-medium — the subject is software engineering. What's assumed going in
-is basic programming experience in whichever language you pick, not
-specifically Python.
-
-Go and Java tracks are still being hardened across the whole course —
-treat them as **preview** until a final cross-track audit lands, even
-though Labs 05-30 already have real, working content in all three.
+you pick one of three equal, **fully supported** language tracks —
+Python, Go, or Java, not one primary language with the other two as
+examples — and use it consistently from there through the Act VI
+capstone: same learning outcomes, real working starters, and the same
+run/test commands pattern (just the language-specific tool) in all
+three. Lab 14 is a deliberate pause to compare how the same idea looks
+across all three — you read all three there, but still only implement
+it in the one you picked, not a switch of track. In all three, the
+language is the medium — the subject is software engineering. You
+only need **one toolchain** for the whole course: whichever language
+you choose at Lab 05, not all three up front.
 
 ## How the labs work
 
-Every lab follows the same shape: **Story → Learning objectives →
+Every lab shares the same backbone: **Story → Learning objectives →
 Before you start → Your task → Acceptance criteria → Verification →
-Think about it → If you get stuck → What's next.** That consistency is
-deliberate — these materials are designed for self-study, whether
-you're working through them solo or as part of a classroom.
+Think about it → If you get stuck → What's next.** Some labs add a
+section where the material actually calls for one — a timing note on
+the heavier sessions, an "All tracks" note, or (Lab 26) a short
+architecture-decision record — rather than forcing every lab into an
+identical length. That backbone is deliberate — these materials are
+designed for self-study, whether you're working through them solo or
+as part of a classroom.
 
 ## Course map
 
