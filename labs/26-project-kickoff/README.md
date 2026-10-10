@@ -275,6 +275,26 @@ you're a team — have every teammate `git pull` and run their track's
 test command locally, confirming green, before anyone writes a line
 of TableTime's actual logic.
 
+### Step 5 — CI, now, if this session has room left (optional here)
+
+Lab 27 opens with setting up CI for this repository — the exact same
+mechanical recipe you already followed in Lab 19, just pointed at a
+different test command. Nothing about it depends on any TableTime
+code existing yet, since it only needs to run against the starter's
+one existing test. If your team finished Steps 1-4 with meaningful
+time still left in this session, set it up now: it's one `.github/
+workflows/*.yml` file, one more small PR through your team's own
+review process, and one thing Lab 27 won't have to spend time on.
+
+This is genuinely optional here, not a hidden requirement: a 3-4
+person team that's already spent most of this session on repository
+setup, collaborator invites, and a real planning discussion should
+not try to squeeze CI in on top — Lab 27's own step 1 covers it, and
+starting Lab 27 with that step is exactly as valid as arriving with
+it already done. Don't let this turn into a reason to rush
+`PROJECT_PLAN.md` or the ADR; those two documents are this lab's
+actual point.
+
 ## Acceptance criteria
 
 - `PROJECT_PLAN.md` exists and answers all six points in Step 2 with

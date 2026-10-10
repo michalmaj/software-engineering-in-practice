@@ -296,6 +296,27 @@ koleżanka zrobi `git pull` i uruchomi lokalnie komendę testów swojego
 tracku, potwierdzając zielony wynik, zanim ktokolwiek napisze choć
 jedną linię prawdziwej logiki TableTime.
 
+### Krok 5 — CI, już teraz, jeśli ta sesja ma jeszcze czas (opcjonalnie tutaj)
+
+Lab 27 zaczyna się od skonfigurowania CI dla tego repozytorium —
+dokładnie tej samej mechanicznej receptury, za którą już podążyliście
+w Lab 19, tylko wskazanej na inną komendę testową. Nic w tym nie
+zależy od istnienia jakiegokolwiek kodu TableTime, bo potrzebuje
+tylko uruchomić się wobec jednego istniejącego testu startera. Jeśli
+Wasz zespół skończył Kroki 1-4 z realnie pozostałym czasem w tej
+sesji, skonfigurujcie to teraz: to jeden plik `.github/
+workflows/*.yml`, jeden kolejny mały PR przez Wasz własny proces
+review, i jedna rzecz, na którą Lab 27 nie musi już poświęcać czasu.
+
+To jest naprawdę opcjonalne tutaj, nie ukryty wymóg: zespół 3-4 osób,
+który już spędził większość tej sesji na setupie repo, zaproszeniach
+współpracowników i prawdziwej dyskusji planistycznej, nie powinien
+próbować wcisnąć CI na wierch tego — krok 1 samego Lab 27 to pokrywa,
+a zaczęcie Lab 27 od tego kroku jest dokładnie tak uprawnione, jak
+przyjście z tym już zrobionym. Nie pozwólcie, żeby to stało się
+powodem, żeby przyspieszyć `PROJECT_PLAN.md` albo ADR — te dwa
+dokumenty to faktyczny sens tego labu.
+
 ## Kryteria akceptacji
 
 - `PROJECT_PLAN.md` istnieje i odpowiada na wszystkie sześć punktów z
