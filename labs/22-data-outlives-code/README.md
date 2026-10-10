@@ -438,10 +438,12 @@ curl -s -X POST http://localhost:8000/orders \
   -d '{"items": ["Burger"], "notes": "no onions"}'
 ```
 
-Note this order's id too, then fetch it:
+Note this order's id too, then fetch it — the example below uses `2`;
+replace it with this new order's actual id (`<` and `>` are special to
+Bash, so never paste a placeholder like `<new-order-id>` literally):
 
 ```bash
-curl -s http://localhost:8000/orders/<new-order-id>
+curl -s http://localhost:8000/orders/2
 ```
 
 Confirm `notes` comes back as `"no onions"`, unchanged. Stop the
