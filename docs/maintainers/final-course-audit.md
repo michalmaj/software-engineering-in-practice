@@ -218,7 +218,7 @@ No regression found.
 | 2 | Windows setup installed VS Code from a non-administrator window after Chocolatey, which needs admin rights | BLOCKER (onboarding) | **Fixed** |
 | 3 | Windows setup's `bash.exe` location assumption (same folder as `git.exe`) was factually wrong | MAJOR | **Fixed** |
 | 4 | `check-environment.sh` mislabeled which lab needs which tool, and didn't explain that 2/3 language rows showing MISSING is normal | MAJOR | **Fixed** |
-| 5 | Full line-by-line editorial/naturalness audit of all 30×2 READMEs not completed (agent failures; time budget) | — | **Open, disclosed** |
+| 5 | Full line-by-line editorial/naturalness audit of all 30×2 READMEs not completed (agent failures; time budget) | — | **Closed (PR J1-J3):** all 60 files read in full across three follow-up passes — see [`editorial-audit-j1.md`](editorial-audit-j1.md), [`editorial-audit-j2.md`](editorial-audit-j2.md), [`editorial-audit-j3.md`](editorial-audit-j3.md) |
 | 6 | Windows fixes not executed on a real Windows machine | — | **Partially closed (PR I): real CI execution on `windows-latest` added — see [`windows-reality-check.md`](windows-reality-check.md); real-GUI items remain open, disclosed (NOT INDEPENDENTLY VERIFIED)** |
 
 No BLOCKER remains open. Findings 5 and 6 are scope limitations of
@@ -255,7 +255,17 @@ before this PR and are not newly introduced by it.
   of all 30 `README.pl.md` files — this pass sampled a cross-section
   (see above) rather than completing an exhaustive read; background
   agents dispatched for broader coverage failed partway through due to
-  this session's API rate limit and were not retried.
+  this session's API rate limit and were not retried. **Update (PR
+  J1-J3):** this gap is now closed — three follow-up passes read every
+  one of Labs 01-30's `README.md`/`README.pl.md` files in full
+  (60/60, 20 per PR), found and fixed real bugs in each batch, and
+  performed extensive hands-on, from-the-published-instructions-only
+  verification across Python/Go/Java. See
+  [`editorial-audit-j1.md`](editorial-audit-j1.md) (Labs 01-10),
+  [`editorial-audit-j2.md`](editorial-audit-j2.md) (Labs 11-20), and
+  [`editorial-audit-j3.md`](editorial-audit-j3.md) (Labs 21-30) for
+  the full per-lab findings, what was and wasn't independently
+  verified, and the 90-minute timebox assessment for every lab.
 - A from-scratch, fresh re-execution of every example project in
   Labs 06-15 and 19-25 in this specific session (Lab 16-17's
   team-inventory was freshly re-executed; Course Health's own
